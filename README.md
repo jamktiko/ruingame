@@ -1,7 +1,7 @@
 this is a great readme document!
 
-<<<<<<< HEAD
-I agree, top notch readme. ~Mikki
+
+I agree, top notch readme. also OMEGALUL ~Mikki
 =======
 <<<<<<< HEAD
 =======
