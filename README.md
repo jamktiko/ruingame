@@ -8,6 +8,8 @@ I agree, top notch readme. ~Mikki
 next is better - Patrik Kaunisto
 <<<<<<< HEAD
 olen anssi
+
+hahaa eeppinen teksti :D
 =======
 # You thought it was meaningful push, but it was me! Teemu!
 >>>>>>> 633f344bfa3e238359aed8ea64bbbc78e583ae20
