@@ -38,7 +38,7 @@ Aapo Hyyryläinen
 
 [Game Design Document](https:/github.com/jamktiko/ruingame)
 
-[Bug report form](https:/github.com/jamktiko/ruingame)
+[Bug report form](https://docs.google.com/spreadsheets/d/1UkeBcV-mZ7PwsgvJWJJCiUxvYgYJ5370cGh-ks6_nQg/edit?usp=sharing)
 
 ## Intro
 
