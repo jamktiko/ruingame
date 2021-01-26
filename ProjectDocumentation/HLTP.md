@@ -19,6 +19,7 @@ Aapo Hyyryläinen
     + [Testing Activities](#testing-activities)
     + [Features to be tested](#features-to-be-tested)
     + [Features not to be tested](#features-not-to-be-tested)
+  * [Testing Approach](#testing-approach)
     + [Key Principles applied](#key-principles-applied)
     + [Testing constraints](#testing-constraints)
     + [Acceptance Criteria](#acceptance-criteria)
@@ -104,7 +105,7 @@ Compatibility will not be tested due to limited availability to different machin
 
 Load and multiplayer testing will not be done due to no server requirement or multiplayer intended for the project.
 
-##Testing Approach
+## Testing Approach
 
 ### Key Principles applied
 
