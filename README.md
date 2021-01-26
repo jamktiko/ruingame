@@ -1,4 +1,4 @@
-# RUIN The Game
+# RUIN
 
 ## Background
 
