@@ -1,6 +1,8 @@
 # High Level Test Plan
 **RUIN GAME**
+
 Authors:
+
 Aapo Hyyryläinen
 
 **VERSION NUMBER 1.1**
