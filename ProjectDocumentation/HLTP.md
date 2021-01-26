@@ -7,6 +7,30 @@ Aapo Hyyryläinen
 
 **VERSION NUMBER 1.1**
 
+## Table of Contents 
+
+- [High Level Test Plan](#high-level-test-plan)
+  * [References](#references)
+  * [Intro](#intro)
+    + [Project Introduction](#project-introduction)
+    + [Purpose of this document](#purpose-of-this-document)
+  * [Testing Strategy](#testing-strategy)
+    + [Testing Subjects](#testing-subjects)
+    + [Testing Activities](#testing-activities)
+    + [Features to be tested](#features-to-be-tested)
+    + [Features not to be tested](#features-not-to-be-tested)
+    + [Key Principles applied](#key-principles-applied)
+    + [Testing constraints](#testing-constraints)
+    + [Acceptance Criteria](#acceptance-criteria)
+    + [Testing pausing and continuation](#testing-pausing-and-continuation)
+  * [Products](#products)
+  * [Environment](#environment)
+  * [Responsibilities](#responsibilities)
+  * [Expertise and Guidance](#expertise-and-guidance)
+  * [Timetables and milestones](#timetables-and-milestones)
+  * [Risks](#risks)
+  * [Assumptions and dependencies](#assumptions-and-dependencies)
+
 ## References
 
 [Project plan](https:/github.com/jamktiko/ruingame)
