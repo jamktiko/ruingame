@@ -98,11 +98,11 @@ Humans exploit the resources and the people of a newfound continent, possibly le
 
 **Challenging:** Easy to learn, hard to master. Difficulty settings, the player never feels like the game is like a walk in a park.
 
-**Combat:** ombat is fluid, intuitive and dynamic. Different skills and combat styles.
+**Combat:** Combat is fluid, intuitive and dynamic. Different skills and combat styles.
 
-**Visuals:** ppealing art style that fits the world and its various environments. Vibrant world above the ground, dark and grim world under the ground, cel-shading.
+**Visuals:** Appealing art style that fits the world and its various environments. Vibrant world above the ground, dark and grim world under the ground, cel-shading.
 
-**Character progression:**Multiclassing system akin to pen & paper roleplaying games. Different characters with different combat styles and build paths. Multiple feats and skills to open.
+**Character progression:** Multiclassing system akin to pen & paper roleplaying games. Different characters with different combat styles and build paths. Multiple feats and skills to open.
 
 
 ## Combat
