@@ -1,4 +1,4 @@
-# RUIN
+RUIN
 
 ## Background
 
