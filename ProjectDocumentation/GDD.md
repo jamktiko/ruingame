@@ -58,13 +58,6 @@ Inspiration for the enemies comes from multiple mythologies like Chinese and Lov
 ## Setting
 
 
-
-<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image2.jpg). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image2.jpg "image_tooltip")
-
-
 WIP map of the Continent. Very likely to have some changes in the future.
 
 The Continent used to be full of lush pine and leaf forests, but as the calamities of the ancient evil devastated the landscape, only a few forests were left standing. Now half of the Continent is under permafrost and another quarter is a hostile desert. Only some brave people live in those areas. The coastline of the Continent is very fractured and there’s a huge amount of island of various sizes near the coast. Two long and wide rivers cut the Continent in three vastly different regions.
@@ -97,7 +90,6 @@ The future of the Continent and likely the whole world now lies in the hands of 
 
 Humans exploit the resources and the people of a newfound continent, possibly leading to the end of the world. Humanity’s greed leads them to a ruin which holds in it an ancient eldritch force that will run rampant unless a solution to put it to rest is found quickly. Player character will be one of the people sent to the Ruin to find answers and solutions before it is too late.
 
-
 # Gameplay
 
 
@@ -129,10 +121,6 @@ Basic combat principle:
 
 ## Classes
 
-<p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image3.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image3.png "image_tooltip")
 
 
 Class Name : Warrior
@@ -165,26 +153,11 @@ Skills:
 Start a run, choose a class, defeat the enemies to level up and collect artifacts, beat the level by defeating the final boss and use gained xp to get new feats, start a new run...
 
 
-
-<p id="gdcalert4" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image4.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert5">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image4.png "image_tooltip")
-
-
-
 ## Mechanics & Dynamics
 
 **Basic attack:** Basic attack is the quick versatile always available combat mechanic for beating the poor creatures that end up between you and the exit to the next stage. It includes a simple attack combo that depends on the weapon you have equipped. Basic attack combos include animations, area of effect, range, damage, length of combo and other special effects caused by the attacks. <span style="text-decoration:underline;">Example</span>: _Class: Nightblade. Name: Whirling death. Effect: Rapid strikes alternating between the two light bladed weapons, picking up attack speed while combo goes on. Combo length: max 10 hits. Damage: Low damage slowly tapering down further in the combo. Special effect: Inflict vulnerability increasing damage taken by all sources._ 
 
 **Skills:** Skills are active abilities given to the player character from the decisions made when acquiring classes. Skills are the primary combat mechanic besides basic attack combos. Each class gives their unique set of skills to pick from and build your own unique build for the run. Skills include multiple different similar versions of itself to make it possible to be used by a variety of weapons. Skill includes animation, area of effect, range, damage and other special effects caused by it. <span style="text-decoration:underline;">Example</span>: _class: Infiltrator. Name: Barb shot. Effect: Shoots an arrow with barb wire attached to it entangling the enemy hit by the skill. Enemies movement speed is reduced, they take initial damage on being hit and gain stack of bleed debuff._
-
-
-
-<p id="gdcalert5" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image5.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert6">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image5.png "image_tooltip")
 
 
 **Artifacts:** Artifacts are rarities found in the world around the long-forgotten temples and ruins of the olden civilization that you are exploring. They are semi randomly encountered within the world, elite enemies/bosses and secret rooms. Artifacts include rarity, special effects, etc. <span style="text-decoration:underline;">Example</span>: _Feather of phoenix. Once during the run when the player character dies a large amount of damage is inflicted to enemies around the player and player character is reborn in the middle of it._
@@ -207,14 +180,6 @@ Start a run, choose a class, defeat the enemies to level up and collect artifact
 ## Core Diagram
 
 
-
-<p id="gdcalert6" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image6.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert7">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image6.png "image_tooltip")
-
-
-
 # Levels
 
 
@@ -232,11 +197,6 @@ You might find Merchants in some rooms that sell you various Artifacts, items or
 
 
 ## 
-
-<p id="gdcalert7" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image7.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert8">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image7.png "image_tooltip")
 
 
 Here’s a very rough example of a level/stage. Every closed shape resembles a room that is randomly connected to another room on its exit point. Every room has multiple possible exit and entry points so they can be connected to other rooms in more ways than just one.
@@ -328,7 +288,6 @@ If possible, we should use Unity’s colordblind filter to see how colorblind fr
 
 
 ## Target Budget
-
 
 
 
