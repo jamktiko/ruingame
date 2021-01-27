@@ -363,9 +363,6 @@ The project will end in bankruptcy on 12.5.2021.
 
 
 
-## 
-
-
 
 ## 
 **Reporting and Communication**
@@ -410,34 +407,11 @@ The project will end in bankruptcy on 12.5.2021.
   </tr>
 </table>
 
-
-
-### 
-**Daily Scrum Plan**
-
-All scrum related activities require active participation from all team members.
-
-Sprint planning will be held during Monday on the first day of the sprint. The time reserved will be 2 hours. The user stories that are selected during the sprint planning are to be completed during that sprint. Minutes will be produced from this meeting.
-
-The daily scrum will be held after 15 minutes in the work day and it should be done in 15 minutes. All members of the team decide what they are going to do during this meeting, they will also tell what they have done since the last meeting and bring up any issues with their work. \
- \
-Sprint review will be held during the last day of the sprint. The length of the sprint review will be limited to 1 hour. During the sprint review the members will show the work that they have done during the week. Minutes will be produced from this meeting.
-
-Retrospective will be held during the last day of the sprint. The time reserved will be 2 hours. The purpose of the meeting is to have open discussion about any issues, opinions, ideas and improvements related to the completing the project. Minutes will be produced from items discussed during this meeting. \
-
-
-
 ### 
 **Communication Channels**
 
 The main communication channel for the project will be Discord. Every person has their own voice-channel, where they work, and where people can join to discuss matters if necessary. In addition, there is a general voice-channel for general discussion and meetings, and there are also text-channels for different subjects. Teams will also be used for communications.
 
-
-## 
-**Documentation**
-
-
-Scrum related meetings, high level test plans and bug reports will be documented and shared within the team and presented to the organization when required.
 
 
 ### 
@@ -454,6 +428,33 @@ Scrum related meetings, high level test plans and bug reports will be documented
 
 
 The documents will be held in a group’s shared OneDrive folder and the scrum master will hold backups of the documents on a personal cloud drive.
+
+##
+**Scrum Plan**
+
+###
+**Daily Scrum**
+
+The daily scrum will be held after 15 minutes in the work day and it should be done in 15 minutes. All members of the team decide what they are going to do during this meeting, they will also tell what they have done since the last meeting and bring up any issues with their work.
+
+Generally all scrum related activities require active participation from all team members.
+
+###
+**Sprint Planning**
+
+Sprint planning will be held during Monday on the first day of the sprint. The time reserved will be 2 hours but can be extended if needed. The user stories that are selected during the sprint planning are to be completed during that sprint. Minutes will be produced from this meeting.
+
+###
+**Sprint Review**
+
+Sprint review will be held during the last day of the sprint. The length of the sprint review will be limited to 1 hour. During the sprint review the Product Owner discusses the completed user stories and the team members will show the work that they have done during the sprint. Minutes will be produced from this meeting.
+
+###
+**Sprint Retrospective**
+
+Retrospective will be held during the last day of the sprint. The time reserved will be 2 hours. The purpose of the meeting is to have open discussion about any issues, opinions, ideas and improvements related to the completing the project. Minutes will be produced from items discussed during this meeting. 
+
+
 
 
 ## 
