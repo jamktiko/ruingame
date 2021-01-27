@@ -176,6 +176,66 @@ In progress
 
 ## Timetables and milestones
 
+<table>
+  <tr>
+   <td>
+<strong>Event</strong>
+   </td>
+   <td><strong>Date</strong>
+   </td>
+   <td><strong>Additional information/Participants</strong>
+   </td>
+  </tr>
+  <tr>
+   <td>Preproduction Begins
+   </td>
+   <td>18.1.2021
+   </td>
+   <td>Online meeting space, Full work group.
+   </td>
+  </tr>
+  <tr>
+   <td>Initial sprint
+   </td>
+   <td>1.2.2021
+   </td>
+   <td>Online meeting space, Full work group
+   </td>
+  </tr>
+  <tr>
+   <td>Demo #1
+   </td>
+   <td>25.2.2021
+   </td>
+   <td>Online meeting space, TIKO students
+   </td>
+  </tr>
+  <tr>
+   <td>Demo #2
+   </td>
+   <td>1.4.2021
+   </td>
+   <td>TBD, Online meeting space, TIKO students
+   </td>
+  </tr>
+  <tr>
+   <td>Demo #3
+   </td>
+   <td>12.5.2021
+   </td>
+   <td>TBD, Online meeting space, Unknown
+   </td>
+  </tr>
+  <tr>
+   <td>Project ending
+   </td>
+   <td>12.5.2021
+   </td>
+   <td>Unknown
+   </td>
+  </tr>
+</table>
+
 In progress
 
 ## Risks
