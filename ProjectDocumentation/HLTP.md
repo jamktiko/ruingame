@@ -99,7 +99,7 @@ Testing will also take advantage of the professional guidance provided by JAMK w
 
 ### Features to be tested
 
-In progress
+Using manual testing, all current features are tested through functional testing. Functional testing is done to determine process, load durability, and user logic. From this, concerns over redundancies, UI flow and gameplay feel addressed through feedback from the product owner
 
 ### Features not to be tested
 
