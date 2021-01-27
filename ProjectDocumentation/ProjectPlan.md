@@ -81,27 +81,10 @@ Teemu Kosonen
 ### 
 **References**
 
-
-<table>
-  <tr>
-   <td><strong>Reference</strong>
-   </td>
-   <td><strong>Material</strong>
-   </td>
-  </tr>
-  <tr>
-   <td>HLTP
-   </td>
-   <td>&lt;link to HLTP>
-   </td>
-  </tr>
-  <tr>
-   <td>GDD
-   </td>
-   <td>&lt;link to game design document>
-   </td>
-  </tr>
-</table>
+|  Reference | Material  | 
+|---|---|
+|  HLTP | [High Level Testing Plan](./HLTP.md) |
+| GDD  | [Game Design Document](./gdd.md)  | 
 
 
 
@@ -177,13 +160,14 @@ Project begins with creation of this document and initial version of the Game De
 ### 
 **Project Implementation**
 
-Implementation begins on 1.2.2021 with a sprint planning session according to the scrum framework. The sprints will be 2 weeks long.
+Implementation begins on 1.2.2021 with a sprint planning session according to the scrum framework. The sprints will be 2 weeks long. The following meetings will be held on specific time frames:
 
 * Daily scrum
 * Sprint planning
 * Weekly meeting
 * Sprint review + Retrospective
 
+Additionally backlog grooming will be done when there is a need for it.
 
 ### 
 **Project Testing**
