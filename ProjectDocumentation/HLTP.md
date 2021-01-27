@@ -236,7 +236,7 @@ In progress
   </tr>
 </table>
 
-In progress
+Other milestones such as sprint demos are case specific and will not be listed in the overall timetabling. The same rule applies to demos arranged later on with TiCorporate personnel.
 
 ## Risks
 
