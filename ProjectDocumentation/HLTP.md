@@ -66,7 +66,11 @@ The following document aims to explain the course of action taken to test the co
 
 ### Testing Activities
 
-- Testing will be conducted weekly via a demo and concept evaluation.  This testing will be done internally and feedback will be collected from the project group and product owner. Bugs found in the demo will be reported in the following manner:
+- Testing will be conducted weekly via a demo and concept evaluation. 
+
+- Feedback will be submitted via a form or recorded by a member of the testing team.
+
+- This testing will be done internally and feedback will be collected from the project group and product owner. Bugs found in the demo will be reported in the following manner:
 
   - Can it be described via text? Add it to the bug reporting list with a concise description. If not ->
   - Can it be described via a screenshot? Add it to the bug reporting list with a screenshot of the problem. If not ->
