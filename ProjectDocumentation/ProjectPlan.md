@@ -179,6 +179,11 @@ Project begins with creation of this document and initial version of the Game De
 
 Implementation begins on 1.2.2021 with a sprint planning session according to the scrum framework. The sprints will be 2 weeks long.
 
+* Daily scrum
+* Sprint planning
+* Weekly meeting
+* Sprint review + Retrospective
+
 
 ### 
 **Project Testing**
@@ -422,11 +427,11 @@ All scrum related activities require active participation from all team members.
 
 Sprint planning will be held during Monday on the first day of the sprint. The time reserved will be 2 hours. The user stories that are selected during the sprint planning are to be completed during that sprint. Minutes will be produced from this meeting.
 
-The first hour of the work day is dedicated for daily scrum. The daily scrum will be held after 30 minutes in the work day and it should be done in 30 minutes, after getting used to the process the length of daily scrum will be reduced to 15 minutes. All members of the team decide what they are going to do during this meeting, they will also tell what they have done since the last meeting and bring up any issues with their work. \
+The daily scrum will be held after 15 minutes in the work day and it should be done in 15 minutes. All members of the team decide what they are going to do during this meeting, they will also tell what they have done since the last meeting and bring up any issues with their work. \
  \
-Sprint review will be held during the last day of the sprint. The length of the sprint review will be limited to 1 hour. During the sprint review the members will show the work that they have done during the week. A transcript will be produced from this meeting.
+Sprint review will be held during the last day of the sprint. The length of the sprint review will be limited to 1 hour. During the sprint review the members will show the work that they have done during the week. Minutes will be produced from this meeting.
 
-Retrospective will be held during the last day of the sprint. The time reserved will be 2 hours. The purpose of the meeting is to have open discussion about any issues, opinions, ideas and improvements related to the completing the project. A transcript will be produced from items discussed during this meeting. \
+Retrospective will be held during the last day of the sprint. The time reserved will be 2 hours. The purpose of the meeting is to have open discussion about any issues, opinions, ideas and improvements related to the completing the project. Minutes will be produced from items discussed during this meeting. \
 
 
 
