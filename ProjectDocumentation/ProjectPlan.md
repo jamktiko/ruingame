@@ -186,7 +186,6 @@ The project will end in bankruptcy on 12.5.2021.
 
 
 ### 
-**Project Organization**
 
 **Work Groups**
 
@@ -247,6 +246,62 @@ The project will end in bankruptcy on 12.5.2021.
   </td>
   <td> gr200924@gradia.fi
   </td>
+  </tr>
+</table>
+
+###
+
+**Stakeholders**
+
+
+<table>
+  <tr>
+   <td><strong>Name</strong>
+   </td>
+   <td><strong>Roles</strong>
+   </td>
+   <td><strong>Contact</strong>
+   </td>
+  </tr>
+  <tr>
+   <td>Teemu Pölkki
+   </td>
+   <td>Lab Director
+   </td>
+   <td>teemu.polkki@jamk.fi
+   </td>
+  </tr>
+  <tr>
+   <td>Jukka Riikonen
+   </td>
+   <td>Coaching (PO & SM teams)
+   </td>
+   <td>jukka.riikonen@jamk.fi
+   </td>
+  </tr>
+  <tr>
+   <td>Riikka Ahlgren
+   </td>
+   <td>Business
+   </td>
+   <td>riikka.ahlgren@jamk.fi
+   </td>
+  </tr>
+  <tr>
+   <td>Risto Koskenkorva
+   </td>
+   <td>Product coaching
+   </td>
+   <td>risto.koskenkorva@jamk.fi
+   </td>
+  </tr>
+  <tr>
+   <td>Ilari Miikkulainen
+   </td>
+   <td>Narrative, Marketing
+   </td>
+   <td>ilari.miikkulainen@jamk.fi
+   </td>
   </tr>
 </table>
 
