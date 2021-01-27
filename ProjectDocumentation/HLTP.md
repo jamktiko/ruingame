@@ -128,7 +128,14 @@ Load and multiplayer testing will not be done due to no server requirement or mu
 
 ### Acceptance Criteria
 
-In progress
+In general, we will adapt a case-case approach on acceptance:
+
+ - Product Owner will be responsible for gameplay feel, story guideline and world building details and such, will handle evaluating if the feature implemented corresponds to the overall vision and approach of the game.
+ - Testing Supervisor will be responsible for technical analysis; Is the codebase properly done according to SOLID principles and naming conventions used in our coding guidelines.
+
+For example: A movement system is deemed acceptable when the Product Owner deems it suitable for the game vision (Speed is fast paced, commands are fluid, controls are intuitive..) and the Testing Supervisor checks the codebase (Movement is constructed using SOLID principles)
+
+- A feature will get a passing score from 6-10 in review when both of these criteria are met. A failing score of 1-5 will mean it will go back to testing or production depending on the disqualifying feature (Movement was slow but implemented correctly)
 
 ### Testing pausing and continuation
 
