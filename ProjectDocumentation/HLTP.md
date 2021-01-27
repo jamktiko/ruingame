@@ -165,7 +165,7 @@ For example: A movement system is deemed acceptable when the Product Owner deems
    - **Operating System**: Windows 10
    - **CPU**: Intel Core i7 7700K @ 4.20GHz
    - **RAM**: 16gt @ 1339mhz
-   - **Graphics**: 3071mb Nvidia GeForce GTX 1080 Ti
+   - **Graphics**: 11000 Nvidia GeForce GTX 1080 Ti
    - **Drive**: 119GB SSD
    - **Software**
     - Unity
