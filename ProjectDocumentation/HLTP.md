@@ -117,7 +117,7 @@ Load and multiplayer testing will not be done due to no server requirement or mu
 
 - **Early Testing principle**: The testing will be done weekly to avoid major bugs and developmental issues from slipping through. This will save a lot of time during the later stages of the development cycle. 
 
-**Exhaustive testing is Impossible**: As we're continuously testing the product, we must avoid the fallacy that we can find all of the bugs with the limited resources we have.
+- **Exhaustive testing is Impossible**: As we're continuously testing the product, we must avoid the fallacy that we can find all of the bugs with the limited resources we have.
 
 ### Testing constraints
 
