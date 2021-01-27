@@ -256,6 +256,14 @@ The project will end in bankruptcy on 12.5.2021.
    <td>N3261@student.jamk.fi
    </td>
   </tr>
+  <tr>
+  <td> Ville Kolu
+  </td>
+  <td> Programming
+  </td>
+  <td> gr200924@gradia.fi
+  </td>
+  </tr>
 </table>
 
 
