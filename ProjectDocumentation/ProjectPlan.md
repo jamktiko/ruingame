@@ -81,27 +81,10 @@ Teemu Kosonen
 ### 
 **References**
 
-
-<table>
-  <tr>
-   <td><strong>Reference</strong>
-   </td>
-   <td><strong>Material</strong>
-   </td>
-  </tr>
-  <tr>
-   <td>HLTP
-   </td>
-   <td>&lt;link to HLTP>
-   </td>
-  </tr>
-  <tr>
-   <td>GDD
-   </td>
-   <td>&lt;link to game design document>
-   </td>
-  </tr>
-</table>
+|  Reference | Material  | 
+|---|---|
+|  HLTP | [High Level Testing Plan](./HLTP.md) |
+| GDD  | [Game Design Document](./gdd.md)  | 
 
 
 
@@ -177,8 +160,14 @@ Project begins with creation of this document and initial version of the Game De
 ### 
 **Project Implementation**
 
-Implementation begins on 1.2.2021 with a sprint planning session according to the scrum framework. The sprints will be 2 weeks long.
+Implementation begins on 1.2.2021 with a sprint planning session according to the scrum framework. The sprints will be 2 weeks long. The following meetings will be held on specific time frames:
 
+* Daily scrum
+* Sprint planning
+* Weekly meeting
+* Sprint review + Retrospective
+
+Additionally backlog grooming will be done when there is a need for it.
 
 ### 
 **Project Testing**
@@ -197,7 +186,6 @@ The project will end in bankruptcy on 12.5.2021.
 
 
 ### 
-**Project Organization**
 
 **Work Groups**
 
@@ -249,6 +237,70 @@ The project will end in bankruptcy on 12.5.2021.
    <td>Content Creation, Developer
    </td>
    <td>N3261@student.jamk.fi
+   </td>
+  </tr>
+  <tr>
+  <td> Ville Kolu
+  </td>
+  <td> Programming
+  </td>
+  <td> gr200924@gradia.fi
+  </td>
+  </tr>
+</table>
+
+###
+
+**Stakeholders**
+
+
+<table>
+  <tr>
+   <td><strong>Name</strong>
+   </td>
+   <td><strong>Roles</strong>
+   </td>
+   <td><strong>Contact</strong>
+   </td>
+  </tr>
+  <tr>
+   <td>Teemu Pölkki
+   </td>
+   <td>Lab Director
+   </td>
+   <td>teemu.polkki@jamk.fi
+   </td>
+  </tr>
+  <tr>
+   <td>Jukka Riikonen
+   </td>
+   <td>Coaching (PO & SM teams)
+   </td>
+   <td>jukka.riikonen@jamk.fi
+   </td>
+  </tr>
+  <tr>
+   <td>Riikka Ahlgren
+   </td>
+   <td>Business
+   </td>
+   <td>riikka.ahlgren@jamk.fi
+   </td>
+  </tr>
+  <tr>
+   <td>Risto Koskenkorva
+   </td>
+   <td>Product coaching
+   </td>
+   <td>risto.koskenkorva@jamk.fi
+   </td>
+  </tr>
+  <tr>
+   <td>Ilari Miikkulainen
+   </td>
+   <td>Narrative, Marketing
+   </td>
+   <td>ilari.miikkulainen@jamk.fi
    </td>
   </tr>
 </table>
@@ -366,9 +418,6 @@ The project will end in bankruptcy on 12.5.2021.
 
 
 
-## 
-
-
 
 ## 
 **Reporting and Communication**
@@ -413,34 +462,11 @@ The project will end in bankruptcy on 12.5.2021.
   </tr>
 </table>
 
-
-
-### 
-**Daily Scrum Plan**
-
-All scrum related activities require active participation from all team members.
-
-Sprint planning will be held during Monday on the first day of the sprint. The time reserved will be 2 hours. The user stories that are selected during the sprint planning are to be completed during that sprint. Minutes will be produced from this meeting.
-
-The first hour of the work day is dedicated for daily scrum. The daily scrum will be held after 30 minutes in the work day and it should be done in 30 minutes, after getting used to the process the length of daily scrum will be reduced to 15 minutes. All members of the team decide what they are going to do during this meeting, they will also tell what they have done since the last meeting and bring up any issues with their work. \
- \
-Sprint review will be held during the last day of the sprint. The length of the sprint review will be limited to 1 hour. During the sprint review the members will show the work that they have done during the week. A transcript will be produced from this meeting.
-
-Retrospective will be held during the last day of the sprint. The time reserved will be 2 hours. The purpose of the meeting is to have open discussion about any issues, opinions, ideas and improvements related to the completing the project. A transcript will be produced from items discussed during this meeting. \
-
-
-
 ### 
 **Communication Channels**
 
 The main communication channel for the project will be Discord. Every person has their own voice-channel, where they work, and where people can join to discuss matters if necessary. In addition, there is a general voice-channel for general discussion and meetings, and there are also text-channels for different subjects. Teams will also be used for communications.
 
-
-## 
-**Documentation**
-
-
-Scrum related meetings, high level test plans and bug reports will be documented and shared within the team and presented to the organization when required.
 
 
 ### 
@@ -457,6 +483,33 @@ Scrum related meetings, high level test plans and bug reports will be documented
 
 
 The documents will be held in a group’s shared OneDrive folder and the scrum master will hold backups of the documents on a personal cloud drive.
+
+##
+**Scrum Plan**
+
+###
+**Daily Scrum**
+
+The daily scrum will be held after 15 minutes in the work day and it should be done in 15 minutes. All members of the team decide what they are going to do during this meeting, they will also tell what they have done since the last meeting and bring up any issues with their work.
+
+Generally all scrum related activities require active participation from all team members.
+
+###
+**Sprint Planning**
+
+Sprint planning will be held during Monday on the first day of the sprint. The time reserved will be 2 hours but can be extended if needed. The user stories that are selected during the sprint planning are to be completed during that sprint. Minutes will be produced from this meeting.
+
+###
+**Sprint Review**
+
+Sprint review will be held during the last day of the sprint. The length of the sprint review will be limited to 1 hour. During the sprint review the Product Owner discusses the completed user stories and the team members will show the work that they have done during the sprint. Minutes will be produced from this meeting.
+
+###
+**Sprint Retrospective**
+
+Retrospective will be held during the last day of the sprint. The time reserved will be 2 hours. The purpose of the meeting is to have open discussion about any issues, opinions, ideas and improvements related to the completing the project. Minutes will be produced from items discussed during this meeting. 
+
+
 
 
 ## 

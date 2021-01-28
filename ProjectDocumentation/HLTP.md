@@ -66,7 +66,11 @@ The following document aims to explain the course of action taken to test the co
 
 ### Testing Activities
 
-- Testing will be conducted weekly via a demo and concept evaluation.  This testing will be done internally and feedback will be collected from the project group and product owner. Bugs found in the demo will be reported in the following manner:
+- Testing will be conducted weekly via a demo and concept evaluation. 
+
+- Feedback will be submitted via a form or recorded by a member of the testing team.
+
+- This testing will be done internally and feedback will be collected from the project group and product owner. Bugs found in the demo will be reported in the following manner:
 
   - Can it be described via text? Add it to the bug reporting list with a concise description. If not ->
   - Can it be described via a screenshot? Add it to the bug reporting list with a screenshot of the problem. If not ->
@@ -95,7 +99,7 @@ Testing will also take advantage of the professional guidance provided by JAMK w
 
 ### Features to be tested
 
-In progress
+Using manual testing, all current features are tested through functional testing. Functional testing is done to determine process, load durability, and user logic. From this, concerns over redundancies, UI flow and gameplay feel addressed through feedback from the product owner
 
 ### Features not to be tested
 
@@ -113,7 +117,7 @@ Load and multiplayer testing will not be done due to no server requirement or mu
 
 - **Early Testing principle**: The testing will be done weekly to avoid major bugs and developmental issues from slipping through. This will save a lot of time during the later stages of the development cycle. 
 
-**Exhaustive testing is Impossible**: As we're continuously testing the product, we must avoid the fallacy that we can find all of the bugs with the limited resources we have.
+- **Exhaustive testing is Impossible**: As we're continuously testing the product, we must avoid the fallacy that we can find all of the bugs with the limited resources we have.
 
 ### Testing constraints
 
@@ -124,7 +128,14 @@ Load and multiplayer testing will not be done due to no server requirement or mu
 
 ### Acceptance Criteria
 
-In progress
+In general, we will adapt a case-case approach on acceptance:
+
+ - Product Owner will be responsible for gameplay feel, story guideline and world building details and such, will handle evaluating if the feature implemented corresponds to the overall vision and approach of the game.
+ - Testing Supervisor will be responsible for technical analysis; Is the codebase properly done according to SOLID principles and naming conventions used in our coding guidelines.
+
+For example: A movement system is deemed acceptable when the Product Owner deems it suitable for the game vision (Speed is fast paced, commands are fluid, controls are intuitive..) and the Testing Supervisor checks the codebase (Movement is constructed using SOLID principles)
+
+- A feature will get a passing score from 6-10 in review when both of these criteria are met. A failing score of 1-5 will mean it will go back to testing or production depending on the disqualifying feature (Movement was slow but implemented correctly)
 
 ### Testing pausing and continuation
 
@@ -154,7 +165,7 @@ In progress
    - **Operating System**: Windows 10
    - **CPU**: Intel Core i7 7700K @ 4.20GHz
    - **RAM**: 16gt @ 1339mhz
-   - **Graphics**: 3071mb Nvidia GeForce GTX 1080 Ti
+   - **Graphics**: 11000 Nvidia GeForce GTX 1080 Ti
    - **Drive**: 119GB SSD
    - **Software**
     - Unity
@@ -176,7 +187,67 @@ In progress
 
 ## Timetables and milestones
 
-In progress
+<table>
+  <tr>
+   <td>
+<strong>Event</strong>
+   </td>
+   <td><strong>Date</strong>
+   </td>
+   <td><strong>Additional information/Participants</strong>
+   </td>
+  </tr>
+  <tr>
+   <td>Preproduction Begins
+   </td>
+   <td>18.1.2021
+   </td>
+   <td>Online meeting space, Full work group.
+   </td>
+  </tr>
+  <tr>
+   <td>Initial sprint
+   </td>
+   <td>1.2.2021
+   </td>
+   <td>Online meeting space, Full work group
+   </td>
+  </tr>
+  <tr>
+   <td>Demo #1
+   </td>
+   <td>25.2.2021
+   </td>
+   <td>Online meeting space, TIKO students
+   </td>
+  </tr>
+  <tr>
+   <td>Demo #2
+   </td>
+   <td>1.4.2021
+   </td>
+   <td>TBD, Online meeting space, TIKO students
+   </td>
+  </tr>
+  <tr>
+   <td>Demo #3
+   </td>
+   <td>12.5.2021
+   </td>
+   <td>TBD, Online meeting space, Unknown
+   </td>
+  </tr>
+  <tr>
+   <td>Project ending
+   </td>
+   <td>12.5.2021
+   </td>
+   <td>Unknown
+   </td>
+  </tr>
+</table>
+
+Other milestones such as sprint demos are case specific and will not be listed in the overall timetabling. The same rule applies to demos arranged later on with TiCorporate personnel.
 
 ## Risks
 
