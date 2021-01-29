@@ -6,8 +6,54 @@
 
 # Table of Contents
 
-
-[TOC]
+- [Table of Contents](#table-of-contents)
+- [Summary](#summary)
+	- [Distinguishing Features](#distinguishing-features)
+	- [MVP](#mvp)
+- [Story](#story)
+	- [Enemies](#enemies)
+	- [Setting](#setting)
+	- [Narrative](#narrative)
+	- [Story summary](#story-summary)
+- [Gameplay](#gameplay)
+	- [Design Pillars](#design-pillars)
+	- [Combat](#combat)
+	- [Skills](#skills)
+		- [Skill Pool : “Warrior”](#skill-pool--warrior)
+		- [Skill Pool : “Rogue”](#skill-pool--rogue)
+		- [Skill pool : “Make”](#skill-pool--make)
+		- [LS](#ls)
+		- [Dagger](#dagger)
+		- [Staff](#staff)
+	- [Status Effects](#status-effects)
+	- [Core Loop](#core-loop)
+	- [Mechanics & Dynamics](#mechanics--dynamics)
+	- [Core Diagram](#core-diagram)
+- [Levels](#levels)
+	- [Level Progression](#level-progression)
+	- [Environments](#environments)
+	- [Level Design](#level-design)
+- [Art](#art)
+	- [Summary](#summary-1)
+	- [Art Bible](#art-bible)
+- [UI, Systems & Options](#ui-systems--options)
+	- [UI Overview](#ui-overview)
+	- [Menu System](#menu-system)
+	- [Controls](#controls)
+	- [Accessibility](#accessibility)
+- [Audio](#audio)
+- [Analysis](#analysis)
+	- [Market Analysis](#market-analysis)
+	- [Competitor Analysis](#competitor-analysis)
+	- [Technical Analysis](#technical-analysis)
+	- [Legal Analysis](#legal-analysis)
+- [Target](#target)
+	- [Target Audience](#target-audience)
+	- [Target Device](#target-device)
+	- [Target Budget](#target-budget)
+- [Marketing](#marketing)
+	- [Trailer](#trailer)
+- [Development Plan](#development-plan)
 
 
 
@@ -90,17 +136,17 @@ Humans exploit the resources and the people of a newfound continent, possibly le
 
 ## Design Pillars
 
-**Replayability: **Short enough playthrough time, every playthrough is unique, unlockables.
+**Replayability:** Short enough playthrough time, every playthrough is unique, unlockables.
 
-**Challenge: **Easy to learn, hard to master. Difficulty settings, the player never feels like the game is like a walk in a park
+**Challenge:** Easy to learn, hard to master. Difficulty settings, the player never feels like the game is like a walk in a park
 
 Key mechanics
 
-**Combat: **Combat is fluid, intuitive and dynamic. Different skills and combat styles.
+**Combat:** Combat is fluid, intuitive and dynamic. Different skills and combat styles.
 
-**Visuals: **Appealing art style that fits the world and its various environments. Vibrant world above the ground, dark and grim world under the ground, cel-shading.
+**Visuals:** Appealing art style that fits the world and its various environments. Vibrant world above the ground, dark and grim world under the ground, cel-shading.
 
-**Character progression: **Multiclassing system akin to pen & paper roleplaying games. Different characters with different combat styles and build paths. Multiple feats and skills to open.
+**Character progression:** Multiclassing system akin to pen & paper roleplaying games. Different characters with different combat styles and build paths. Multiple feats and skills to open.
 
 
 ## Combat
@@ -129,9 +175,7 @@ Skills:
 
 	Whirlwind, damages enemies in a 270 degree arc and knocks them back
 
-
     Ultimate Thrust: Charges a mighty thrust that pierces enemies in a line and affects a large area depending on the charge time.
-
 
     Stance Change: Changes between Aggressive and Defensive stances
 
@@ -145,14 +189,11 @@ Skills:
 
     Throw knives in a cone in front of you damaging enemies inside the cone. 
 
-
     Causes a bleed effect on the enemies hit.
-
 
     Higher crit chance.
 
 
-     \
 Dash through the enemy damaging them. Gain crit chance against the enemies you dash through.
 
 
@@ -163,9 +204,7 @@ Skills:
 
     Firestrike area of effect hit that causes enemies to take DoT damage.
 
-
     Blizzard area of effect that causes enemies inside it to be slowed down and take damage.
-
 
     Short distance teleportation.
 
@@ -179,7 +218,7 @@ After choosing your skills, you get to select your weapon to suit your needs out
 
 Type: Melee
 
-Damage: TBD \
+Damage: TBD 
 Attack speed: 100
 
 Passive: TBD 
@@ -261,17 +300,10 @@ The locations in the game are based on abandoned underground structures and buil
 
 
 
-
-
 ## Level Design
 
 
 ## 
-
-<p id="gdcalert7" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image7.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert8">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image7.png "image_tooltip")
 
 
 Here’s a very rough example of a level/stage. Every closed shape resembles a room that is randomly connected to another room on its exit point. Every room has multiple possible exit and entry points so they can be connected to other rooms in more ways than just one.
@@ -347,25 +379,25 @@ Ruin will have adaptive audio that will be made by using FMOD. Music for the gam
 
 ## Competitor Analysis
 
-**Current titles:**
+**Current titles:** 
 
-**[Hades](https://store.steampowered.com/app/1145360/Hades/) **is a critically acclaimed action roguelike that has been nominated in The Game Awards in multiple categories, including game of the year.
+**[Hades](https://store.steampowered.com/app/1145360/Hades/) ** is a critically acclaimed action roguelike that has been nominated in The Game Awards in multiple categories, including game of the year.
 
-**[Noita](https://store.steampowered.com/app/881100/Noita/) **is a Finnish action roguelite with focus on magic and physics. It has received great reviews on Steam.
+**[Noita](https://store.steampowered.com/app/881100/Noita/) ** is a Finnish action roguelite with focus on magic and physics. It has received great reviews on Steam.
 
-**[Gunfire Reborn](https://store.steampowered.com/app/1217060/Gunfire_Reborn/) **is an FPS roguelite with RPG elements like different abilities and heroes, also cel-shaded voxel graphics. The game is in Steam Early Access and has received very positive reviews.
+**[Gunfire Reborn](https://store.steampowered.com/app/1217060/Gunfire_Reborn/) ** is an FPS roguelite with RPG elements like different abilities and heroes, also cel-shaded voxel graphics. The game is in Steam Early Access and has received very positive reviews.
 
-**[Genshin Impact](https://genshin.mihoyo.com/en) **is an open world action RPG with cel-shaded graphics and vibrant colors. It has a character based combat system with every character having a different element and skillset. The game made 245 million dollars during its first month.
+**[Genshin Impact](https://genshin.mihoyo.com/en) ** is an open world action RPG with cel-shaded graphics and vibrant colors. It has a character based combat system with every character having a different element and skillset. The game made 245 million dollars during its first month.
 
 **Future titles:**
 
-**[Darkest Dungeon 2](https://www.epicgames.com/store/en-US/product/darkest-dungeon-2/home) **is an upcoming roguelike RPG set in a dark and gritty world. The first game in the series sold over 2 million copies during its first year.
+**[Darkest Dungeon 2](https://www.epicgames.com/store/en-US/product/darkest-dungeon-2/home) ** is an upcoming roguelike RPG set in a dark and gritty world. The first game in the series sold over 2 million copies during its first year.
 
-**[Senua’s Saga: Hellblade 2](https://www.xbox.com/en-US/games/senuas-saga-hellblade-II) **is an action adventure game that takes place in a grim world with psychological elements. The first title in the series generated over 13 million dollars in revenue and peaked the interest of Xbox Game Studios that later acquired the developer Ninja Theory.
+**[Senua’s Saga: Hellblade 2](https://www.xbox.com/en-US/games/senuas-saga-hellblade-II) ** is an action adventure game that takes place in a grim world with psychological elements. The first title in the series generated over 13 million dollars in revenue and peaked the interest of Xbox Game Studios that later acquired the developer Ninja Theory.
 
 **[Boyfriend Dungeon](https://store.steampowered.com/app/674930/Boyfriend_Dungeon/)** is a unique take on the hack-and-slash dungeon crawler genre. The game combines two entirely different game genres, dungeon crawler and dating sim, creating “shack-and-slash”. The title has vibrant cartoonish graphics.
 
-**[Diablo 4](https://diablo4.blizzard.com/en-us/) **is an upcoming entry in the legendary Blizzard dungeon crawler series. Fans have been waiting for this game for years but right now it doesn’t have a set release date.
+**[Diablo 4](https://diablo4.blizzard.com/en-us/) ** is an upcoming entry in the legendary Blizzard dungeon crawler series. Fans have been waiting for this game for years but right now it doesn’t have a set release date.
 
 
 ## Technical Analysis
