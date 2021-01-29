@@ -1,7 +1,7 @@
 
 ## Game Design Document
 
-
+[<img src="./images/ruinlogo.png">]()
 
 
 # Table of Contents
@@ -93,9 +93,15 @@
 
 Inspiration for the enemies comes from some mythologies like Lovecraftian ones. At the end of the level there will be a boss enemy that will have harder mechanics than a normal enemy and will also offer greater rewards when defeated.
 
+[<img src="./images/basic_enemy_mood.png">]()
+
+
+[<img src="./images/boss_moodboard.png">]()
+
 
 ## Setting
 
+[<img src="./images/settingexample.jpg">]()
 
 
 WIP map of the Continent. Very likely to have some changes in the future.
@@ -260,6 +266,7 @@ Reduced flat reduction
 
 Start a run, choose 3 skills, choose a weapon, defeat the enemies to upgrade your skills and collect artifacts, beat the level by defeating the final boss and use gained xp to get new feats, start a new run...
 
+[<img src="./images/initialcoreloop.png">]()
 
 
 ## Mechanics & Dynamics
@@ -280,8 +287,13 @@ Start a run, choose 3 skills, choose a weapon, defeat the enemies to upgrade you
 
 **Secret rooms:** Secret rooms are randomly generated secret areas that need to be actively found by the player, they can be hidden by a mossy entrance, a waterfall, secret activated lift or a fake trap. Secret rooms always include something interesting that helps with the playthrough (like an Artifact) and sometimes pieces of lore that can’t be found anywhere else in the game.
 
+[<img src="./images/controlscheme.png">]()
+
+
 
 ## Core Diagram
+
+[<img src="./images/corediagram.png">]()
 
 
 # Levels
@@ -298,12 +310,14 @@ Whetstones/craftsmen/whatever can also be found randomly and they increase the s
 
 The locations in the game are based on abandoned underground structures and buildings. The period of time when these are built are medieval, but they also have ancient technology embedded in them and have fantasy themes.
 
+[<img src="./images/environments.jpg">]()
+
 
 
 ## Level Design
 
 
-## 
+[<img src="./images/examplelevel.png">]()
 
 
 Here’s a very rough example of a level/stage. Every closed shape resembles a room that is randomly connected to another room on its exit point. Every room has multiple possible exit and entry points so they can be connected to other rooms in more ways than just one.
