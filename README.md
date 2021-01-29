@@ -1,12 +1,25 @@
-this is a great readme document!
+# RUIN
 
-I agree, top notch readme. also OMEGALUL ~Mikki
-=======
-next is better - Patrik Kaunisto
-olen anssi
+## Background
 
-hahaa eeppinen teksti :D
-=======
-# You thought it was meaningful push, but it was me! Teemu!
+TiCorporate DemoLab is a project learning / business simulation course that we are working on during the spring of 2021 
 
-git on hauskaa ja helppoa -Teemu, MA 25.1.2021 klo 9:48
+Our project is called RUIN, a 3D Action Rogue-lite that we're developing using Unity and C# with a multitude of tools. 
+
+We are a group of 6 students located in the Jyväskylä area, Finland.
+
+## Links to project documentation
+
+[Project Plan](./ProjectDocumentation/ProjectPlan.md "Project plan documentation")
+
+[Game Design Document](./ProjectDocumentation/GDD.md "Game Design Document")
+
+[High Level Testing Plan](./ProjectDocumentation/HLTP.md "High Level Testing Plan")
+
+## Other links
+
+Website
+
+Twitter
+
+Youtube
