@@ -1,4 +1,8 @@
 
+## Game Design Document
+
+
+
 
 # Table of Contents
 
@@ -7,19 +11,17 @@
 
 
 
-
-
 # Summary
 
 3D rogue-lite action RPG with the rogue-lite elements of Gunfire Reborn/Hades, multiclassing progress of Dungeons & Dragons and the combat of the Witcher 3 /Souls series/Genshin Impact.
 
 
-## Unique Features
+## Distinguishing Features
 
 
 
 *   Graphics with cel-shading
-*   Multiclassing
+*   Multi-class gameplay
 *   Rogue-lite with action combat and over the shoulder camera
 *   Story combining different mythoi
 
@@ -29,7 +31,7 @@
 
 
 *   Core gameplay loop can be played through (New Game -> Select class -> Beat level). 
-*   3 classes with their respective abilities/skills. 
+*   3 skillpools with unique, class based skills
 *   Classes use the same base model. 
 *   1 level with boss fight. 10 artifacts with status effects. 
 *   1-2 enemies (melee, ranged). 
@@ -41,21 +43,13 @@
 # Story
 
 
-## Characters
-
-Warrior representative 
- 
-Rogue representative 
- 
-Mage representative
-
-
 ## Enemies
 
-Inspiration for the enemies comes from multiple mythologies like Chinese and Lovecraftian ones.At the end of the level there will be a boss enemy that will have harder mechanics than a normal enemy and will also offer greater rewards when defeated.
+Inspiration for the enemies comes from some mythologies like Lovecraftian ones. At the end of the level there will be a boss enemy that will have harder mechanics than a normal enemy and will also offer greater rewards when defeated.
 
 
 ## Setting
+
 
 
 WIP map of the Continent. Very likely to have some changes in the future.
@@ -90,88 +84,162 @@ The future of the Continent and likely the whole world now lies in the hands of 
 
 Humans exploit the resources and the people of a newfound continent, possibly leading to the end of the world. Humanity’s greed leads them to a ruin which holds in it an ancient eldritch force that will run rampant unless a solution to put it to rest is found quickly. Player character will be one of the people sent to the Ruin to find answers and solutions before it is too late.
 
+
 # Gameplay
+
 
 ## Design Pillars
 
-**Replayability:** Short enough playthrough time, every playthrough is unique, unlockables.
+**Replayability: **Short enough playthrough time, every playthrough is unique, unlockables.
 
-**Challenging:** Easy to learn, hard to master. Difficulty settings, the player never feels like the game is like a walk in a park.
+**Challenge: **Easy to learn, hard to master. Difficulty settings, the player never feels like the game is like a walk in a park
 
-**Combat:** Combat is fluid, intuitive and dynamic. Different skills and combat styles.
+Key mechanics
 
-**Visuals:** Appealing art style that fits the world and its various environments. Vibrant world above the ground, dark and grim world under the ground, cel-shading.
+**Combat: **Combat is fluid, intuitive and dynamic. Different skills and combat styles.
 
-**Character progression:** Multiclassing system akin to pen & paper roleplaying games. Different characters with different combat styles and build paths. Multiple feats and skills to open.
+**Visuals: **Appealing art style that fits the world and its various environments. Vibrant world above the ground, dark and grim world under the ground, cel-shading.
+
+**Character progression: **Multiclassing system akin to pen & paper roleplaying games. Different characters with different combat styles and build paths. Multiple feats and skills to open.
 
 
 ## Combat
 
 Basic combat principle:
 
-	Damage:
+	Critical chance
+
+	Damage
 
 	Flat Resistance
 
 	Percentual Resistance
 
-	Health:
+	Health
 
 
-## Classes
+## Skills
 
-Class Name : Warrior
 
-Description: Warrior from foreign lands
+### Skill Pool : “Warrior”
 
-Stats:
-
-	Health:
-
-	Attack Speed:
-
-	Movement Speed:
-
-	Sprint Speed:
+	
 
 Skills:
 
-	Q: Whirlwind, damages enemies in a 270 degree arc and knocks them back
+	Whirlwind, damages enemies in a 270 degree arc and knocks them back
 
-	E: Stance Change: Changes between Aggressive and Defensive stances
 
-	R: Ultimate Thrust: Charges a mighty thrust that pierces enemies in a line and affects      a large area depending on the charge time.
+    Ultimate Thrust: Charges a mighty thrust that pierces enemies in a line and affects a large area depending on the charge time.
 
-	Shift: Shield Bash, evades enemy attacks.
+
+    Stance Change: Changes between Aggressive and Defensive stances
+
+	Shield Bash, evades enemy attacks, gives temporary hit points.
+
+
+### Skill Pool : “Rogue”
+
+Skills:
+
+
+    Throw knives in a cone in front of you damaging enemies inside the cone. 
+
+
+    Causes a bleed effect on the enemies hit.
+
+
+    Higher crit chance.
+
+
+     \
+Dash through the enemy damaging them. Gain crit chance against the enemies you dash through.
+
+
+### Skill pool : “Make”
+
+Skills:
+
+
+    Firestrike area of effect hit that causes enemies to take DoT damage.
+
+
+    Blizzard area of effect that causes enemies inside it to be slowed down and take damage.
+
+
+    Short distance teleportation.
+
+
+Weapons
+
+After choosing your skills, you get to select your weapon to suit your needs out of 3 weapons: Long Sword, Dagger and Staff.
+
+
+### LS
+
+Type: Melee
+
+Damage: TBD \
+Attack speed: 100
+
+Passive: TBD 
+
+
+
+### Dagger
+
+Type: Melee
+
+Damage: TBD 
+Attack speed: 140
+
+Passive: Increased crit chance
+
+
+### Staff
+
+Type: Range
+
+Damage: TBD 
+Attack speed: 100
+
+Passive: TBD
+
+
+## Status Effects
+
+ 
+DoT damage 
+Vulnerability (Increased crit chance)
+
+Slow movement
+
+Reduced flat reduction
 
 
 ## Core Loop
 
-Start a run, choose a class, defeat the enemies to level up and collect artifacts, beat the level by defeating the final boss and use gained xp to get new feats, start a new run...
+Start a run, choose 3 skills, choose a weapon, defeat the enemies to upgrade your skills and collect artifacts, beat the level by defeating the final boss and use gained xp to get new feats, start a new run...
+
 
 
 ## Mechanics & Dynamics
 
-**Basic attack:** Basic attack is the quick versatile always available combat mechanic for beating the poor creatures that end up between you and the exit to the next stage. It includes a simple attack combo that depends on the weapon you have equipped. Basic attack combos include animations, area of effect, range, damage, length of combo and other special effects caused by the attacks. <span style="text-decoration:underline;">Example</span>: _Class: Nightblade. Name: Whirling death. Effect: Rapid strikes alternating between the two light bladed weapons, picking up attack speed while combo goes on. Combo length: max 10 hits. Damage: Low damage slowly tapering down further in the combo. Special effect: Inflict vulnerability increasing damage taken by all sources._ 
+**Basic attack:** Basic attack is the quick versatile always available combat mechanic for beating the poor creatures that end up between you and the exit to the next stage. It includes a simple attack combo that depends on the weapon you have equipped. Basic attack combos include animations, area of effect, range, damage, length of combo and other special effects caused by the attacks.
 
-**Skills:** Skills are active abilities given to the player character from the decisions made when acquiring classes. Skills are the primary combat mechanic besides basic attack combos. Each class gives their unique set of skills to pick from and build your own unique build for the run. Skills include multiple different similar versions of itself to make it possible to be used by a variety of weapons. Skill includes animation, area of effect, range, damage and other special effects caused by it. <span style="text-decoration:underline;">Example</span>: _class: Infiltrator. Name: Barb shot. Effect: Shoots an arrow with barb wire attached to it entangling the enemy hit by the skill. Enemies movement speed is reduced, they take initial damage on being hit and gain stack of bleed debuff._
+**Skills:**. Skills are the primary combat mechanic besides basic attack combos. Skill includes animation, area of effect, range, damage and other special effects caused by it.
+
 
 
 **Artifacts:** Artifacts are rarities found in the world around the long-forgotten temples and ruins of the olden civilization that you are exploring. They are semi randomly encountered within the world, elite enemies/bosses and secret rooms. Artifacts include rarity, special effects, etc. <span style="text-decoration:underline;">Example</span>: _Feather of phoenix. Once during the run when the player character dies a large amount of damage is inflicted to enemies around the player and player character is reborn in the middle of it._
 
-**Feats:** Feats are passive abilities changing base stats of the player character from the start of each run. They are unlocked with currency collected over every play through. The currency is used to advance in a varied “feat tree” unlocking these passive traits for future use. 
+**Feats:** Feats are passive abilities changing base stats of the player character from the start of each run. They are unlocked with currency collected over every play through. The currency is used to advance in a varied “feat tree” unlocking these passive traits for future use.
 
-**Levels: **Levels refer to the skill of the character in all the different classes it has during the run. Whenever a stage is cleared the player can level-up in a new class or continue leveling up on one of the ones the character already has advanced in.
+**Ancient tech points/Experience points: **Currency collected over multiple runs of the game. Whenever a run finishes, is it because of early death or beating the game the player saves this currency to spend on the menu (“Overworld?”) to advance the character in some ways or to unlock more things to appear during gameplay.
 
-**Weapons:** Each class either brings its own weapons to the character or swaps out previous  weapons attached to the player character, for example if the previous class had one dagger as weapon but the new class would add dual dagger instead of adding dual daggers it updates the old weapon set. 
+**Equipment enhancing: **A table where you can choose between enhancing your weapon’s damage or your max hit points by a small amount.
 
-**Ancient tech points: **Currency collected over multiple runs of the game. Whenever a run finishes, is it because of early death or beating the game the player saves this currency to spend on the menu (“Overworld?”) to advance character in some ways or to unlock more things to appear during game play.
-
-**Class-system: **Class system will include base classes to select from at the start, along the playthrough player will gain a level at the end of each stage that they will spend on either picking up new class to their build or to advance further in one of the current classes in the build. Adding a new class to the build will create a hybrid class based on the original class and the new class added. <span style="text-decoration:underline;">Example</span>: _Player starts the playthrough with the Warrior class and after the first stage decides to add a level of Wizard to the build. This causes the first class Warrior and the second class Wizard to morph into a new hybrid class Spellblade. Spellblade will have features of both Warrior and Wizard._
-
-**Weapon enhancing: **When a weapon is enchanted it will add effects to it that might not normally be possible to achieve with that weapon set
-
-**Secret rooms:** Secret rooms are randomly generated secret areas that need to be actively found by the player, they can be hidden by a mossy entrance, a waterfall, secret activated lift or a fake trap. Secret rooms always include something interesting that helps with the playthrough and sometimes pieces of lore that can’t be found anywhere else in the game.
+**Secret rooms:** Secret rooms are randomly generated secret areas that need to be actively found by the player, they can be hidden by a mossy entrance, a waterfall, secret activated lift or a fake trap. Secret rooms always include something interesting that helps with the playthrough (like an Artifact) and sometimes pieces of lore that can’t be found anywhere else in the game.
 
 
 ## Core Diagram
@@ -184,16 +252,26 @@ Start a run, choose a class, defeat the enemies to level up and collect artifact
 
 Pre-created rooms form random generated sequences that form the level in different ways each time. Each room is full of enemies with some randomness sprinkled in. After entering a room, you cannot exit it until you defeat the enemies in the room or whatever challenge you are facing in there. Completing the room will allow you to progress to the next room and after multiple different rooms you will arrive in a room with the boss of the level.
 
-You might find Merchants in some rooms that sell you various Artifacts, items or other goods. Whetstones/craftsmen/whatever can also be found randomly and they increase the stats of your equipment. Secret rooms are challenge areas that have a chance to have their entrance to spawn in rooms. Completing a secret room will yield the player with a reward like Artifact.
+Whetstones/craftsmen/whatever can also be found randomly and they increase the stats of your equipment. Secret rooms are challenge areas that have a chance to have their entrance to spawn in rooms. Completing a secret room will yield the player with a reward like Artifacts.
 
 
 ## Environments
+
+The locations in the game are based on abandoned underground structures and buildings. The period of time when these are built are medieval, but they also have ancient technology embedded in them and have fantasy themes.
+
+
+
 
 
 ## Level Design
 
 
 ## 
+
+<p id="gdcalert7" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image7.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert8">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+
+
+![alt_text](images/image7.png "image_tooltip")
 
 
 Here’s a very rough example of a level/stage. Every closed shape resembles a room that is randomly connected to another room on its exit point. Every room has multiple possible exit and entry points so they can be connected to other rooms in more ways than just one.
@@ -204,7 +282,7 @@ Here’s a very rough example of a level/stage. Every closed shape resembles a r
 
 ## Summary
 
-Ruin’s art style can probably be summarized in just a couple of words: Cel-shading/toon shading, textures that remind of watercolors and vibrant yet grim world. The first moodboard under the environment title is a good example of this.
+Ruin’s art style can probably be summarized in just a couple of words: Cel-shading/toon shading, textures that remind of watercolors and vibrant yet grim world.
 
 Right now Ruin uses RealToon ([Unity Asset Store: RealToon](https://assetstore.unity.com/packages/vfx/shaders/realtoon-65518)) for its cel-shading, but depending on our needs we might be making our own shader for this, changing to another one or just sticking with RealToon as it has been looking good and working well so far.
 
@@ -221,6 +299,29 @@ Right now Ruin uses RealToon ([Unity Asset Store: RealToon](https://assetstore.u
 ## Menu System
 
 
+
+*   Main menu
+    *   New Game
+*   Inventory
+    *   Equipment
+    *   Artifacts \
+	
+*   Options
+    *   Graphics
+        *   Preset (Low, Medium, High)
+        *   V-Sync
+        *   FPS limit
+        *   Bloom
+        *   Anti-aliasing
+        *   Aspect ratio
+        *   Screen resolution \
+	
+*   Audio
+    *   Sounds
+        *   Music volume
+        *   SFX volume
+
+
 ## Controls
 
 Ruin is playable with mouse and keyboard as well as a controller. Remapping the keys and controls is possible. You can change the sensitivity of the mouse or the controller. The default mappings are going to be similar to other action RPGs, WASD to move, shift to run, left click to attack for example.
@@ -228,16 +329,14 @@ Ruin is playable with mouse and keyboard as well as a controller. Remapping the 
 
 ## Accessibility
 
-Games should be playable by everyone, so we have been thinking of many ways to make Ruin more accessible for people. We aim to have scalable subtitles with clean font, likely following Netflix subtitle guidelines (especially the timing of the subtitles). Black transparent background box for subtitles makes it visible on every background. Having different colored subtitles for different characters in a scene helps to follow the dialogue easier. Visual and auditory indicators are important especially in combat. We also aim to have our UI scalable. Audio settings will also have a slider for dialogue volume.
+Remappable controls, mouse/controller sensitivity settings and controller support already help a lot of players. Option to turn off motion blur and other settings like flashing effects is important as well. Changing field of view is also possible. Game’s instructions are clear and there will be tooltips on the loading screen for extra tips.
 
-Remappable controls, mouse/controller sensitivity settings and controller support already help a lot of players. Option to turn off motion blur and other settings like flashing effects is important as well. Changing field of view is also possible.
-
-A tutorial level will teach the player all the basics they need to know to play Ruin. Tutorial is replayable so the player can get comfortable with the controls and mechanics in a safe environment. Game’s instructions are clear and there will be tooltips on the loading screen for extra tips.
-
-If possible, we should use Unity’s colordblind filter to see how colorblind friendly our game is. Designing the game for every type of colorblindness is likely not possible, so we should implement a colorblind mode that would have different settings for different types of colorblindness.
+If possible, we should use Unity’s colordblind filter to see how colorblind friendly our game is.
 
 
 # Audio
+
+Ruin will have adaptive audio that will be made by using FMOD. Music for the game will be made by using Reaper and multiple different VST plugins and effects. Ruin will have 2 different music tracks. One for the normal stages of the game that adapts between battle and non-battle sections. Boss stage will have a music track that will adapt according to the boss’ phases. In game sounds will be implemented through FMOD as well. Possible voice acted dialogue for the main character.
 
 
 # Analysis
@@ -283,9 +382,10 @@ If possible, we should use Unity’s colordblind filter to see how colorblind fr
 
 ## Target Device
 
+The game will be distributed on PC platform.
+
 
 ## Target Budget
-
 
 
 # Marketing
@@ -296,4 +396,4 @@ If possible, we should use Unity’s colordblind filter to see how colorblind fr
 
 # Development Plan
 
-We will be using **Unity 2019.4.18f1 LTS **version.
+We will be using **Unity 2019.4.18f1 LTS **version. 
