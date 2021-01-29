@@ -395,23 +395,23 @@ Ruin will have adaptive audio that will be made by using FMOD. Music for the gam
 
 **Current titles:** 
 
-**[Hades](https://store.steampowered.com/app/1145360/Hades/) ** is a critically acclaimed action roguelike that has been nominated in The Game Awards in multiple categories, including game of the year.
+[Hades](https://store.steampowered.com/app/1145360/Hades/) is a critically acclaimed action roguelike that has been nominated in The Game Awards in multiple categories, including game of the year.
 
-**[Noita](https://store.steampowered.com/app/881100/Noita/) ** is a Finnish action roguelite with focus on magic and physics. It has received great reviews on Steam.
+[Noita](https://store.steampowered.com/app/881100/Noita/)  is a Finnish action roguelite with focus on magic and physics. It has received great reviews on Steam.
 
-**[Gunfire Reborn](https://store.steampowered.com/app/1217060/Gunfire_Reborn/) ** is an FPS roguelite with RPG elements like different abilities and heroes, also cel-shaded voxel graphics. The game is in Steam Early Access and has received very positive reviews.
+[Gunfire Reborn](https://store.steampowered.com/app/1217060/Gunfire_Reborn/)  is an FPS roguelite with RPG elements like different abilities and heroes, also cel-shaded voxel graphics. The game is in Steam Early Access and has received very positive reviews.
 
-**[Genshin Impact](https://genshin.mihoyo.com/en) ** is an open world action RPG with cel-shaded graphics and vibrant colors. It has a character based combat system with every character having a different element and skillset. The game made 245 million dollars during its first month.
+[Genshin Impact](https://genshin.mihoyo.com/en)  is an open world action RPG with cel-shaded graphics and vibrant colors. It has a character based combat system with every character having a different element and skillset. The game made 245 million dollars during its first month.
 
-**Future titles:**
+Future titles:
 
-**[Darkest Dungeon 2](https://www.epicgames.com/store/en-US/product/darkest-dungeon-2/home) ** is an upcoming roguelike RPG set in a dark and gritty world. The first game in the series sold over 2 million copies during its first year.
+[Darkest Dungeon 2](https://www.epicgames.com/store/en-US/product/darkest-dungeon-2/home)  is an upcoming roguelike RPG set in a dark and gritty world. The first game in the series sold over 2 million copies during its first year.
 
-**[Senua’s Saga: Hellblade 2](https://www.xbox.com/en-US/games/senuas-saga-hellblade-II) ** is an action adventure game that takes place in a grim world with psychological elements. The first title in the series generated over 13 million dollars in revenue and peaked the interest of Xbox Game Studios that later acquired the developer Ninja Theory.
+[Senua’s Saga: Hellblade 2](https://www.xbox.com/en-US/games/senuas-saga-hellblade-II)  is an action adventure game that takes place in a grim world with psychological elements. The first title in the series generated over 13 million dollars in revenue and peaked the interest of Xbox Game Studios that later acquired the developer Ninja Theory.
 
-**[Boyfriend Dungeon](https://store.steampowered.com/app/674930/Boyfriend_Dungeon/)** is a unique take on the hack-and-slash dungeon crawler genre. The game combines two entirely different game genres, dungeon crawler and dating sim, creating “shack-and-slash”. The title has vibrant cartoonish graphics.
+[Boyfriend Dungeon](https://store.steampowered.com/app/674930/Boyfriend_Dungeon/) is a unique take on the hack-and-slash dungeon crawler genre. The game combines two entirely different game genres, dungeon crawler and dating sim, creating “shack-and-slash”. The title has vibrant cartoonish graphics.
 
-**[Diablo 4](https://diablo4.blizzard.com/en-us/) ** is an upcoming entry in the legendary Blizzard dungeon crawler series. Fans have been waiting for this game for years but right now it doesn’t have a set release date.
+[Diablo 4](https://diablo4.blizzard.com/en-us/) is an upcoming entry in the legendary Blizzard dungeon crawler series. Fans have been waiting for this game for years but right now it doesn’t have a set release date.
 
 
 ## Technical Analysis
