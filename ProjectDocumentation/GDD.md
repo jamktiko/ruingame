@@ -274,9 +274,9 @@ Start a run, choose 3 skills, choose a weapon, defeat the enemies to upgrade you
 
 **Feats:** Feats are passive abilities changing base stats of the player character from the start of each run. They are unlocked with currency collected over every play through. The currency is used to advance in a varied “feat tree” unlocking these passive traits for future use.
 
-**Ancient tech points/Experience points: **Currency collected over multiple runs of the game. Whenever a run finishes, is it because of early death or beating the game the player saves this currency to spend on the menu (“Overworld?”) to advance the character in some ways or to unlock more things to appear during gameplay.
+**Ancient tech points/Experience points: ** Currency collected over multiple runs of the game. Whenever a run finishes, is it because of early death or beating the game the player saves this currency to spend on the menu (“Overworld?”) to advance the character in some ways or to unlock more things to appear during gameplay.
 
-**Equipment enhancing: **A table where you can choose between enhancing your weapon’s damage or your max hit points by a small amount.
+**Equipment enhancing: ** A table where you can choose between enhancing your weapon’s damage or your max hit points by a small amount.
 
 **Secret rooms:** Secret rooms are randomly generated secret areas that need to be actively found by the player, they can be hidden by a mossy entrance, a waterfall, secret activated lift or a fake trap. Secret rooms always include something interesting that helps with the playthrough (like an Artifact) and sometimes pieces of lore that can’t be found anywhere else in the game.
 
