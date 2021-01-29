@@ -522,6 +522,17 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""19e91028-d782-4e2e-999a-303e7a12a088"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Skill1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""ed941dec-aefc-4ab5-b2bb-a67686a7bd22"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
