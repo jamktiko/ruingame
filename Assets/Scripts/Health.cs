@@ -10,6 +10,8 @@ public class Health : MonoBehaviour
 
     [SerializeField]
     private float _currentHealth;
+    
+    [SerializeField]
     private bool damageable = true;
 
     void Start()
@@ -33,9 +35,18 @@ public class Health : MonoBehaviour
         
     }
 
-    public void Die()
+    public virtual void Die()
     {
-        Debug.Log(this +  " dies");
     }
-    
+
+    public void AddIFrame(float duration)
+    {
+        damageable = false;
+        Invoke("TurnDamageOn", duration);
+    }
+
+    public void TurnDamageOn()
+    {
+        damageable = true;
+    }
 }

@@ -10,15 +10,14 @@ public class SkillExecute : MonoBehaviour
     public float skillCooldown = 5f;
 
     public bool onCooldown = false;
-    
+
+    public SkillUser skillUser;
     public virtual void Execute()
     {
     }
     public virtual IEnumerator GoOnCooldown()
     {
-        Debug.Log("Skill going on cooldown!");
         yield return new WaitForSeconds(skillCooldown);
-        Debug.Log("Skill ready!");
         onCooldown = false;
     }
 
@@ -32,7 +31,7 @@ public class SkillExecute : MonoBehaviour
         }
         else
         {
-            Debug.Log("Skill on cooldown!");
+            //ON COOLDOWN
         }
     }
 }

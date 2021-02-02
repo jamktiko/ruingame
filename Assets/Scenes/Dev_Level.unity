@@ -256,10 +256,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 319197839}
-  - component: {fileID: 319197840}
-  - component: {fileID: 319197843}
   - component: {fileID: 319197842}
   - component: {fileID: 319197841}
+  - component: {fileID: 319197843}
+  - component: {fileID: 319197840}
   m_Layer: 0
   m_Name: Skills
   m_TagString: Untagged
@@ -290,13 +290,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 319197838}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8617edddcc354744a3248ab55286245, type: 3}
+  m_Script: {fileID: 11500000, guid: c0562049f2a7d014eabe27d5fa4b2650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skillname: 
   skillDescription: 
   skillCooldown: 5
   onCooldown: 0
+  skillUser: {fileID: 0}
+  teleportDistance: 10
+  iFrameDuration: 1
 --- !u!114 &319197841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,13 +309,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 319197838}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0562049f2a7d014eabe27d5fa4b2650, type: 3}
+  m_Script: {fileID: 11500000, guid: a8617edddcc354744a3248ab55286245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skillname: 
   skillDescription: 
   skillCooldown: 5
   onCooldown: 0
+  skillUser: {fileID: 0}
 --- !u!114 &319197842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -322,13 +326,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 319197838}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0562049f2a7d014eabe27d5fa4b2650, type: 3}
+  m_Script: {fileID: 11500000, guid: a8617edddcc354744a3248ab55286245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skillname: 
   skillDescription: 
   skillCooldown: 5
   onCooldown: 0
+  skillUser: {fileID: 0}
 --- !u!114 &319197843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -338,13 +343,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 319197838}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0562049f2a7d014eabe27d5fa4b2650, type: 3}
+  m_Script: {fileID: 11500000, guid: 358d98be8bb5a44479758a7dddf4486a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skillname: 
   skillDescription: 
-  skillCooldown: 5
+  skillCooldown: 0.2
   onCooldown: 0
+  skillUser: {fileID: 0}
 --- !u!1 &416028854
 GameObject:
   m_ObjectHideFlags: 0
@@ -782,6 +788,7 @@ GameObject:
   - component: {fileID: 647002629}
   - component: {fileID: 647002628}
   - component: {fileID: 647002631}
+  - component: {fileID: 647002632}
   m_Layer: 0
   m_Name: PlayerMaster
   m_TagString: Player
@@ -819,6 +826,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inputReader: {fileID: 11400000, guid: 88aea93a9d9c85d4ea251d1cce5aa3e6, type: 2}
   _skillList: []
+  entityHealth: {fileID: 647002632}
 --- !u!114 &647002629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -872,6 +880,23 @@ MonoBehaviour:
   _damageCollider: {fileID: 1593034694}
   _damage: 100
   _attackDistance: 3
+--- !u!114 &647002632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 647002626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f3bf3bd00f309643aad6fc90554e3e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maximumHealth: 100
+  flatResistance: 10
+  percentualResistance: 10
+  _currentHealth: 0
+  damageable: 1
 --- !u!1 &653350215
 GameObject:
   m_ObjectHideFlags: 0
@@ -952,6 +977,7 @@ MonoBehaviour:
   flatResistance: 90
   percentualResistance: 10
   _currentHealth: 0
+  damageable: 1
 --- !u!65 &762925944
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1020,11 +1046,120 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 762925942}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.36, y: 0.52, z: 3.83}
+  m_LocalPosition: {x: -0.36, y: 0.93, z: 3.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &816952416
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 816952421}
+  - component: {fileID: 816952420}
+  - component: {fileID: 816952419}
+  - component: {fileID: 816952418}
+  - component: {fileID: 816952417}
+  m_Layer: 0
+  m_Name: DamageTester
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &816952417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 816952416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed7886612bb6b7443a9d032624a12651, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damageCollider: {fileID: 816952418}
+  _damage: 50
+  _targetTag: Player
+--- !u!65 &816952418
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 816952416}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &816952419
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 816952416}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 5989adeca0677d24e8d96fa623452d36, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &816952420
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 816952416}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &816952421
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 816952416}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5, y: 1, z: 0}
+  m_LocalScale: {x: 0.2, y: 2, z: 5}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &904965577
 GameObject:
@@ -1563,7 +1698,7 @@ GameObject:
   - component: {fileID: 1593034696}
   m_Layer: 0
   m_Name: WeaponHolder
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1597,6 +1732,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damageCollider: {fileID: 1593034695}
   _damage: 100
+  _targetTag: 
 --- !u!65 &1593034695
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1640,7 +1776,7 @@ GameObject:
   - component: {fileID: 1599923822}
   m_Layer: 0
   m_Name: Weapon
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1756,6 +1892,7 @@ MonoBehaviour:
   flatResistance: 90
   percentualResistance: 10
   _currentHealth: 0
+  damageable: 1
 --- !u!65 &1797545844
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1824,7 +1961,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1797545842}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.8, y: 0.52, z: 3.83}
+  m_LocalPosition: {x: -1.8, y: 0.93, z: 3.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

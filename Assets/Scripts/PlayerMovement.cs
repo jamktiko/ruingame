@@ -39,7 +39,8 @@ namespace DefaultNamespace
         {
             _characterController = GetComponent<CharacterController>();
         }
-
+        
+        
         void OnEnable()
         { 
             //Subscribe to events

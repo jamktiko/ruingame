@@ -9,6 +9,7 @@ public class SkillUser : MonoBehaviour
 
     [SerializeField] private SkillExecute[] _skillList;
 
+    [SerializeField] private Health entityHealth;
     private void OnEnable()
     {
         _inputReader.activateSkill1 += OnSkill1;
@@ -34,6 +35,7 @@ public class SkillUser : MonoBehaviour
         for (int i = 0; i < skills.Length; i++)
         {
             _skillList[i] = skills[i];
+            _skillList[i].skillUser = this;
         }
     }
     void OnSkill1()
@@ -84,13 +86,19 @@ public class SkillUser : MonoBehaviour
         }
     }
 
-    void ResetAllSkills()
+    public void ResetAllSkills()
     {
         foreach (var skill in _skillList)
         {
             skill.StopCoroutine(nameof(SkillExecute.GoOnCooldown));
             skill.onCooldown = false;
-            Debug.Log("Reset all skills!");
+            
         }
+        Debug.Log("Reset all skills!");
+    }
+
+    public void AddInvulnerability(float duration)
+    {
+        entityHealth.AddIFrame(duration);
     }
 }

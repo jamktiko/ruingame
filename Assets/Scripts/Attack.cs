@@ -21,8 +21,12 @@ public class Attack : MonoBehaviour
                 //Attack deals damage on hit
             //Trigger Animation, prevent attacking while an attack is in progress
                 //Last Combo Step resets number
-    
-   
+
+    private void Start()
+    {
+        _damageCollider = GetComponentInChildren<DamageCollider>();
+    }
+
     private void OnEnable()
     {
         _inputReader.attackEvent += ExecuteAttack;
@@ -36,18 +40,8 @@ public class Attack : MonoBehaviour
     private void ExecuteAttack()
     {
         _damageCollider.EnableDamage();
-        Debug.Log("Executing Attack!");
     }
-    void EnableDamage()
-    {
-        
-    }
-
-    void DisableDamage()
-    {
-        
-    }
-
+    
     //Attack Range visualization
     /*
    private void OnDrawGizmos()
