@@ -57,7 +57,8 @@ public class InputReader : ScriptableObject, PlayerInput.IGameplayActions
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
+        if (context.phase == InputActionPhase.Performed)
+            jumpEvent.Invoke();
     }
 
     public void OnAttack(InputAction.CallbackContext context)
