@@ -27,7 +27,7 @@ public class Health : MonoBehaviour
         damagePassed -= flatResistance;
         damagePassed = damagePassed * ((100 - percentualResistance) / 100);
         _currentHealth -= damagePassed;
-
+        CheckHealth();
     }
 
     public void DealDamageOverTime(float amount, float time)
@@ -48,5 +48,13 @@ public class Health : MonoBehaviour
     public void TurnDamageOn()
     {
         damageable = true;
+    }
+
+    public void CheckHealth()
+    {
+        if (_currentHealth <= 0)
+        {
+            Die();
+        }
     }
 }

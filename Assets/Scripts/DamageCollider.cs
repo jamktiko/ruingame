@@ -7,7 +7,7 @@ using Debug = UnityEngine.Debug;
 public class DamageCollider : MonoBehaviour
 {
     [SerializeField] private Collider _damageCollider;
-    [SerializeField] private float _damage;
+    [SerializeField] private float _damage = 0f;
     [SerializeField] private string _targetTag;
     
     private bool _canAttack = true;
@@ -16,15 +16,15 @@ public class DamageCollider : MonoBehaviour
         //Needs better detection, only works for one tag at the moment.
         if (collision.CompareTag(_targetTag))
         {
-            Debug.Log("Hit target!");
             var _targetHealth = collision.gameObject.GetComponent<Health>();
             if (_targetHealth != null)
                 _targetHealth.DealDamage(_damage);
         }
     }
 
-    public void EnableDamage()
+    public void EnableDamage(float amount)
     {
+        _damage = amount;
         if (_canAttack)
         {
             _damageCollider.enabled = true;
@@ -36,6 +36,8 @@ public class DamageCollider : MonoBehaviour
     public void DisableDamage()
     {
         _damageCollider.enabled = false;
+        _damage = 0;
         _canAttack = true;
+        
     }
 }

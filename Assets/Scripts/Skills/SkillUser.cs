@@ -9,7 +9,7 @@ public class SkillUser : MonoBehaviour
 
     [SerializeField] private SkillExecute[] _skillList;
 
-    [SerializeField] private Health entityHealth;
+    [SerializeField] private Health _entityHealth;
     private void OnEnable()
     {
         _inputReader.activateSkill1 += OnSkill1;
@@ -37,6 +37,7 @@ public class SkillUser : MonoBehaviour
             _skillList[i] = skills[i];
             _skillList[i].skillUser = this;
         }
+        _entityHealth = GetComponent<Health>();
     }
     void OnSkill1()
     {
@@ -99,6 +100,6 @@ public class SkillUser : MonoBehaviour
 
     public void AddInvulnerability(float duration)
     {
-        entityHealth.AddIFrame(duration);
+        _entityHealth.AddIFrame(duration);
     }
 }

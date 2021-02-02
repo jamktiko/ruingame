@@ -11,8 +11,7 @@ public class Attack : MonoBehaviour
     [SerializeField] private DamageCollider _damageCollider;
 
     [SerializeField] private float _damage = 100f;
-
-    [SerializeField] private float _attackDistance = 3f;
+    
     
     //Get Attack Input
         //Check if already attacking
@@ -39,7 +38,7 @@ public class Attack : MonoBehaviour
 
     private void ExecuteAttack()
     {
-        _damageCollider.EnableDamage();
+        _damageCollider.EnableDamage(_damage);
     }
     
     //Attack Range visualization
