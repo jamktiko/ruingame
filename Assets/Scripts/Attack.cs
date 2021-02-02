@@ -11,8 +11,7 @@ public class Attack : MonoBehaviour
     [SerializeField] private DamageCollider _damageCollider;
 
     [SerializeField] private float _damage = 100f;
-
-    [SerializeField] private float _attackDistance = 3f;
+    
     
     //Get Attack Input
         //Check if already attacking
@@ -21,8 +20,12 @@ public class Attack : MonoBehaviour
                 //Attack deals damage on hit
             //Trigger Animation, prevent attacking while an attack is in progress
                 //Last Combo Step resets number
-    
-   
+
+    private void Start()
+    {
+        _damageCollider = GetComponentInChildren<DamageCollider>();
+    }
+
     private void OnEnable()
     {
         _inputReader.attackEvent += ExecuteAttack;
@@ -35,19 +38,9 @@ public class Attack : MonoBehaviour
 
     private void ExecuteAttack()
     {
-        _damageCollider.EnableDamage();
-        Debug.Log("Executing Attack!");
+        _damageCollider.EnableDamage(_damage);
     }
-    void EnableDamage()
-    {
-        
-    }
-
-    void DisableDamage()
-    {
-        
-    }
-
+    
     //Attack Range visualization
     /*
    private void OnDrawGizmos()

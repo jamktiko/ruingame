@@ -10,6 +10,8 @@ public class Health : MonoBehaviour
 
     [SerializeField]
     private float _currentHealth;
+    
+    [SerializeField]
     private bool damageable = true;
 
     void Start()
@@ -25,7 +27,7 @@ public class Health : MonoBehaviour
         damagePassed -= flatResistance;
         damagePassed = damagePassed * ((100 - percentualResistance) / 100);
         _currentHealth -= damagePassed;
-
+        CheckHealth();
     }
 
     public void DealDamageOverTime(float amount, float time)
@@ -33,9 +35,26 @@ public class Health : MonoBehaviour
         
     }
 
-    public void Die()
+    public virtual void Die()
     {
-        Debug.Log(this +  " dies");
     }
-    
+
+    public void AddIFrame(float duration)
+    {
+        damageable = false;
+        Invoke("TurnDamageOn", duration);
+    }
+
+    public void TurnDamageOn()
+    {
+        damageable = true;
+    }
+
+    public void CheckHealth()
+    {
+        if (_currentHealth <= 0)
+        {
+            Die();
+        }
+    }
 }

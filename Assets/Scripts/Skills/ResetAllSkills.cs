@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SprintSkill : SkillExecute
-{
+public class ResetAllSkills : SkillExecute
+{    
     public override void Execute()
     {
-        Debug.Log("Sprint Skill Executed!");
+        skillUser.ResetAllSkills();
     }
 }
