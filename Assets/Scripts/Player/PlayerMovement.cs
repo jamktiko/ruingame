@@ -8,24 +8,24 @@ namespace DefaultNamespace
     public class PlayerMovement : MonoBehaviour
     {
         [SerializeField] public TransformAnchor gameplayCameraTransform;
-
+        
         [SerializeField] private InputReader _playerInput = default;
         [HideInInspector] public Vector3 movementInput;
         [HideInInspector] public Vector3 movementVector; 
-        private Vector2 _previousMovementInput;
         
+        private Vector2 _previousMovementInput;
         private Vector3 _playerVelocity;
-        [SerializeField]
-        private float _jumpHeight = 1.0f;
-        [SerializeField]
+        
         private bool _groundedPlayer;
         private float gravityValue = -9.81f;
         
-        protected CharacterController _characterController;
+        private CharacterController _characterController;
         
         //Get from entity stats
         [SerializeField]
         private float _movementSpeed = 10f;
+        [SerializeField]
+        private float _jumpHeight = 1.0f;
         [SerializeField]
         protected float turnSmoothing = 0.2f;
 
