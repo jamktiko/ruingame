@@ -4,43 +4,26 @@ using UnityEngine.InputSystem;
 
 namespace DefaultNamespace
 {
-    [RequireComponent(typeof(CharacterController))]
-    public class PlayerMovement : MonoBehaviour
+    public class PlayerMovement : Movement
     {
         [SerializeField] public TransformAnchor gameplayCameraTransform;
-
+        
         [SerializeField] private InputReader _playerInput = default;
-        [HideInInspector] public Vector3 movementInput;
-        [HideInInspector] public Vector3 movementVector; 
-        private Vector2 _previousMovementInput;
-        
-        private Vector3 _playerVelocity;
-        [SerializeField]
-        private float _jumpHeight = 1.0f;
-        [SerializeField]
-        private bool _groundedPlayer;
-        private float gravityValue = -9.81f;
-        
-        protected CharacterController _characterController;
-        
-        //Get from entity stats
-        [SerializeField]
-        private float _movementSpeed = 10f;
-        [SerializeField]
-        protected float turnSmoothing = 0.2f;
 
-        private void Update()
+        private Vector2 _previousMovementInput;
+
+        public override void Update()
         {
-            _groundedPlayer = _characterController.isGrounded;
-            if (_groundedPlayer && _playerVelocity.y < 0)
+            _groundedEntity = _characterController.isGrounded;
+            if (_groundedEntity && _entityVelocity.y < 0)
             {
-                _playerVelocity.y = -0.2f;
+                _entityVelocity.y = -0.2f;
             }
             CalculateMovement();
             _characterController.Move(movementInput * (Time.deltaTime * _movementSpeed));
             RotateTowardsMovement();
-            _playerVelocity.y += gravityValue * Time.deltaTime;
-            _characterController.Move(_playerVelocity * Time.deltaTime);
+            _entityVelocity.y += gravityValue * Time.deltaTime;
+            _characterController.Move(_entityVelocity * Time.deltaTime);
         }
 
         private void RotateTowardsMovement()
@@ -49,31 +32,30 @@ namespace DefaultNamespace
             Vector3 newDirection = Vector3.RotateTowards(transform.forward, movementInput, singleStep, 0.0f);
             transform.rotation = Quaternion.LookRotation(newDirection);
         }
-        private void Awake()
+        public override void Awake()
         {
-            _characterController = GetComponent<CharacterController>();
+            base.Awake();
         }
         
-        
-        void OnEnable()
+        public override void OnEnable()
         {
             _playerInput.moveEvent += OnMove;
             _playerInput.jumpEvent += OnJump;
 
         }
 
-        private void OnDisable()
+        public override void OnDisable()
         {
             _playerInput.moveEvent -= OnMove;
             _playerInput.jumpEvent -= OnJump;
         }
 
-        private void OnJump()
+        public override void OnJump()
         {
             //Allows for spamming to quickly jump twice
-            if (_groundedPlayer && _playerVelocity.y < 0)
+            if (_groundedEntity && _entityVelocity.y < 0)
             {
-                _playerVelocity.y += Mathf.Sqrt(_jumpHeight * -3.0f * gravityValue);
+                _entityVelocity.y += Mathf.Sqrt(_jumpHeight * -3.0f * gravityValue);
             }
 
         }
@@ -94,7 +76,7 @@ namespace DefaultNamespace
             }
         }
 
-        private void OnMove(Vector2 movement)
+        public override void OnMove(Vector2 movement)
         {
             _previousMovementInput = movement;
         }

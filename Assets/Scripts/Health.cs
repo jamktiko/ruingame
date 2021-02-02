@@ -7,7 +7,9 @@ public class Health : MonoBehaviour
     public float maximumHealth = 100f;
     public float flatResistance = 10f;
     public float percentualResistance = 10f;
-
+    public float reDamageTimer = 0.4f;
+    public float reDamageTimerDoT = 0.4f;
+    
     [SerializeField]
     private float _currentHealth;
     
@@ -23,16 +25,21 @@ public class Health : MonoBehaviour
     {
         if (!damageable)
             return;
+        ReactToDamage(amount);
+        CheckHealth();
+    }
+
+    public void ReactToDamage(float amount)
+    {
         var damagePassed = amount;
         damagePassed -= flatResistance;
         damagePassed = damagePassed * ((100 - percentualResistance) / 100);
         _currentHealth -= damagePassed;
-        CheckHealth();
+        AddIFrame(reDamageTimer);
     }
-
     public void DealDamageOverTime(float amount, float time)
     {
-        
+        //Make this a coroutine which applies damage over time
     }
 
     public virtual void Die()
