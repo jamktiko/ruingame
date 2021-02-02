@@ -12,10 +12,17 @@ public class DamageCollider : MonoBehaviour
     [SerializeField] private string _targetTag;
     [SerializeField] private GameObject _attackingEntity;
     [SerializeField] private float _activationDuration;
+    
     private bool _canAttack = true;
+
+    private void Start()
+    {
+    }
+    
+    
     private void OnTriggerEnter(Collider collision)
     {
-        //Needs better detection, only works for one tag at the moment.
+        //Do a sphere check, deal damage to everything and knockback?
         //Deal Damage
         //Knock back from attacker
         //STUN?

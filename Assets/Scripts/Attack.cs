@@ -5,14 +5,10 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
-    [SerializeField]
-    private InputReader _inputReader;
-
-    [SerializeField] private DamageCollider _damageCollider;
+    [SerializeField] protected DamageCollider _damageCollider;
 
     [SerializeField] private float _damage = 100f;
-    
-    
+
     //Get Attack Input
         //Check if already attacking
         //Check Combo Step
@@ -21,22 +17,21 @@ public class Attack : MonoBehaviour
             //Trigger Animation, prevent attacking while an attack is in progress
                 //Last Combo Step resets number
 
-    private void Start()
+    public virtual void Start()
     {
         _damageCollider = GetComponentInChildren<DamageCollider>();
     }
 
-    private void OnEnable()
+    public virtual void OnEnable()
     {
-        _inputReader.attackEvent += ExecuteAttack;
+
     }
 
-    private void OnDisable()
+    public virtual void OnDisable()
     {
-        _inputReader.attackEvent -= ExecuteAttack;
-    }
 
-    private void ExecuteAttack()
+    }
+    public virtual void ExecuteAttack()
     {
         _damageCollider.EnableDamage(_damage);
     }
