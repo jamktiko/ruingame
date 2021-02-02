@@ -9,6 +9,8 @@ namespace DefaultNamespace
     {
         [SerializeField]
         private InputReader _inputReader;
+
+        [SerializeField] private Animator _playerAnimator;
         public override void Start()
         {
             _damageCollider = GetComponentInChildren<DamageCollider>();
@@ -22,6 +24,12 @@ namespace DefaultNamespace
         public override void OnDisable()
         {
             _inputReader.attackEvent -= ExecuteAttack;
+        }
+
+        public override void ExecuteAttack()
+        {
+            base.ExecuteAttack();
+            _playerAnimator.SetTrigger("Attack");
         }
     }
 }
