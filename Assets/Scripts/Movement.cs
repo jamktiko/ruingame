@@ -30,17 +30,17 @@ namespace DefaultNamespace
         public virtual void Update()
         {
             //Gravity check
+            _entityVelocity.y += gravityValue * Time.deltaTime;
+            _characterController.Move(_entityVelocity * Time.deltaTime);
             _groundedEntity = _characterController.isGrounded;
             if (_groundedEntity && _entityVelocity.y < 0)
             {
                 _entityVelocity.y = -0.2f;
             }
-            _entityVelocity.y += gravityValue * Time.deltaTime;
-            _characterController.Move(_entityVelocity * Time.deltaTime);
             _characterController.Move(movementInput * (Time.deltaTime * _movementSpeed));
         }
 
-        public virtual void Awake()
+        public virtual void Start()
         {
             _characterController = GetComponent<CharacterController>();
         }

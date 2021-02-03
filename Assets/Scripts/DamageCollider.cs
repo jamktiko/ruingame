@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using FMOD;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
@@ -7,14 +8,14 @@ using Debug = UnityEngine.Debug;
 public class DamageCollider : MonoBehaviour
 {
     [SerializeField] private Collider _damageCollider;
-    [SerializeField] private float _damage = 0f;
+    [SerializeField] private float _damage = 50f;
     [SerializeField] private float _kbStrength = 1f;
-    [SerializeField] private string _targetTag;
+    [SerializeField] private string _targetTag = "Enemy";
     [SerializeField] private GameObject _attackingEntity;
-    [SerializeField] private float _activationDuration;
-    
+
     private void Start()
     {
+        _damageCollider = GetComponent<Collider>();
     }
     
     

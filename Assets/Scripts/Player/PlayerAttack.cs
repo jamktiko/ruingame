@@ -13,7 +13,7 @@ namespace DefaultNamespace
         [SerializeField] protected Movement _movementControl;
 
         public int comboStep = 1;
-        public int maximumCombo;
+        public int maximumCombo = 6;
 
         public override void OnEnable()
         {

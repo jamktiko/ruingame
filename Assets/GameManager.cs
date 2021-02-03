@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
         pm._playerInput = playerInput;
         pm.gameplayCameraTransform = playerAnchor;
         
+
         //Setup player attacks
         var pa = cp.AddComponent<PlayerAttack>();
         pa._inputReader = playerInput;
@@ -38,6 +39,7 @@ public class GameManager : MonoBehaviour
         
         var animator = cp.AddComponent<Animator>();
         animator.runtimeAnimatorController = playerAnimator;
+        animator.applyRootMotion = true;
 
         var sk = new GameObject("Skills");
         //ADD Selected skills to this gameobject
@@ -48,8 +50,13 @@ public class GameManager : MonoBehaviour
         sk.transform.SetParent(cp.transform);
         
         var pc = Instantiate(playerCharacter);
+        pc.name = "PlayerCharacter";
         pc.transform.SetParent(cp.transform);
+        sk.tag = "Player";
+        pc.tag = "Player";
         cp.tag = "Player";
+        
+        
         
         createdPlayer = cp;
         Destroy(cp);
@@ -59,6 +66,7 @@ public class GameManager : MonoBehaviour
     {
         ConstructPlayer();
         var player = Instantiate(createdPlayer);
+        player.name = "PlayerMaster";
         InitializePlayer();
         SetupPlayerCamera(player.transform);
     }

@@ -25,6 +25,8 @@ public class Attack : MonoBehaviour
     {
         _damageCollider = GetComponentInChildren<DamageCollider>();
         _entityAnimator = GetComponentInParent<Animator>();
+        _entityAnimator.enabled = true;
+        _weaponMesh = GetComponentInChildren<WeaponMesh>().WM;
     }
 
     public virtual void OnEnable()
