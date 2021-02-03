@@ -9,18 +9,10 @@ namespace DefaultNamespace
     {
         [SerializeField] private InputReader _inputReader;
 
-        [SerializeField] private Animator _playerAnimator;
-        
         [SerializeField] protected Movement _movementControl;
 
         public int comboStep = 1;
         public int maximumCombo;
-        public bool currentlyAttacking;
-        public override void Start()
-        {
-            _damageCollider = GetComponentInChildren<DamageCollider>();
-            _playerAnimator = GetComponentInParent<Animator>();
-        }
 
         public override void OnEnable()
         {
@@ -32,10 +24,9 @@ namespace DefaultNamespace
             _inputReader.attackEvent -= AttemptAttack;
         }
 
-        public void AttemptAttack()
+        public override void AttemptAttack()
         {
             //ComboTimer that resets the combo if too long passes between attacks
-            
             if (_movementControl._groundedEntity && !currentlyAttacking)
             {
                 currentlyAttacking = true;
@@ -48,27 +39,24 @@ namespace DefaultNamespace
                 comboStep = 1;
             }
         }
-        public void ExecuteAttackAnimation()
+        public override void ExecuteAttackAnimation()
         {
             //Triggers animation event
-            _playerAnimator.Play("Attack" + comboStep);
+            _entityAnimator.Play("Attack" + comboStep);
 
         }
         public override void ExecuteAttack()
         {
             //USED AS AN ANIMATION EVENT
+            base.ExecuteAttack();
             _movementControl.enabled = false;
-            _damageCollider.EnableDamage();
-            _weaponMesh.enabled = true;
         }
 
         public override void EndAttack()
         {
             //USED AS AN ANIMATION EVENT
             _movementControl.enabled = true;
-            _damageCollider.DisableDamage();
-            _weaponMesh.enabled = false;
-            currentlyAttacking = false;
+            base.EndAttack();
         }
     }
 }

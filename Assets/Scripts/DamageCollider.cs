@@ -41,7 +41,7 @@ public class DamageCollider : MonoBehaviour
                 }
                 catch
                 {
-                    Debug.Log("Object has no character controller");
+                    Debug.Log("KNOCKBACK Object has no character controller");
                 }
             }
         }

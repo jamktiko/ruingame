@@ -10,7 +10,7 @@ namespace DefaultNamespace
 
         public override void OnStateEnter()
         {
-            name = "attacking";
+            _enemy._attack.AttemptAttack();
         }
         public override void Tick()
         {
@@ -22,7 +22,6 @@ namespace DefaultNamespace
 
         private bool AttackedPlayer()
         {
-            _enemy._attack.ExecuteAttack();
             return true;
         }
     }

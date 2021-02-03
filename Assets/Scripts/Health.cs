@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 
 public class Health : MonoBehaviour
@@ -12,13 +13,15 @@ public class Health : MonoBehaviour
     
     [SerializeField]
     private float _currentHealth;
-    
     [SerializeField]
     private bool damageable = true;
+
+    [SerializeField] private Animator _entityAnimator;
 
     void Start()
     {
         _currentHealth = maximumHealth;
+        _entityAnimator = GetComponent<Animator>();
     }
 
     public void DealDamage(float amount)
@@ -45,8 +48,9 @@ public class Health : MonoBehaviour
     public virtual void Die()
     {
         //Animation
+        _entityAnimator.Play("Death");
         //Particles
-        Destroy(gameObject, 0.5f);
+        Destroy(gameObject, 0.6f);
     }
 
     public void AddIFrame(float duration)
