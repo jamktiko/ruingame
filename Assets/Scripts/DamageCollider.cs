@@ -13,8 +13,6 @@ public class DamageCollider : MonoBehaviour
     [SerializeField] private GameObject _attackingEntity;
     [SerializeField] private float _activationDuration;
     
-    private bool _canAttack = true;
-
     private void Start()
     {
     }

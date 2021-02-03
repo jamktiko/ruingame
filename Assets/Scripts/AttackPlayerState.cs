@@ -11,7 +11,6 @@ namespace DefaultNamespace
         public override void OnStateEnter()
         {
             name = "attacking";
-            _enemy.GetComponent<Renderer>().material.color = Color.red;
         }
         public override void Tick()
         {

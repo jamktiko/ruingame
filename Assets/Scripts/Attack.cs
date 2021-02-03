@@ -10,9 +10,6 @@ public class Attack : MonoBehaviour
 {
     [SerializeField] protected DamageCollider _damageCollider;
     [SerializeField] protected MeshRenderer _weaponMesh;
-    [SerializeField] protected Movement _movementControl;
-
-    [SerializeField] private float _damage = 100f;
 
     //Get Attack Input
         //Check if already attacking
@@ -31,7 +28,7 @@ public class Attack : MonoBehaviour
     {
 
     }
-
+    
     public virtual void OnDisable()
     {
 

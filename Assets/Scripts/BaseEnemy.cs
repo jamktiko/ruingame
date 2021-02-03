@@ -4,9 +4,9 @@ namespace DefaultNamespace
 {
     public class BaseEnemy : MonoBehaviour
     {
-        [SerializeField] private float moveSpeed = 1f;
-
         [SerializeField] private CharacterController _characterController;
+
+        [SerializeField] private Movement _movementControl;
         
         private State currentState;
         
@@ -19,6 +19,7 @@ namespace DefaultNamespace
         {
             _playerTransform = FindObjectOfType<PlayerMovement>().transform;
             _characterController = GetComponent<CharacterController>();
+            
             SetState(new MoveTowardsPlayerState(this));
         }
 
@@ -42,7 +43,8 @@ namespace DefaultNamespace
             direction.y = 0;
             Vector3 newDirection = Vector3.RotateTowards(transform.forward, direction, 90, 0.0f);
             transform.rotation = Quaternion.LookRotation(newDirection);
-            _characterController.Move(direction * (Time.deltaTime * moveSpeed));
+            var enemyMoveInput = new Vector2(direction.x, direction.z);
+            _movementControl.OnMove(enemyMoveInput);
         }
 
         private Vector3 GetDirection(Vector3 destination)

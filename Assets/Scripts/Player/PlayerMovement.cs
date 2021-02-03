@@ -21,6 +21,7 @@ namespace DefaultNamespace
                 _entityVelocity.y = -0.3f;
             }
             CalculateMovement();
+            //Jump and gravity check in a separate script?
             _characterController.Move(movementInput * (Time.deltaTime * _movementSpeed));
             RotateTowardsMovement();
             _entityVelocity.y += gravityValue * Time.deltaTime;
@@ -43,7 +44,7 @@ namespace DefaultNamespace
         {
             _playerInput.moveEvent += OnMove;
             _playerInput.jumpEvent += OnJump;
-
+            
         }
 
         public override void OnDisable()
@@ -54,7 +55,6 @@ namespace DefaultNamespace
 
         public override void OnJump()
         {
-
             if (_groundedEntity && _entityVelocity.y < 0)
             {
                 _entityVelocity.y += Mathf.Sqrt(_jumpHeight * -3.0f * gravityValue);

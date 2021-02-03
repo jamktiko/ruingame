@@ -20,8 +20,8 @@ namespace DefaultNamespace
         protected CharacterController _characterController;
         
         //Get from entity stats
-        [SerializeField]
-        protected float _movementSpeed = 10f;
+        
+        public float _movementSpeed = 10f;
         [SerializeField]
         protected float _jumpHeight = 1.0f;
         [SerializeField]
@@ -37,6 +37,7 @@ namespace DefaultNamespace
             }
             _entityVelocity.y += gravityValue * Time.deltaTime;
             _characterController.Move(_entityVelocity * Time.deltaTime);
+            _characterController.Move(movementInput * (Time.deltaTime * _movementSpeed));
         }
 
         public virtual void Awake()
@@ -65,7 +66,7 @@ namespace DefaultNamespace
         
         public virtual void OnMove(Vector2 movement)
         {
-            
-        }
+            movementInput = movement;
+        } 
     }
 }
