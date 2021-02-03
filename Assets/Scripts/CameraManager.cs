@@ -13,7 +13,7 @@ public class CameraManager : MonoBehaviour
 	public Transform playerTransform;
 	
 	[SerializeField, Range(.5f, 3f)]
-	private float _speedMultiplier = 1f; //TODO: make this modifiable in the game settings
+	private float _speedMultiplier = 1f; 
 	[SerializeField] private TransformAnchor _cameraTransformAnchor = default;
 	
 

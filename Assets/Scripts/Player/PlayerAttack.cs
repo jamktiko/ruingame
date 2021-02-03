@@ -7,7 +7,8 @@ namespace DefaultNamespace
 {
     public class PlayerAttack : Attack
     {
-        [SerializeField] private InputReader _inputReader;
+        [HideInInspector]
+        public InputReader _inputReader;
 
         [SerializeField] protected Movement _movementControl;
 
@@ -16,6 +17,7 @@ namespace DefaultNamespace
 
         public override void OnEnable()
         {
+            _movementControl = GetComponent<Movement>();
             _inputReader.attackEvent += AttemptAttack;
         }
 

@@ -25,7 +25,7 @@ namespace DefaultNamespace
         [SerializeField]
         protected float _jumpHeight = 1.0f;
         [SerializeField]
-        protected float turnSmoothing = 0.2f;
+        protected float turnSmoothing = 15f;
 
         public virtual void Update()
         {

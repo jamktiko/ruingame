@@ -4,15 +4,7 @@ using UnityEngine;
 
 public class SpawnerManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //GET ALL POSSIBLE SPAWNING LOCATIONS IN THE ROOM
+    
 }

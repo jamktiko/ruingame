@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class SkillUser : MonoBehaviour
 {
-    [SerializeField] private InputReader _inputReader = default;
+    [HideInInspector]
+    public InputReader _inputReader = default;
 
     [SerializeField] private SkillExecute[] _skillList;
 
     [SerializeField] private Health _entityHealth;
+    
     private void OnEnable()
     {
         _inputReader.activateSkill1 += OnSkill1;

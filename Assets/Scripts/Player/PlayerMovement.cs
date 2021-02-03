@@ -7,9 +7,9 @@ namespace DefaultNamespace
 {
     public class PlayerMovement : Movement
     {
-        [SerializeField] public TransformAnchor gameplayCameraTransform;
-        
-        [SerializeField] private InputReader _playerInput = default;
+        public TransformAnchor gameplayCameraTransform;
+
+        public InputReader _playerInput = default;
 
         public Vector2 _previousMovementInput;
 
@@ -42,6 +42,7 @@ namespace DefaultNamespace
         
         public override void OnEnable()
         {
+            
             _playerInput.moveEvent += OnMove;
             _playerInput.jumpEvent += OnJump;
             
