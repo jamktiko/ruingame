@@ -49,22 +49,13 @@ public class DamageCollider : MonoBehaviour
         }
     }
 
-    public void EnableDamage(float amount)
+    public void EnableDamage()
     {
-        _damage = amount;
-        if (_canAttack)
-        {
-            _damageCollider.enabled = true;
-            _canAttack = false;
-            Invoke(nameof(DisableDamage), _activationDuration);
-        }
+        _damageCollider.enabled = true;
     }
 
     public void DisableDamage()
     {
         _damageCollider.enabled = false;
-        _damage = 0;
-        _canAttack = true;
-        
     }
 }

@@ -44,6 +44,9 @@ public class Health : MonoBehaviour
 
     public virtual void Die()
     {
+        //Animation
+        //Particles
+        Destroy(gameObject, 0.5f);
     }
 
     public void AddIFrame(float duration)

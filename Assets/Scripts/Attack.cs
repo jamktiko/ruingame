@@ -3,9 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace DefaultNamespace
+{
+    
 public class Attack : MonoBehaviour
 {
     [SerializeField] protected DamageCollider _damageCollider;
+    [SerializeField] protected MeshRenderer _weaponMesh;
+    [SerializeField] protected Movement _movementControl;
 
     [SerializeField] private float _damage = 100f;
 
@@ -33,7 +38,12 @@ public class Attack : MonoBehaviour
     }
     public virtual void ExecuteAttack()
     {
-        _damageCollider.EnableDamage(_damage);
+
+    }
+
+    public virtual void EndAttack()
+    {
+
     }
     
     //Attack Range visualization
@@ -58,4 +68,5 @@ public class Attack : MonoBehaviour
         }
     }
     */
+}
 }

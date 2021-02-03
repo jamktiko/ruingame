@@ -12,7 +12,7 @@ namespace DefaultNamespace
 
         protected Vector3 _entityVelocity;
         
-        protected bool _groundedEntity;
+        public bool _groundedEntity;
         
         //Could refer from game manager?
         protected float gravityValue = -9.81f;

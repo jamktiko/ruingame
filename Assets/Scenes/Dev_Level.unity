@@ -842,12 +842,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementInput: {x: 0, y: 0, z: 0}
   movementVector: {x: 0, y: 0, z: 0}
+  _groundedEntity: 0
   _movementSpeed: 10
   _jumpHeight: 1
   turnSmoothing: 15
   gameplayCameraTransform: {fileID: 11400000, guid: 612800d3903195747a1006a6b6464522,
     type: 2}
   _playerInput: {fileID: 11400000, guid: 88aea93a9d9c85d4ea251d1cce5aa3e6, type: 2}
+  _previousMovementInput: {x: 0, y: 0}
 --- !u!143 &647002630
 CharacterController:
   m_ObjectHideFlags: 0
@@ -898,9 +900,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damageCollider: {fileID: 0}
+  _weaponMesh: {fileID: 1599923823}
+  _movementControl: {fileID: 647002629}
   _damage: 100
   _inputReader: {fileID: 11400000, guid: 88aea93a9d9c85d4ea251d1cce5aa3e6, type: 2}
-  _playerAnimator: {fileID: 647002633}
+  _playerAnimator: {fileID: 0}
 --- !u!95 &647002633
 Animator:
   serializedVersion: 3
@@ -1759,7 +1763,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damageCollider: {fileID: 1593034695}
   _damage: 100
-  _kbStrength: 0.5
+  _kbStrength: 1
   _targetTag: Enemy
   _attackingEntity: {fileID: 647002626}
   _activationDuration: 0.2
@@ -1772,9 +1776,9 @@ BoxCollider:
   m_GameObject: {fileID: 1593034692}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.3, z: 0.5}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &1593034696
 Rigidbody:
@@ -1803,7 +1807,6 @@ GameObject:
   - component: {fileID: 1599923821}
   - component: {fileID: 1599923824}
   - component: {fileID: 1599923823}
-  - component: {fileID: 1599923822}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -1820,25 +1823,11 @@ Transform:
   m_GameObject: {fileID: 1599923820}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1593034693}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &1599923822
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1599923820}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1599923823
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1846,7 +1835,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1599923820}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1885,7 +1874,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1599923820}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1736479696
 GameObject:
   m_ObjectHideFlags: 0
@@ -1916,7 +1905,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1736479696}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa4aafd8afbe44c2a3d9dcbeef8fc330, type: 3}
   m_Name: 
@@ -2044,12 +2033,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1736479696}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 78a9927cdd83e544396c17a2b3a82dd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _damageCollider: {fileID: 0}
+  _weaponMesh: {fileID: 0}
+  _movementControl: {fileID: 0}
   _damage: 100
 --- !u!1 &1797545842
 GameObject:
@@ -2180,6 +2171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementInput: {x: 0, y: 0, z: 0}
   movementVector: {x: 0, y: 0, z: 0}
+  _groundedEntity: 0
   _movementSpeed: 10
   _jumpHeight: 1
   turnSmoothing: 0.2
