@@ -34,7 +34,7 @@ public class Attack : MonoBehaviour
         }
         catch
         {
-            
+            Debug.Log("Error, weaponmesh not loading fast enough");
         }
     }
     
