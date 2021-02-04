@@ -144,7 +144,6 @@ MonoBehaviour:
   _kbStrength: 3
   _targetTag: Player
   _attackingEntity: {fileID: 8775856171702227479}
-  _activationDuration: 1
 --- !u!65 &8775856172880376474
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -302,7 +301,7 @@ CharacterController:
   m_Height: 2
   m_Radius: 0.5
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0.01
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}

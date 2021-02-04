@@ -27,7 +27,7 @@ public class Attack : MonoBehaviour
         _entityAnimator = GetComponentInParent<Animator>();
         _entityAnimator.enabled = true;
         
-        //Gives a nullreference error on room loading? Fix somehow
+        //Gives a nullreference error on room loading?
         _weaponMesh = GetComponentInChildren<WeaponMesh>().WM;
     }
 
