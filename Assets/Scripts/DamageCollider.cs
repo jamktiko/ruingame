@@ -16,6 +16,7 @@ public class DamageCollider : MonoBehaviour
     private void Start()
     {
         _damageCollider = GetComponent<Collider>();
+        _attackingEntity = gameObject.transform.parent.gameObject;
     }
     
     

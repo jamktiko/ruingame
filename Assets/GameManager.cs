@@ -6,15 +6,21 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    
-    //Should be a separate player manager
+    //Should be a separate player manager with require components
     private GameObject createdPlayer;
     public RuntimeAnimatorController playerAnimator;
     public GameObject playerCharacter;
     public InputReader playerInput;
     public TransformAnchor playerAnchor;
-    
+    public GameObject player;
+    public RoomManager roomManager;
+    public Roomvariants _Roomvariants;
     public CameraManager CameraManager;
+
+    void Start()
+    {
+        StartGame();
+    }
     public void ConstructPlayer()
     {
         Destroy(createdPlayer);
@@ -55,20 +61,22 @@ public class GameManager : MonoBehaviour
         sk.tag = "Player";
         pc.tag = "Player";
         cp.tag = "Player";
-        
-        
-        
+
         createdPlayer = cp;
         Destroy(cp);
+        
+        //Gives nullreference on enable but fixed in initialize
     }
 
-    void Start()
+    void StartGame()
     {
         ConstructPlayer();
-        var player = Instantiate(createdPlayer);
+        player = Instantiate(createdPlayer);
         player.name = "PlayerMaster";
         InitializePlayer();
         SetupPlayerCamera(player.transform);
+        CreateRoomManager();
+        roomManager.StartRoomManager();
     }
 
     public void InitializePlayer()
@@ -83,6 +91,8 @@ public class GameManager : MonoBehaviour
                 m.enabled = true;
             }
         }
+
+        player.transform.position = gameObject.transform.position;
     }
 
     public void SetupPlayerCamera(Transform tr)
@@ -90,4 +100,18 @@ public class GameManager : MonoBehaviour
         CameraManager.inputReader = playerInput;
         CameraManager.SetupProtagonistVirtualCamera(tr);
     }
+
+    public void CreateRoomManager()
+    {
+        roomManager = gameObject.AddComponent<RoomManager>();
+        roomManager.playerReference = player;
+        roomManager.possibleRooms = _Roomvariants.possibleRooms;
+    }
+
+    [RuntimeInitializeOnLoadMethod]
+    static void GameLoaded()
+    {
+        Debug.Log("Game Loaded");
+    }
+
 }
