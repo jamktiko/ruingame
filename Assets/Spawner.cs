@@ -22,7 +22,7 @@ public class Spawner : MonoBehaviour
         //Spawn amount of enemies
         
         //If currentSpawnedEnemies => max concurrent enemies, wait
-        SpawnEnemy();
+        StartCoroutine(SpawnEnemy());
         //Wait a bit, spawn another enemy
 
         if (enemiesToSpawn == 0)
@@ -36,11 +36,11 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    private void SpawnEnemy()
+    private IEnumerator SpawnEnemy()
     {
         //Spawns one enemy
-        var enemy = Instantiate(enemyprefab);
-        enemy.transform.SetParent(gameObject.transform);
+        yield return new WaitForSeconds(1f);
+        var enemy = Instantiate(enemyprefab, gameObject.transform);
         enemiesToSpawn--;
         currentSpawnedEnemies++;
     }
