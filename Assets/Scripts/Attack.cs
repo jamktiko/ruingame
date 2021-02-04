@@ -3,11 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace DefaultNamespace
+{
+    
 public class Attack : MonoBehaviour
 {
     [SerializeField] protected DamageCollider _damageCollider;
-
-    [SerializeField] private float _damage = 100f;
+    [SerializeField] protected MeshRenderer _weaponMesh;
+    public bool currentlyAttacking;
+    [SerializeField] protected Animator _entityAnimator;
 
     //Get Attack Input
         //Check if already attacking
@@ -20,20 +24,44 @@ public class Attack : MonoBehaviour
     public virtual void Start()
     {
         _damageCollider = GetComponentInChildren<DamageCollider>();
+        _entityAnimator = GetComponentInParent<Animator>();
     }
 
     public virtual void OnEnable()
     {
 
     }
-
+    
     public virtual void OnDisable()
     {
 
     }
     public virtual void ExecuteAttack()
     {
-        _damageCollider.EnableDamage(_damage);
+        _damageCollider.EnableDamage();
+        _weaponMesh.enabled = true;
+    }
+
+    public virtual void AttemptAttack()
+    {
+        if (!currentlyAttacking)
+        {
+            ExecuteAttackAnimation();
+            currentlyAttacking = true;
+        }
+    }
+    public virtual void ExecuteAttackAnimation()
+    {
+        //Triggers animation event
+        _entityAnimator.Play("Attack1");
+
+    }
+
+    public virtual void EndAttack()
+    {
+        _damageCollider.DisableDamage();
+        _weaponMesh.enabled = false;
+        currentlyAttacking = false;
     }
     
     //Attack Range visualization
@@ -58,4 +86,5 @@ public class Attack : MonoBehaviour
         }
     }
     */
+}
 }

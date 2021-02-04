@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,20 +11,22 @@ namespace DefaultNamespace
         
         [SerializeField] private InputReader _playerInput = default;
 
-        private Vector2 _previousMovementInput;
+        public Vector2 _previousMovementInput;
 
         public override void Update()
         {
             _groundedEntity = _characterController.isGrounded;
             if (_groundedEntity && _entityVelocity.y < 0)
             {
-                _entityVelocity.y = -0.2f;
+                _entityVelocity.y = -0.3f;
             }
             CalculateMovement();
+            //Jump and gravity check in a separate script?
             _characterController.Move(movementInput * (Time.deltaTime * _movementSpeed));
             RotateTowardsMovement();
             _entityVelocity.y += gravityValue * Time.deltaTime;
             _characterController.Move(_entityVelocity * Time.deltaTime);
+            
         }
 
         private void RotateTowardsMovement()
@@ -41,7 +44,7 @@ namespace DefaultNamespace
         {
             _playerInput.moveEvent += OnMove;
             _playerInput.jumpEvent += OnJump;
-
+            
         }
 
         public override void OnDisable()
@@ -52,12 +55,10 @@ namespace DefaultNamespace
 
         public override void OnJump()
         {
-            //Allows for spamming to quickly jump twice
             if (_groundedEntity && _entityVelocity.y < 0)
             {
                 _entityVelocity.y += Mathf.Sqrt(_jumpHeight * -3.0f * gravityValue);
             }
-
         }
         private void CalculateMovement()
         {

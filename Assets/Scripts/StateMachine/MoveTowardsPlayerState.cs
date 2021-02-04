@@ -28,7 +28,7 @@ namespace DefaultNamespace
 
         private bool ReachedPlayer()
         {
-            return Vector3.Distance(_enemy.transform.position, destination) < 2f;
+            return Vector3.Distance(_enemy.transform.position, destination) < 1.5f;
         }
     }
 }
