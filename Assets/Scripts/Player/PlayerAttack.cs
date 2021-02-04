@@ -7,15 +7,17 @@ namespace DefaultNamespace
 {
     public class PlayerAttack : Attack
     {
-        [SerializeField] private InputReader _inputReader;
+        [HideInInspector]
+        public InputReader _inputReader;
 
         [SerializeField] protected Movement _movementControl;
 
         public int comboStep = 1;
-        public int maximumCombo;
+        public int maximumCombo = 6;
 
         public override void OnEnable()
         {
+            _movementControl = GetComponent<Movement>();
             _inputReader.attackEvent += AttemptAttack;
         }
 

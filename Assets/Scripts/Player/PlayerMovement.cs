@@ -7,26 +7,27 @@ namespace DefaultNamespace
 {
     public class PlayerMovement : Movement
     {
-        [SerializeField] public TransformAnchor gameplayCameraTransform;
-        
-        [SerializeField] private InputReader _playerInput = default;
+        [HideInInspector]
+        public TransformAnchor gameplayCameraTransform;
+        [HideInInspector]
+        public InputReader _playerInput = default;
 
-        public Vector2 _previousMovementInput;
-
+        private Vector2 _previousMovementInput;
+    
         public override void Update()
         {
-            _groundedEntity = _characterController.isGrounded;
+            //Gravity Check
+            _entityVelocity.y += gravityValue * Time.deltaTime;
+            _characterController.Move(_entityVelocity * Time.deltaTime);
             if (_groundedEntity && _entityVelocity.y < 0)
             {
                 _entityVelocity.y = -0.3f;
             }
+            _groundedEntity = _characterController.isGrounded;
+            //Movement
             CalculateMovement();
-            //Jump and gravity check in a separate script?
             _characterController.Move(movementInput * (Time.deltaTime * _movementSpeed));
             RotateTowardsMovement();
-            _entityVelocity.y += gravityValue * Time.deltaTime;
-            _characterController.Move(_entityVelocity * Time.deltaTime);
-            
         }
 
         private void RotateTowardsMovement()
@@ -35,16 +36,11 @@ namespace DefaultNamespace
             Vector3 newDirection = Vector3.RotateTowards(transform.forward, movementInput, singleStep, 0.0f);
             transform.rotation = Quaternion.LookRotation(newDirection);
         }
-        public override void Awake()
-        {
-            base.Awake();
-        }
-        
+
         public override void OnEnable()
         {
             _playerInput.moveEvent += OnMove;
             _playerInput.jumpEvent += OnJump;
-            
         }
 
         public override void OnDisable()

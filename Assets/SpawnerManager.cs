@@ -4,15 +4,39 @@ using UnityEngine;
 
 public class SpawnerManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+
+    //GET ALL POSSIBLE SPAWNING LOCATIONS IN THE ROOM
+    public Spawner[] spawners;
+    private int _totalEnemiesRemaining;
+    private int _spawnersDone;
+    
     void Start()
     {
-        
+        spawners = GetComponentsInChildren<Spawner>();
+        StartSpawners();
     }
 
-    // Update is called once per frame
-    void Update()
+    public int EnemiesRemaining()
     {
-        
+        var enemies = 0;
+        foreach (Spawner sp in spawners)
+        {
+            enemies += sp.remainingEnemies;
+        }
+        return enemies;
     }
+
+    public void SpawnersDone()
+    {
+        _spawnersDone++;
+    }
+
+    public void StartSpawners()
+    {
+        foreach (Spawner sp in spawners)
+        {
+            sp.StartSpawning(1);
+        }
+    }
+
 }

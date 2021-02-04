@@ -51,6 +51,8 @@ public class Health : MonoBehaviour
         _entityAnimator.Play("Death");
         //Particles
         Destroy(gameObject, 0.6f);
+        //Update UI or stats
+        SendMessageUpwards("EntityDeath");
     }
 
     public void AddIFrame(float duration)
