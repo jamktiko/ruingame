@@ -16,14 +16,14 @@ public class Health : MonoBehaviour
     [SerializeField]
     private bool damageable = true;
 
-    [SerializeField] private Animator _entityAnimator;
+    [SerializeField] protected Animator _entityAnimator;
 
     
     
     void Start()
     {
         _currentHealth = maximumHealth;
-        _entityAnimator = GetComponent<Animator>();
+        _entityAnimator = GetComponentInChildren<Animator>();
     }
 
     public void DealDamage(float amount)

@@ -24,7 +24,7 @@ public class Attack : MonoBehaviour
     public virtual void Start()
     {
         _damageCollider = GetComponentInChildren<DamageCollider>();
-        _entityAnimator = GetComponentInParent<Animator>();
+        _entityAnimator = GetComponentInChildren<Animator>();
         _entityAnimator.enabled = true;
         try
         {
@@ -61,7 +61,6 @@ public class Attack : MonoBehaviour
     {
         //Triggers animation event
         _entityAnimator.Play("Attack1");
-
     }
 
     public virtual void EndAttack()

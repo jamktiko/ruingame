@@ -7,11 +7,9 @@ namespace DefaultNamespace
 {
     public class PlayerMovement : Movement
     {
-        
         public TransformAnchor gameplayCameraTransform;
         
         public InputReader _inputReader = default;
-
         private Vector2 _previousMovementInput;
     
         public override void Update()
@@ -36,11 +34,11 @@ namespace DefaultNamespace
             Vector3 newDirection = Vector3.RotateTowards(transform.forward, movementInput, singleStep, 0.0f);
             transform.rotation = Quaternion.LookRotation(newDirection);
         }
-        
         public override void OnEnable()
         {
             try
             {
+
                 _inputReader.moveEvent += OnMove;
                 _inputReader.jumpEvent += OnJump;
             }

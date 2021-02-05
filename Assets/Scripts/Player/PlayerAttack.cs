@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace DefaultNamespace
 {
-    [RequireComponent(typeof(Animator))]
     public class PlayerAttack : Attack
     {
        
@@ -14,7 +13,7 @@ namespace DefaultNamespace
         [SerializeField] protected Movement _movementControl;
 
         public int comboStep = 1;
-        public int maximumCombo = 6;
+        public int maximumCombo = 2;
         
         public override void Start()
         {

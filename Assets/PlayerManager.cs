@@ -8,7 +8,6 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerHealth))]
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(SkillUser))]
-[RequireComponent(typeof(Animator))]
 public class PlayerManager : BaseManager
 {
     public InputReader _playerInputReader;
@@ -32,7 +31,6 @@ public class PlayerManager : BaseManager
         SetupPlayerInput();
         SetupPlayerCamera();
         SetupPlayerAnimations();
-        
         InitializeScriptsOnPlayer();
     }
 
@@ -54,9 +52,14 @@ public class PlayerManager : BaseManager
         cam.enabled = true;
     }
 
+    private void SetupCharacterController()
+    {
+        var CC = GetComponent<CharacterController>();
+        
+    }
     private void SetupPlayerAnimations()
     {
-        var animator = GetComponent<Animator>();
+        var animator = GetComponentInChildren<Animator>();
         animator.runtimeAnimatorController = _playerAnimator;
         animator.applyRootMotion = true;
     }

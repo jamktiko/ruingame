@@ -11,12 +11,12 @@ public class GameManager : MonoBehaviour
     public PlayerManager _playerManager;
     public GameObject currentPlayer;
     
+    [Header("Player Control SO")] 
+    public InputReader _playerInputReader;
+
     [Header("Player Character and Animation")]
     public GameObject playerCharacter;
     public RuntimeAnimatorController _playerAnimator;
-
-    [Header("Player Control SO")] 
-    public InputReader _playerInputReader;
     
     [Header("Room Management References")]
     public RoomManager roomManager;
