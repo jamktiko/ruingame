@@ -7,10 +7,10 @@ namespace DefaultNamespace
 {
     public class PlayerMovement : Movement
     {
-        [HideInInspector]
+        
         public TransformAnchor gameplayCameraTransform;
-        [HideInInspector]
-        public InputReader _playerInput = default;
+        
+        public InputReader _inputReader = default;
 
         private Vector2 _previousMovementInput;
     
@@ -36,17 +36,21 @@ namespace DefaultNamespace
             Vector3 newDirection = Vector3.RotateTowards(transform.forward, movementInput, singleStep, 0.0f);
             transform.rotation = Quaternion.LookRotation(newDirection);
         }
-
+        
         public override void OnEnable()
         {
-            _playerInput.moveEvent += OnMove;
-            _playerInput.jumpEvent += OnJump;
+            try
+            {
+                _inputReader.moveEvent += OnMove;
+                _inputReader.jumpEvent += OnJump;
+            }
+            catch{}
         }
 
         public override void OnDisable()
         {
-            _playerInput.moveEvent -= OnMove;
-            _playerInput.jumpEvent -= OnJump;
+            _inputReader.moveEvent -= OnMove;
+            _inputReader.jumpEvent -= OnJump;
         }
 
         public override void OnJump()

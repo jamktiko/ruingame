@@ -5,20 +5,31 @@ using UnityEngine;
 
 namespace DefaultNamespace
 {
+    [RequireComponent(typeof(Animator))]
     public class PlayerAttack : Attack
     {
-        [HideInInspector]
+       
         public InputReader _inputReader;
-
+        
         [SerializeField] protected Movement _movementControl;
 
         public int comboStep = 1;
         public int maximumCombo = 6;
-
+        
+        public override void Start()
+        {
+            base.Start();
+            _movementControl = GetComponent<Movement>();
+        }
         public override void OnEnable()
         {
-            _movementControl = GetComponent<Movement>();
-            _inputReader.attackEvent += AttemptAttack;
+            try
+            {
+                _inputReader.attackEvent += AttemptAttack;
+            }
+            catch
+            {
+            }
         }
 
         public override void OnDisable()

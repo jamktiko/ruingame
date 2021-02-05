@@ -26,16 +26,11 @@ public class Attack : MonoBehaviour
         _damageCollider = GetComponentInChildren<DamageCollider>();
         _entityAnimator = GetComponentInParent<Animator>();
         _entityAnimator.enabled = true;
-        
-        //Gives a nullreference error on room loading?
         try
         {
             _weaponMesh = GetComponentInChildren<WeaponMesh>().WM;
         }
-        catch
-        {
-            Debug.Log("Error, weaponmesh not loading fast enough");
-        }
+        catch {}
     }
     
 

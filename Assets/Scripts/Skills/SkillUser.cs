@@ -12,25 +12,35 @@ public class SkillUser : MonoBehaviour
 
     [SerializeField] private Health _entityHealth;
     
+    public void Awake()
+    {
+        this.enabled = false;
+    }
     private void OnEnable()
     {
-        _inputReader.activateSkill1 += OnSkill1;
-        _inputReader.activateSkill2 += OnSkill2;
-        _inputReader.activateSkill3 += OnSKill3;
-        _inputReader.activateSprintSkill += OnSprint;
-        Initialize();
-        
+        try
+        {
+            _inputReader.activateSkill1 += OnSkill1;
+            _inputReader.activateSkill2 += OnSkill2;
+            _inputReader.activateSkill3 += OnSKill3;
+            _inputReader.activateSprintSkill += OnSprint;
+        }
+        catch{}
     }
     
     private void OnDisable()
     {
-        _inputReader.activateSkill1 -= OnSkill1;
-        _inputReader.activateSkill2 -= OnSkill2;
-        _inputReader.activateSkill3 -= OnSKill3;
-        _inputReader.activateSprintSkill -= OnSprint;
+        try
+        {
+            _inputReader.activateSkill1 -= OnSkill1;
+            _inputReader.activateSkill2 -= OnSkill2;
+            _inputReader.activateSkill3 -= OnSKill3;
+            _inputReader.activateSprintSkill -= OnSprint;
+        }
+        catch{}
     }
 
-    private void Initialize()
+    public void Initialize()
     {
         _skillList = new SkillExecute[4];
         var skills = GetComponentsInChildren<SkillExecute>();

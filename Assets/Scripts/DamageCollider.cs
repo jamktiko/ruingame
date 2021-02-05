@@ -7,11 +7,11 @@ using Debug = UnityEngine.Debug;
 
 public class DamageCollider : MonoBehaviour
 {
-    [SerializeField] private Collider _damageCollider;
+     private Collider _damageCollider;
     [SerializeField] private float _damage = 50f;
     [SerializeField] private float _kbStrength = 1f;
     [SerializeField] private string _targetTag = "Enemy";
-    [SerializeField] private GameObject _attackingEntity;
+    private GameObject _attackingEntity;
 
     private void Start()
     {

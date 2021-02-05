@@ -18,6 +18,8 @@ public class Health : MonoBehaviour
 
     [SerializeField] private Animator _entityAnimator;
 
+    
+    
     void Start()
     {
         _currentHealth = maximumHealth;

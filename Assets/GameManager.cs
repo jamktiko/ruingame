@@ -6,105 +6,77 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    //Should be a separate player manager with require components
-    private GameObject createdPlayer;
-    public RuntimeAnimatorController playerAnimator;
+    
+    [Header("Player References")]
+    public PlayerManager _playerManager;
+    public GameObject currentPlayer;
+    
+    [Header("Player Character and Animation")]
     public GameObject playerCharacter;
-    public InputReader playerInput;
-    public TransformAnchor playerAnchor;
-    public GameObject player;
+    public RuntimeAnimatorController _playerAnimator;
+
+    [Header("Player Control SO")] 
+    public InputReader _playerInputReader;
+    
+    [Header("Room Management References")]
     public RoomManager roomManager;
     public Roomvariants _Roomvariants;
-    public CameraManager CameraManager;
-
+    
+    private GameObject _createdPlayer;
     void Start()
     {
         StartGame();
     }
     public void ConstructPlayer()
     {
-        Destroy(createdPlayer);
+        //Destroy previous player
+        Destroy(currentPlayer);
         //Create PlayerMaster
-        var cp = new GameObject("PlayerMaster");
-        
-        //Setup player movement
-        var pm = cp.AddComponent<PlayerMovement>();
-        pm._playerInput = playerInput;
-        pm.gameplayCameraTransform = playerAnchor;
-        
-
-        //Setup player attacks
-        var pa = cp.AddComponent<PlayerAttack>();
-        pa._inputReader = playerInput;
-        
-        cp.AddComponent<PlayerHealth>();
-        
-        //Setup player skills
-        var su = cp.AddComponent<SkillUser>();
-        su._inputReader = playerInput;
-        
-        var animator = cp.AddComponent<Animator>();
-        animator.runtimeAnimatorController = playerAnimator;
-        animator.applyRootMotion = true;
-
+        currentPlayer = new GameObject("PlayerMaster");
+        //Setup player manager
+        _playerManager = currentPlayer.AddComponent<PlayerManager>();
+        _playerManager._playerInputReader = _playerInputReader;
+        //Setup playerAnimator / Make playeranimator and playercharacter come from a source for character selection.
+        _playerManager._playerAnimator = _playerAnimator;
+            
+        //ADD Skills holder object
         var sk = new GameObject("Skills");
-        //ADD Selected skills to this gameobject
-        
         //Get list of selected skills 
+        //ADD Selected skills to this gameobject
         sk.AddComponent<TeleportSkill>();
+        //Set skill holder parent to playermaster
+        sk.transform.SetParent(currentPlayer.transform);
+        //UPDATE Skills on playermanager
+        _playerManager.UpdateSkills();
         
-        sk.transform.SetParent(cp.transform);
-        
+        //Instantiate player model
         var pc = Instantiate(playerCharacter);
+        
         pc.name = "PlayerCharacter";
-        pc.transform.SetParent(cp.transform);
+        pc.transform.SetParent(currentPlayer.transform);
         sk.tag = "Player";
         pc.tag = "Player";
-        cp.tag = "Player";
-
-        createdPlayer = cp;
-        Destroy(cp);
-        
-        //Gives nullreference on enable but fixed in initialize
+        currentPlayer.tag = "Player";
     }
 
     void StartGame()
     {
         ConstructPlayer();
-        player = Instantiate(createdPlayer);
-        player.name = "PlayerMaster";
         InitializePlayer();
-        SetupPlayerCamera(player.transform);
         CreateRoomManager();
         roomManager.StartRoomManager();
     }
 
     public void InitializePlayer()
     {
-        //Enables every script on the player
-        foreach (GameObject go in GameObject.FindGameObjectsWithTag("Player"))
-        {
-            MonoBehaviour[] mb = go.GetComponents<MonoBehaviour>();
-            foreach (MonoBehaviour m in mb)
-            {
-                m.enabled = false;
-                m.enabled = true;
-            }
-        }
-
-        player.transform.position = gameObject.transform.position;
+        currentPlayer.transform.position = gameObject.transform.position;
     }
-
-    public void SetupPlayerCamera(Transform tr)
-    {
-        CameraManager.inputReader = playerInput;
-        CameraManager.SetupProtagonistVirtualCamera(tr);
-    }
+    
 
     public void CreateRoomManager()
     {
         roomManager = gameObject.AddComponent<RoomManager>();
-        roomManager.playerReference = player;
+        roomManager.playerReference = currentPlayer;
         roomManager.possibleRooms = _Roomvariants.possibleRooms;
     }
 

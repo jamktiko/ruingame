@@ -14,7 +14,7 @@ public class CameraManager : MonoBehaviour
 	
 	[SerializeField, Range(.5f, 3f)]
 	private float _speedMultiplier = 1f; 
-	[SerializeField] private TransformAnchor _cameraTransformAnchor = default;
+	public TransformAnchor _cameraTransformAnchor = default;
 	
 
 	private bool _cameraMovementLock = false;
@@ -27,15 +27,20 @@ public class CameraManager : MonoBehaviour
 
 	private void Awake()
 	{
-		SetupProtagonistVirtualCamera(playerTransform);
+		freeLookVCam = GetComponentInChildren<CinemachineFreeLook>();
+		mainCamera = GetComponentInChildren<Camera>();
+		_cameraTransformAnchor.Transform = mainCamera.transform;
 	}
 
 	private void OnEnable()
 	{
-		inputReader.cameraMoveEvent += OnCameraMove;
-		inputReader.enableMouseControlCameraEvent += OnEnableMouseControlCamera;
-		inputReader.disableMouseControlCameraEvent += OnDisableMouseControlCamera;
-		_cameraTransformAnchor.Transform = mainCamera.transform;
+		try
+		{
+			inputReader.cameraMoveEvent += OnCameraMove;
+			inputReader.enableMouseControlCameraEvent += OnEnableMouseControlCamera;
+			inputReader.disableMouseControlCameraEvent += OnDisableMouseControlCamera;
+		}
+		catch{}
 	}
 
 	private void OnDisable()

@@ -90,6 +90,5 @@ public class RoomManager : MonoBehaviour
 
     void WaitUntilPlayerIsLoaded()
     {
-        Debug.Log("Player loaded!");
     }
 }
