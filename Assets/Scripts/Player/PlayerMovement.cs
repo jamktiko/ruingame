@@ -38,7 +38,6 @@ namespace DefaultNamespace
         {
             try
             {
-
                 _inputReader.moveEvent += OnMove;
                 _inputReader.jumpEvent += OnJump;
             }

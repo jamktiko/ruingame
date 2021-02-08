@@ -31,7 +31,6 @@
       <Path>Library</Path>
       <Path>Logs</Path>
       <Path>ProjectDocumentation</Path>
-      <Path>Temp</Path>
       <Path>obj</Path>
       <Path>ruingame</Path>
     </explicitExcludes>

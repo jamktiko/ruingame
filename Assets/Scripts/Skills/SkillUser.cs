@@ -5,17 +5,12 @@ using UnityEngine;
 
 public class SkillUser : MonoBehaviour
 {
-    [HideInInspector]
     public InputReader _inputReader = default;
 
     [SerializeField] private SkillExecute[] _skillList;
 
     [SerializeField] private Health _entityHealth;
-    
-    public void Awake()
-    {
-        this.enabled = false;
-    }
+
     private void OnEnable()
     {
         try

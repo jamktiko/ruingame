@@ -7,18 +7,23 @@ namespace DefaultNamespace
 {
     public class PlayerAttack : Attack
     {
-       
+        public Rigidbody _characterRigidbody;
         public InputReader _inputReader;
         
-        [SerializeField] protected Movement _movementControl;
+        
+        [SerializeField] protected MovementController _movementControl;
 
+
+
+        public float attackSwingForce;
         public int comboStep = 1;
         public int maximumCombo = 2;
         
         public override void Start()
         {
             base.Start();
-            _movementControl = GetComponent<Movement>();
+            _movementControl = GetComponent<MovementController>();
+            _characterRigidbody = GetComponent<Rigidbody>();
         }
         public override void OnEnable()
         {
@@ -42,6 +47,7 @@ namespace DefaultNamespace
             if (_movementControl._groundedEntity && !currentlyAttacking)
             {
                 currentlyAttacking = true;
+                _characterRigidbody.AddForce(transform.forward * attackSwingForce, ForceMode.Impulse);
                 ExecuteAttackAnimation();
                 comboStep++;
             }
