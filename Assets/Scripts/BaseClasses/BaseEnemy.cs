@@ -17,7 +17,7 @@ namespace DefaultNamespace
 
         private void Start()
         {
-            _playerTransform = FindObjectOfType<PlayerMovement>().transform;
+            _playerTransform = FindObjectOfType<MovementController>().transform;
             _characterController = GetComponent<CharacterController>();
             
             SetState(new MoveTowardsPlayerState(this));

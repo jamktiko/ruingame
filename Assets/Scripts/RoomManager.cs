@@ -59,10 +59,8 @@ public class RoomManager : MonoBehaviour
 
     public void MovePlayerToLocation(Transform tr)
     {
-        var p = playerReference.GetComponent<CharacterController>();
-        p.enabled = false;
         playerReference.transform.position = tr.position;
-        p.enabled = true;
+        playerReference.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
     }
     public virtual IEnumerator WaitCreation()
     {

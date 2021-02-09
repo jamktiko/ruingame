@@ -12,6 +12,7 @@ public class EntityData : ScriptableObject
     public float _entityjumpHeight = 350f;
 
     [Header("Combat stats")] 
-    public float _entityDamage = 10f;
+    public float _entityDamage = 100f;
     public float _entityAttackSpeed = 10f;
+    public string _entityEnemyTag = "Enemy";
 }

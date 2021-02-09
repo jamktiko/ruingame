@@ -24,6 +24,7 @@ public class MovementController : MonoBehaviour
     private Animator characterAnimator;
     
     protected Rigidbody _characterRigidBody;
+    private bool attacking;
     
     //Used to calculate movement vectors
     private Vector2 _previousMovementInput;
@@ -64,11 +65,20 @@ public class MovementController : MonoBehaviour
 
     public void OnAttack()
     {
-        if (_groundedEntity)
+        if (_groundedEntity && !attacking)
         {
+            attacking = true;
             _previousMovementInput = Vector3.zero;
+           _characterRigidBody.AddForce(transform.forward * 10f, ForceMode.Impulse);
             animatorVelocity = 0;
+            //sync this with attacking animation
+            Invoke("ToggleAttacking", 0.2f);
         }
+    }
+
+    private void ToggleAttacking()
+    {
+        attacking = false;
     }
     public void Start()
     {
@@ -107,8 +117,12 @@ public class MovementController : MonoBehaviour
     }
     public void Move()
     {
-        Vector3 movementVelocity =  _movementSpeed * movementInput;
-        _characterRigidBody.velocity = new Vector3(movementVelocity.x, _characterRigidBody.velocity.y, movementVelocity.z);
+        if (!attacking)
+        {
+            Vector3 movementVelocity = _movementSpeed * movementInput;
+            _characterRigidBody.velocity =
+                new Vector3(movementVelocity.x, _characterRigidBody.velocity.y, movementVelocity.z);
+        }
     }
 
     public void GroundCheck()

@@ -84,6 +84,7 @@ public class SkillUser : MonoBehaviour
 
     void OnSprint()
     {
+        //Always default
         try
         {
             _skillList[3].ActivateSkill();

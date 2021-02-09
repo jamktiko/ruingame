@@ -9,11 +9,9 @@ namespace DefaultNamespace
     {
         public Rigidbody _characterRigidbody;
         public InputReader _inputReader;
-        
-        
+        public float _playerDamage = 100f;
+        public float _playerAttackSpeed = 1f;
         [SerializeField] protected MovementController _movementControl;
-
-
 
         public float attackSwingForce;
         public int comboStep = 1;
@@ -44,10 +42,12 @@ namespace DefaultNamespace
         public override void AttemptAttack()
         {
             //ComboTimer that resets the combo if too long passes between attacks
+            
+            //Set damagecollider damage based on combo step?
+            _damageCollider._damage = _playerDamage;
             if (_movementControl._groundedEntity && !currentlyAttacking)
             {
                 currentlyAttacking = true;
-                _characterRigidbody.AddForce(transform.forward * attackSwingForce, ForceMode.Impulse);
                 ExecuteAttackAnimation();
                 comboStep++;
             }
@@ -67,13 +67,12 @@ namespace DefaultNamespace
         {
             //USED AS AN ANIMATION EVENT
             base.ExecuteAttack();
-            _movementControl.enabled = false;
+
         }
 
         public override void EndAttack()
         {
             //USED AS AN ANIMATION EVENT
-            _movementControl.enabled = true;
             base.EndAttack();
         }
     }

@@ -8,9 +8,10 @@ public class SkillExecute : MonoBehaviour
     public string skillname;
     public string skillDescription;
     public float skillCooldown = 5f;
-
+    public float iFrameDuration = 1f;
     public bool onCooldown = false;
-
+    public bool persistentEffect = false;
+    public float persistentEffectTime = 2f;
     public SkillUser skillUser;
     public virtual void Execute()
     {
@@ -26,6 +27,7 @@ public class SkillExecute : MonoBehaviour
         if (!onCooldown)
         {
             Execute();
+            skillUser.AddInvulnerability(iFrameDuration);
             onCooldown = true;
             StartCoroutine(nameof(GoOnCooldown));
         }
@@ -33,5 +35,22 @@ public class SkillExecute : MonoBehaviour
         {
             //ON COOLDOWN
         }
+    }
+
+    public virtual IEnumerator SkillPersistentEffect()
+    {
+        ApplyPersistentEffect();
+        yield return new WaitForSeconds(persistentEffectTime);
+        DeActivatePersistentEffect();
+    }
+
+    public virtual void ApplyPersistentEffect()
+    {
+        
+    }
+
+    public virtual void DeActivatePersistentEffect()
+    {
+        
     }
 }

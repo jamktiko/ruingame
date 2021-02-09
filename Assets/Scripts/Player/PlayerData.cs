@@ -16,5 +16,6 @@ namespace DefaultNamespace
         public float movementAnimatorAcceleration = 10f;
 
         [Header("Current Artifacts")] public List<Artifact> artifactList = new List<Artifact>();
+
     }
 }

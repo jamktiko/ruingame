@@ -8,16 +8,14 @@ using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Events;
 
-/*
+
 [RequireComponent(typeof(PlayerAttack))]
 [RequireComponent(typeof(PlayerHealth))]
-[RequireComponent(typeof(PlayerMovement))]
-*/
+[RequireComponent(typeof(MovementController))]
 [RequireComponent(typeof(SkillUser))]
 
-
 //Move player initialization to another script
-//Have run time management in one class
+//Have run time management in separate class
 public class PlayerManager : BaseManager
 {
     public InputReader _playerInputReader;
@@ -32,7 +30,6 @@ public class PlayerManager : BaseManager
     
     [HideInInspector]
     public UnityEvent pickUpEvent;
-    
     
     private void OnEnable()
     {
@@ -57,16 +54,17 @@ public class PlayerManager : BaseManager
         SetupPlayerInput();
         SetupPlayerCamera();
         SetupPlayerAnimations();
-        InitializeScriptsOnPlayer();
-        UpdateSkills();
+        DisableScriptsOnPlayer();
+        EnableScriptsOnPlayer();
         UpdatePlayerStats();
+        _playerInputReader.interactEvent += OnPickUp;
     }
 
     private void SetupPlayerInput()
     {
         _playerAttack._inputReader = _playerInputReader;
         _playerMovement._inputReader = _playerInputReader;
-      //  _playerSkills._inputReader = _playerInputReader;
+        _playerSkills._inputReader = _playerInputReader;
     }
 
     private void SetupPlayerCamera()
@@ -80,40 +78,36 @@ public class PlayerManager : BaseManager
         cam.enabled = true;
     }
 
-    private void SetupCharacterController()
-    {
-        var CC = GetComponent<CharacterController>();
-        
-    }
     private void SetupPlayerAnimations()
     {
         var animator = GetComponentInChildren<Animator>();
         animator.runtimeAnimatorController = _playerAnimator;
-        animator.applyRootMotion = true;
     }
 
     public void UpdateSkills()
     {
-        //_playerSkills.Initialize();
+        _playerSkills.Initialize();
     }
-    public void InitializeScriptsOnPlayer()
+    public void DisableScriptsOnPlayer()
     {
-        //Enables every script on the player
-        foreach (GameObject go in GameObject.FindGameObjectsWithTag("Player"))
-        {
-            MonoBehaviour[] mb = go.GetComponents<MonoBehaviour>();
-            foreach (MonoBehaviour m in mb)
-            {
-                m.enabled = false;
-                m.enabled = true;
-            }
-        }
+        _playerAttack.enabled = false;
+        _playerHealth.enabled = false;
+        _playerMovement.enabled = false;
+        _playerSkills.enabled = false;
     }
-
+    public void EnableScriptsOnPlayer()
+    {
+        _playerAttack.enabled = true;
+        _playerHealth.enabled = true;
+        _playerMovement.enabled = true;
+        _playerSkills.enabled = true;
+    }
     public void UpdatePlayerStats()
     {
         _playerMovement._movementSpeed = _playerData._entityMovementSpeed;
         _playerMovement._jumpHeight = _playerData._entityjumpHeight;
+        _playerAttack._playerDamage = _playerData._entityDamage;
+        _playerAttack._playerAttackSpeed = _playerData._entityAttackSpeed;
     }
     public void OnPickUp()
     {
@@ -122,9 +116,8 @@ public class PlayerManager : BaseManager
 
     public void AddArtifact(Artifact artifact)
     {
-        //Take artifact stats and add as a string to the artifact list
+        //Give artifact stats and add as a string to the artifact list
         Destroy(artifact.gameObject, 0.1f);
-        Invoke("UpdatePlayerStats", 0.2f);
     }
     public void ModifyMovementSpeed(float amount, int type)
     {
@@ -141,6 +134,7 @@ public class PlayerManager : BaseManager
                 Debug.Log("No type given for modification type");
                 break;
         }
+        _playerMovement._movementSpeed = _playerData._entityMovementSpeed;
     }
     public void ModifyJump(float amount, int type)
     {
@@ -156,6 +150,7 @@ public class PlayerManager : BaseManager
                 Debug.Log("No type given for modification type");
                 break;
         }
+        _playerMovement._jumpHeight = _playerData._entityjumpHeight;
     }
 
     public void ModifyDamage(float amount, int type)
@@ -172,6 +167,7 @@ public class PlayerManager : BaseManager
                 Debug.Log("No type given for modification type");
                 break;
         }
+        _playerAttack._playerDamage = _playerData._entityDamage;
     }
 
     public void ModifyAttackSpeed(float amount, int type)
@@ -188,5 +184,12 @@ public class PlayerManager : BaseManager
                 Debug.Log("No type given for modification type");
                 break;
         }
+        _playerAttack._playerAttackSpeed = _playerData._entityAttackSpeed;
+    }
+
+    public void Die()
+    {
+        DisableScriptsOnPlayer();
+        GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().GameOver();
     }
 }

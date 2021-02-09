@@ -14,8 +14,14 @@ public class RoomExit : DoorSwitch
         {
             if (_roomManager.AllEnemiesCleared())
             {
-                Debug.Log("Player Exited Level!");
-                _roomManager.GoToNextLevel();
+                try
+                {
+                    _roomManager.GoToNextLevel();
+                }
+                catch
+                {
+                    Debug.Log("No room manager in the scene!");
+                }
             }
             else
             {

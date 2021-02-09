@@ -8,10 +8,10 @@ using Debug = UnityEngine.Debug;
 public class DamageCollider : MonoBehaviour
 {
      private Collider _damageCollider;
-    [SerializeField] private float _damage = 50f;
-    [SerializeField] private float _kbStrength = 1f;
-    [SerializeField] private string _targetTag = "Enemy";
-    private GameObject _attackingEntity;
+     public  float _damage = 50f;
+     public float _kbStrength = 1f;
+     public string _targetTag = "Enemy";
+     private GameObject _attackingEntity;
 
     private void Start()
     {
@@ -38,7 +38,7 @@ public class DamageCollider : MonoBehaviour
                 try
                 {
                     //Apply Knockback
-                    tr.GetComponent<CharacterController>().Move(-kbDirection* _kbStrength);
+                    tr.GetComponent<Rigidbody>().AddForce(-kbDirection*_kbStrength);
                     
                 }
                 catch
