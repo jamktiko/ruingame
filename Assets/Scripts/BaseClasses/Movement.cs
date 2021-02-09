@@ -7,8 +7,8 @@ namespace DefaultNamespace
     [RequireComponent(typeof(CharacterController))]
     public class Movement : MonoBehaviour
     {
-        [HideInInspector] public Vector3 movementInput;
-        [HideInInspector] public Vector3 movementVector; 
+        public Vector3 movementInput;
+        public Vector3 movementVector; 
 
         protected Vector3 _entityVelocity;
         
@@ -31,12 +31,12 @@ namespace DefaultNamespace
         {
             //Gravity check
             _entityVelocity.y += gravityValue * Time.deltaTime;
-            _characterController.Move(_entityVelocity * Time.deltaTime);
             _groundedEntity = _characterController.isGrounded;
             if (_groundedEntity && _entityVelocity.y < 0)
             {
                 _entityVelocity.y = -0.2f;
             }
+            _characterController.Move(_entityVelocity * Time.deltaTime);
             _characterController.Move(movementInput * (Time.deltaTime * _movementSpeed));
         }
 
@@ -66,7 +66,7 @@ namespace DefaultNamespace
         
         public virtual void OnMove(Vector2 movement)
         {
-            movementInput = movement;
+            movementInput = new Vector3(movement.x, 0, movement.y);
         } 
     }
 }

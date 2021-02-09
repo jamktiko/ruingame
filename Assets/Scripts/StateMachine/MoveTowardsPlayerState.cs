@@ -19,6 +19,11 @@ namespace DefaultNamespace
             {
                 _enemy.SetState(new AttackPlayerState(_enemy));
             }
+
+            if (_enemy.stunned)
+            {
+                _enemy.SetState(new StunnedState(_enemy));
+            }
         }
 
         public override void OnStateEnter()
@@ -29,6 +34,11 @@ namespace DefaultNamespace
         private bool ReachedPlayer()
         {
             return Vector3.Distance(_enemy.transform.position, destination) < 1.5f;
+        }
+
+        public override void OnStateExit()
+        {
+            destination = Vector3.zero;
         }
     }
 }

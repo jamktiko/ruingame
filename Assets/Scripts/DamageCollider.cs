@@ -8,8 +8,8 @@ using Debug = UnityEngine.Debug;
 public class DamageCollider : MonoBehaviour
 {
      private Collider _damageCollider;
-     public  float _damage = 50f;
-     public float _kbStrength = 1f;
+     public  float _damage = default;
+     public float _kbStrength = 100f;
      public string _targetTag = "Enemy";
      private GameObject _attackingEntity;
 
@@ -39,11 +39,10 @@ public class DamageCollider : MonoBehaviour
                 {
                     //Apply Knockback
                     tr.GetComponent<Rigidbody>().AddForce(-kbDirection*_kbStrength);
-                    
                 }
                 catch
                 {
-                    Debug.Log("KNOCKBACK Object has no character controller");
+                    Debug.Log("KNOCKBACK Object has no Rigidbody");
                 }
             }
         }

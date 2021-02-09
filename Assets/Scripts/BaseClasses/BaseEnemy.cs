@@ -4,13 +4,17 @@ namespace DefaultNamespace
 {
     public class BaseEnemy : MonoBehaviour
     {
-        [SerializeField] private CharacterController _characterController;
+         public CharacterController _characterController;
 
         [SerializeField] private Movement _movementControl;
         
         private State currentState;
+
+        public float knockbackStrength = default;
         
         public Attack _attack;
+        
+        public bool stunned;   
         
         [SerializeField]
         public Transform _playerTransform;
@@ -49,6 +53,7 @@ namespace DefaultNamespace
 
         private Vector3 GetDirection(Vector3 destination)
         {
+            destination.y = 0;
             return (destination - transform.position).normalized;
         }
     }

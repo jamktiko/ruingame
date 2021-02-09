@@ -12,7 +12,7 @@ public class Health : MonoBehaviour
     public float reDamageTimerDoT = 0.4f;
     
     [SerializeField]
-    private float _currentHealth;
+    protected float _currentHealth;
     [SerializeField]
     private bool damageable = true;
 
@@ -20,13 +20,13 @@ public class Health : MonoBehaviour
 
     
     
-    void Start()
+    public virtual void Start()
     {
         _currentHealth = maximumHealth;
         _entityAnimator = GetComponentInChildren<Animator>();
     }
 
-    public void DealDamage(float amount)
+    public virtual void DealDamage(float amount)
     {
         if (!damageable)
             return;
@@ -34,7 +34,7 @@ public class Health : MonoBehaviour
         CheckHealth();
     }
 
-    public void ReactToDamage(float amount)
+    public virtual void ReactToDamage(float amount)
     {
         var damagePassed = amount;
         damagePassed -= flatResistance;

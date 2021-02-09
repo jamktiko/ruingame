@@ -10,6 +10,7 @@ namespace DefaultNamespace
 
         public override void OnStateEnter()
         {
+            name = "Attacking Player";
             _enemy._attack.AttemptAttack();
         }
         public override void Tick()

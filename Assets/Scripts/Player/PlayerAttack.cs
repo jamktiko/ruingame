@@ -9,7 +9,7 @@ namespace DefaultNamespace
     {
         public Rigidbody _characterRigidbody;
         public InputReader _inputReader;
-        public float _playerDamage = 100f;
+        public float _playerDamage = 10f;
         public float _playerAttackSpeed = 1f;
         [SerializeField] protected MovementController _movementControl;
 
