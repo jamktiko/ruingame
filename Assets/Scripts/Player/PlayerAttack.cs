@@ -2,16 +2,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace DefaultNamespace
 {
     public class PlayerAttack : Attack
     {
-        public Rigidbody _characterRigidbody;
-        public InputReader _inputReader;
-        public float _playerDamage = 10f;
-        public float _playerAttackSpeed = 1f;
-        [SerializeField] protected MovementController _movementControl;
+        private Rigidbody _characterRigidbody;
+        private InputReader _inputReader;
+        private float _playerDamage = 10f;
+        private float _playerAttackSpeed = 1f;
+        protected MovementController _movementControl;
 
         public float attackSwingForce;
         public int comboStep = 1;
@@ -20,6 +21,7 @@ namespace DefaultNamespace
         public override void Start()
         {
             base.Start();
+            _inputReader = GameManager.Instance.playerInputReader;
             _movementControl = GetComponent<MovementController>();
             _characterRigidbody = GetComponent<Rigidbody>();
         }
@@ -27,7 +29,7 @@ namespace DefaultNamespace
         {
             try
             {
-                _inputReader.attackEvent += AttemptAttack;
+                _inputReader.AttackEvent += AttemptAttack;
             }
             catch
             {
@@ -36,7 +38,7 @@ namespace DefaultNamespace
 
         public override void OnDisable()
         {
-            _inputReader.attackEvent -= AttemptAttack;
+            _inputReader.AttackEvent -= AttemptAttack;
         }
 
         public override void AttemptAttack()
@@ -44,8 +46,8 @@ namespace DefaultNamespace
             //ComboTimer that resets the combo if too long passes between attacks
             
             //Set damagecollider damage based on combo step?
-            _damageCollider._damage = _playerDamage;
-            if (_movementControl._groundedEntity && !currentlyAttacking)
+            DamageCollider.damage = _playerDamage;
+            if (_movementControl.GroundedEntity && !currentlyAttacking)
             {
                 currentlyAttacking = true;
                 ExecuteAttackAnimation();
@@ -60,7 +62,7 @@ namespace DefaultNamespace
         public override void ExecuteAttackAnimation()
         {
             //Triggers animation event
-            _entityAnimator.Play("Attack" + comboStep);
+            EntityAnimator.Play("Attack" + comboStep);
 
         }
         public override void ExecuteAttack()
@@ -74,6 +76,15 @@ namespace DefaultNamespace
         {
             //USED AS AN ANIMATION EVENT
             base.EndAttack();
+        }
+        public void SetDamage(float amount)
+        {
+            _playerDamage = amount;
+        }
+
+        public void SetAttackSpeed(float amount)
+        {
+            _playerAttackSpeed = amount;
         }
     }
 }

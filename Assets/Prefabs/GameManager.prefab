@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7757926612644807249}
   - component: {fileID: 7757926612644807248}
+  - component: {fileID: 1801376928}
   m_Layer: 0
   m_Name: GameManager
-  m_TagString: Untagged
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,8 +49,28 @@ MonoBehaviour:
   _playerMasterPrefab: {fileID: 2280579018184987033, guid: 138a1419c696a3443aa607e012497b53,
     type: 3}
   _playerInputReader: {fileID: 11400000, guid: 88aea93a9d9c85d4ea251d1cce5aa3e6, type: 2}
+  prefabSkillData: {fileID: 1801376928}
+  baseSkillData: {fileID: 0}
+  givenSkillData: {fileID: 0}
   playerCharacter: {fileID: 7988665621073601980, guid: 683ee43a988b15b48bf8214c1ca86baa,
     type: 3}
   _playerAnimator: {fileID: 9100000, guid: 972cd31453c9be84997d9eaac9360287, type: 2}
   roomManager: {fileID: 0}
   _Roomvariants: {fileID: 11400000, guid: c54faea2c41d99f49a3eb603ec4e2813, type: 2}
+--- !u!114 &1801376928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7757926612644807255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e16ad5b73801fe4a87b58cd81bf1ab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SkillList:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

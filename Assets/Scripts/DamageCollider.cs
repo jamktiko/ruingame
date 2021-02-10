@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using DefaultNamespace;
 using FMOD;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Debug = UnityEngine.Debug;
 
 public class DamageCollider : MonoBehaviour
 {
      private Collider _damageCollider;
-     public  float _damage = default;
-     public float _kbStrength = 100f;
-     public string _targetTag = "Enemy";
+     [FormerlySerializedAs("_damage")] public  float damage = default;
+     [FormerlySerializedAs("_kbStrength")] public float kbStrength = 100f;
+     [FormerlySerializedAs("_targetTag")] public string targetTag = "Enemy";
      private GameObject _attackingEntity;
 
     private void Start()
@@ -26,19 +27,19 @@ public class DamageCollider : MonoBehaviour
         //Deal Damage
         //Knock back from attacker
         //STUN?
-        if (collision.CompareTag(_targetTag))
+        if (collision.CompareTag(targetTag))
         {
             var tr = collision.gameObject;
-            var _targetHealth = tr.GetComponent<Health>();
-            if (_targetHealth != null)
+            var targetHealth = tr.GetComponent<Health>();
+            if (targetHealth != null)
             {
-                _targetHealth.DealDamage(_damage);
+                targetHealth.DealDamage(damage);
                 var kbDirection = _attackingEntity.transform.position - tr.transform.position;
                 kbDirection.y = 0; //Normalize y coordinates
                 try
                 {
                     //Apply Knockback
-                    tr.GetComponent<Rigidbody>().AddForce(-kbDirection*_kbStrength);
+                    tr.GetComponent<Rigidbody>().AddForce(-kbDirection*kbStrength);
                 }
                 catch
                 {

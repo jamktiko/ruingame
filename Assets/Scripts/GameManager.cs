@@ -5,17 +5,17 @@ using DefaultNamespace.Skills;
 using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
+    //Creates singleton gamemanager
     private static GameManager _instance;
     public static GameManager Instance
     {
         get { return _instance; }
     }
     
-    
-    //Creates singleton gamemanager
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -26,21 +26,26 @@ public class GameManager : MonoBehaviour
         }
     }
     
-    [Header("Player References")]
-    public PlayerManager _playerManager;
-    public GameObject currentPlayer;
-    public GameObject _playerMasterPrefab;
+    
+    public PlayerManager playerManager { get; private set; }
+    public GameObject currentPlayer { get; private set; }
+
+    [Header("Player References")] 
+    public GameObject playerMasterPrefab;
     
     [Header("Player Control SO")] 
-    public InputReader _playerInputReader;
+    public InputReader playerInputReader;
+
+    public SkillData prefabSkillData;
+    public SkillData baseSkillData;
+    public SkillData givenSkillData;
 
     [Header("Player Character and Animation")]
-    public GameObject playerCharacter;
-    public RuntimeAnimatorController _playerAnimator;
+    public RuntimeAnimatorController playerAnimator;
     
     [Header("Room Management References")]
     public RoomManager roomManager;
-    public Roomvariants _Roomvariants;
+    public Roomvariants roomvariants;
     
     private GameObject _createdPlayer;
     public void ConstructPlayer()
@@ -48,20 +53,19 @@ public class GameManager : MonoBehaviour
         //Destroy previous player
         Destroy(currentPlayer);
         //Create PlayerMaster
-        currentPlayer = Instantiate(_playerMasterPrefab);
+        currentPlayer = Instantiate(playerMasterPrefab);
         currentPlayer.name = "PlayerMaster";
-        
-        _playerManager = currentPlayer.GetComponent<PlayerManager>();
-        _playerManager._playerInputReader = _playerInputReader;
-        
+        playerManager = currentPlayer.GetComponent<PlayerManager>();
+
         //Setup playerAnimator / Make playeranimator and playercharacter come from a source for character selection.
-        _playerManager._playerAnimator = _playerAnimator;
+        
             
         //ADD Skills holder object
         var sk = new GameObject("Skills");
         //Get list of selected skills 
         //ADD Selected skills to this gameobject
-        sk.AddComponent<SprintSkill>();
+        
+        
         //Set skill holder parent to playermaster
         sk.transform.SetParent(currentPlayer.transform);
         //UPDATE Skills on playermanager
@@ -74,18 +78,19 @@ public class GameManager : MonoBehaviour
     public void Start()
     {
         DontDestroyOnLoad(gameObject);
+        baseSkillData = prefabSkillData;
     }
-    public void StartGame()
+    public void StartGameplayLoop()
     {
         SceneManager.LoadScene("MovementRework");
         StartCoroutine("CreateGame");
     }
     public virtual IEnumerator CreateGame()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
         ConstructPlayer();
         InitializePlayer();
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
         CreateRoomManager();
         roomManager.StartRoomManager();
     }
@@ -105,7 +110,13 @@ public class GameManager : MonoBehaviour
     public void CreateRoomManager()
     {
         roomManager = gameObject.AddComponent<RoomManager>();
-        roomManager.playerReference = currentPlayer;
-        roomManager.possibleRooms = _Roomvariants.possibleRooms;
+        roomManager.possibleRooms = roomvariants.possibleRooms;
+    }
+
+    private void AddSkills(GameObject sk)
+    {
+        foreach (NonMonoSkill skill in givenSkillData.skillList.skill)
+        {
+        }
     }
 }

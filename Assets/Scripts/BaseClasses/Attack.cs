@@ -8,10 +8,11 @@ namespace DefaultNamespace
     
 public class Attack : MonoBehaviour
 {
-    [SerializeField] protected DamageCollider _damageCollider;
-    [SerializeField] protected MeshRenderer _weaponMesh;
+    protected DamageCollider DamageCollider;
+    protected MeshRenderer WeaponMesh;
+    [HideInInspector]
     public bool currentlyAttacking;
-    [SerializeField] protected Animator _entityAnimator;
+    protected Animator EntityAnimator;
 
     //Get Attack Input
         //Check if already attacking
@@ -23,12 +24,12 @@ public class Attack : MonoBehaviour
 
     public virtual void Start()
     {
-        _damageCollider = GetComponentInChildren<DamageCollider>();
-        _entityAnimator = GetComponentInChildren<Animator>();
-        _entityAnimator.enabled = true;
+        DamageCollider = GetComponentInChildren<DamageCollider>();
+        EntityAnimator = GetComponentInChildren<Animator>();
+        EntityAnimator.enabled = true;
         try
         {
-            _weaponMesh = GetComponentInChildren<WeaponMesh>().WM;
+            WeaponMesh = GetComponentInChildren<WeaponMesh>().wm;
         }
         catch {}
     }
@@ -45,8 +46,8 @@ public class Attack : MonoBehaviour
     }
     public virtual void ExecuteAttack()
     {
-        _damageCollider.EnableDamage();
-        _weaponMesh.enabled = true;
+        DamageCollider.EnableDamage();
+        //WeaponMesh.enabled = true;
     }
 
     public virtual void AttemptAttack()
@@ -60,13 +61,13 @@ public class Attack : MonoBehaviour
     public virtual void ExecuteAttackAnimation()
     {
         //Triggers animation event
-        _entityAnimator.Play("Attack1");
+        EntityAnimator.Play("Attack1");
     }
 
     public virtual void EndAttack()
     {
-        _damageCollider.DisableDamage();
-        _weaponMesh.enabled = false;
+        DamageCollider.DisableDamage();
+        //WeaponMesh.enabled = false;
         currentlyAttacking = false;
     }
     

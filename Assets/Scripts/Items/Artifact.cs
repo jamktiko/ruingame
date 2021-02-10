@@ -4,28 +4,29 @@ using System.Collections.Generic;
 using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class Artifact : MonoBehaviour
 {
-    public PlayerManager _playerReference;
+    public PlayerManager PlayerReference;
     
-    public ArtifactEffect _ArtifactEffect;
+    public ArtifactEffect ArtifactEffect;
 
-    private int pickupeventcount = 0;
+    private int _pickupeventcount = 0;
     private void Start()
     {
-        _ArtifactEffect = GetComponent<ArtifactEffect>();
+        ArtifactEffect = GetComponent<ArtifactEffect>();
 
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            pickupeventcount++;
-            if (pickupeventcount == 2)
+            _pickupeventcount++;
+            if (_pickupeventcount == 2)
             {
-                _playerReference = other.gameObject.GetComponent<PlayerManager>();
-                var pickup = _playerReference.pickUpEvent;
+                PlayerReference = other.gameObject.GetComponent<PlayerManager>();
+                var pickup = PlayerReference.pickUpEvent;
                 pickup.AddListener(OnPickup);
             }
         }
@@ -34,11 +35,11 @@ public class Artifact : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            pickupeventcount--;
-            if (pickupeventcount == 0)
+            _pickupeventcount--;
+            if (_pickupeventcount == 0)
             {
-                _playerReference = other.gameObject.GetComponent<PlayerManager>();
-                var pickup = _playerReference.pickUpEvent;
+                PlayerReference = other.gameObject.GetComponent<PlayerManager>();
+                var pickup = PlayerReference.pickUpEvent;
                 pickup.RemoveAllListeners();
             }
         }
@@ -48,13 +49,13 @@ public class Artifact : MonoBehaviour
     {
         try
         {
-            _ArtifactEffect.AddEffect(_playerReference);
-            _playerReference.AddArtifact(gameObject.GetComponent<Artifact>());
+            ArtifactEffect.AddEffect(PlayerReference);
+            PlayerReference.AddArtifact(gameObject.GetComponent<Artifact>());
         }
         catch
         {
             Debug.Log(this.name + " has no artifact effect applied!!");
         }
-        _playerReference.pickUpEvent.RemoveAllListeners();
+        PlayerReference.pickUpEvent.RemoveAllListeners();
     }
 }

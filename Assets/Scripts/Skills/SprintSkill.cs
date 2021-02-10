@@ -1,26 +1,29 @@
 ﻿
 
+using System.Dynamic;
 using UnityEngine;
 
 namespace DefaultNamespace.Skills
 {
-  
-    public class SprintSkill : SkillExecute
+    public class SprintSkill : NonMonoSkill
     {
-        public float sprintSpeed;
+        public float SprintSpeed;
         public override void Execute()
         {
-            StartCoroutine("SkillPersistentEffect");
+            ApplyPersistentEffect();
         }
-
         public override void ApplyPersistentEffect()
         {
-            skillUser.gameObject.GetComponent<PlayerManager>().ModifyMovementSpeed(sprintSpeed, 1);
+            if (!onCooldown)
+            {
+                skillUser.gameObject.GetComponent<PlayerManager>().ModifyMovementSpeed(SprintSpeed, 1);
+                skillUser.StartCoroutine("UsePersistentEffect");
+            }
         }
 
         public override void DeActivatePersistentEffect()
         {
-            skillUser.gameObject.GetComponent<PlayerManager>().ModifyMovementSpeed(sprintSpeed, 0);
+            skillUser.gameObject.GetComponent<PlayerManager>().ModifyMovementSpeed(SprintSpeed, 0);
         }
     }
 }

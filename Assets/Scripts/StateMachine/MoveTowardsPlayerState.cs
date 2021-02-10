@@ -5,40 +5,40 @@ namespace DefaultNamespace
 {
     public class MoveTowardsPlayerState : State
     {
-        private Vector3 destination;
+        private Vector3 _destination;
 
-        public MoveTowardsPlayerState(BaseEnemy _enemy) : base(_enemy)
+        public MoveTowardsPlayerState(BaseEnemy enemy) : base(enemy)
         {
         }
 
         public override void Tick()
         {
-            destination = _enemy._playerTransform.position;
-            _enemy.MoveToward(destination);
+            _destination = Enemy.playerTransform.position;
+            Enemy.MoveToward(_destination);
             if (ReachedPlayer())
             {
-                _enemy.SetState(new AttackPlayerState(_enemy));
+                Enemy.SetState(new AttackPlayerState(Enemy));
             }
 
-            if (_enemy.stunned)
+            if (Enemy.stunned)
             {
-                _enemy.SetState(new StunnedState(_enemy));
+                Enemy.SetState(new StunnedState(Enemy));
             }
         }
 
         public override void OnStateEnter()
         {
-            name = "moving towards player";
+            Name = "moving towards player";
         }
 
         private bool ReachedPlayer()
         {
-            return Vector3.Distance(_enemy.transform.position, destination) < 1.5f;
+            return Vector3.Distance(Enemy.transform.position, _destination) < 1.5f;
         }
 
         public override void OnStateExit()
         {
-            destination = Vector3.zero;
+            _destination = Vector3.zero;
         }
     }
 }

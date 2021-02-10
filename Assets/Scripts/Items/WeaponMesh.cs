@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class WeaponMesh : MonoBehaviour
 {
-    public MeshRenderer WM;
+    public MeshRenderer wm;
     void Awake()
     {
-        WM = GetComponent<MeshRenderer>();
+        wm = GetComponent<MeshRenderer>();
     }
 }

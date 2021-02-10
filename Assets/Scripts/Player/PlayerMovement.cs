@@ -9,22 +9,22 @@ namespace DefaultNamespace
     {
         public TransformAnchor gameplayCameraTransform;
         
-        public InputReader _inputReader = default;
+        private InputReader _inputReader = default;
         private Vector2 _previousMovementInput;
     
         public override void Update()
         {
             //Gravity Check
-            _entityVelocity.y += gravityValue * Time.deltaTime;
-            _characterController.Move(_entityVelocity * Time.deltaTime);
-            if (_groundedEntity && _entityVelocity.y < 0)
+            EntityVelocity.y += GravityValue * Time.deltaTime;
+            CharacterController.Move(EntityVelocity * Time.deltaTime);
+            if (groundedEntity && EntityVelocity.y < 0)
             {
-                _entityVelocity.y = -0.3f;
+                EntityVelocity.y = -0.3f;
             }
-            _groundedEntity = _characterController.isGrounded;
+            groundedEntity = CharacterController.isGrounded;
             //Movement
             CalculateMovement();
-            _characterController.Move(movementInput * (Time.deltaTime * _movementSpeed));
+            CharacterController.Move(movementInput * (Time.deltaTime * movementSpeed));
             RotateTowardsMovement();
         }
 
@@ -38,23 +38,23 @@ namespace DefaultNamespace
         {
             try
             {
-                _inputReader.moveEvent += OnMove;
-                _inputReader.jumpEvent += OnJump;
+                _inputReader.MoveEvent += OnMove;
+                _inputReader.JumpEvent += OnJump;
             }
             catch{}
         }
 
         public override void OnDisable()
         {
-            _inputReader.moveEvent -= OnMove;
-            _inputReader.jumpEvent -= OnJump;
+            _inputReader.MoveEvent -= OnMove;
+            _inputReader.JumpEvent -= OnJump;
         }
 
         public override void OnJump()
         {
-            if (_groundedEntity && _entityVelocity.y < 0)
+            if (groundedEntity && EntityVelocity.y < 0)
             {
-                _entityVelocity.y += Mathf.Sqrt(_jumpHeight * -3.0f * gravityValue);
+                EntityVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * GravityValue);
             }
         }
         private void CalculateMovement()

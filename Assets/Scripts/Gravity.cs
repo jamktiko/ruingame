@@ -2,20 +2,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Gravity : MonoBehaviour
 {
-    private Rigidbody rb;
-    public float GravityForce = -9.81f;
+    private Rigidbody _rb;
+    [FormerlySerializedAs("GravityForce")] public float gravityForce = -9.81f;
     public void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        _rb = GetComponent<Rigidbody>();
     }
 
     public void FixedUpdate()
     {
 
-        rb.AddForce(Vector3.up*GravityForce,ForceMode.Acceleration);
+        _rb.AddForce(Vector3.up*gravityForce,ForceMode.Acceleration);
     }
 }

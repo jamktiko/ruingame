@@ -6,16 +6,16 @@ using UnityEngine;
 
 public class RoomManager : MonoBehaviour
 {
-    private int currentRoom = 0;
+    private int _currentRoom = 0;
     public List<GameObject> possibleRooms;
     //Get total enemies 
-    private int totalEnemiesInRoom = 0;
-    public GameObject currentRoomGO;
-    public GameObject playerReference;
+    private int _totalEnemiesInRoom = 0;
+    private GameObject currentRoomGO;
+    private GameObject playerReference;
     private RoomExit _roomExit;
     private Transform _entryPoint;
 
-    private bool creatingRoom = false;
+    private bool _creatingRoom = false;
     private void Awake()
     {
         //Created by Game Manager
@@ -24,8 +24,8 @@ public class RoomManager : MonoBehaviour
 
     public bool AllEnemiesCleared()
     {
-        totalEnemiesInRoom = currentRoomGO.GetComponentInChildren<SpawnerManager>().EnemiesRemaining();
-        return (totalEnemiesInRoom <= 0);
+        _totalEnemiesInRoom = currentRoomGO.GetComponentInChildren<SpawnerManager>().EnemiesRemaining();
+        return (_totalEnemiesInRoom <= 0);
     }
 
     public void GoToNextLevel()
@@ -37,9 +37,9 @@ public class RoomManager : MonoBehaviour
 
     public void CreateLevel()
     {
-        if (creatingRoom)
+        if (_creatingRoom)
             return;
-        creatingRoom = true;
+        _creatingRoom = true;
         StartCoroutine(WaitCreation());
     }
     
@@ -71,17 +71,18 @@ public class RoomManager : MonoBehaviour
             Destroy(currentRoomGO);
         }
         currentRoomGO = Instantiate(GetRandomRoomFromList());
-        currentRoomGO.GetComponentInChildren<RoomExit>()._roomManager = gameObject.GetComponent<RoomManager>();
-        currentRoom++;
+        currentRoomGO.GetComponentInChildren<RoomExit>().roomManager = gameObject.GetComponent<RoomManager>();
+        _currentRoom++;
         _entryPoint = GameObject.FindGameObjectWithTag("Entry").transform;
         PlacePlayerAtEntry();
         yield return new WaitForSeconds(1f);
         //Deactivate loading screen
-        creatingRoom = false;
+        _creatingRoom = false;
     }
     public void StartRoomManager()
     {
         //Create a list of possible rooms from roomVariants
+        playerReference = GameManager.Instance.currentPlayer;
         CreateLevel();
         WaitUntilPlayerIsLoaded();
     }

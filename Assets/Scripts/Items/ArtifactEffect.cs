@@ -3,42 +3,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 
 namespace DefaultNamespace
 {
     public class ArtifactEffect : MonoBehaviour
     {
-        private PlayerManager playerReference;
-    
-        
+        private PlayerManager _playerReference;
         [System.Serializable]
         public class ArtifactModifier
         {
-            public float _modifier;
+            public float modifier;
             [System.Serializable]
-            public enum modifiedValues {
+            public enum enumModifiedValues {
                 MovementSpeed,
                 Jump,
                 Damage,
                 AttackSpeed
             }
             [System.Serializable]
-            public enum type
+            public enum Type
             {
-                PLUS,
-                MINUS
+                Plus,
+                Minus
             }
 
-            public type _type;
-            public modifiedValues ModifiedValues;
+            public Type type;
+            public enumModifiedValues modifiedValues;
         }
-        public List<ArtifactModifier> Modifiers;
+        public List<ArtifactModifier> artifactModifiers;
 
         public virtual void AddEffect(PlayerManager pm)
         {
-            playerReference = pm;
-            foreach (ArtifactModifier am in Modifiers)
+            _playerReference = pm;
+            foreach (ArtifactModifier am in artifactModifiers)
             {
                 AddSingleModifier(am);
             }
@@ -46,7 +45,7 @@ namespace DefaultNamespace
         public virtual void AddSingleModifier(ArtifactModifier am)
         {
             int type;
-            if (am._type == ArtifactModifier.type.PLUS)
+            if (am.type == ArtifactModifier.Type.Plus)
             {
                 type = 0;
             }
@@ -54,19 +53,19 @@ namespace DefaultNamespace
             {
                 type = 1;
             }
-            switch (am.ModifiedValues)
+            switch (am.modifiedValues)
             {
-                case ArtifactModifier.modifiedValues.Damage:
-                    playerReference.ModifyDamage(am._modifier, type);
+                case ArtifactModifier.enumModifiedValues.Damage:
+                    _playerReference.ModifyDamage(am.modifier, type);
                     break;
-                case ArtifactModifier.modifiedValues.AttackSpeed:
-                    playerReference.ModifyJump(am._modifier, type);
+                case ArtifactModifier.enumModifiedValues.AttackSpeed:
+                    _playerReference.ModifyJump(am.modifier, type);
                     break;
-                case ArtifactModifier.modifiedValues.MovementSpeed:
-                    playerReference.ModifyMovementSpeed(am._modifier, type);
+                case ArtifactModifier.enumModifiedValues.MovementSpeed:
+                    _playerReference.ModifyMovementSpeed(am.modifier, type);
                     break;
-                case ArtifactModifier.modifiedValues.Jump:
-                    playerReference.ModifyAttackSpeed(am._modifier, type);
+                case ArtifactModifier.enumModifiedValues.Jump:
+                    _playerReference.ModifyAttackSpeed(am.modifier, type);
                     break;
             }
         }

@@ -5,30 +5,27 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    public float maximumHealth = 100f;
-    public float flatResistance = 10f;
-    public float percentualResistance = 10f;
-    public float reDamageTimer = 0.4f;
-    public float reDamageTimerDoT = 0.4f;
+    private float _maximumHealth = 100f;
+    private float _flatResistance = 10f;
+    private float _percentualResistance = 10f;
+    private float _reDamageTimer = 0.4f;
+    //private float _reDamageTimerDoT = 0.4f;
     
-    [SerializeField]
-    protected float _currentHealth;
-    [SerializeField]
-    private bool damageable = true;
-
-    [SerializeField] protected Animator _entityAnimator;
+    protected float CurrentHealth;
+    private bool _damageable = true; 
+    protected Animator EntityAnimator;
 
     
     
     public virtual void Start()
     {
-        _currentHealth = maximumHealth;
-        _entityAnimator = GetComponentInChildren<Animator>();
+        CurrentHealth = _maximumHealth;
+        EntityAnimator = GetComponentInChildren<Animator>();
     }
 
     public virtual void DealDamage(float amount)
     {
-        if (!damageable)
+        if (!_damageable)
             return;
         ReactToDamage(amount);
         CheckHealth();
@@ -37,10 +34,10 @@ public class Health : MonoBehaviour
     public virtual void ReactToDamage(float amount)
     {
         var damagePassed = amount;
-        damagePassed -= flatResistance;
-        damagePassed = damagePassed * ((100 - percentualResistance) / 100);
-        _currentHealth -= damagePassed;
-        AddIFrame(reDamageTimer);
+        damagePassed -= _flatResistance;
+        damagePassed = damagePassed * ((100 - _percentualResistance) / 100);
+        CurrentHealth -= damagePassed;
+        AddIFrame(_reDamageTimer);
     }
     public void DealDamageOverTime(float amount, float time)
     {
@@ -50,7 +47,7 @@ public class Health : MonoBehaviour
     public virtual void Die()
     {
         //Animation
-        _entityAnimator.Play("Death");
+        EntityAnimator.Play("Death");
         //Particles
         Destroy(gameObject, 0.6f);
         //Update UI or stats
@@ -59,18 +56,18 @@ public class Health : MonoBehaviour
 
     public void AddIFrame(float duration)
     {
-        damageable = false;
+        _damageable = false;
         Invoke("TurnDamageOn", duration);
     }
 
     public void TurnDamageOn()
     {
-        damageable = true;
+        _damageable = true;
     }
 
     public void CheckHealth()
     {
-        if (_currentHealth <= 0)
+        if (CurrentHealth <= 0)
         {
             Die();
         }

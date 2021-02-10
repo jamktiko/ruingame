@@ -1,25 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class SpawnerManager : MonoBehaviour
 {
 
     //GET ALL POSSIBLE SPAWNING LOCATIONS IN THE ROOM
-    public Spawner[] spawners;
+    public Spawner[] spawnerList;
     private int _totalEnemiesRemaining;
     private int _spawnersDone;
     
     void Start()
     {
-        spawners = GetComponentsInChildren<Spawner>();
+        spawnerList = GetComponentsInChildren<Spawner>();
         StartSpawners();
     }
 
     public int EnemiesRemaining()
     {
         var enemies = 0;
-        foreach (Spawner sp in spawners)
+        foreach (Spawner sp in spawnerList)
         {
             enemies += sp.remainingEnemies;
         }
@@ -33,7 +34,7 @@ public class SpawnerManager : MonoBehaviour
 
     public void StartSpawners()
     {
-        foreach (Spawner sp in spawners)
+        foreach (Spawner sp in spawnerList)
         {
             sp.StartSpawning(1);
         }

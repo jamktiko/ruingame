@@ -8,10 +8,10 @@ using UnityEngine.InputSystem.Utilities;
 
 public class @PlayerInput : IInputActionCollection, IDisposable
 {
-    public InputActionAsset asset { get; }
+    public InputActionAsset Asset { get; }
     public @PlayerInput()
     {
-        asset = InputActionAsset.FromJson(@"{
+        Asset = InputActionAsset.FromJson(@"{
     ""name"": ""PlayerInput"",
     ""maps"": [
         {
@@ -1247,60 +1247,60 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     ]
 }");
         // Gameplay
-        m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
-        m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
-        m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
-        m_Gameplay_Attack = m_Gameplay.FindAction("Attack", throwIfNotFound: true);
-        m_Gameplay_Interact = m_Gameplay.FindAction("Interact", throwIfNotFound: true);
-        m_Gameplay_Pause = m_Gameplay.FindAction("Pause", throwIfNotFound: true);
-        m_Gameplay_OpenInventory = m_Gameplay.FindAction("OpenInventory", throwIfNotFound: true);
-        m_Gameplay_RotateCamera = m_Gameplay.FindAction("RotateCamera", throwIfNotFound: true);
-        m_Gameplay_MouseControlCamera = m_Gameplay.FindAction("MouseControlCamera", throwIfNotFound: true);
-        m_Gameplay_Run = m_Gameplay.FindAction("Run", throwIfNotFound: true);
-        m_Gameplay_Skill1 = m_Gameplay.FindAction("Skill1", throwIfNotFound: true);
-        m_Gameplay_Skill2 = m_Gameplay.FindAction("Skill2", throwIfNotFound: true);
-        m_Gameplay_Skill3 = m_Gameplay.FindAction("Skill3", throwIfNotFound: true);
-        m_Gameplay_Sprint = m_Gameplay.FindAction("Sprint", throwIfNotFound: true);
+        _mGameplay = Asset.FindActionMap("Gameplay", throwIfNotFound: true);
+        _mGameplayMove = _mGameplay.FindAction("Move", throwIfNotFound: true);
+        _mGameplayJump = _mGameplay.FindAction("Jump", throwIfNotFound: true);
+        _mGameplayAttack = _mGameplay.FindAction("Attack", throwIfNotFound: true);
+        _mGameplayInteract = _mGameplay.FindAction("Interact", throwIfNotFound: true);
+        _mGameplayPause = _mGameplay.FindAction("Pause", throwIfNotFound: true);
+        _mGameplayOpenInventory = _mGameplay.FindAction("OpenInventory", throwIfNotFound: true);
+        _mGameplayRotateCamera = _mGameplay.FindAction("RotateCamera", throwIfNotFound: true);
+        _mGameplayMouseControlCamera = _mGameplay.FindAction("MouseControlCamera", throwIfNotFound: true);
+        _mGameplayRun = _mGameplay.FindAction("Run", throwIfNotFound: true);
+        _mGameplaySkill1 = _mGameplay.FindAction("Skill1", throwIfNotFound: true);
+        _mGameplaySkill2 = _mGameplay.FindAction("Skill2", throwIfNotFound: true);
+        _mGameplaySkill3 = _mGameplay.FindAction("Skill3", throwIfNotFound: true);
+        _mGameplaySprint = _mGameplay.FindAction("Sprint", throwIfNotFound: true);
         // Menus
-        m_Menus = asset.FindActionMap("Menus", throwIfNotFound: true);
-        m_Menus_MoveSelection = m_Menus.FindAction("MoveSelection", throwIfNotFound: true);
-        m_Menus_Confirm = m_Menus.FindAction("Confirm", throwIfNotFound: true);
-        m_Menus_Cancel = m_Menus.FindAction("Cancel", throwIfNotFound: true);
-        m_Menus_MouseMove = m_Menus.FindAction("MouseMove", throwIfNotFound: true);
-        m_Menus_Unpause = m_Menus.FindAction("Unpause", throwIfNotFound: true);
+        _mMenus = Asset.FindActionMap("Menus", throwIfNotFound: true);
+        _mMenusMoveSelection = _mMenus.FindAction("MoveSelection", throwIfNotFound: true);
+        _mMenusConfirm = _mMenus.FindAction("Confirm", throwIfNotFound: true);
+        _mMenusCancel = _mMenus.FindAction("Cancel", throwIfNotFound: true);
+        _mMenusMouseMove = _mMenus.FindAction("MouseMove", throwIfNotFound: true);
+        _mMenusUnpause = _mMenus.FindAction("Unpause", throwIfNotFound: true);
         // Dialogues
-        m_Dialogues = asset.FindActionMap("Dialogues", throwIfNotFound: true);
-        m_Dialogues_MoveSelection = m_Dialogues.FindAction("MoveSelection", throwIfNotFound: true);
-        m_Dialogues_AdvanceDialogue = m_Dialogues.FindAction("AdvanceDialogue", throwIfNotFound: true);
+        _mDialogues = Asset.FindActionMap("Dialogues", throwIfNotFound: true);
+        _mDialoguesMoveSelection = _mDialogues.FindAction("MoveSelection", throwIfNotFound: true);
+        _mDialoguesAdvanceDialogue = _mDialogues.FindAction("AdvanceDialogue", throwIfNotFound: true);
     }
 
     public void Dispose()
     {
-        UnityEngine.Object.Destroy(asset);
+        UnityEngine.Object.Destroy(Asset);
     }
 
     public InputBinding? bindingMask
     {
-        get => asset.bindingMask;
-        set => asset.bindingMask = value;
+        get => Asset.bindingMask;
+        set => Asset.bindingMask = value;
     }
 
     public ReadOnlyArray<InputDevice>? devices
     {
-        get => asset.devices;
-        set => asset.devices = value;
+        get => Asset.devices;
+        set => Asset.devices = value;
     }
 
-    public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
+    public ReadOnlyArray<InputControlScheme> controlSchemes => Asset.controlSchemes;
 
     public bool Contains(InputAction action)
     {
-        return asset.Contains(action);
+        return Asset.Contains(action);
     }
 
     public IEnumerator<InputAction> GetEnumerator()
     {
-        return asset.GetEnumerator();
+        return Asset.GetEnumerator();
     }
 
     IEnumerator IEnumerable.GetEnumerator()
@@ -1310,97 +1310,97 @@ public class @PlayerInput : IInputActionCollection, IDisposable
 
     public void Enable()
     {
-        asset.Enable();
+        Asset.Enable();
     }
 
     public void Disable()
     {
-        asset.Disable();
+        Asset.Disable();
     }
 
     // Gameplay
-    private readonly InputActionMap m_Gameplay;
-    private IGameplayActions m_GameplayActionsCallbackInterface;
-    private readonly InputAction m_Gameplay_Move;
-    private readonly InputAction m_Gameplay_Jump;
-    private readonly InputAction m_Gameplay_Attack;
-    private readonly InputAction m_Gameplay_Interact;
-    private readonly InputAction m_Gameplay_Pause;
-    private readonly InputAction m_Gameplay_OpenInventory;
-    private readonly InputAction m_Gameplay_RotateCamera;
-    private readonly InputAction m_Gameplay_MouseControlCamera;
-    private readonly InputAction m_Gameplay_Run;
-    private readonly InputAction m_Gameplay_Skill1;
-    private readonly InputAction m_Gameplay_Skill2;
-    private readonly InputAction m_Gameplay_Skill3;
-    private readonly InputAction m_Gameplay_Sprint;
+    private readonly InputActionMap _mGameplay;
+    private IGameplayActions _mGameplayActionsCallbackInterface;
+    private readonly InputAction _mGameplayMove;
+    private readonly InputAction _mGameplayJump;
+    private readonly InputAction _mGameplayAttack;
+    private readonly InputAction _mGameplayInteract;
+    private readonly InputAction _mGameplayPause;
+    private readonly InputAction _mGameplayOpenInventory;
+    private readonly InputAction _mGameplayRotateCamera;
+    private readonly InputAction _mGameplayMouseControlCamera;
+    private readonly InputAction _mGameplayRun;
+    private readonly InputAction _mGameplaySkill1;
+    private readonly InputAction _mGameplaySkill2;
+    private readonly InputAction _mGameplaySkill3;
+    private readonly InputAction _mGameplaySprint;
     public struct GameplayActions
     {
-        private @PlayerInput m_Wrapper;
-        public GameplayActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Move => m_Wrapper.m_Gameplay_Move;
-        public InputAction @Jump => m_Wrapper.m_Gameplay_Jump;
-        public InputAction @Attack => m_Wrapper.m_Gameplay_Attack;
-        public InputAction @Interact => m_Wrapper.m_Gameplay_Interact;
-        public InputAction @Pause => m_Wrapper.m_Gameplay_Pause;
-        public InputAction @OpenInventory => m_Wrapper.m_Gameplay_OpenInventory;
-        public InputAction @RotateCamera => m_Wrapper.m_Gameplay_RotateCamera;
-        public InputAction @MouseControlCamera => m_Wrapper.m_Gameplay_MouseControlCamera;
-        public InputAction @Run => m_Wrapper.m_Gameplay_Run;
-        public InputAction @Skill1 => m_Wrapper.m_Gameplay_Skill1;
-        public InputAction @Skill2 => m_Wrapper.m_Gameplay_Skill2;
-        public InputAction @Skill3 => m_Wrapper.m_Gameplay_Skill3;
-        public InputAction @Sprint => m_Wrapper.m_Gameplay_Sprint;
-        public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
+        private @PlayerInput _mWrapper;
+        public GameplayActions(@PlayerInput wrapper) { _mWrapper = wrapper; }
+        public InputAction @Move => _mWrapper._mGameplayMove;
+        public InputAction @Jump => _mWrapper._mGameplayJump;
+        public InputAction @Attack => _mWrapper._mGameplayAttack;
+        public InputAction @Interact => _mWrapper._mGameplayInteract;
+        public InputAction @Pause => _mWrapper._mGameplayPause;
+        public InputAction @OpenInventory => _mWrapper._mGameplayOpenInventory;
+        public InputAction @RotateCamera => _mWrapper._mGameplayRotateCamera;
+        public InputAction @MouseControlCamera => _mWrapper._mGameplayMouseControlCamera;
+        public InputAction @Run => _mWrapper._mGameplayRun;
+        public InputAction @Skill1 => _mWrapper._mGameplaySkill1;
+        public InputAction @Skill2 => _mWrapper._mGameplaySkill2;
+        public InputAction @Skill3 => _mWrapper._mGameplaySkill3;
+        public InputAction @Sprint => _mWrapper._mGameplaySprint;
+        public InputActionMap Get() { return _mWrapper._mGameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
+        public bool Enabled => Get().enabled;
         public static implicit operator InputActionMap(GameplayActions set) { return set.Get(); }
         public void SetCallbacks(IGameplayActions instance)
         {
-            if (m_Wrapper.m_GameplayActionsCallbackInterface != null)
+            if (_mWrapper._mGameplayActionsCallbackInterface != null)
             {
-                @Move.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
-                @Move.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
-                @Move.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
-                @Jump.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJump;
-                @Jump.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJump;
-                @Jump.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJump;
-                @Attack.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAttack;
-                @Attack.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAttack;
-                @Attack.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAttack;
-                @Interact.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract;
-                @Interact.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract;
-                @Interact.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract;
-                @Pause.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
-                @Pause.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
-                @Pause.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
-                @OpenInventory.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnOpenInventory;
-                @OpenInventory.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnOpenInventory;
-                @OpenInventory.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnOpenInventory;
-                @RotateCamera.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRotateCamera;
-                @RotateCamera.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRotateCamera;
-                @RotateCamera.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRotateCamera;
-                @MouseControlCamera.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMouseControlCamera;
-                @MouseControlCamera.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMouseControlCamera;
-                @MouseControlCamera.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMouseControlCamera;
-                @Run.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRun;
-                @Run.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRun;
-                @Run.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRun;
-                @Skill1.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSkill1;
-                @Skill1.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSkill1;
-                @Skill1.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSkill1;
-                @Skill2.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSkill2;
-                @Skill2.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSkill2;
-                @Skill2.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSkill2;
-                @Skill3.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSkill3;
-                @Skill3.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSkill3;
-                @Skill3.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSkill3;
-                @Sprint.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSprint;
-                @Sprint.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSprint;
-                @Sprint.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSprint;
+                @Move.started -= _mWrapper._mGameplayActionsCallbackInterface.OnMove;
+                @Move.performed -= _mWrapper._mGameplayActionsCallbackInterface.OnMove;
+                @Move.canceled -= _mWrapper._mGameplayActionsCallbackInterface.OnMove;
+                @Jump.started -= _mWrapper._mGameplayActionsCallbackInterface.OnJump;
+                @Jump.performed -= _mWrapper._mGameplayActionsCallbackInterface.OnJump;
+                @Jump.canceled -= _mWrapper._mGameplayActionsCallbackInterface.OnJump;
+                @Attack.started -= _mWrapper._mGameplayActionsCallbackInterface.OnAttack;
+                @Attack.performed -= _mWrapper._mGameplayActionsCallbackInterface.OnAttack;
+                @Attack.canceled -= _mWrapper._mGameplayActionsCallbackInterface.OnAttack;
+                @Interact.started -= _mWrapper._mGameplayActionsCallbackInterface.OnInteract;
+                @Interact.performed -= _mWrapper._mGameplayActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= _mWrapper._mGameplayActionsCallbackInterface.OnInteract;
+                @Pause.started -= _mWrapper._mGameplayActionsCallbackInterface.OnPause;
+                @Pause.performed -= _mWrapper._mGameplayActionsCallbackInterface.OnPause;
+                @Pause.canceled -= _mWrapper._mGameplayActionsCallbackInterface.OnPause;
+                @OpenInventory.started -= _mWrapper._mGameplayActionsCallbackInterface.OnOpenInventory;
+                @OpenInventory.performed -= _mWrapper._mGameplayActionsCallbackInterface.OnOpenInventory;
+                @OpenInventory.canceled -= _mWrapper._mGameplayActionsCallbackInterface.OnOpenInventory;
+                @RotateCamera.started -= _mWrapper._mGameplayActionsCallbackInterface.OnRotateCamera;
+                @RotateCamera.performed -= _mWrapper._mGameplayActionsCallbackInterface.OnRotateCamera;
+                @RotateCamera.canceled -= _mWrapper._mGameplayActionsCallbackInterface.OnRotateCamera;
+                @MouseControlCamera.started -= _mWrapper._mGameplayActionsCallbackInterface.OnMouseControlCamera;
+                @MouseControlCamera.performed -= _mWrapper._mGameplayActionsCallbackInterface.OnMouseControlCamera;
+                @MouseControlCamera.canceled -= _mWrapper._mGameplayActionsCallbackInterface.OnMouseControlCamera;
+                @Run.started -= _mWrapper._mGameplayActionsCallbackInterface.OnRun;
+                @Run.performed -= _mWrapper._mGameplayActionsCallbackInterface.OnRun;
+                @Run.canceled -= _mWrapper._mGameplayActionsCallbackInterface.OnRun;
+                @Skill1.started -= _mWrapper._mGameplayActionsCallbackInterface.OnSkill1;
+                @Skill1.performed -= _mWrapper._mGameplayActionsCallbackInterface.OnSkill1;
+                @Skill1.canceled -= _mWrapper._mGameplayActionsCallbackInterface.OnSkill1;
+                @Skill2.started -= _mWrapper._mGameplayActionsCallbackInterface.OnSkill2;
+                @Skill2.performed -= _mWrapper._mGameplayActionsCallbackInterface.OnSkill2;
+                @Skill2.canceled -= _mWrapper._mGameplayActionsCallbackInterface.OnSkill2;
+                @Skill3.started -= _mWrapper._mGameplayActionsCallbackInterface.OnSkill3;
+                @Skill3.performed -= _mWrapper._mGameplayActionsCallbackInterface.OnSkill3;
+                @Skill3.canceled -= _mWrapper._mGameplayActionsCallbackInterface.OnSkill3;
+                @Sprint.started -= _mWrapper._mGameplayActionsCallbackInterface.OnSprint;
+                @Sprint.performed -= _mWrapper._mGameplayActionsCallbackInterface.OnSprint;
+                @Sprint.canceled -= _mWrapper._mGameplayActionsCallbackInterface.OnSprint;
             }
-            m_Wrapper.m_GameplayActionsCallbackInterface = instance;
+            _mWrapper._mGameplayActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @Move.started += instance.OnMove;
@@ -1448,48 +1448,48 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     public GameplayActions @Gameplay => new GameplayActions(this);
 
     // Menus
-    private readonly InputActionMap m_Menus;
-    private IMenusActions m_MenusActionsCallbackInterface;
-    private readonly InputAction m_Menus_MoveSelection;
-    private readonly InputAction m_Menus_Confirm;
-    private readonly InputAction m_Menus_Cancel;
-    private readonly InputAction m_Menus_MouseMove;
-    private readonly InputAction m_Menus_Unpause;
+    private readonly InputActionMap _mMenus;
+    private IMenusActions _mMenusActionsCallbackInterface;
+    private readonly InputAction _mMenusMoveSelection;
+    private readonly InputAction _mMenusConfirm;
+    private readonly InputAction _mMenusCancel;
+    private readonly InputAction _mMenusMouseMove;
+    private readonly InputAction _mMenusUnpause;
     public struct MenusActions
     {
-        private @PlayerInput m_Wrapper;
-        public MenusActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @MoveSelection => m_Wrapper.m_Menus_MoveSelection;
-        public InputAction @Confirm => m_Wrapper.m_Menus_Confirm;
-        public InputAction @Cancel => m_Wrapper.m_Menus_Cancel;
-        public InputAction @MouseMove => m_Wrapper.m_Menus_MouseMove;
-        public InputAction @Unpause => m_Wrapper.m_Menus_Unpause;
-        public InputActionMap Get() { return m_Wrapper.m_Menus; }
+        private @PlayerInput _mWrapper;
+        public MenusActions(@PlayerInput wrapper) { _mWrapper = wrapper; }
+        public InputAction @MoveSelection => _mWrapper._mMenusMoveSelection;
+        public InputAction @Confirm => _mWrapper._mMenusConfirm;
+        public InputAction @Cancel => _mWrapper._mMenusCancel;
+        public InputAction @MouseMove => _mWrapper._mMenusMouseMove;
+        public InputAction @Unpause => _mWrapper._mMenusUnpause;
+        public InputActionMap Get() { return _mWrapper._mMenus; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
+        public bool Enabled => Get().enabled;
         public static implicit operator InputActionMap(MenusActions set) { return set.Get(); }
         public void SetCallbacks(IMenusActions instance)
         {
-            if (m_Wrapper.m_MenusActionsCallbackInterface != null)
+            if (_mWrapper._mMenusActionsCallbackInterface != null)
             {
-                @MoveSelection.started -= m_Wrapper.m_MenusActionsCallbackInterface.OnMoveSelection;
-                @MoveSelection.performed -= m_Wrapper.m_MenusActionsCallbackInterface.OnMoveSelection;
-                @MoveSelection.canceled -= m_Wrapper.m_MenusActionsCallbackInterface.OnMoveSelection;
-                @Confirm.started -= m_Wrapper.m_MenusActionsCallbackInterface.OnConfirm;
-                @Confirm.performed -= m_Wrapper.m_MenusActionsCallbackInterface.OnConfirm;
-                @Confirm.canceled -= m_Wrapper.m_MenusActionsCallbackInterface.OnConfirm;
-                @Cancel.started -= m_Wrapper.m_MenusActionsCallbackInterface.OnCancel;
-                @Cancel.performed -= m_Wrapper.m_MenusActionsCallbackInterface.OnCancel;
-                @Cancel.canceled -= m_Wrapper.m_MenusActionsCallbackInterface.OnCancel;
-                @MouseMove.started -= m_Wrapper.m_MenusActionsCallbackInterface.OnMouseMove;
-                @MouseMove.performed -= m_Wrapper.m_MenusActionsCallbackInterface.OnMouseMove;
-                @MouseMove.canceled -= m_Wrapper.m_MenusActionsCallbackInterface.OnMouseMove;
-                @Unpause.started -= m_Wrapper.m_MenusActionsCallbackInterface.OnUnpause;
-                @Unpause.performed -= m_Wrapper.m_MenusActionsCallbackInterface.OnUnpause;
-                @Unpause.canceled -= m_Wrapper.m_MenusActionsCallbackInterface.OnUnpause;
+                @MoveSelection.started -= _mWrapper._mMenusActionsCallbackInterface.OnMoveSelection;
+                @MoveSelection.performed -= _mWrapper._mMenusActionsCallbackInterface.OnMoveSelection;
+                @MoveSelection.canceled -= _mWrapper._mMenusActionsCallbackInterface.OnMoveSelection;
+                @Confirm.started -= _mWrapper._mMenusActionsCallbackInterface.OnConfirm;
+                @Confirm.performed -= _mWrapper._mMenusActionsCallbackInterface.OnConfirm;
+                @Confirm.canceled -= _mWrapper._mMenusActionsCallbackInterface.OnConfirm;
+                @Cancel.started -= _mWrapper._mMenusActionsCallbackInterface.OnCancel;
+                @Cancel.performed -= _mWrapper._mMenusActionsCallbackInterface.OnCancel;
+                @Cancel.canceled -= _mWrapper._mMenusActionsCallbackInterface.OnCancel;
+                @MouseMove.started -= _mWrapper._mMenusActionsCallbackInterface.OnMouseMove;
+                @MouseMove.performed -= _mWrapper._mMenusActionsCallbackInterface.OnMouseMove;
+                @MouseMove.canceled -= _mWrapper._mMenusActionsCallbackInterface.OnMouseMove;
+                @Unpause.started -= _mWrapper._mMenusActionsCallbackInterface.OnUnpause;
+                @Unpause.performed -= _mWrapper._mMenusActionsCallbackInterface.OnUnpause;
+                @Unpause.canceled -= _mWrapper._mMenusActionsCallbackInterface.OnUnpause;
             }
-            m_Wrapper.m_MenusActionsCallbackInterface = instance;
+            _mWrapper._mMenusActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @MoveSelection.started += instance.OnMoveSelection;
@@ -1513,33 +1513,33 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     public MenusActions @Menus => new MenusActions(this);
 
     // Dialogues
-    private readonly InputActionMap m_Dialogues;
-    private IDialoguesActions m_DialoguesActionsCallbackInterface;
-    private readonly InputAction m_Dialogues_MoveSelection;
-    private readonly InputAction m_Dialogues_AdvanceDialogue;
+    private readonly InputActionMap _mDialogues;
+    private IDialoguesActions _mDialoguesActionsCallbackInterface;
+    private readonly InputAction _mDialoguesMoveSelection;
+    private readonly InputAction _mDialoguesAdvanceDialogue;
     public struct DialoguesActions
     {
-        private @PlayerInput m_Wrapper;
-        public DialoguesActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @MoveSelection => m_Wrapper.m_Dialogues_MoveSelection;
-        public InputAction @AdvanceDialogue => m_Wrapper.m_Dialogues_AdvanceDialogue;
-        public InputActionMap Get() { return m_Wrapper.m_Dialogues; }
+        private @PlayerInput _mWrapper;
+        public DialoguesActions(@PlayerInput wrapper) { _mWrapper = wrapper; }
+        public InputAction @MoveSelection => _mWrapper._mDialoguesMoveSelection;
+        public InputAction @AdvanceDialogue => _mWrapper._mDialoguesAdvanceDialogue;
+        public InputActionMap Get() { return _mWrapper._mDialogues; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
+        public bool Enabled => Get().enabled;
         public static implicit operator InputActionMap(DialoguesActions set) { return set.Get(); }
         public void SetCallbacks(IDialoguesActions instance)
         {
-            if (m_Wrapper.m_DialoguesActionsCallbackInterface != null)
+            if (_mWrapper._mDialoguesActionsCallbackInterface != null)
             {
-                @MoveSelection.started -= m_Wrapper.m_DialoguesActionsCallbackInterface.OnMoveSelection;
-                @MoveSelection.performed -= m_Wrapper.m_DialoguesActionsCallbackInterface.OnMoveSelection;
-                @MoveSelection.canceled -= m_Wrapper.m_DialoguesActionsCallbackInterface.OnMoveSelection;
-                @AdvanceDialogue.started -= m_Wrapper.m_DialoguesActionsCallbackInterface.OnAdvanceDialogue;
-                @AdvanceDialogue.performed -= m_Wrapper.m_DialoguesActionsCallbackInterface.OnAdvanceDialogue;
-                @AdvanceDialogue.canceled -= m_Wrapper.m_DialoguesActionsCallbackInterface.OnAdvanceDialogue;
+                @MoveSelection.started -= _mWrapper._mDialoguesActionsCallbackInterface.OnMoveSelection;
+                @MoveSelection.performed -= _mWrapper._mDialoguesActionsCallbackInterface.OnMoveSelection;
+                @MoveSelection.canceled -= _mWrapper._mDialoguesActionsCallbackInterface.OnMoveSelection;
+                @AdvanceDialogue.started -= _mWrapper._mDialoguesActionsCallbackInterface.OnAdvanceDialogue;
+                @AdvanceDialogue.performed -= _mWrapper._mDialoguesActionsCallbackInterface.OnAdvanceDialogue;
+                @AdvanceDialogue.canceled -= _mWrapper._mDialoguesActionsCallbackInterface.OnAdvanceDialogue;
             }
-            m_Wrapper.m_DialoguesActionsCallbackInterface = instance;
+            _mWrapper._mDialoguesActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @MoveSelection.started += instance.OnMoveSelection;
@@ -1552,13 +1552,13 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         }
     }
     public DialoguesActions @Dialogues => new DialoguesActions(this);
-    private int m_KeyboardOrGamepadSchemeIndex = -1;
+    private int _mKeyboardOrGamepadSchemeIndex = -1;
     public InputControlScheme KeyboardOrGamepadScheme
     {
         get
         {
-            if (m_KeyboardOrGamepadSchemeIndex == -1) m_KeyboardOrGamepadSchemeIndex = asset.FindControlSchemeIndex("KeyboardOrGamepad");
-            return asset.controlSchemes[m_KeyboardOrGamepadSchemeIndex];
+            if (_mKeyboardOrGamepadSchemeIndex == -1) _mKeyboardOrGamepadSchemeIndex = Asset.FindControlSchemeIndex("KeyboardOrGamepad");
+            return Asset.controlSchemes[_mKeyboardOrGamepadSchemeIndex];
         }
     }
     public interface IGameplayActions

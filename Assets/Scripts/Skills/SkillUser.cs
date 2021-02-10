@@ -2,23 +2,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class SkillUser : MonoBehaviour
 {
-    public InputReader _inputReader = default;
+    [FormerlySerializedAs("_inputReader")] public InputReader inputReader = default;
 
-    [SerializeField] private SkillExecute[] _skillList;
+    [FormerlySerializedAs("_skillList")] [SerializeField] private NonMonoSkill[] skillList;
 
-    [SerializeField] private Health _entityHealth;
+    [FormerlySerializedAs("_entityHealth")] [SerializeField] private Health entityHealth;
 
     private void OnEnable()
     {
         try
         {
-            _inputReader.activateSkill1 += OnSkill1;
-            _inputReader.activateSkill2 += OnSkill2;
-            _inputReader.activateSkill3 += OnSKill3;
-            _inputReader.activateSprintSkill += OnSprint;
+            inputReader.ActivateSkill1 += OnSkill1;
+            inputReader.ActivateSkill2 += OnSkill2;
+            inputReader.ActivateSkill3 += OnSKill3;
+            inputReader.ActivateSprintSkill += OnSprint;
         }
         catch{}
     }
@@ -27,30 +28,30 @@ public class SkillUser : MonoBehaviour
     {
         try
         {
-            _inputReader.activateSkill1 -= OnSkill1;
-            _inputReader.activateSkill2 -= OnSkill2;
-            _inputReader.activateSkill3 -= OnSKill3;
-            _inputReader.activateSprintSkill -= OnSprint;
+            inputReader.ActivateSkill1 -= OnSkill1;
+            inputReader.ActivateSkill2 -= OnSkill2;
+            inputReader.ActivateSkill3 -= OnSKill3;
+            inputReader.ActivateSprintSkill -= OnSprint;
         }
         catch{}
     }
 
     public void Initialize()
     {
-        _skillList = new SkillExecute[4];
-        var skills = GetComponentsInChildren<SkillExecute>();
+        skillList = new NonMonoSkill[4];
+        var skills = GetComponentsInChildren<NonMonoSkill>();
         for (int i = 0; i < skills.Length; i++)
         {
-            _skillList[i] = skills[i];
-            _skillList[i].skillUser = this;
+            skillList[i] = skills[i];
+            skillList[i].skillUser = this;
         }
-        _entityHealth = GetComponent<Health>();
+        entityHealth = GetComponent<Health>();
     }
     void OnSkill1()
     {
         try
         {
-            _skillList[0].ActivateSkill();
+            ActivateSkill(skillList[0]);
         }
         catch
         {
@@ -62,7 +63,7 @@ public class SkillUser : MonoBehaviour
     {
         try
         {
-            _skillList[1].ActivateSkill();
+            ActivateSkill(skillList[1]);
         }
         catch
         {
@@ -74,7 +75,7 @@ public class SkillUser : MonoBehaviour
     {
         try
         {
-            _skillList[2].ActivateSkill();
+            ActivateSkill(skillList[2]);
         }
         catch
         {
@@ -84,30 +85,46 @@ public class SkillUser : MonoBehaviour
 
     void OnSprint()
     {
-        //Always default
         try
         {
-            _skillList[3].ActivateSkill();
+            ActivateSkill(skillList[3]);
         }
         catch
         {
             Debug.Log("No skill assigned!");
         }
     }
-
+    
+    public virtual void ActivateSkill(NonMonoSkill sk)
+    {
+        if (!sk.onCooldown)
+        {
+            sk.Execute();
+            AddInvulnerability(sk.iFrameDuration);
+            sk.onCooldown = true;
+        }
+    }
     public void ResetAllSkills()
     {
-        foreach (var skill in _skillList)
+        foreach (var skill in skillList)
         {
-            skill.StopCoroutine(nameof(SkillExecute.GoOnCooldown));
             skill.onCooldown = false;
-            
         }
-        Debug.Log("Reset all skills!");
+        this.StopAllCoroutines();
     }
-
     public void AddInvulnerability(float duration)
     {
-        _entityHealth.AddIFrame(duration);
+        entityHealth.AddIFrame(duration);
+    }
+    public virtual IEnumerator GoOnCooldown(NonMonoSkill sk)
+    {
+        yield return new WaitForSeconds(sk.skillCooldown);
+        sk.onCooldown = false;
+    }
+
+    public virtual IEnumerator UsePersistentEffect(NonMonoSkill sk)
+    {
+        yield return new WaitForSeconds(sk.duration);
+        sk.DeActivatePersistentEffect();
     }
 }

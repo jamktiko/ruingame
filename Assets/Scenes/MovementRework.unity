@@ -188,5 +188,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cameras
       objectReference: {fileID: 0}
+    - target: {fileID: 7831688450053781505, guid: 53bc2a04e1e31b54ab17415cd2ba4a53,
+        type: 3}
+      propertyPath: m_XAxis.m_InvertInput
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53bc2a04e1e31b54ab17415cd2ba4a53, type: 3}

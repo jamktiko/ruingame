@@ -3,20 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class RoomExit : DoorSwitch
     {
         //SWITCHES DOOR LOGIC FROM CLOSED TO OPEN WHEN ALL ENEMIES ARE KILLED
         //REQUIRES INTERACTION OR TRIGGER?
-        public RoomManager _roomManager;
+        public RoomManager roomManager;
         
         private void OnTriggerEnter(Collider other)
         {
-            if (_roomManager.AllEnemiesCleared())
+            if (roomManager.AllEnemiesCleared())
             {
                 try
                 {
-                    _roomManager.GoToNextLevel();
+                    roomManager.GoToNextLevel();
                 }
                 catch
                 {

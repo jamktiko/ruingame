@@ -2,23 +2,24 @@
 using System.Collections.Generic;
 using DefaultNamespace;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 
 namespace DefaultNamespace
 {
     public class EnemyHealth : Health
     {
-        public BaseEnemy _enemyController;
+        public BaseEnemy enemyController;
 
         public override void Start()
         {
             base.Start();
-            _enemyController = GetComponent<BaseEnemy>();
+            enemyController = GetComponent<BaseEnemy>();
         }
 
         public override void ReactToDamage(float amount)
         {
-            _enemyController.stunned = true;
+            enemyController.stunned = true;
             //base.ReactToDamage(amount);
         }
     }

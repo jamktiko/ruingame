@@ -1,49 +1,52 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace DefaultNamespace
 {
     public class BaseEnemy : MonoBehaviour
     {
-         public CharacterController _characterController;
+        private CharacterController _characterController;
 
-        [SerializeField] private Movement _movementControl;
+        private Movement _movementControl;
         
-        private State currentState;
+        private State _currentState;
 
-        public float knockbackStrength = default;
+        //private float _knockbackStrength = default;
         
-        public Attack _attack;
+        [HideInInspector]
+        public Attack attack;
         
+        [HideInInspector]
         public bool stunned;   
         
-        [SerializeField]
-        public Transform _playerTransform;
+        public Transform playerTransform;
 
         private void Start()
         {
-            _playerTransform = FindObjectOfType<MovementController>().transform;
+            playerTransform = PlayerManager.Instance.transform;
+            _movementControl = GetComponent<Movement>();
+            attack = GetComponent<Attack>();
             _characterController = GetComponent<CharacterController>();
-            
             SetState(new MoveTowardsPlayerState(this));
         }
 
         private void Update()
         {
-            currentState.Tick();
+            _currentState.Tick();
         }
 
         public void SetState(State state)
         {
-            currentState?.OnStateExit();
+            _currentState?.OnStateExit();
 
-            currentState = state;
+            _currentState = state;
 
-            currentState?.OnStateEnter();
+            _currentState?.OnStateEnter();
         }
 
-        public void MoveToward(Vector3 destination)
+        public virtual void MoveToward(Vector3 destination)
         {
-            var direction = GetDirection(_playerTransform.position);
+            var direction = GetDirection(playerTransform.position);
             direction.y = 0;
             Vector3 newDirection = Vector3.RotateTowards(transform.forward, direction, 90, 0.0f);
             transform.rotation = Quaternion.LookRotation(newDirection);
@@ -51,7 +54,7 @@ namespace DefaultNamespace
             _movementControl.OnMove(enemyMoveInput);
         }
 
-        private Vector3 GetDirection(Vector3 destination)
+        protected virtual Vector3 GetDirection(Vector3 destination)
         {
             destination.y = 0;
             return (destination - transform.position).normalized;

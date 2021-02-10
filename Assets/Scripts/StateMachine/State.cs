@@ -7,8 +7,8 @@ namespace DefaultNamespace
 
     public abstract class State
     {
-        protected BaseEnemy _enemy;
-        public string name;
+        protected BaseEnemy Enemy;
+        public string Name;
 
         public abstract void Tick();
 
@@ -20,9 +20,9 @@ namespace DefaultNamespace
         {
         }
 
-        public State(BaseEnemy _enemy)
+        public State(BaseEnemy enemy)
         {
-            this._enemy = _enemy;
+            this.Enemy = enemy;
         }
 
     }

@@ -4,20 +4,20 @@ namespace DefaultNamespace
 {
     public class AttackPlayerState : State
     {
-        public AttackPlayerState(BaseEnemy _enemy) : base(_enemy)
+        public AttackPlayerState(BaseEnemy enemy) : base(enemy)
         {
         }
 
         public override void OnStateEnter()
         {
-            name = "Attacking Player";
-            _enemy._attack.AttemptAttack();
+            Name = "Attacking Player";
+            Enemy.attack.AttemptAttack();
         }
         public override void Tick()
         {
             if (AttackedPlayer())
             {
-                _enemy.SetState(new MoveTowardsPlayerState(_enemy));
+                Enemy.SetState(new MoveTowardsPlayerState(Enemy));
             }
         }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace DefaultNamespace
 {
@@ -10,39 +11,37 @@ namespace DefaultNamespace
         public Vector3 movementInput;
         public Vector3 movementVector; 
 
-        protected Vector3 _entityVelocity;
-        
-        public bool _groundedEntity;
+        protected Vector3 EntityVelocity;
+        public bool groundedEntity;
         
         //Could refer from game manager?
-        protected float gravityValue = -9.81f;
+        protected float GravityValue = -9.81f;
         
-        protected CharacterController _characterController;
+        protected CharacterController CharacterController;
         
         //Get from entity stats
         
-        public float _movementSpeed = 10f;
-        [SerializeField]
-        protected float _jumpHeight = 1.0f;
+        public float movementSpeed = 10f;
+        protected float jumpHeight = 1.0f;
         [SerializeField]
         protected float turnSmoothing = 15f;
 
         public virtual void Update()
         {
             //Gravity check
-            _entityVelocity.y += gravityValue * Time.deltaTime;
-            _groundedEntity = _characterController.isGrounded;
-            if (_groundedEntity && _entityVelocity.y < 0)
+            EntityVelocity.y += GravityValue * Time.deltaTime;
+            groundedEntity = CharacterController.isGrounded;
+            if (groundedEntity && EntityVelocity.y < 0)
             {
-                _entityVelocity.y = -0.2f;
+                EntityVelocity.y = -0.2f;
             }
-            _characterController.Move(_entityVelocity * Time.deltaTime);
-            _characterController.Move(movementInput * (Time.deltaTime * _movementSpeed));
+            CharacterController.Move(EntityVelocity * Time.deltaTime);
+            CharacterController.Move(movementInput * (Time.deltaTime * movementSpeed));
         }
 
         public virtual void Start()
         {
-            _characterController = GetComponent<CharacterController>();
+            CharacterController = GetComponent<CharacterController>();
         }
         
         public virtual void OnEnable()
@@ -57,9 +56,9 @@ namespace DefaultNamespace
 
         public virtual void OnJump()
         {
-            if (_groundedEntity && _entityVelocity.y < 0)
+            if (groundedEntity && EntityVelocity.y < 0)
             {
-                _entityVelocity.y += Mathf.Sqrt(_jumpHeight * -3.0f * gravityValue);
+                EntityVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * GravityValue);
             }
 
         }

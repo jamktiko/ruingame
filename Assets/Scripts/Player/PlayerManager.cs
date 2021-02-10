@@ -7,6 +7,7 @@ using UnityEditor;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 
 [RequireComponent(typeof(PlayerAttack))]
@@ -18,30 +19,43 @@ using UnityEngine.Events;
 //Have run time management in separate class
 public class PlayerManager : BaseManager
 {
-    public InputReader _playerInputReader;
-    public RuntimeAnimatorController _playerAnimator;
+    private static PlayerManager _instance;
+    public static PlayerManager Instance
+    {
+        get { return _instance; }
+    }
+    
+    public InputReader playerInputReader { get; private set; }
+    public RuntimeAnimatorController playerAnimator { get; private set; }
 
     private PlayerAttack _playerAttack;
     private PlayerHealth _playerHealth;
-    public MovementController _playerMovement;
+    private MovementController _playerMovement;
     private SkillUser _playerSkills;
 
-    public PlayerData _playerData;
+    private PlayerData _playerData;
     
     [HideInInspector]
     public UnityEvent pickUpEvent;
     
     private void OnEnable()
     {
-        _playerInputReader.interactEvent += OnPickUp;
+        playerInputReader.InteractEvent += OnPickUp;
     }
     private void OnDisable()
     {
-        _playerInputReader.interactEvent -= OnPickUp;
+        playerInputReader.InteractEvent -= OnPickUp;
     }
 
     private void Awake()
     {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        } else {
+            _instance = this;
+        }
+        playerInputReader = GameManager.Instance.playerInputReader;
         _playerAttack = GetComponent<PlayerAttack>();
         _playerHealth = GetComponent<PlayerHealth>();
         _playerMovement = GetComponent<MovementController>();
@@ -57,21 +71,18 @@ public class PlayerManager : BaseManager
         DisableScriptsOnPlayer();
         EnableScriptsOnPlayer();
         UpdatePlayerStats();
-        _playerInputReader.interactEvent += OnPickUp;
+        playerInputReader.InteractEvent += OnPickUp;
     }
 
     private void SetupPlayerInput()
     {
-        _playerAttack._inputReader = _playerInputReader;
-        _playerMovement._inputReader = _playerInputReader;
-        _playerSkills._inputReader = _playerInputReader;
+        playerAnimator = GameManager.Instance.playerAnimator;
     }
 
     private void SetupPlayerCamera()
     {
         var cam = GameObject.FindGameObjectWithTag("Cameras").GetComponent<CameraManager>();
-        _playerMovement.gameplayCameraTransform = cam._cameraTransformAnchor;
-        cam.inputReader = _playerInputReader;
+        _playerMovement.SetPlayerCamera(cam.cameraTransformAnchor);
         cam.SetupProtagonistVirtualCamera(gameObject.transform);
         cam.playerTransform = gameObject.transform;
         cam.enabled = false;
@@ -81,7 +92,7 @@ public class PlayerManager : BaseManager
     private void SetupPlayerAnimations()
     {
         var animator = GetComponentInChildren<Animator>();
-        animator.runtimeAnimatorController = _playerAnimator;
+        animator.runtimeAnimatorController = playerAnimator;
     }
 
     public void UpdateSkills()
@@ -104,10 +115,10 @@ public class PlayerManager : BaseManager
     }
     public void UpdatePlayerStats()
     {
-        _playerMovement._movementSpeed = _playerData._entityMovementSpeed;
-        _playerMovement._jumpHeight = _playerData._entityjumpHeight;
-        _playerAttack._playerDamage = _playerData._entityDamage;
-        _playerAttack._playerAttackSpeed = _playerData._entityAttackSpeed;
+        _playerMovement.SetMovementSpeed(_playerData.entityMovementSpeed);
+        _playerMovement.SetJumpHeight((_playerData.entityjumpHeight));
+        _playerAttack.SetDamage(_playerData.entityDamage);
+        _playerAttack.SetAttackSpeed(_playerData.entityAttackSpeed);
     }
     public void OnPickUp()
     {
@@ -125,32 +136,32 @@ public class PlayerManager : BaseManager
         switch (type)
         {
             case 0:
-                _playerData._entityMovementSpeed -= amount;
+                _playerData.entityMovementSpeed -= amount;
                 break;
             case 1:
-                _playerData._entityMovementSpeed += amount;
+                _playerData.entityMovementSpeed += amount;
                 break;
             default:
                 Debug.Log("No type given for modification type");
                 break;
         }
-        _playerMovement._movementSpeed = _playerData._entityMovementSpeed;
+        _playerMovement.SetMovementSpeed(_playerData.entityMovementSpeed);
     }
     public void ModifyJump(float amount, int type)
     {
         switch (type)
         {
             case 0:
-                _playerData._entityjumpHeight -= amount;
+                _playerData.entityjumpHeight -= amount;
                 break;
             case 1:
-                _playerData._entityjumpHeight += amount;
+                _playerData.entityjumpHeight += amount;
                 break;
             default:
                 Debug.Log("No type given for modification type");
                 break;
         }
-        _playerMovement._jumpHeight = _playerData._entityjumpHeight;
+        _playerMovement.SetJumpHeight((_playerData.entityjumpHeight));
     }
 
     public void ModifyDamage(float amount, int type)
@@ -158,16 +169,16 @@ public class PlayerManager : BaseManager
         switch (type)
         {
             case 0:
-                _playerData._entityDamage -= amount;
+                _playerData.entityDamage -= amount;
                 break;
             case 1:
-                _playerData._entityDamage += amount;
+                _playerData.entityDamage += amount;
                 break;
             default:
                 Debug.Log("No type given for modification type");
                 break;
         }
-        _playerAttack._playerDamage = _playerData._entityDamage;
+        _playerAttack.SetDamage(_playerData.entityDamage);
     }
 
     public void ModifyAttackSpeed(float amount, int type)
@@ -175,16 +186,16 @@ public class PlayerManager : BaseManager
         switch (type)
         {
             case 0:
-                _playerData._entityAttackSpeed -= amount;
+                _playerData.entityAttackSpeed -= amount;
                 break;
             case 1:
-                _playerData._entityAttackSpeed += amount;
+                _playerData.entityAttackSpeed += amount;
                 break;
             default:
                 Debug.Log("No type given for modification type");
                 break;
         }
-        _playerAttack._playerAttackSpeed = _playerData._entityAttackSpeed;
+        _playerAttack.SetAttackSpeed(_playerData.entityAttackSpeed);
     }
 
     public void Die()
