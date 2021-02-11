@@ -7,26 +7,24 @@ namespace DefaultNamespace
 {
     public class PlayerMovement : Movement
     {
-        [HideInInspector]
         public TransformAnchor gameplayCameraTransform;
-        [HideInInspector]
-        public InputReader _playerInput = default;
-
+        
+        private InputReader _inputReader = default;
         private Vector2 _previousMovementInput;
     
         public override void Update()
         {
             //Gravity Check
-            _entityVelocity.y += gravityValue * Time.deltaTime;
-            _characterController.Move(_entityVelocity * Time.deltaTime);
-            if (_groundedEntity && _entityVelocity.y < 0)
+            EntityVelocity.y += GravityValue * Time.deltaTime;
+            CharacterController.Move(EntityVelocity * Time.deltaTime);
+            if (groundedEntity && EntityVelocity.y < 0)
             {
-                _entityVelocity.y = -0.3f;
+                EntityVelocity.y = -0.3f;
             }
-            _groundedEntity = _characterController.isGrounded;
+            groundedEntity = CharacterController.isGrounded;
             //Movement
             CalculateMovement();
-            _characterController.Move(movementInput * (Time.deltaTime * _movementSpeed));
+            CharacterController.Move(movementInput * (Time.deltaTime * movementSpeed));
             RotateTowardsMovement();
         }
 
@@ -36,24 +34,27 @@ namespace DefaultNamespace
             Vector3 newDirection = Vector3.RotateTowards(transform.forward, movementInput, singleStep, 0.0f);
             transform.rotation = Quaternion.LookRotation(newDirection);
         }
-
         public override void OnEnable()
         {
-            _playerInput.moveEvent += OnMove;
-            _playerInput.jumpEvent += OnJump;
+            try
+            {
+                _inputReader.MoveEvent += OnMove;
+                _inputReader.JumpEvent += OnJump;
+            }
+            catch{}
         }
 
         public override void OnDisable()
         {
-            _playerInput.moveEvent -= OnMove;
-            _playerInput.jumpEvent -= OnJump;
+            _inputReader.MoveEvent -= OnMove;
+            _inputReader.JumpEvent -= OnJump;
         }
 
         public override void OnJump()
         {
-            if (_groundedEntity && _entityVelocity.y < 0)
+            if (groundedEntity && EntityVelocity.y < 0)
             {
-                _entityVelocity.y += Mathf.Sqrt(_jumpHeight * -3.0f * gravityValue);
+                EntityVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * GravityValue);
             }
         }
         private void CalculateMovement()

@@ -2,34 +2,52 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace DefaultNamespace
 {
     public class PlayerAttack : Attack
     {
-        [HideInInspector]
-        public InputReader _inputReader;
+        private Rigidbody _characterRigidbody;
+        private InputReader _inputReader;
+        private float _playerDamage = default;
+        private float _playerAttackSpeed = default;
+        protected MovementController _movementControl;
 
-        [SerializeField] protected Movement _movementControl;
-
+        public float attackSwingForce;
         public int comboStep = 1;
-        public int maximumCombo = 6;
-
+        public int maximumCombo = 2;
+        
+        public override void Start()
+        {
+            base.Start();
+            _inputReader = GameManager.Instance.playerInputReader;
+            _movementControl = GetComponent<MovementController>();
+            _characterRigidbody = GetComponent<Rigidbody>();
+        }
         public override void OnEnable()
         {
-            _movementControl = GetComponent<Movement>();
-            _inputReader.attackEvent += AttemptAttack;
+            try
+            {
+                _inputReader.AttackEvent += AttemptAttack;
+            }
+            catch
+            {
+            }
         }
 
         public override void OnDisable()
         {
-            _inputReader.attackEvent -= AttemptAttack;
+            _inputReader.AttackEvent -= AttemptAttack;
         }
 
         public override void AttemptAttack()
         {
             //ComboTimer that resets the combo if too long passes between attacks
-            if (_movementControl._groundedEntity && !currentlyAttacking)
+            
+            //Set damagecollider damage based on combo step?
+            DamageCollider.damage = _playerDamage;
+            if (_movementControl.GroundedEntity && !currentlyAttacking)
             {
                 currentlyAttacking = true;
                 ExecuteAttackAnimation();
@@ -44,21 +62,29 @@ namespace DefaultNamespace
         public override void ExecuteAttackAnimation()
         {
             //Triggers animation event
-            _entityAnimator.Play("Attack" + comboStep);
+            EntityAnimator.Play("Attack" + comboStep);
 
         }
         public override void ExecuteAttack()
         {
             //USED AS AN ANIMATION EVENT
             base.ExecuteAttack();
-            _movementControl.enabled = false;
+
         }
 
         public override void EndAttack()
         {
             //USED AS AN ANIMATION EVENT
-            _movementControl.enabled = true;
             base.EndAttack();
+        }
+        public void SetDamage(float amount)
+        {
+            _playerDamage = amount;
+        }
+
+        public void SetAttackSpeed(float amount)
+        {
+            _playerAttackSpeed = amount;
         }
     }
 }

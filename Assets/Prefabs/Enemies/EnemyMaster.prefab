@@ -120,7 +120,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8775856172880376477}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 0, z: 0}
+  m_LocalPosition: {x: 1.15, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8775856172946932758}
@@ -139,11 +139,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed7886612bb6b7443a9d032624a12651, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damageCollider: {fileID: 8775856172880376474}
-  _damage: 100
-  _kbStrength: 3
-  _targetTag: Player
-  _attackingEntity: {fileID: 8775856171702227479}
+  damage: 10
+  kbStrength: 3
+  targetTag: Player
 --- !u!65 &8775856172880376474
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -205,7 +203,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8775856172946932746}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -264,7 +262,7 @@ GameObject:
   - component: {fileID: 8775856173488751770}
   - component: {fileID: 8775856173488751771}
   - component: {fileID: 8775856173488751772}
-  - component: {fileID: 8775856173488751782}
+  - component: {fileID: -7289633844803330178}
   m_Layer: 0
   m_Name: EnemyMaster
   m_TagString: Enemy
@@ -319,9 +317,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementInput: {x: 0, y: 0, z: 0}
   movementVector: {x: 0, y: 0, z: 0}
-  _groundedEntity: 0
-  _movementSpeed: 10
-  _jumpHeight: 1
+  groundedEntity: 0
+  movementSpeed: 5
   turnSmoothing: 0.2
 --- !u!114 &8775856173488751770
 MonoBehaviour:
@@ -335,10 +332,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa4aafd8afbe44c2a3d9dcbeef8fc330, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _characterController: {fileID: 8775856173488751768}
-  _movementControl: {fileID: 8775856173488751769}
-  _attack: {fileID: 8775856173488751772}
-  _playerTransform: {fileID: 0}
+  attack: {fileID: 0}
+  stunned: 0
+  playerTransform: {fileID: 0}
 --- !u!95 &8775856173488751771
 Animator:
   serializedVersion: 3
@@ -370,11 +366,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78a9927cdd83e544396c17a2b3a82dd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damageCollider: {fileID: 8775856172880376475}
-  _weaponMesh: {fileID: 8775856172946932745}
   currentlyAttacking: 0
-  _entityAnimator: {fileID: 0}
---- !u!114 &8775856173488751782
+--- !u!114 &-7289633844803330178
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -383,14 +376,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8775856173488751773}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f3bf3bd00f309643aad6fc90554e3e3, type: 3}
+  m_Script: {fileID: 11500000, guid: d4abbfb463cf49559cdc4c5181bdab7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maximumHealth: 100
-  flatResistance: 10
-  percentualResistance: 10
-  reDamageTimer: 0.4
-  reDamageTimerDoT: 0.4
-  _currentHealth: 0
-  damageable: 1
-  _entityAnimator: {fileID: 0}
+  enemyController: {fileID: 0}

@@ -10,6 +10,8 @@ TagManager:
   - SpawnerLocation
   - Entry
   - Exit
+  - Cameras
+  - Ground
   layers:
   - Default
   - TransparentFX
