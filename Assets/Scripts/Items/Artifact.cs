@@ -25,10 +25,8 @@ public class Artifact : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("artifact triggered");
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Player close");
             _pickupeventcount++;
             if (_pickupeventcount >= 2)
             {

@@ -54,7 +54,6 @@ public class AttackHandler : MonoBehaviour
             _characterAnimator.Play(comboToExecute.animationClip.name);
             Invoke("EndAttack", comboToExecute.animationClip.length / _playerAttackSpeed);
             Debug.Log(comboToExecute.name);
-            Debug.Log(comboToExecute.Damage * _playerDamage);
         }
         catch
         {
