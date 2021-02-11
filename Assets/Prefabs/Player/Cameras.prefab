@@ -45,12 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ed4bbdf70865a14d888e6d3bdc2a4ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputReader: {fileID: 11400000, guid: 88aea93a9d9c85d4ea251d1cce5aa3e6, type: 2}
-  mainCamera: {fileID: 7831688450991784963}
-  freeLookVCam: {fileID: 7831688450053781505}
   playerTransform: {fileID: 0}
-  _speedMultiplier: 1
-  _cameraTransformAnchor: {fileID: 11400000, guid: 612800d3903195747a1006a6b6464522,
+  speedMultiplier: 10
+  cameraTransformAnchor: {fileID: 11400000, guid: 612800d3903195747a1006a6b6464522,
     type: 2}
 --- !u!1 &7831688450053781504
 GameObject:
