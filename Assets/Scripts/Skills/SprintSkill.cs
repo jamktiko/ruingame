@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace DefaultNamespace.Skills
 {
-    public class SprintSkill : NonMonoSkill
+    public class SprintSkill : SkillExecute
     {
         public float SprintSpeed;
         public override void Execute()

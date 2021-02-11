@@ -12,12 +12,13 @@ GameObject:
   - component: {fileID: 2280579018184987111}
   - component: {fileID: 2280579018184987032}
   - component: {fileID: 2280579018184987109}
-  - component: {fileID: 2280579018184987108}
   - component: {fileID: 2280579018184987107}
   - component: {fileID: 2280579018184987106}
   - component: {fileID: 2280579018184987105}
   - component: {fileID: 2280579018184987119}
   - component: {fileID: 2280579018184987104}
+  - component: {fileID: 4976709545601713087}
+  - component: {fileID: 175041796649272600}
   m_Layer: 0
   m_Name: RigidBodyController
   m_TagString: Player
@@ -68,22 +69,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3262deee02d07c14181e8eb5ddde00d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameplayCameraTransform: {fileID: 11400000, guid: 612800d3903195747a1006a6b6464522,
-    type: 2}
-  _inputReader: {fileID: 11400000, guid: 88aea93a9d9c85d4ea251d1cce5aa3e6, type: 2}
   layerMask:
     serializedVersion: 2
     m_Bits: 256
   groundCheckRadius: 0.1
-  _groundedEntity: 0
   animatorDeceleration: 10
   animatorAcceleration: 10
-  movementInput: {x: 0, y: 0, z: 0}
-  _movementSpeed: 10
-  _jumpHeight: 300
   turnSmoothing: 15
-  stepRayUpper: {fileID: 0}
-  stepRayLower: {fileID: 0}
   stepHeight: 0.5
   stepSmooth: 2
 --- !u!136 &2280579018184987109
@@ -100,30 +92,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &2280579018184987108
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2280579018184987033}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e701b8a16b6a4d85bf080251e2f0be11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _damageCollider: {fileID: 0}
-  _weaponMesh: {fileID: 0}
-  currentlyAttacking: 0
-  _entityAnimator: {fileID: 0}
-  _characterRigidbody: {fileID: 0}
-  _inputReader: {fileID: 11400000, guid: 88aea93a9d9c85d4ea251d1cce5aa3e6, type: 2}
-  _playerDamage: 20
-  _playerAttackSpeed: 1
-  _movementControl: {fileID: 0}
-  attackSwingForce: 10
-  comboStep: 1
-  maximumCombo: 2
 --- !u!136 &2280579018184987107
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -150,7 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b993fe047c5cfa4cae7027bdb89e2a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GravityForce: -9.81
+  gravityForce: -9.81
 --- !u!114 &2280579018184987105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,10 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22bda2f9af239d843bd2742bb700a8af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerInputReader: {fileID: 11400000, guid: 88aea93a9d9c85d4ea251d1cce5aa3e6, type: 2}
-  _playerAnimator: {fileID: 9100000, guid: 972cd31453c9be84997d9eaac9360287, type: 2}
-  _playerMovement: {fileID: 0}
-  _playerData: {fileID: 0}
+  _weaponData: {fileID: 0}
   pickUpEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -182,9 +147,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e8bef8382a2c434588cfcf5a66930ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inputReader: {fileID: 0}
-  _skillList: []
-  _entityHealth: {fileID: 0}
+  inputReader: {fileID: 0}
+  skillList: []
+  entityHealth: {fileID: 0}
 --- !u!114 &2280579018184987104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,14 +162,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8570592085c9d1143b04375b1eaeb62e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maximumHealth: 100
-  flatResistance: 10
-  percentualResistance: 10
-  reDamageTimer: 0.4
-  reDamageTimerDoT: 0.4
-  _currentHealth: 0
-  damageable: 1
-  _entityAnimator: {fileID: 0}
+--- !u!114 &4976709545601713087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2280579018184987033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 452776f6714012b44ace57d7de9d5748, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  comboData: {fileID: 0}
+--- !u!114 &175041796649272600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2280579018184987033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f265421dd558ff747aed7bda24fadffe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attacking: 0
+  comboHandler: {fileID: 0}
 --- !u!1001 &5180147126887772255
 PrefabInstance:
   m_ObjectHideFlags: 0

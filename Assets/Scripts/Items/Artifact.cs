@@ -18,14 +18,20 @@ public class Artifact : MonoBehaviour
         ArtifactEffect = GetComponent<ArtifactEffect>();
 
     }
+
+    private void Awake()
+    {
+        PlayerReference = PlayerManager.Instance;
+    }
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("artifact triggered");
         if (other.CompareTag("Player"))
         {
+            Debug.Log("Player close");
             _pickupeventcount++;
-            if (_pickupeventcount == 2)
+            if (_pickupeventcount >= 2)
             {
-                PlayerReference = other.gameObject.GetComponent<PlayerManager>();
                 var pickup = PlayerReference.pickUpEvent;
                 pickup.AddListener(OnPickup);
             }
@@ -38,7 +44,6 @@ public class Artifact : MonoBehaviour
             _pickupeventcount--;
             if (_pickupeventcount == 0)
             {
-                PlayerReference = other.gameObject.GetComponent<PlayerManager>();
                 var pickup = PlayerReference.pickUpEvent;
                 pickup.RemoveAllListeners();
             }
@@ -49,7 +54,7 @@ public class Artifact : MonoBehaviour
     {
         try
         {
-            ArtifactEffect.AddEffect(PlayerReference);
+            ArtifactEffect.AddEffect();
             PlayerReference.AddArtifact(gameObject.GetComponent<Artifact>());
         }
         catch

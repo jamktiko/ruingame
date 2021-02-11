@@ -43,6 +43,9 @@ public class MovementController : MonoBehaviour
     [SerializeField] private float stepSmooth = 0.1f;
     private GameObject _stepRayUpper;
     private GameObject _stepRayLower;
+
+    public float attackMovement;
+    public bool attacking;
     private void OnEnable()
     {
         try
@@ -108,8 +111,8 @@ public class MovementController : MonoBehaviour
     private void Move()
     {
         Vector3 movementVelocity = _movementSpeed * MovementInput;
-            _characterRigidBody.velocity =
-                new Vector3(movementVelocity.x, _characterRigidBody.velocity.y, movementVelocity.z);
+        Vector3 attackVelocity = transform.forward * attackMovement;
+        _characterRigidBody.velocity = new Vector3(movementVelocity.x, _characterRigidBody.velocity.y, movementVelocity.z) + attackVelocity;
     }
 
     private void GroundCheck()

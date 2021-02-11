@@ -34,9 +34,9 @@ namespace DefaultNamespace
         }
         public List<ArtifactModifier> artifactModifiers;
 
-        public virtual void AddEffect(PlayerManager pm)
+        public virtual void AddEffect()
         {
-            _playerReference = pm;
+            _playerReference = PlayerManager.Instance;
             foreach (ArtifactModifier am in artifactModifiers)
             {
                 AddSingleModifier(am);
@@ -45,7 +45,7 @@ namespace DefaultNamespace
         public virtual void AddSingleModifier(ArtifactModifier am)
         {
             int type;
-            if (am.type == ArtifactModifier.Type.Plus)
+            if (am.type == ArtifactModifier.Type.Minus)
             {
                 type = 0;
             }
@@ -58,13 +58,13 @@ namespace DefaultNamespace
                 case ArtifactModifier.enumModifiedValues.Damage:
                     _playerReference.ModifyDamage(am.modifier, type);
                     break;
-                case ArtifactModifier.enumModifiedValues.AttackSpeed:
+                case ArtifactModifier.enumModifiedValues.Jump:
                     _playerReference.ModifyJump(am.modifier, type);
                     break;
                 case ArtifactModifier.enumModifiedValues.MovementSpeed:
                     _playerReference.ModifyMovementSpeed(am.modifier, type);
                     break;
-                case ArtifactModifier.enumModifiedValues.Jump:
+                case ArtifactModifier.enumModifiedValues.AttackSpeed:
                     _playerReference.ModifyAttackSpeed(am.modifier, type);
                     break;
             }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace DefaultNamespace
 {
+    [CreateAssetMenu(fileName = "PlayerData", menuName = "Game/PlayerData")]
     public class PlayerData : EntityData
     {
         [Header("Movement Tuning")]
@@ -15,7 +16,8 @@ namespace DefaultNamespace
         public float movementAnimatorDeceleration = 10f;
         public float movementAnimatorAcceleration = 10f;
 
-        [Header("Current Artifacts")] public List<Artifact> artifactList = new List<Artifact>();
+        [Header("Current Artifacts")] 
+        public List<Artifact> artifactList = new List<Artifact>();
 
     }
 }

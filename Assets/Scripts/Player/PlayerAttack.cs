@@ -10,8 +10,8 @@ namespace DefaultNamespace
     {
         private Rigidbody _characterRigidbody;
         private InputReader _inputReader;
-        private float _playerDamage = 10f;
-        private float _playerAttackSpeed = 1f;
+        private float _playerDamage = default;
+        private float _playerAttackSpeed = default;
         protected MovementController _movementControl;
 
         public float attackSwingForce;

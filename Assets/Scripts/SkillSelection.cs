@@ -12,7 +12,7 @@ public class SkillSelection : MonoBehaviour
     {
         get { return _instance; }
     }
-    
+    /*
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -83,4 +83,5 @@ public class SkillSelection : MonoBehaviour
             GenerateSkillSelection();
         }
     }
+    */
 }

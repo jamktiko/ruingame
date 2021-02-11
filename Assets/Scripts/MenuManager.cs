@@ -6,10 +6,10 @@ using UnityEngine.Serialization;
 
 public class MenuManager : MonoBehaviour
 {
-    [FormerlySerializedAs("GameManager")] public GameManager gameManager;
+    public GameManager gameManager;
     public SkillSelection skillSelectionManager;
-    [FormerlySerializedAs("_PlayCanvas")] public Canvas playCanvas;
-    [FormerlySerializedAs("_SkillSelectionCanvas")] public Canvas skillSelectionCanvas;
+    public Canvas playCanvas;
+    public Canvas skillSelectionCanvas;
     public void StartGame()
     {
         gameManager.StartGameplayLoop();
@@ -25,8 +25,8 @@ public class MenuManager : MonoBehaviour
     {
         playCanvas.enabled = false;
         skillSelectionCanvas.enabled = true;
-        skillSelectionManager = SkillSelection.Instance;
-        skillSelectionManager.StartSkillSelection();
+        //skillSelectionManager = SkillSelection.Instance;
+        //skillSelectionManager.StartSkillSelection();
     }
     private void Awake()
     {

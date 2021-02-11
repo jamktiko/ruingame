@@ -7,10 +7,11 @@ using UnityEditor;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 
-[RequireComponent(typeof(PlayerAttack))]
+[RequireComponent(typeof(AttackHandler))]
 [RequireComponent(typeof(PlayerHealth))]
 [RequireComponent(typeof(MovementController))]
 [RequireComponent(typeof(SkillUser))]
@@ -27,13 +28,14 @@ public class PlayerManager : BaseManager
     
     public InputReader playerInputReader { get; private set; }
     public RuntimeAnimatorController playerAnimator { get; private set; }
-
-    private PlayerAttack _playerAttack;
+    
+    private AttackHandler _playerAttack;
     private PlayerHealth _playerHealth;
     private MovementController _playerMovement;
     private SkillUser _playerSkills;
 
-    private PlayerData _playerData;
+    public Combo _weaponData;
+    public PlayerData _playerData;
     
     [HideInInspector]
     public UnityEvent pickUpEvent;
@@ -56,7 +58,8 @@ public class PlayerManager : BaseManager
             _instance = this;
         }
         playerInputReader = GameManager.Instance.playerInputReader;
-        _playerAttack = GetComponent<PlayerAttack>();
+        _playerAttack = GetComponent<AttackHandler>();
+        _weaponData = GameManager.Instance.weaponCombo;
         _playerHealth = GetComponent<PlayerHealth>();
         _playerMovement = GetComponent<MovementController>();
         _playerSkills = GetComponent<SkillUser>();
@@ -72,6 +75,16 @@ public class PlayerManager : BaseManager
         EnableScriptsOnPlayer();
         UpdatePlayerStats();
         playerInputReader.InteractEvent += OnPickUp;
+    }
+
+    private void Update()
+    {
+        //For testing updates
+        /*if (Mouse.current.rightButton.wasPressedThisFrame)
+        {
+            UpdatePlayerStats();
+        }*/
+        //MAKE GUI FOR UPDATING PLAYER STATS
     }
 
     private void SetupPlayerInput()
@@ -93,6 +106,7 @@ public class PlayerManager : BaseManager
     {
         var animator = GetComponentInChildren<Animator>();
         animator.runtimeAnimatorController = playerAnimator;
+        _playerAttack.comboHandler.comboData = _weaponData;
     }
 
     public void UpdateSkills()

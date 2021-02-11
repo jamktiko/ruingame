@@ -13,9 +13,9 @@ public class CameraManager : MonoBehaviour
 
 	public Transform playerTransform;
 	
-	[FormerlySerializedAs("_speedMultiplier")] [SerializeField, Range(.5f, 10f)]
+	[SerializeField, Range(.5f, 100f)]
 	private float speedMultiplier = 10f; 
-	[FormerlySerializedAs("_cameraTransformAnchor")] public TransformAnchor cameraTransformAnchor = default;
+	public TransformAnchor cameraTransformAnchor = default;
 	
 	private bool _cameraMovementLock = false;
 

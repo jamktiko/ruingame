@@ -6,10 +6,10 @@ using UnityEngine;
 
 public class TurboArtifact : ArtifactEffect
 {
-    public override void AddEffect(PlayerManager pm)
+    public override void AddEffect()
     {
         //Add all base modifiers
-        base.AddEffect(pm);
+        base.AddEffect();
         Debug.Log("TurboArtifact specific effect!");
     }
 }

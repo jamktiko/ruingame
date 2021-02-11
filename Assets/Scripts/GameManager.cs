@@ -7,6 +7,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
+
+
 public class GameManager : MonoBehaviour
 {
     //Creates singleton gamemanager
@@ -36,12 +38,9 @@ public class GameManager : MonoBehaviour
     [Header("Player Control SO")] 
     public InputReader playerInputReader;
 
-    public SkillData prefabSkillData;
-    public SkillData baseSkillData;
-    public SkillData givenSkillData;
-
     [Header("Player Character and Animation")]
     public RuntimeAnimatorController playerAnimator;
+    public Combo weaponCombo;
     
     [Header("Room Management References")]
     public RoomManager roomManager;
@@ -55,11 +54,9 @@ public class GameManager : MonoBehaviour
         //Create PlayerMaster
         currentPlayer = Instantiate(playerMasterPrefab);
         currentPlayer.name = "PlayerMaster";
-        playerManager = currentPlayer.GetComponent<PlayerManager>();
+        playerManager = PlayerManager.Instance;
 
         //Setup playerAnimator / Make playeranimator and playercharacter come from a source for character selection.
-        
-            
         //ADD Skills holder object
         var sk = new GameObject("Skills");
         //Get list of selected skills 
@@ -78,12 +75,17 @@ public class GameManager : MonoBehaviour
     public void Start()
     {
         DontDestroyOnLoad(gameObject);
-        baseSkillData = prefabSkillData;
     }
     public void StartGameplayLoop()
     {
         SceneManager.LoadScene("MovementRework");
         StartCoroutine("CreateGame");
+    }
+
+    public void StopGameplayLoop()
+    {
+        //Cleanup gameplay loop
+        //Save XP gained etc
     }
     public virtual IEnumerator CreateGame()
     {
@@ -115,8 +117,6 @@ public class GameManager : MonoBehaviour
 
     private void AddSkills(GameObject sk)
     {
-        foreach (NonMonoSkill skill in givenSkillData.skillList.skill)
-        {
-        }
+        sk.AddComponent<SprintSkill>();
     }
 }
