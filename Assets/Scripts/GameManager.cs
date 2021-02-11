@@ -61,8 +61,7 @@ public class GameManager : MonoBehaviour
         var sk = new GameObject("Skills");
         //Get list of selected skills 
         //ADD Selected skills to this gameobject
-        
-        
+        sk.AddComponent<SprintSkill>();
         //Set skill holder parent to playermaster
         sk.transform.SetParent(currentPlayer.transform);
         //UPDATE Skills on playermanager

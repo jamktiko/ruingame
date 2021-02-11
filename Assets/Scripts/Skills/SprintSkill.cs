@@ -1,5 +1,7 @@
 ﻿
 
+using System.Collections;
+using System.Collections.Generic;
 using System.Dynamic;
 using UnityEngine;
 
@@ -7,7 +9,7 @@ namespace DefaultNamespace.Skills
 {
     public class SprintSkill : SkillExecute
     {
-        public float SprintSpeed;
+        public float SprintSpeed = 50f;
         public override void Execute()
         {
             ApplyPersistentEffect();
@@ -16,14 +18,15 @@ namespace DefaultNamespace.Skills
         {
             if (!onCooldown)
             {
-                skillUser.gameObject.GetComponent<PlayerManager>().ModifyMovementSpeed(SprintSpeed, 1);
-                skillUser.StartCoroutine("UsePersistentEffect");
+                PlayerManager.Instance.ModifyMovementSpeed(SprintSpeed, 1);
+                IEnumerator coroutine = skillUser.UsePersistentEffect(this);
+                skillUser.StartCoroutine(coroutine);
             }
         }
 
         public override void DeActivatePersistentEffect()
         {
-            skillUser.gameObject.GetComponent<PlayerManager>().ModifyMovementSpeed(SprintSpeed, 0);
+            PlayerManager.Instance.ModifyMovementSpeed(SprintSpeed, 0);
         }
     }
 }

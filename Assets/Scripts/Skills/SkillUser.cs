@@ -2,17 +2,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 public class SkillUser : MonoBehaviour
 {
-    [FormerlySerializedAs("_inputReader")] public InputReader inputReader = default;
+    public InputReader inputReader = default;
 
-    [FormerlySerializedAs("_skillList")] [SerializeField] private NonMonoSkill[] skillList;
+    [SerializeField] private SkillExecute[] skillList;
 
-    [FormerlySerializedAs("_entityHealth")] [SerializeField] private Health entityHealth;
+    [SerializeField] private Health entityHealth;
 
+    private void Awake()
+    {
+        inputReader = PlayerManager.Instance.playerInputReader;
+    }
     private void OnEnable()
+   
     {
         try
         {
@@ -36,10 +42,15 @@ public class SkillUser : MonoBehaviour
         catch{}
     }
 
+    public void Start()
+    {
+        Initialize();
+    }
+
     public void Initialize()
     {
-        skillList = new NonMonoSkill[4];
-        var skills = GetComponentsInChildren<NonMonoSkill>();
+        skillList = new SkillExecute[4];
+        var skills = GetComponentsInChildren<SkillExecute>();
         for (int i = 0; i < skills.Length; i++)
         {
             skillList[i] = skills[i];
@@ -95,13 +106,14 @@ public class SkillUser : MonoBehaviour
         }
     }
     
-    public virtual void ActivateSkill(NonMonoSkill sk)
+    public virtual void ActivateSkill(SkillExecute sk)
     {
         if (!sk.onCooldown)
         {
             sk.Execute();
             AddInvulnerability(sk.iFrameDuration);
             sk.onCooldown = true;
+            StartCoroutine(GoOnCooldown(sk));
         }
     }
     public void ResetAllSkills()
@@ -116,13 +128,13 @@ public class SkillUser : MonoBehaviour
     {
         entityHealth.AddIFrame(duration);
     }
-    public virtual IEnumerator GoOnCooldown(NonMonoSkill sk)
+    public virtual IEnumerator GoOnCooldown(SkillExecute sk)
     {
         yield return new WaitForSeconds(sk.skillCooldown);
         sk.onCooldown = false;
     }
 
-    public virtual IEnumerator UsePersistentEffect(NonMonoSkill sk)
+    public virtual IEnumerator UsePersistentEffect(SkillExecute sk)
     {
         yield return new WaitForSeconds(sk.duration);
         sk.DeActivatePersistentEffect();

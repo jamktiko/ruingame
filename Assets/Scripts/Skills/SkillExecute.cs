@@ -13,6 +13,7 @@ public class SkillExecute : MonoBehaviour
     public bool persistentEffect = false;
     public float persistentEffectTime = 2f;
     public SkillUser skillUser;
+    public float duration = 1f;
     public virtual void Execute()
     {
     }
