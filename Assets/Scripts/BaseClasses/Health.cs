@@ -11,10 +11,9 @@ public class Health : MonoBehaviour
     private float _reDamageTimer = 0.4f;
     //private float _reDamageTimerDoT = 0.4f;
     
-    protected float CurrentHealth;
-    private bool _damageable = true; 
+    public float CurrentHealth;
+    public bool _damageable = true; 
     protected Animator EntityAnimator;
-
     
     
     public virtual void Start()

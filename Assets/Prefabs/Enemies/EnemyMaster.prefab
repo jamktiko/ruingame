@@ -139,7 +139,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed7886612bb6b7443a9d032624a12651, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  _damageCollider: {fileID: 0}
+  damage: 50
   kbStrength: 3
   targetTag: Player
 --- !u!65 &8775856172880376474
@@ -379,4 +380,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4abbfb463cf49559cdc4c5181bdab7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentHealth: 0
+  _damageable: 1
   enemyController: {fileID: 0}

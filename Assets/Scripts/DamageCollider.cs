@@ -8,10 +8,10 @@ using Debug = UnityEngine.Debug;
 
 public class DamageCollider : MonoBehaviour
 {
-     private Collider _damageCollider;
-     [FormerlySerializedAs("_damage")] public  float damage = default;
-     [FormerlySerializedAs("_kbStrength")] public float kbStrength = 100f;
-     [FormerlySerializedAs("_targetTag")] public string targetTag = "Enemy";
+     public Collider _damageCollider;
+      public  float damage = 100f;
+     public float kbStrength = 100f;
+     public string targetTag = "Enemy";
      private GameObject _attackingEntity;
 
     private void Start()

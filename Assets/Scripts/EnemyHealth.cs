@@ -20,7 +20,7 @@ namespace DefaultNamespace
         public override void ReactToDamage(float amount)
         {
             enemyController.stunned = true;
-            //base.ReactToDamage(amount);
+            base.ReactToDamage(amount);
         }
     }
 }
