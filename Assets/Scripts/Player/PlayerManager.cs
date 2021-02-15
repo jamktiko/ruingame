@@ -111,7 +111,7 @@ public class PlayerManager : BaseManager
 
     public void UpdateSkills()
     {
-        _playerSkills.Initialize();
+       // _playerSkills.Initialize();
     }
     public void DisableScriptsOnPlayer()
     {

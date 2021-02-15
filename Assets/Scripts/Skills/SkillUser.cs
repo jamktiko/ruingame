@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace.Skills;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -8,14 +9,28 @@ using UnityEngine.Serialization;
 public class SkillUser : MonoBehaviour
 {
     public InputReader inputReader = default;
+    
+    public SkillExecute[] skillList;
 
-    [SerializeField] private SkillExecute[] skillList;
-
+    public Animator entityAnimator;
+    
     [SerializeField] private Health entityHealth;
 
+    [SerializeField] private SkillsUI skillUI;
     private void Awake()
     {
+        entityAnimator = GetComponentInChildren<Animator>();
         inputReader = PlayerManager.Instance.playerInputReader;
+        skillList = new SkillExecute[4];
+        var skills = GetComponentsInChildren<SkillExecute>();
+        for (int i = 0; i < skills.Length; i++)
+        {
+            skillList[i] = skills[i];
+            skillList[i].skillUser = this;
+        }
+        entityHealth = GetComponent<Health>();
+        skillList[3] = gameObject.AddComponent<SprintSkill>();
+        skillList[3].skillUser = this;
     }
     private void OnEnable()
    
@@ -41,28 +56,13 @@ public class SkillUser : MonoBehaviour
         }
         catch{}
     }
-
-    public void Start()
-    {
-        Initialize();
-    }
-
-    public void Initialize()
-    {
-        skillList = new SkillExecute[4];
-        var skills = GetComponentsInChildren<SkillExecute>();
-        for (int i = 0; i < skills.Length; i++)
-        {
-            skillList[i] = skills[i];
-            skillList[i].skillUser = this;
-        }
-        entityHealth = GetComponent<Health>();
-    }
     void OnSkill1()
     {
         try
         {
+            skillUI.OnSkillUse1();
             ActivateSkill(skillList[0]);
+            
         }
         catch
         {
@@ -86,7 +86,7 @@ public class SkillUser : MonoBehaviour
     {
         try
         {
-            ActivateSkill(skillList[2]);
+            //ActivateSkill(skillList[2]);
         }
         catch
         {
@@ -98,22 +98,30 @@ public class SkillUser : MonoBehaviour
     {
         try
         {
-            ActivateSkill(skillList[3]);
+            if (entityAnimator.GetFloat("attackCancelFloat") < 0.8f)
+            {
+                ActivateSkill(skillList[3]);
+            }
         }
         catch
         {
-            Debug.Log("No skill assigned!");
+            Debug.Log("Cant Execute Skill!");
         }
     }
     
     public virtual void ActivateSkill(SkillExecute sk)
     {
-        if (!sk.onCooldown)
+        if (entityAnimator.GetFloat("attackCancelFloat") < 0.8f)
         {
-            sk.Execute();
-            AddInvulnerability(sk.iFrameDuration);
-            sk.onCooldown = true;
-            StartCoroutine(GoOnCooldown(sk));
+            if (!sk.onCooldown)
+            {
+                //Get This Clip From Skill itself
+                entityAnimator.Play("Sprinting");
+                sk.Execute();
+                AddInvulnerability(sk.iFrameDuration);
+                sk.onCooldown = true;
+                StartCoroutine(GoOnCooldown(sk));
+            }
         }
     }
     public void ResetAllSkills()
