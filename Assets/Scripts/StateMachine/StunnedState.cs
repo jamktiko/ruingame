@@ -16,6 +16,7 @@ namespace DefaultNamespace
         {
             if (StunTimer > 0)
             {
+                Enemy._movementControl.movementSpeed = 0f;
                 Enemy.stunned = true;
                 StunTimer -= _time * Time.deltaTime;
             }
@@ -23,8 +24,12 @@ namespace DefaultNamespace
             {
                 Enemy.stunned = false;
             }
+
             if (!Enemy.stunned)
+            {
+                Enemy._movementControl.movementSpeed = 10f;
                 Enemy.SetState(new MoveTowardsPlayerState(Enemy));
+            }
         }
 
         public override void OnStateEnter()

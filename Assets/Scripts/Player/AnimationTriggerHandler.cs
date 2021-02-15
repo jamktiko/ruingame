@@ -14,11 +14,11 @@ public class AnimationTriggerHandler : MonoBehaviour
 
     public void TriggerAttack()
     {
-        _damageCollider._damageCollider.enabled = true;
+        _damageCollider.EnableDamage();
     }
 
     public void EndAttack()
     {
-        _damageCollider._damageCollider.enabled = false;
+        _damageCollider.DisableDamage();
     }
 }

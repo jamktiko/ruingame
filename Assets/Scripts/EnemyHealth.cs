@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
 using UnityEngine;
@@ -10,6 +11,10 @@ namespace DefaultNamespace
     public class EnemyHealth : Health
     {
         public BaseEnemy enemyController;
+        public void Awake()
+        {
+            //_enemyUI.GetComponentInChildren<EnemyUI>();
+        }
 
         public override void Start()
         {

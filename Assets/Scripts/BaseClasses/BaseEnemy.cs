@@ -7,7 +7,7 @@ namespace DefaultNamespace
     {
         private CharacterController _characterController;
 
-        private Movement _movementControl;
+        public Movement _movementControl;
         
         private State _currentState;
 

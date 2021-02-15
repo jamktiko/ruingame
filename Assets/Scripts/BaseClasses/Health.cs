@@ -5,12 +5,13 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    private float _maximumHealth = 100f;
+    public float _maximumHealth = 100f;
     private float _flatResistance = 10f;
     private float _percentualResistance = 10f;
     private float _reDamageTimer = 0.4f;
     //private float _reDamageTimerDoT = 0.4f;
     
+    public HealthUI _healthUI;
     public float CurrentHealth;
     public bool _damageable = true; 
     protected Animator EntityAnimator;
@@ -27,7 +28,6 @@ public class Health : MonoBehaviour
         if (!_damageable)
             return;
         ReactToDamage(amount);
-        CheckHealth();
     }
 
     public virtual void ReactToDamage(float amount)
@@ -37,6 +37,8 @@ public class Health : MonoBehaviour
         damagePassed = damagePassed * ((100 - _percentualResistance) / 100);
         CurrentHealth -= damagePassed;
         AddIFrame(_reDamageTimer);
+        CheckHealth();
+        _healthUI.UpdateUIValue(CurrentHealth);
     }
     public void DealDamageOverTime(float amount, float time)
     {
@@ -68,6 +70,7 @@ public class Health : MonoBehaviour
     {
         if (CurrentHealth <= 0)
         {
+            CurrentHealth = 0;
             Die();
         }
     }
