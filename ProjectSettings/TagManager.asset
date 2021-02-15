@@ -5,6 +5,13 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - GameManager
+  - Weapon
+  - SpawnerLocation
+  - Entry
+  - Exit
+  - Cameras
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -14,7 +21,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - CameraCollision
   - 
   - 
   - 
