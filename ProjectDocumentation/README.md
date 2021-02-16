@@ -2,7 +2,7 @@ RUIN GAME
 
 *Are marked as done
 
-Sprint - 2 - 15.2.2021
+Sprint - 2 - 16.2.2021
 
 ### PLAYER CONTROLS
 
@@ -13,33 +13,24 @@ Sprint - 2 - 15.2.2021
 	
 ### ANIMATION CANCELLING
 
-	Attack animation startup frame / Cancellable with sprint
-	Attack animation return frame / Cancellable with sprint
+	*Attack animation startup frame / Cancellable with sprint
+	*Attack animation return frame / Cancellable with sprint
 
 	Skill animation startup frame / NOT Cancellable
 	Skill animation return frame / Cancellable with sprint or attack
 	
-	Movement / Cancellable
+	*Movement / Cancellable
 	
 	Jump / NOT Cancellable
 	
-###
-
 
 ### ATTACK
-	//ON HOLD
+
+	*MAKE TRANSITION BETWEEN ATTACKING AND MOVING SMOOTHER
+	
+		//ON HOLD
 	ADD RANGED ATTACK
 		MAKE ATTACK FIND NEAREST TARGET FOR AUTOAIM?
-	MAKE TRANSITION BETWEEN ATTACKING AND MOVING SMOOTHER
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 ### ENEMY

@@ -301,6 +301,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputReader: {fileID: 0}
   skillList: []
+  entityAnimator: {fileID: 0}
   entityHealth: {fileID: 0}
   skillUI: {fileID: 2881556058604505900}
 --- !u!114 &2280579018184987104
