@@ -15,8 +15,11 @@ public class SkillUser : MonoBehaviour
     public Animator entityAnimator;
     
     [SerializeField] private Health entityHealth;
+
+    public SkillsUI skillUI;
+=======
     private PlayerManager _playerManager;
-    [SerializeField] private SkillsUI skillUI;
+
     private void Awake()
     {
         entityAnimator = GetComponentInChildren<Animator>();
@@ -61,9 +64,7 @@ public class SkillUser : MonoBehaviour
     {
         try
         {
-            skillUI.OnSkillUse1();
-            ActivateSkill(skillList[0]);
-            
+            ActivateSkill(skillList[0], 0);
         }
         catch
         {
@@ -75,7 +76,7 @@ public class SkillUser : MonoBehaviour
     {
         try
         {
-            ActivateSkill(skillList[1]);
+            ActivateSkill(skillList[1], 1);
         }
         catch
         {
@@ -87,7 +88,7 @@ public class SkillUser : MonoBehaviour
     {
         try
         {
-            //ActivateSkill(skillList[2]);
+            ActivateSkill(skillList[2], 2);
         }
         catch
         {
@@ -99,7 +100,7 @@ public class SkillUser : MonoBehaviour
     {
         try
         {
-            ActivateSkill(skillList[3]);
+            ActivateSkill(skillList[3], 3);
         }
         catch
         {
@@ -107,12 +108,13 @@ public class SkillUser : MonoBehaviour
         }
     }
     
-    public virtual void ActivateSkill(SkillExecute sk)
+    public virtual void ActivateSkill(SkillExecute sk, int index)
     {
         if (entityAnimator.GetFloat("attackCancelFloat") < 1f)
         {
             if (!sk.onCooldown)
             {
+                skillUI.OnSkillUse(index);
                 sk.Execute();
                 _playerManager.StopAttacking();
                 entityAnimator.Play("Sprinting");
