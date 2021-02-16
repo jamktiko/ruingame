@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57e207e7ef8e5a949a2fe0a2e51260e7, type: 3}
-  m_Name: ComboAttack2
+  m_Name: SwordComboAttack2
   m_EditorClassIdentifier: 
   animationClip: {fileID: 7400000, guid: 6c35db1d002c9224ca86a74794a236bb, type: 2}
   Damage: 10
