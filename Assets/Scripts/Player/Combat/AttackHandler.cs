@@ -16,7 +16,7 @@ public class AttackHandler : MonoBehaviour
     private InputReader _inputReader;
     private Rigidbody _characterRigidbody;
     private MovementController _movementControl;
-
+    private DamageCollider _damageCollider;
     public void Awake()
     {
         comboHandler = GetComponent<ComboHandler>();
@@ -24,6 +24,7 @@ public class AttackHandler : MonoBehaviour
         _inputReader = GameManager.Instance.playerInputReader;
         _movementControl = GetComponent<MovementController>();
         _characterRigidbody = GetComponent<Rigidbody>();
+        _damageCollider = GetComponentInChildren<DamageCollider>();
     }
     public void OnEnable()
     {
@@ -43,17 +44,17 @@ public class AttackHandler : MonoBehaviour
     private void OnAttack()
     {
         if (attacking)
-                return;
+            return;
+        if (!_movementControl.GroundedEntity)
+            return;
         attacking = true;
         ComboAttack comboToExecute = comboHandler.ProcessCombo();
         try
         {
             _movementControl.attacking = attacking;
-            StartCoroutine(AttackMovementEffect(5f, comboToExecute.animationClip.length / _playerAttackSpeed / 2 ));
             _characterAnimator.SetFloat("attackSpeed", _playerAttackSpeed);
             _characterAnimator.Play(comboToExecute.animationClip.name);
-            Invoke("EndAttack", comboToExecute.animationClip.length / _playerAttackSpeed);
-            Debug.Log(comboToExecute.name);
+            StartCoroutine(EndAttackRoutine(comboToExecute.animationClip.length / _playerAttackSpeed));
         }
         catch
         {
@@ -61,12 +62,13 @@ public class AttackHandler : MonoBehaviour
             EndAttack();
         }
     }
-    private void EndAttack()
+    public void EndAttack()
     {
+        StopAllCoroutines();
         attacking = false;
         _movementControl.attacking = attacking;
+        _damageCollider._damageCollider.enabled = false;
     }
-
     public void SetDamage(float amount)
     {
         _playerDamage = amount;
@@ -80,6 +82,13 @@ public class AttackHandler : MonoBehaviour
         _movementControl.attackMovement += attackForce;
         yield return new WaitForSeconds(duration);
         _movementControl.attackMovement -= attackForce;
-
     }
+    public virtual IEnumerator EndAttackRoutine(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        attacking = false;
+        _movementControl.attacking = attacking;
+        _damageCollider._damageCollider.enabled = false;
+    }
+    
 }

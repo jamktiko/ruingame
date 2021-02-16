@@ -34,17 +34,6 @@ public class DamageCollider : MonoBehaviour
             if (targetHealth != null)
             {
                 targetHealth.DealDamage(damage);
-                var kbDirection = _attackingEntity.transform.position - tr.transform.position;
-                kbDirection.y = 0; //Normalize y coordinates
-                try
-                {
-                    //Apply Knockback
-                    tr.GetComponent<Rigidbody>().AddForce(-kbDirection*kbStrength);
-                }
-                catch
-                {
-                    Debug.Log("KNOCKBACK Object has no Rigidbody");
-                }
             }
         }
     }

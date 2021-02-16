@@ -215,6 +215,11 @@ public class PlayerManager : BaseManager
     public void Die()
     {
         DisableScriptsOnPlayer();
-        GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().GameOver();
+        GameManager.Instance.GameOver();
+    }
+
+    public void StopAttacking()
+    {
+        _playerAttack.EndAttack();
     }
 }

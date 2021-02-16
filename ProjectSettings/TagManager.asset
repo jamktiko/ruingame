@@ -12,6 +12,8 @@ TagManager:
   - Exit
   - Cameras
   - Ground
+  - SkillsUI
+  - SkillIcon
   layers:
   - Default
   - TransparentFX

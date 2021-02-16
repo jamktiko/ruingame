@@ -68,7 +68,6 @@ public class MovementController : MonoBehaviour
     {
         if (GroundedEntity)
         {
-            _previousMovementInput = Vector3.zero;
             _animatorVelocity = 0;
         }
     }
@@ -90,7 +89,7 @@ public class MovementController : MonoBehaviour
         var stp = _stepRayUpper.transform.position;
         _stepRayUpper.transform.position = new Vector3(0, stepHeight, 0);
     }
-    private void OnMove(Vector2 movement)
+    public void OnMove(Vector2 movement)
     {
         _previousMovementInput = movement;
     }
@@ -98,14 +97,21 @@ public class MovementController : MonoBehaviour
     private void Update()
     {
         CalculateMovement();
-        
+        Debug.Log(MovementInput);
     }
     private void FixedUpdate()
     {
         GroundCheck();
-        Move();
         StepClimb();
-        RotateTowardsMovement();
+        if (!attacking)
+        {
+            Move();
+            RotateTowardsMovement();
+        }
+        else
+        {
+            _animatorVelocity = 0.0f;
+        }
         HandleMovementAnimation();
     }
     private void Move()
@@ -139,8 +145,7 @@ public class MovementController : MonoBehaviour
 
     private void OnJump()
     {
-        //CHECK FOR ANIMATION FINISHED TOO
-        if (GroundedEntity)
+        if (GroundedEntity && !attacking)
         {
             _characterRigidBody.AddForce(Vector3.up * _jumpHeight);
         }
@@ -152,7 +157,7 @@ public class MovementController : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(newDirection);
 
     }
-    private void CalculateMovement()
+    public void CalculateMovement()
     {
         if (_gameplayCameraTransform.isSet)
         {

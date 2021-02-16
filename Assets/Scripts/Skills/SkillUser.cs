@@ -17,10 +17,14 @@ public class SkillUser : MonoBehaviour
     [SerializeField] private Health entityHealth;
 
     public SkillsUI skillUI;
+=======
+    private PlayerManager _playerManager;
+
     private void Awake()
     {
         entityAnimator = GetComponentInChildren<Animator>();
-        inputReader = PlayerManager.Instance.playerInputReader;
+        _playerManager = PlayerManager.Instance;
+        inputReader = _playerManager.playerInputReader;
         skillList = new SkillExecute[4];
         var skills = GetComponentsInChildren<SkillExecute>();
         for (int i = 0; i < skills.Length; i++)
@@ -106,13 +110,18 @@ public class SkillUser : MonoBehaviour
     
     public virtual void ActivateSkill(SkillExecute sk, int index)
     {
-        if (!sk.onCooldown) 
+        if (entityAnimator.GetFloat("attackCancelFloat") < 1f)
         {
-            skillUI.OnSkillUse(index);
-            sk.Execute();
-            AddInvulnerability(sk.iFrameDuration);
-            sk.onCooldown = true;
-            StartCoroutine(GoOnCooldown(sk));
+            if (!sk.onCooldown)
+            {
+                skillUI.OnSkillUse(index);
+                sk.Execute();
+                _playerManager.StopAttacking();
+                entityAnimator.Play("Sprinting");
+                AddInvulnerability(sk.iFrameDuration);
+                sk.onCooldown = true;
+                StartCoroutine(GoOnCooldown(sk));
+            }
         }
     }
     public void ResetAllSkills()
