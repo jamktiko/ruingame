@@ -15,12 +15,13 @@ public class SkillUser : MonoBehaviour
     public Animator entityAnimator;
     
     [SerializeField] private Health entityHealth;
-
+    private PlayerManager _playerManager;
     [SerializeField] private SkillsUI skillUI;
     private void Awake()
     {
         entityAnimator = GetComponentInChildren<Animator>();
-        inputReader = PlayerManager.Instance.playerInputReader;
+        _playerManager = PlayerManager.Instance;
+        inputReader = _playerManager.playerInputReader;
         skillList = new SkillExecute[4];
         var skills = GetComponentsInChildren<SkillExecute>();
         for (int i = 0; i < skills.Length; i++)
@@ -98,10 +99,7 @@ public class SkillUser : MonoBehaviour
     {
         try
         {
-            if (entityAnimator.GetFloat("attackCancelFloat") < 0.8f)
-            {
-                ActivateSkill(skillList[3]);
-            }
+            ActivateSkill(skillList[3]);
         }
         catch
         {
@@ -111,13 +109,13 @@ public class SkillUser : MonoBehaviour
     
     public virtual void ActivateSkill(SkillExecute sk)
     {
-        if (entityAnimator.GetFloat("attackCancelFloat") < 0.8f)
+        if (entityAnimator.GetFloat("attackCancelFloat") < 1f)
         {
             if (!sk.onCooldown)
             {
-                //Get This Clip From Skill itself
-                entityAnimator.Play("Sprinting");
                 sk.Execute();
+                _playerManager.StopAttacking();
+                entityAnimator.Play("Sprinting");
                 AddInvulnerability(sk.iFrameDuration);
                 sk.onCooldown = true;
                 StartCoroutine(GoOnCooldown(sk));

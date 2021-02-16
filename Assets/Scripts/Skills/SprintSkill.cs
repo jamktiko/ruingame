@@ -10,7 +10,8 @@ namespace DefaultNamespace.Skills
 {
     public class SprintSkill : SkillExecute
     {
-        public float SprintSpeed = 50f;
+        //Should contain UI IMAGE and Animation Clip
+        public float SprintSpeed = 20f;
         public override void Execute()
         {
             ApplyPersistentEffect();
