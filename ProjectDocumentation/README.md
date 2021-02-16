@@ -2,29 +2,52 @@ RUIN GAME
 
 *Are marked as done
 
+Sprint - 2 - 15.2.2021
+
 ### PLAYER CONTROLS
 
-	REWORK LOGIC FOR PLAYER
-	
 		*PLAYER MANAGER
 			STATUS
-	REWORK MOVEMENT TO ALLOW FOR BETTER KNOCKBACK, STUN
-		STATES?
+	STATES?
 	*DIFFERENT MOVEMENT SYSTEM (Rigidbody variant)
+	
+### ANIMATION CANCELLING
+
+	Attack animation startup frame / Cancellable with sprint
+	Attack animation return frame / Cancellable with sprint
+
+	Skill animation startup frame / NOT Cancellable
+	Skill animation return frame / Cancellable with sprint or attack
+	
+	Movement / Cancellable
+	
+	Jump / NOT Cancellable
+	
+###
+
 
 ### ATTACK
-
+	//ON HOLD
 	ADD RANGED ATTACK
 		MAKE ATTACK FIND NEAREST TARGET FOR AUTOAIM?
 	MAKE TRANSITION BETWEEN ATTACKING AND MOVING SMOOTHER
 	
 	
-### ENEMY
 	
+	
+	
+	
+	
+	
+	
+	
+	
+### ENEMY
+	//ON HOLD
 	ADD ENEMY AI BEHAVIOURS FOR DIFFERENT TYPES OF ENEMIES
 	
 ### ROOM
-	
+	//ON HOLD
 	SELECT ROOM TYPE / PREFAB
 	
 	*INSTANTIATE ROOM
@@ -46,7 +69,7 @@ RUIN GAME
 		
 
 ### SPAWNER
-	
+	//ON HOLD
 	*GET ROOM SPAWNER LOCATIONS
 		SPAWNER LOCATION AS ENEMY COORDINATOR?
 	*SET ENEMIES TO EACH SPAWNER LOCATION
@@ -56,7 +79,7 @@ RUIN GAME
 	
 
 ### MAIN MENU
-	
+	// ON HOLD
 	*PLAY GAME
 		GET A CHOICE OF SKILL 
 			SKILL GETS STORED INTO LIST OF SKILLS TO ADD TO PLAYER
