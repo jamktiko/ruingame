@@ -4,19 +4,29 @@ using UnityEngine;
 using UnityEngine.UI;
 public class SkillsUI : MonoBehaviour
 {
-    public Image abilityImage1;
-    public SkillUser skillUser;
-    public Image[] skillImages = new Image[10];
-    
-    /*
+    private SkillUser skillUser;
+    public GameObject[] skillIconPrefabs;
+    public Image[] skillImages;
+    public GameObject skillIconPrefab;
     void Start()
     {
-        
-        abilityImage1.fillAmount = 0;
-       Debug.Log(skillUser.skillList.Length);
+        skillUser = PlayerManager.Instance._playerSkills;
+        skillUser.skillUI = this;
+        skillIconPrefabs = new GameObject[skillUser.skillList.Length];
+        skillImages = new Image[skillUser.skillList.Length];
         for (int i = 0; i < skillUser.skillList.Length; i++)
         {
-            skillImages[i] = abilityImage1;
+            skillIconPrefabs[i] = Instantiate(skillIconPrefab);
+            skillIconPrefabs[i].transform.SetParent(gameObject.transform);
+            var skI = skillIconPrefabs[i].GetComponent<SkillImage>();
+            //skI.skillImage = skillUser.skillList[i]
+            //skI.skillImageGrayScale = skillUser.skillList[i]
+            skillImages[i] = skI.skillImageGrayScale;
+        }
+
+        foreach (Image skillImage in skillImages)
+        {
+            skillImage.fillAmount = 0;
         }
     }
 
@@ -25,31 +35,40 @@ public class SkillsUI : MonoBehaviour
     {
         for (int i = 0; i < skillUser.skillList.Length; i++)
         {
-            SkillUpdate(skillUser.skillList[i], i);
+            try
+            {
+                SkillUpdate(skillUser.skillList[i], i);
+            }
+            catch
+            {
+            }
         }
     }
-    */
+    
 
     void SkillUpdate(SkillExecute sk, int index)
     {
-        /*Debug.Log(sk);
-        if (sk.onCooldown)
+        if (sk != null)
         {
-            try
+            if (sk.onCooldown)
             {
-                skillImages[index].fillAmount -= 1 / sk.skillCooldown * Time.deltaTime;
-                if (abilityImage1.fillAmount <= 0)
+                try
                 {
-                    abilityImage1.fillAmount = 0;
+                    skillImages[index].fillAmount -= 1 / sk.skillCooldown * Time.deltaTime;
+                    if (skillImages[index].fillAmount <= 0)
+                    {
+                        skillImages[index].fillAmount = 0;
+                    }
+                    
                 }
+                catch {Debug.Log("No UI element assigned!");}
             }
-            catch {Debug.Log("No UI element assigned!");}
         }
-        */
+
     }
-    public void OnSkillUse1()
+    public void OnSkillUse(int index)
     {
-        abilityImage1.fillAmount = 1;
+        skillImages[index].fillAmount = 1;
     }
     
 }
