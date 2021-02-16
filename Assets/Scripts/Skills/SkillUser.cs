@@ -16,7 +16,7 @@ public class SkillUser : MonoBehaviour
     
     [SerializeField] private Health entityHealth;
 
-    [SerializeField] private SkillsUI skillUI;
+    public SkillsUI skillUI;
     private void Awake()
     {
         entityAnimator = GetComponentInChildren<Animator>();
@@ -60,9 +60,7 @@ public class SkillUser : MonoBehaviour
     {
         try
         {
-            skillUI.OnSkillUse1();
-            ActivateSkill(skillList[0]);
-            
+            ActivateSkill(skillList[0], 0);
         }
         catch
         {
@@ -74,7 +72,7 @@ public class SkillUser : MonoBehaviour
     {
         try
         {
-            ActivateSkill(skillList[1]);
+            ActivateSkill(skillList[1], 1);
         }
         catch
         {
@@ -86,7 +84,7 @@ public class SkillUser : MonoBehaviour
     {
         try
         {
-            //ActivateSkill(skillList[2]);
+            ActivateSkill(skillList[2], 2);
         }
         catch
         {
@@ -98,10 +96,7 @@ public class SkillUser : MonoBehaviour
     {
         try
         {
-            if (entityAnimator.GetFloat("attackCancelFloat") < 0.8f)
-            {
-                ActivateSkill(skillList[3]);
-            }
+            ActivateSkill(skillList[3], 3);
         }
         catch
         {
@@ -109,19 +104,15 @@ public class SkillUser : MonoBehaviour
         }
     }
     
-    public virtual void ActivateSkill(SkillExecute sk)
+    public virtual void ActivateSkill(SkillExecute sk, int index)
     {
-        if (entityAnimator.GetFloat("attackCancelFloat") < 0.8f)
+        if (!sk.onCooldown) 
         {
-            if (!sk.onCooldown)
-            {
-                //Get This Clip From Skill itself
-                entityAnimator.Play("Sprinting");
-                sk.Execute();
-                AddInvulnerability(sk.iFrameDuration);
-                sk.onCooldown = true;
-                StartCoroutine(GoOnCooldown(sk));
-            }
+            skillUI.OnSkillUse(index);
+            sk.Execute();
+            AddInvulnerability(sk.iFrameDuration);
+            sk.onCooldown = true;
+            StartCoroutine(GoOnCooldown(sk));
         }
     }
     public void ResetAllSkills()
