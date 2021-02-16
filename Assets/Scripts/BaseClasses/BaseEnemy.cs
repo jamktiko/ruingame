@@ -32,7 +32,8 @@ namespace DefaultNamespace
 
         private void Update()
         {
-            _currentState.Tick();
+            if (PlayerManager.Instance != null) 
+                _currentState.Tick();
         }
 
         public void SetState(State state)
