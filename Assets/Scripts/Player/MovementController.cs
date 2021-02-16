@@ -97,7 +97,6 @@ public class MovementController : MonoBehaviour
     private void Update()
     {
         CalculateMovement();
-        Debug.Log(MovementInput);
     }
     private void FixedUpdate()
     {
