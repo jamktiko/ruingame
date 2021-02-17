@@ -69,6 +69,7 @@ public class MovementController : MonoBehaviour
         if (GroundedEntity)
         {
             _animatorVelocity = 0;
+            _characterRigidBody.velocity = Vector3.zero;
         }
     }
     private void Start()
