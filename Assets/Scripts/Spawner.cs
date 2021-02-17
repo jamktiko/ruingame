@@ -44,4 +44,9 @@ public class Spawner : MonoBehaviour
         enemiesToSpawn--;
         currentSpawnedEnemies++;
     }
+
+    public void SpawnSingleEnemy()
+    {
+        Instantiate(enemyprefab, gameObject.transform);
+    }
 }

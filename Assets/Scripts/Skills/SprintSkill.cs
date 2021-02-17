@@ -14,6 +14,7 @@ namespace DefaultNamespace.Skills
         public float SprintSpeed = 20f;
         public override void Execute()
         {
+
             ApplyPersistentEffect();
         }
         public override void ApplyPersistentEffect()

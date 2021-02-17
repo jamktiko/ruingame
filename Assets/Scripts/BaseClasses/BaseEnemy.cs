@@ -5,11 +5,12 @@ namespace DefaultNamespace
 {
     public class BaseEnemy : MonoBehaviour
     {
-        private CharacterController _characterController;
 
         public Movement _movementControl;
         
         private State _currentState;
+
+        public bool alive = true;
 
         //private float _knockbackStrength = default;
         
@@ -26,7 +27,6 @@ namespace DefaultNamespace
             playerTransform = PlayerManager.Instance.transform;
             _movementControl = GetComponent<Movement>();
             attack = GetComponent<Attack>();
-            _characterController = GetComponent<CharacterController>();
             SetState(new MoveTowardsPlayerState(this));
         }
 

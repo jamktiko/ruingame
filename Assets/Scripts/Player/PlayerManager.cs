@@ -74,7 +74,6 @@ public class PlayerManager : BaseManager
         DisableScriptsOnPlayer();
         EnableScriptsOnPlayer();
         UpdatePlayerStats();
-        playerInputReader.InteractEvent += OnPickUp;
     }
 
     private void Update()

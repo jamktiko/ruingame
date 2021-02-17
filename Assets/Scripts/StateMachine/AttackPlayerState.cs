@@ -12,18 +12,18 @@ namespace DefaultNamespace
         {
             Name = "Attacking Player";
             Enemy.attack.AttemptAttack();
+            Enemy.attack.currentlyAttacking = true;
         }
         public override void Tick()
         {
-            if (AttackedPlayer())
+            if (!Enemy.alive)
+            {
+                Enemy.SetState(new DeathState(Enemy));
+            }
+            if (!Enemy.attack.currentlyAttacking)
             {
                 Enemy.SetState(new MoveTowardsPlayerState(Enemy));
             }
-        }
-
-        private bool AttackedPlayer()
-        {
-            return true;
         }
     }
 }

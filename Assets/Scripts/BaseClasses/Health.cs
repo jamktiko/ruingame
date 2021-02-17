@@ -48,9 +48,9 @@ public class Health : MonoBehaviour
     public virtual void Die()
     {
         //Animation
-        EntityAnimator.Play("Death");
+        //EntityAnimator.Play("Death");
         //Particles
-        Destroy(gameObject, 0.6f);
+        
         //Update UI or stats
         SendMessageUpwards("EntityDeath");
     }

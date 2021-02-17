@@ -31,9 +31,19 @@ public class DamageCollider : MonoBehaviour
         {
             var tr = collision.gameObject;
             var targetHealth = tr.GetComponent<Health>();
-            if (targetHealth != null)
-            {
+            try {
                 targetHealth.DealDamage(damage);
+            }
+            catch {Debug.Log("Target has no health!");}
+
+            try
+            {
+                var rb = tr.GetComponent<Rigidbody>();
+                rb.AddForce(gameObject.transform.forward * kbStrength * 100);
+            }
+            catch
+            {
+                Debug.Log("Target has no rigidbody");
             }
         }
     }

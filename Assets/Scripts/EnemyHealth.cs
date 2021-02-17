@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -26,6 +27,13 @@ namespace DefaultNamespace
         {
             enemyController.stunned = true;
             base.ReactToDamage(amount);
+        }
+
+        public override void Die()
+        {
+            base.Die();
+            enemyController.alive = false;
+            Destroy(gameObject, 0.5f);
         }
     }
 }

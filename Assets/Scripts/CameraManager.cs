@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 
 public class CameraManager : MonoBehaviour
 {
-	private InputReader inputReader;
+	public InputReader inputReader;
 	private Camera mainCamera;
 	private CinemachineFreeLook freeLookVCam;
 	private bool _isRmbPressed;
@@ -30,21 +30,19 @@ public class CameraManager : MonoBehaviour
 		freeLookVCam = GetComponentInChildren<CinemachineFreeLook>();
 		mainCamera = GetComponentInChildren<Camera>();
 		cameraTransformAnchor.Transform = mainCamera.transform;
-		inputReader = GameManager.Instance.playerInputReader;
 	}
-
 	private void OnEnable()
 	{
 		try
 		{
 			inputReader.CameraMoveEvent += OnCameraMove;
-			Cursor.lockState = CursorLockMode.Locked;
 		}
 		catch{}
 	}
 
 	private void Start()
 	{
+		inputReader = GameManager.Instance.playerInputReader;
 		Cursor.visible = false;
 	}
 	private void OnDisable()

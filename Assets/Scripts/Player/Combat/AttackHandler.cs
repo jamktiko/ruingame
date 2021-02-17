@@ -58,7 +58,6 @@ public class AttackHandler : MonoBehaviour
         }
         catch
         {
-            Debug.Log("No animation clip assigned to " + comboToExecute.name);
             EndAttack();
         }
     }
@@ -79,6 +78,7 @@ public class AttackHandler : MonoBehaviour
     }
     public virtual IEnumerator AttackMovementEffect(float attackForce, float duration)
     {
+        //This should apply a rigidbody momentum when attacking
         _movementControl.attackMovement += attackForce;
         yield return new WaitForSeconds(duration);
         _movementControl.attackMovement -= attackForce;
