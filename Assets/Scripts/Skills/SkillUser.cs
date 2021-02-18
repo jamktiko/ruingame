@@ -166,6 +166,6 @@ public class SkillUser : MonoBehaviour
     public virtual IEnumerator UsePersistentEffect(SkillExecute sk)
     {
         yield return new WaitForSeconds(sk.duration);
-        sk.DeActivatePersistentEffect();
+        sk.DeActivateSkillActive();
     }
 }

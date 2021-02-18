@@ -21,12 +21,12 @@ public class SkillExecute : MonoBehaviour
     {
         
     }
-    public virtual void ApplyPersistentEffect()
+    public virtual void WhileSkillActive()
     {
         
     }
 
-    public virtual void DeActivatePersistentEffect()
+    public virtual void DeActivateSkillActive()
     {
         
     }

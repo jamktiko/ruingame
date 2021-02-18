@@ -18,9 +18,9 @@ namespace DefaultNamespace.Skills
             PlayerManager.Instance._playerMovement.OnDash(duration);
             
             //APPLIES ENHANCED MOVEMENT SPEED
-            ApplyPersistentEffect();
+            WhileSkillActive();
         }
-        public override void ApplyPersistentEffect()
+        public override void WhileSkillActive()
         {
             if (!onCooldown)
             {
@@ -31,7 +31,7 @@ namespace DefaultNamespace.Skills
             }
         }
 
-        public override void DeActivatePersistentEffect()
+        public override void DeActivateSkillActive()
         {
             skillUser.usingSkill = false;
             PlayerManager.Instance.ModifyMovementSpeed(SprintSpeed, 0);
