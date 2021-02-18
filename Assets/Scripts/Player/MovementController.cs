@@ -12,21 +12,17 @@ public class MovementController : MonoBehaviour
     private InputReader _inputReader = default;
     
     [Header("Ground Check")]
-    public LayerMask layerMask;
+    [SerializeField] private  LayerMask layerMask;
     [SerializeField] private float groundCheckRadius;
     public bool GroundedEntity { get; private set; }
 
     [Header("Animation parameters")]
-    [SerializeField]
-    private float animatorDeceleration = 1f;
-    [SerializeField]
-    private float animatorAcceleration = 1f;
+    private float animatorDeceleration = 10f;
+    private float animatorAcceleration = 10f;
     private float _animatorVelocity = 0.0f;
     private Animator _characterAnimator;
     
     private Rigidbody _characterRigidBody;
-    private bool _attacking;
-    
     //Used to calculate movement vectors
     private Vector2 _previousMovementInput;
     [HideInInspector] public Vector3 MovementInput { get; private set; }
@@ -45,9 +41,8 @@ public class MovementController : MonoBehaviour
     private GameObject _stepRayLower;
 
     public bool dashing { get; private set; }
-
-    public float attackMovement;
     public bool attacking;
+    
     private static readonly int MovementSpeed = Animator.StringToHash("movementSpeed");
 
     private void OnEnable()
@@ -70,7 +65,7 @@ public class MovementController : MonoBehaviour
 
     private void OnAttack()
     {
-        if (GroundedEntity)
+        if (GroundedEntity && !dashing)
         {
             _animatorVelocity = 0;
             _characterRigidBody.velocity = Vector3.zero;
@@ -122,8 +117,8 @@ public class MovementController : MonoBehaviour
     private void Move(Vector3 MovementInput)
     {
         Vector3 movementVelocity = _movementSpeed * MovementInput;
-        Vector3 attackVelocity = transform.forward * attackMovement;
-        _characterRigidBody.velocity = new Vector3(movementVelocity.x, _characterRigidBody.velocity.y, movementVelocity.z) + attackVelocity;
+       _characterRigidBody.velocity =
+            new Vector3(movementVelocity.x, _characterRigidBody.velocity.y, movementVelocity.z);
     }
 
     private void GroundCheck()

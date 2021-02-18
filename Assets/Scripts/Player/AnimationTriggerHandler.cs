@@ -5,30 +5,14 @@ using UnityEngine;
 
 public class AnimationTriggerHandler : MonoBehaviour
 {
-    private DamageCollider _damageCollider;
-
+    private PlayerAttackHandler _attackHandler;
     public void Start()
     {
-        _damageCollider = GetComponentInChildren<DamageCollider>();
+        _attackHandler = GetComponentInParent<PlayerAttackHandler>();
     }
-
-    public void TriggerAttack()
+    
+    public void HandleDamage()
     {
-        _damageCollider.EnableDamage();
-    }
-
-    public void EndAttack()
-    {
-        _damageCollider.DisableDamage();
-    }
-
-    public void AttackTrailEnable()
-    {
-        _damageCollider.EnableAttackTrail();
-    }
-
-    public void AttackTrailDisable()
-    {
-        _damageCollider.DisableAttackTrail();
+        _attackHandler.HandleAttack();
     }
 }

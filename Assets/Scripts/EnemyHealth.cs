@@ -12,10 +12,6 @@ namespace DefaultNamespace
     public class EnemyHealth : Health
     {
         public BaseEnemy enemyController;
-        public void Awake()
-        {
-            //_enemyUI.GetComponentInChildren<EnemyUI>();
-        }
 
         public override void Start()
         {

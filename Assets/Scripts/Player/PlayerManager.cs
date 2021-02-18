@@ -11,7 +11,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 
-[RequireComponent(typeof(AttackHandler))]
+[RequireComponent(typeof(PlayerAttackHandler))]
 [RequireComponent(typeof(PlayerHealth))]
 [RequireComponent(typeof(MovementController))]
 [RequireComponent(typeof(SkillUser))]
@@ -29,12 +29,12 @@ public class PlayerManager : BaseManager
     public InputReader playerInputReader { get; private set; }
     public RuntimeAnimatorController playerAnimator { get; private set; }
     
-    private AttackHandler _playerAttack;
+    private PlayerAttackHandler _playerAttack;
     private PlayerHealth _playerHealth;
     public MovementController _playerMovement { get; private set; }
     public SkillUser _playerSkills { get; private set; }
 
-    public Combo _weaponData;
+    public Combo _weaponData { get; private set; }
     public PlayerData _playerData;
     
     [HideInInspector]
@@ -58,7 +58,7 @@ public class PlayerManager : BaseManager
             _instance = this;
         }
         playerInputReader = GameManager.Instance.playerInputReader;
-        _playerAttack = GetComponent<AttackHandler>();
+        _playerAttack = GetComponent<PlayerAttackHandler>();
         _weaponData = GameManager.Instance.weaponCombo;
         _playerHealth = GetComponent<PlayerHealth>();
         _playerMovement = GetComponent<MovementController>();

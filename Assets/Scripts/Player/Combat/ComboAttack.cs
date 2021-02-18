@@ -6,7 +6,6 @@ using UnityEngine;
 public class ComboAttack : ScriptableObject
 {
     public AnimationClip animationClip;
-    public float Damage;
-    public float Speed;
-    
+    public BaseAttack attackData;
+
 }
