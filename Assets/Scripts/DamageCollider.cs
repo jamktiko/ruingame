@@ -13,7 +13,8 @@ public class DamageCollider : MonoBehaviour
      public float kbStrength = 100f;
      public string targetTag = "Enemy";
      private GameObject _attackingEntity;
-
+     public GameObject attackTrail;
+     private GameObject _currentTrail;
     private void Start()
     {
         _damageCollider = GetComponent<Collider>();
@@ -55,6 +56,16 @@ public class DamageCollider : MonoBehaviour
 
     public void DisableDamage()
     {
+        
         _damageCollider.enabled = false;
+    }
+
+    public void EnableAttackTrail()
+    {
+         _currentTrail = Instantiate(attackTrail, gameObject.transform);
+    }
+    public void DisableAttackTrail()
+    {
+        Destroy(_currentTrail);
     }
 }

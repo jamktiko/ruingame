@@ -12,9 +12,9 @@ namespace DefaultNamespace.Skills
     {
         //Should contain UI IMAGE and Animation Clip
         public float SprintSpeed = 20f;
-        public override void Execute()
+        public override void Execute(float duration)
         {
-
+            PlayerManager.Instance._playerMovement.OnDash(duration);
             ApplyPersistentEffect();
         }
         public override void ApplyPersistentEffect()

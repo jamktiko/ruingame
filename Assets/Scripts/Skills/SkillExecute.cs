@@ -12,10 +12,14 @@ public class SkillExecute : MonoBehaviour
     public bool onCooldown = false;
     public SkillUser skillUser;
     public float duration = 0.5f;
+    public AnimationClip animation;
     public virtual void Execute()
     {
     }
-    
+    public virtual void Execute(float duration)
+    {
+        
+    }
     public virtual void ApplyPersistentEffect()
     {
         

@@ -31,7 +31,7 @@ public class PlayerManager : BaseManager
     
     private AttackHandler _playerAttack;
     private PlayerHealth _playerHealth;
-    private MovementController _playerMovement;
+    public MovementController _playerMovement { get; private set; }
     public SkillUser _playerSkills { get; private set; }
 
     public Combo _weaponData;

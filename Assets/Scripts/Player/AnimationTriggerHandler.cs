@@ -21,4 +21,14 @@ public class AnimationTriggerHandler : MonoBehaviour
     {
         _damageCollider.DisableDamage();
     }
+
+    public void AttackTrailEnable()
+    {
+        _damageCollider.EnableAttackTrail();
+    }
+
+    public void AttackTrailDisable()
+    {
+        _damageCollider.DisableAttackTrail();
+    }
 }

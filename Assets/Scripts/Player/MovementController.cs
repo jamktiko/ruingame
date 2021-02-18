@@ -44,6 +44,8 @@ public class MovementController : MonoBehaviour
     private GameObject _stepRayUpper;
     private GameObject _stepRayLower;
 
+    private bool dashing;
+
     public float attackMovement;
     public bool attacking;
     private void OnEnable()
@@ -103,10 +105,10 @@ public class MovementController : MonoBehaviour
     {
         GroundCheck();
         StepClimb();
-        if (!attacking)
+        if (!attacking && !dashing)
         {
-            Move();
-            RotateTowardsMovement();
+            Move(MovementInput);
+            RotateTowardsMovement(turnSmoothing);
         }
         else
         {
@@ -114,7 +116,7 @@ public class MovementController : MonoBehaviour
         }
         HandleMovementAnimation();
     }
-    private void Move()
+    private void Move(Vector3 MovementInput)
     {
         Vector3 movementVelocity = _movementSpeed * MovementInput;
         Vector3 attackVelocity = transform.forward * attackMovement;
@@ -150,9 +152,9 @@ public class MovementController : MonoBehaviour
             _characterRigidBody.AddForce(Vector3.up * _jumpHeight);
         }
     }
-    private void RotateTowardsMovement()
+    private void RotateTowardsMovement(float amount)
     {
-        float singleStep = turnSmoothing * Time.deltaTime;
+        float singleStep = amount * Time.deltaTime;
         Vector3 newDirection = Vector3.RotateTowards(transform.forward, MovementInput, singleStep, 0.0f);
         transform.rotation = Quaternion.LookRotation(newDirection);
 
@@ -212,6 +214,26 @@ public class MovementController : MonoBehaviour
         }
     }
 
+    public void OnDash(float duration)
+    {
+       RotateTowardsMovement(1000f);
+       StartCoroutine(Dashing(duration));
+    }
+    public virtual IEnumerator Dashing(float duration)
+    {
+        dashing = true;
+        var originalInput = MovementInput;
+        if (originalInput == Vector3.zero)
+        {
+            originalInput = transform.forward;
+        }
+        for (float ft = duration-0.2f; ft >= 0; ft -= 0.1f)
+        {
+            Move(originalInput);
+            yield return new WaitForSeconds(.1f);
+        }
+        dashing = false;
+    }
     public void SetPlayerCamera(TransformAnchor cam)
     {
         _gameplayCameraTransform = cam;

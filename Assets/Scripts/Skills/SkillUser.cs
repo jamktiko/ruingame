@@ -20,6 +20,8 @@ public class SkillUser : MonoBehaviour
     
     private PlayerManager _playerManager;
 
+    public AnimationClip sprintAnimation;
+    
     private void Awake()
     {
         entityAnimator = GetComponentInChildren<Animator>();
@@ -34,6 +36,7 @@ public class SkillUser : MonoBehaviour
         }
         entityHealth = GetComponent<Health>();
         skillList[3] = gameObject.AddComponent<SprintSkill>();
+        skillList[3].animation = sprintAnimation;
         skillList[3].skillUser = this;
     }
     private void OnEnable()
@@ -115,9 +118,9 @@ public class SkillUser : MonoBehaviour
             if (!sk.onCooldown)
             {
                 skillUI.OnSkillUse(index);
-                sk.Execute();
+                entityAnimator.Play(sk.animation.name);
+                sk.Execute(sk.animation.length);
                 _playerManager.StopAttacking();
-                entityAnimator.Play("Sprinting");
                 AddInvulnerability(sk.iFrameDuration);
                 sk.onCooldown = true;
                 StartCoroutine(GoOnCooldown(sk));
