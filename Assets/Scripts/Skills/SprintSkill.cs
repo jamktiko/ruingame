@@ -24,6 +24,7 @@ namespace DefaultNamespace.Skills
         {
             if (!onCooldown)
             {
+                skillUser.usingSkill = true;
                 PlayerManager.Instance.ModifyMovementSpeed(SprintSpeed, 1);
                 IEnumerator coroutine = skillUser.UsePersistentEffect(this);
                 skillUser.StartCoroutine(coroutine);
@@ -32,6 +33,7 @@ namespace DefaultNamespace.Skills
 
         public override void DeActivatePersistentEffect()
         {
+            skillUser.usingSkill = false;
             PlayerManager.Instance.ModifyMovementSpeed(SprintSpeed, 0);
         }
     }

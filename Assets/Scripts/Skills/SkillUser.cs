@@ -19,6 +19,8 @@ public class SkillUser : MonoBehaviour
     public SkillsUI skillUI;
     
     private PlayerManager _playerManager;
+
+    public bool usingSkill;
     
     //STORE THIS IN SKILL
     public AnimationClip sprintAnimation;
@@ -119,18 +121,25 @@ public class SkillUser : MonoBehaviour
         {
             if (!sk.onCooldown)
             {
-                skillUI.OnSkillUse(index);
-                //SKILL SHOULD DETERMINE WHICH ANIMATION TO USE
-                //Currently uses animation length to determine skill duration, probably should work other way around?
-                try
+                if (!usingSkill)
                 {
-                    sk.Execute(sk.animationClip.length);
-                    entityAnimator.Play(sk.animationClip.name);
+                    skillUI.OnSkillUse(index);
+                    //SKILL SHOULD DETERMINE WHICH ANIMATION TO USE
+                    //Currently uses animation length to determine skill duration, probably should work other way around?
+                    try
+                    {
+                        sk.Execute(sk.animationClip.length);
+                        entityAnimator.Play(sk.animationClip.name);
+                    }
+                    catch
+                    {
+                        sk.Execute();
+                        Debug.Log("No skill animation!");
+                    }
+                    _playerManager.StopAttacking();
+                    AddInvulnerability(sk.iFrameDuration);
+                    StartCoroutine(GoOnCooldown(sk));
                 }
-                catch {Debug.Log("No skill animation!");}
-                _playerManager.StopAttacking();
-                AddInvulnerability(sk.iFrameDuration);
-                StartCoroutine(GoOnCooldown(sk));
             }
         }
     }
