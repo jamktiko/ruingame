@@ -48,6 +48,8 @@ public class MovementController : MonoBehaviour
 
     public float attackMovement;
     public bool attacking;
+    private static readonly int MovementSpeed = Animator.StringToHash("movementSpeed");
+
     private void OnEnable()
     {
         try
@@ -80,6 +82,7 @@ public class MovementController : MonoBehaviour
         _characterAnimator = GetComponentInChildren<Animator>();
         _inputReader = PlayerManager.Instance.playerInputReader;
         CreateStepRays();
+        _characterAnimator.SetFloat(MovementSpeed, _movementSpeed/10);
     }
 
     private void CreateStepRays()
@@ -221,10 +224,12 @@ public class MovementController : MonoBehaviour
     }
     public virtual IEnumerator Dashing(float duration)
     {
+        _characterAnimator.SetBool("dashing", true);
         dashing = true;
         var originalInput = MovementInput;
         if (originalInput == Vector3.zero)
         {
+            _animatorVelocity = 0;
             originalInput = transform.forward;
         }
         for (float ft = duration-0.2f; ft >= 0; ft -= 0.1f)
@@ -233,6 +238,7 @@ public class MovementController : MonoBehaviour
             yield return new WaitForSeconds(.1f);
         }
         dashing = false;
+        _characterAnimator.SetBool("dashing", false);
     }
     public void SetPlayerCamera(TransformAnchor cam)
     {
@@ -242,6 +248,7 @@ public class MovementController : MonoBehaviour
     public void SetMovementSpeed(float amount)
     {
         _movementSpeed = amount;
+        _characterAnimator.SetFloat(MovementSpeed, _movementSpeed/10);
     }
     public void SetJumpHeight(float amount)
     {
