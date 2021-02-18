@@ -19,7 +19,8 @@ public class SkillUser : MonoBehaviour
     public SkillsUI skillUI;
     
     private PlayerManager _playerManager;
-
+    
+    //STORE THIS IN SKILL
     public AnimationClip sprintAnimation;
     
     private void Awake()
@@ -35,8 +36,9 @@ public class SkillUser : MonoBehaviour
             skillList[i].skillUser = this;
         }
         entityHealth = GetComponent<Health>();
+        //MOVE THIS TO CHARACTER CREATION OR SOME SHIT
         skillList[3] = gameObject.AddComponent<SprintSkill>();
-        skillList[3].animation = sprintAnimation;
+        skillList[3].animationClip = sprintAnimation;
         skillList[3].skillUser = this;
     }
     private void OnEnable()
@@ -117,23 +119,28 @@ public class SkillUser : MonoBehaviour
         {
             if (!sk.onCooldown)
             {
+                
                 skillUI.OnSkillUse(index);
-                entityAnimator.Play(sk.animation.name);
-                sk.Execute(sk.animation.length);
+                
+                //SKILL SHOULD DETERMINE WHICH ANIMATION TO USE
+                entityAnimator.Play(sk.animationClip.name);
+                //Currently uses animation length to determine skill duration, probably should work other way around?
+                sk.Execute(sk.animationClip.length);
+                
                 _playerManager.StopAttacking();
                 AddInvulnerability(sk.iFrameDuration);
-                sk.onCooldown = true;
                 StartCoroutine(GoOnCooldown(sk));
             }
         }
     }
     public void ResetAllSkills()
     {
+        //USE WITH CARE
+        this.StopAllCoroutines();
         foreach (var skill in skillList)
         {
             skill.onCooldown = false;
         }
-        this.StopAllCoroutines();
     }
     public void AddInvulnerability(float duration)
     {
@@ -141,6 +148,7 @@ public class SkillUser : MonoBehaviour
     }
     public virtual IEnumerator GoOnCooldown(SkillExecute sk)
     {
+        sk.onCooldown = true;
         yield return new WaitForSeconds(sk.skillCooldown);
         sk.onCooldown = false;
     }

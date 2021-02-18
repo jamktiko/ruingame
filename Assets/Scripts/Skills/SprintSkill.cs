@@ -14,7 +14,10 @@ namespace DefaultNamespace.Skills
         public float SprintSpeed = 20f;
         public override void Execute(float duration)
         {
+            // THIS LOCKS PLAYER MOVEMENT TO LAST INPUT OR FORCES MOVEMENT IF PLAYER IS NOT INPUTTING ANYTHING
             PlayerManager.Instance._playerMovement.OnDash(duration);
+            
+            //APPLIES ENHANCED MOVEMENT SPEED
             ApplyPersistentEffect();
         }
         public override void ApplyPersistentEffect()
