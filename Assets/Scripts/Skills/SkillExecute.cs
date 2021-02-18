@@ -15,6 +15,7 @@ public class SkillExecute : MonoBehaviour
     public AnimationClip animationClip;
     public virtual void Execute()
     {
+        Debug.Log("Skill base, create an implementation!");
     }
     public virtual void Execute(float duration)
     {

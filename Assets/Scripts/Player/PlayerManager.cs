@@ -74,18 +74,14 @@ public class PlayerManager : BaseManager
         DisableScriptsOnPlayer();
         EnableScriptsOnPlayer();
         UpdatePlayerStats();
+        LockCursorToGame();
     }
 
-    private void Update()
+    private void LockCursorToGame()
     {
-        //For testing updates
-        /*if (Mouse.current.rightButton.wasPressedThisFrame)
-        {
-            UpdatePlayerStats();
-        }*/
-        //MAKE GUI FOR UPDATING PLAYER STATS
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
-
     private void SetupPlayerInput()
     {
         playerAnimator = GameManager.Instance.playerAnimator;

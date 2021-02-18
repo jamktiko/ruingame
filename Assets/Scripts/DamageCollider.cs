@@ -36,7 +36,6 @@ public class DamageCollider : MonoBehaviour
                 targetHealth.DealDamage(damage);
             }
             catch {Debug.Log("Target has no health!");}
-
             try
             {
                 var rb = tr.GetComponent<Rigidbody>();

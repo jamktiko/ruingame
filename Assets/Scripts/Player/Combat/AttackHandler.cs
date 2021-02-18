@@ -47,6 +47,8 @@ public class AttackHandler : MonoBehaviour
             return;
         if (!_movementControl.GroundedEntity)
             return;
+        if (_movementControl.dashing)
+            return;
         attacking = true;
         ComboAttack comboToExecute = comboHandler.ProcessCombo();
         try

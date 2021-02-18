@@ -29,10 +29,10 @@ public class SkillUser : MonoBehaviour
         _playerManager = PlayerManager.Instance;
         inputReader = _playerManager.playerInputReader;
         skillList = new SkillExecute[4];
-        var skills = GetComponentsInChildren<SkillExecute>();
-        for (int i = 0; i < skills.Length; i++)
+        //var skills = GetComponentsInChildren<SkillExecute>();
+        for (int i = 0; i < skillList.Length; i++)
         {
-            skillList[i] = skills[i];
+            skillList[i] = gameObject.AddComponent<SkillExecute>();
             skillList[i].skillUser = this;
         }
         entityHealth = GetComponent<Health>();
@@ -73,7 +73,7 @@ public class SkillUser : MonoBehaviour
         }
         catch
         {
-            Debug.Log("No skill assigned!");
+            Debug.Log("Cant Execute Skill!");
         }
     }
 
@@ -85,7 +85,7 @@ public class SkillUser : MonoBehaviour
         }
         catch
         {
-            Debug.Log("No skill assigned!");
+            Debug.Log("Cant Execute Skill!");
         }
     }
 
@@ -97,7 +97,7 @@ public class SkillUser : MonoBehaviour
         }
         catch
         {
-            Debug.Log("No skill assigned!");
+            Debug.Log("Cant Execute Skill!");
         }
     }
 
@@ -119,14 +119,15 @@ public class SkillUser : MonoBehaviour
         {
             if (!sk.onCooldown)
             {
-                
                 skillUI.OnSkillUse(index);
-                
                 //SKILL SHOULD DETERMINE WHICH ANIMATION TO USE
-                entityAnimator.Play(sk.animationClip.name);
                 //Currently uses animation length to determine skill duration, probably should work other way around?
-                sk.Execute(sk.animationClip.length);
-                
+                try
+                {
+                    sk.Execute(sk.animationClip.length);
+                    entityAnimator.Play(sk.animationClip.name);
+                }
+                catch {Debug.Log("No skill animation!");}
                 _playerManager.StopAttacking();
                 AddInvulnerability(sk.iFrameDuration);
                 StartCoroutine(GoOnCooldown(sk));

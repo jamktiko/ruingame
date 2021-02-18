@@ -44,7 +44,7 @@ public class MovementController : MonoBehaviour
     private GameObject _stepRayUpper;
     private GameObject _stepRayLower;
 
-    private bool dashing;
+    public bool dashing { get; private set; }
 
     public float attackMovement;
     public bool attacking;
