@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Management.Instrumentation;
-using DefaultNamespace;
-using UnityEditor;
-using UnityEditor.Rendering;
+﻿using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 
 [RequireComponent(typeof(PlayerAttackHandler))]

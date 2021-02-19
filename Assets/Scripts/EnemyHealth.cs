@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
-using DefaultNamespace;
-using UnityEngine;
-using UnityEngine.Serialization;
-
-
+﻿
 namespace DefaultNamespace
 {
     public class EnemyHealth : Health

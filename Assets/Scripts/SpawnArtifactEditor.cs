@@ -1,5 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
+#if (UNITY_EDITOR) 
+
 using UnityEditor;
 using UnityEngine;
 using DefaultNamespace;
@@ -18,3 +19,4 @@ public class SpawnArtifactEditor : Editor
         }
     }
 }
+#endif

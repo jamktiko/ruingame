@@ -1,8 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Cinemachine;
-using System.Collections;
-using UnityEngine.Serialization;
+
 
 public class CameraManager : MonoBehaviour
 {

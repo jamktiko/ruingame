@@ -1,4 +1,5 @@
-﻿using DefaultNamespace;
+﻿
+#if (UNITY_EDITOR)
 using UnityEngine;     
 using UnityEditor;     
 
@@ -25,4 +26,5 @@ public class SpawnerEditor : Editor
             spawner.StartSpawning(EnemiesToSpawn);
         }    
     }                                        
-}                                            
+}               
+#endif                             

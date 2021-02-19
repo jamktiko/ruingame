@@ -1,7 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
+#if (UNITY_EDITOR) 
+
 using UnityEngine;
 using UnityEditor;
+
 
 [CustomEditor(typeof(GameManager))]
 public class GameEditorManager : Editor
@@ -46,3 +48,4 @@ public class GameEditorManager : Editor
         }
     }
 }
+#endif

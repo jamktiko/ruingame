@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using DefaultNamespace;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AnimationTriggerHandler : MonoBehaviour
 {

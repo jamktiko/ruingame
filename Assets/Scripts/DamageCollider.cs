@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using DefaultNamespace;
-using FMOD;
+﻿
 using UnityEngine;
-using UnityEngine.Serialization;
+
 using Debug = UnityEngine.Debug;
 
 public class DamageCollider : MonoBehaviour
