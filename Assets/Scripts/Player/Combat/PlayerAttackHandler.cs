@@ -52,6 +52,11 @@ public class PlayerAttackHandler : ComboAttackHandler
         base.StartAttack();
         _movementControl.attacking = attacking;
     }
+    protected override void TurnTowardsNearest()
+    {
+        var nearestTarget = _attackTargeting.FindNearestTargetInRadius(currentAttack.radius + 10f);
+        _movementControl.RotateTowardsMovement(nearestTarget, 1000f);
+    }
 
     //New and improved attack logic!
 }

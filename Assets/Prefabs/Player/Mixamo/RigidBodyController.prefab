@@ -133,6 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22bda2f9af239d843bd2742bb700a8af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerData: {fileID: 0}
   pickUpEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -230,6 +231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72c4c3f844aa93a499aea6f44e2096ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canKnockback: 1
 --- !u!114 &2433242057000738767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -480,7 +482,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 6875279134306125958, guid: a24d53503af86754899f3d3d33a6be92,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 6875279134278805807, guid: a24d53503af86754899f3d3d33a6be92, type: 3}
+    - {fileID: 6875279134278805806, guid: a24d53503af86754899f3d3d33a6be92, type: 3}
+    - {fileID: 6875279134278805793, guid: a24d53503af86754899f3d3d33a6be92, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a24d53503af86754899f3d3d33a6be92, type: 3}
 --- !u!4 &5074481599900752763 stripped
 Transform:

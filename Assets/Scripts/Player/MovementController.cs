@@ -98,12 +98,13 @@ public class MovementController : MonoBehaviour
     private void Update()
     {
         CalculateMovement();
+        HandleMovementAnimation();
     }
     private void FixedUpdate()
     {
         GroundCheck();
         StepClimb();
-        if (!attacking && !dashing)
+        if (!attacking && !dashing && MovementInput.magnitude > 0)
         {
             Move(MovementInput);
             RotateTowardsMovement(turnSmoothing);
@@ -112,7 +113,6 @@ public class MovementController : MonoBehaviour
         {
             _animatorVelocity = 0.0f;
         }
-        HandleMovementAnimation();
     }
     private void Move(Vector3 MovementInput)
     {
@@ -157,6 +157,13 @@ public class MovementController : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(newDirection);
 
     }
+    public void RotateTowardsMovement(Vector3 direction, float amount)
+    {
+        float singleStep = amount * Time.deltaTime;
+        Vector3 newDirection = Vector3.RotateTowards(transform.forward, direction, singleStep, 0.0f);
+        transform.rotation = Quaternion.LookRotation(newDirection);
+    }
+    
     public void CalculateMovement()
     {
         if (_gameplayCameraTransform.isSet)

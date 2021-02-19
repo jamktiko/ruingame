@@ -10,28 +10,36 @@ public class AttackTargeting : MonoBehaviour
     public LayerMask layerToCheck;
     public GameObject[] HandleTargeting(BaseAttack attack)
     {
-        try
-        {
-            switch (attack.targetingType)
+        switch (attack.targetingType)
             {
                 case BaseAttack.basetargetingType.AOE:
                     return GetAOETargets(attack.radius);
                 case BaseAttack.basetargetingType.FRONTAL:
-                    return GetFrontalTargets();
+                    return GetFrontalTargets(attack.radius);
                 case BaseAttack.basetargetingType.NEAREST:
-                    return GetNearestTargets();
+                    return GetNearestTargets(attack.radius);
             }
-        }
-        catch
-        {
-            Debug.Log("Unknown targeting type!");
-        }
         return new GameObject[1];
     }
 
-    private GameObject[] GetNearestTargets()
+    private GameObject[] GetNearestTargets(float radius)
     {
-        return new GameObject[1];
+        GameObject[] gos;
+        gos = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject closest = null;
+        float distance = radius;
+        Vector3 position = transform.position;
+        foreach (GameObject go in gos) {
+            Vector3 diff = go.transform.position - position;
+            float curDistance = diff.sqrMagnitude;
+            if (curDistance < distance) {
+                closest = go;
+                distance = curDistance;
+            }
+        }
+        gos = new GameObject[1];
+        gos[0] = closest;
+        return gos;
     }
     private GameObject[] GetAOETargets(float radius)
     {
@@ -47,8 +55,35 @@ public class AttackTargeting : MonoBehaviour
         }
         return retVal.ToArray();
     }
-    private GameObject[] GetFrontalTargets()
+    private GameObject[] GetFrontalTargets(float radius)
     {
         return new GameObject[1];
+    }
+
+    public Vector3 FindNearestTargetInRadius(float radius)
+    {
+        GameObject[] gos;
+        gos = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject closest = null;
+        float distance = radius;
+        Vector3 position = transform.position;
+        foreach (GameObject go in gos) {
+            Vector3 diff = go.transform.position - position;
+            float curDistance = diff.sqrMagnitude;
+            if (curDistance < distance) {
+                closest = go;
+                distance = curDistance;
+            }
+        }
+        if (closest != null)
+        {
+            var target = (closest.transform.position - transform.position);
+            target.y = 0;
+            return target.normalized;
+        }
+        else
+        {
+            return transform.forward;
+        }
     }
 }

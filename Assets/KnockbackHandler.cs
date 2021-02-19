@@ -8,8 +8,8 @@ public class KnockbackHandler : MonoBehaviour
 {
     private Rigidbody _characterRigidbody;
     private BaseEnemy _enemyController;
-    private bool canKnockback = true;
-    public Vector3 currentTarget;
+    public bool canKnockback = true;
+    private Vector3 currentTarget;
     void Start()
     {
         _enemyController = gameObject.GetComponent<BaseEnemy>();
@@ -19,7 +19,8 @@ public class KnockbackHandler : MonoBehaviour
     public virtual void HandleKnockBack(Vector3 target, float force)
     {
         currentTarget = target;
-        _enemyController.stunned = true;
+        try {_enemyController.stunned = true;}
+        catch {}
         if (canKnockback)
         {
             canKnockback = false;

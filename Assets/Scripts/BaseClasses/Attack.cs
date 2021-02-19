@@ -33,8 +33,8 @@ public class Attack : MonoBehaviour
         }
         catch
         {
+            
         }
-
         DamageCollider.EnableDamage();
         currentlyAttacking = true;
         Invoke("EndAttack", 1f);

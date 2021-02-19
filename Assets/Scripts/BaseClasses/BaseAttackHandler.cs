@@ -37,6 +37,7 @@ namespace DefaultNamespace
 
         public virtual void OnDisable()
         {
+            
         }
 
         protected virtual void OnAttack()
@@ -46,6 +47,12 @@ namespace DefaultNamespace
                 AttemptAttack();
             }
         }
+        //ON ATTACK
+            //CHECK ATTACK CONDITIONS
+            //ATTEMPTATTACK
+            //STARTATTACK
+            //EXECUTE ATTACK
+            //START END ATTACK ROUTINE
 
         public virtual void AttemptAttack()
         {
@@ -54,10 +61,16 @@ namespace DefaultNamespace
             catch {Debug.Log("No attack to execute!");}
             try { currentTargets = TargetAttack(currentAttack); }
             catch {Debug.Log("No targets found!");}
+
+            TurnTowardsNearest();
             ExecuteAttack();
             StartCoroutine(EndAttackRoutine(GetAttackEndDuration()));
         }
 
+        protected virtual void TurnTowardsNearest()
+        {
+            
+        }
         protected virtual float GetAttackEndDuration()
         {
             return 2f;
@@ -156,6 +169,5 @@ namespace DefaultNamespace
                 }
             }
         }
-        
     }
 }
