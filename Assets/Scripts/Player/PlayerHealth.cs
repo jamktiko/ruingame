@@ -1,8 +1,8 @@
 ﻿
 public class PlayerHealth : Health
 {
-    public float FlatResistance;
-    public float PercentualResistance;
+    public float flatResistance;
+    public float percentualResistance;
     public override void Die()
     {
         PlayerManager pm = GetComponent<PlayerManager>();

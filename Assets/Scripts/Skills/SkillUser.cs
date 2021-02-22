@@ -24,12 +24,15 @@ public class SkillUser : MonoBehaviour
     //STORE THIS IN SKILL
     public AnimationClip sprintAnimation;
     
+    public Targeting skillTargeting { get; private set; }
     private void Awake()
     {
         entityAnimator = GetComponentInChildren<Animator>();
         _playerManager = PlayerManager.Instance;
         inputReader = _playerManager.playerInputReader;
         entityHealth = GetComponent<Health>();
+        
+        skillTargeting = gameObject.AddComponent<Targeting>();
         
         skillList = new SkillExecute[4];
         skillList[0] = gameObject.AddComponent<WhirlwindSkill>();
@@ -41,6 +44,8 @@ public class SkillUser : MonoBehaviour
         skillList[3] = gameObject.AddComponent<SprintSkill>();
         skillList[3].animationClip = sprintAnimation;
         skillList[3].skillUser = this;
+        
+        
     }
     private void OnEnable()
   
@@ -126,8 +131,8 @@ public class SkillUser : MonoBehaviour
                     _playerManager.StopAttacking();
                     //SKILL SHOULD DETERMINE WHICH ANIMATION TO USE
                     //Currently uses animation length to determine skill duration, probably should work other way around?
-                    sk.Execute();
-                    /*try
+          
+                    try
                     {
                         sk.Execute(sk.animationClip.length);
                         entityAnimator.Play(sk.animationClip.name);
@@ -137,7 +142,7 @@ public class SkillUser : MonoBehaviour
                         sk.Execute();
                         Debug.Log("No skill animation!");
                     }
-                    */
+                    
                     AddInvulnerability(sk.iFrameDuration);
                     StartCoroutine(GoOnCooldown(sk));
                 }

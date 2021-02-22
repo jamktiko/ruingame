@@ -172,6 +172,8 @@ MonoBehaviour:
   _healthUI: {fileID: 2433242057000738767}
   CurrentHealth: 0
   _damageable: 1
+  flatResistance: 0
+  percentualResistance: 0
 --- !u!114 &4976709545601713087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -422,6 +424,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2280579018184987110}
     m_Modifications:
+    - target: {fileID: 2997212299148761449, guid: a24d53503af86754899f3d3d33a6be92,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 3934136008851214654, guid: a24d53503af86754899f3d3d33a6be92,
         type: 3}
       propertyPath: m_Name
@@ -482,15 +489,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6875279134306125958, guid: a24d53503af86754899f3d3d33a6be92,
+    - target: {fileID: 9093402197743950409, guid: a24d53503af86754899f3d3d33a6be92,
         type: 3}
-      propertyPath: m_Enabled
-      value: 1
+      propertyPath: m_LocalPosition.x
+      value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6875279134278805807, guid: a24d53503af86754899f3d3d33a6be92, type: 3}
-    - {fileID: 6875279134278805806, guid: a24d53503af86754899f3d3d33a6be92, type: 3}
-    - {fileID: 6875279134278805793, guid: a24d53503af86754899f3d3d33a6be92, type: 3}
+    - target: {fileID: 9093402197743950409, guid: a24d53503af86754899f3d3d33a6be92,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.007
+      objectReference: {fileID: 0}
+    - target: {fileID: 9093402197743950409, guid: a24d53503af86754899f3d3d33a6be92,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.757
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a24d53503af86754899f3d3d33a6be92, type: 3}
 --- !u!4 &5074481599900752763 stripped
 Transform:

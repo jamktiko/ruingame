@@ -33,7 +33,7 @@ namespace DefaultNamespace.Skills
             skillname = "Stance Change";
             damage = 20f;
             resistance = 5f;
-            passiveAttackSpeed = 10f;
+            passiveAttackSpeed = 0.5f;
             passiveResistance = 10f;
             
             PlayerManager.Instance.ModifyAttackSpeed(passiveAttackSpeed, 1);

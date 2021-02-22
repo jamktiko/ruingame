@@ -175,8 +175,8 @@ public class PlayerManager : BaseManager
 
     public void ModifyResistance(float amount, int type)
     {
-        ModifyPlayerData(ref _playerHealth.FlatResistance, amount, type);
-        ModifyPlayerData(ref _playerHealth.PercentualResistance, amount, type);
+        ModifyPlayerData(ref _playerHealth.flatResistance, amount, type);
+        ModifyPlayerData(ref _playerHealth.percentualResistance, amount, type);
     }
 
     public void Die()

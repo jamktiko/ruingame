@@ -21,13 +21,10 @@ public class SkillExecute : MonoBehaviour
 
     protected Targeting targeting;
 
-    private void Start()
+    protected virtual void Start()
     {
-        targeting = gameObject.AddComponent<Targeting>();
-
+        targeting = skillUser.skillTargeting;
     }
-    
-    
     public virtual void Execute()
     {
         Debug.Log("Skill base, create an implementation!");

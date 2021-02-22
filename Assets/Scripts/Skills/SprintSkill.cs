@@ -1,6 +1,7 @@
 ﻿
 
 using System.Collections;
+using UnityEditor;
 
 
 namespace DefaultNamespace
@@ -9,6 +10,13 @@ namespace DefaultNamespace
     {
         //Should contain UI IMAGE and Animation Clip
         public float SprintSpeed = 20f;
+
+        protected override void Start()
+        {
+            base.Start();
+            duration = 0.5f;
+        }
+
         public override void Execute(float duration)
         {
             // THIS LOCKS PLAYER MOVEMENT TO LAST INPUT OR FORCES MOVEMENT IF PLAYER IS NOT INPUTTING ANYTHING
