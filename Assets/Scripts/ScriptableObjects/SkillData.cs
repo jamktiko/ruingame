@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 
 public class SkillData : MonoBehaviour
 {
+    /*
     [System.Serializable]
     public class SkillListTemplate
     {
@@ -52,6 +53,7 @@ public class SkillData : MonoBehaviour
         }
         return returnSkill;
     }
+    */
 }
 
 static class Extensions

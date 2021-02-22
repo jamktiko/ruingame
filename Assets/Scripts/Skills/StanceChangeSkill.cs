@@ -1,7 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using System.Dynamic;
-using Data.Util;
 using UnityEngine;
 
 #region Skill description
@@ -28,7 +25,7 @@ namespace DefaultNamespace.Skills
         [SerializeField] private float passiveAttackSpeed;
         [SerializeField] private float passiveResistance;
 
-        private void Start()
+        protected override void Start()
         {
             skillname = "Stance Change";
             damage = 20f;

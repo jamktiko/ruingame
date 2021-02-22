@@ -1,8 +1,4 @@
-﻿
-
-using System.Collections;
-using System.Collections.Generic;
-using System.Dynamic;
+﻿using System.Collections;
 using UnityEngine;
 
 #region Skill description
