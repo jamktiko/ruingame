@@ -1,12 +1,10 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Cinemachine;
-using System.Collections;
-using UnityEngine.Serialization;
+
 
 public class CameraManager : MonoBehaviour
 {
-	private InputReader inputReader;
+	public InputReader inputReader;
 	private Camera mainCamera;
 	private CinemachineFreeLook freeLookVCam;
 	private bool _isRmbPressed;
@@ -30,21 +28,19 @@ public class CameraManager : MonoBehaviour
 		freeLookVCam = GetComponentInChildren<CinemachineFreeLook>();
 		mainCamera = GetComponentInChildren<Camera>();
 		cameraTransformAnchor.Transform = mainCamera.transform;
-		inputReader = GameManager.Instance.playerInputReader;
 	}
-
 	private void OnEnable()
 	{
 		try
 		{
 			inputReader.CameraMoveEvent += OnCameraMove;
-			Cursor.lockState = CursorLockMode.Locked;
 		}
 		catch{}
 	}
 
 	private void Start()
 	{
+		inputReader = GameManager.Instance.playerInputReader;
 		Cursor.visible = false;
 	}
 	private void OnDisable()
@@ -54,7 +50,7 @@ public class CameraManager : MonoBehaviour
 		inputReader.CameraMoveEvent -= OnCameraMove;
 	}
 	
-	private void OnCameraMove(Vector2 cameraMovement, bool isDeviceMouse)
+	private void OnCameraMove(Vector2 cameraMovement)
 	{
 		if (_cameraMovementLock)
 			return;

@@ -1,10 +1,9 @@
-﻿using System;
+﻿
 using System.Collections;
-using System.Collections.Generic;
-using DefaultNamespace.Skills;
+
+using DefaultNamespace;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
+
 
 public class SkillUser : MonoBehaviour
 {
@@ -20,20 +19,27 @@ public class SkillUser : MonoBehaviour
     
     private PlayerManager _playerManager;
 
+    public bool usingSkill;
+    
+    //STORE THIS IN SKILL
+    public AnimationClip sprintAnimation;
+    
     private void Awake()
     {
         entityAnimator = GetComponentInChildren<Animator>();
         _playerManager = PlayerManager.Instance;
         inputReader = _playerManager.playerInputReader;
         skillList = new SkillExecute[4];
-        var skills = GetComponentsInChildren<SkillExecute>();
-        for (int i = 0; i < skills.Length; i++)
+        //var skills = GetComponentsInChildren<SkillExecute>();
+        for (int i = 0; i < skillList.Length; i++)
         {
-            skillList[i] = skills[i];
+            skillList[i] = gameObject.AddComponent<SkillExecute>();
             skillList[i].skillUser = this;
         }
         entityHealth = GetComponent<Health>();
+        //MOVE THIS TO CHARACTER CREATION OR SOME SHIT
         skillList[3] = gameObject.AddComponent<SprintSkill>();
+        skillList[3].animationClip = sprintAnimation;
         skillList[3].skillUser = this;
     }
     private void OnEnable()
@@ -68,7 +74,7 @@ public class SkillUser : MonoBehaviour
         }
         catch
         {
-            Debug.Log("No skill assigned!");
+            Debug.Log("Cant Execute Skill!");
         }
     }
 
@@ -80,7 +86,7 @@ public class SkillUser : MonoBehaviour
         }
         catch
         {
-            Debug.Log("No skill assigned!");
+            Debug.Log("Cant Execute Skill!");
         }
     }
 
@@ -92,7 +98,7 @@ public class SkillUser : MonoBehaviour
         }
         catch
         {
-            Debug.Log("No skill assigned!");
+            Debug.Log("Cant Execute Skill!");
         }
     }
 
@@ -114,23 +120,36 @@ public class SkillUser : MonoBehaviour
         {
             if (!sk.onCooldown)
             {
-                skillUI.OnSkillUse(index);
-                sk.Execute();
-                _playerManager.StopAttacking();
-                entityAnimator.Play("Sprinting");
-                AddInvulnerability(sk.iFrameDuration);
-                sk.onCooldown = true;
-                StartCoroutine(GoOnCooldown(sk));
+                if (!usingSkill)
+                {
+                    skillUI.OnSkillUse(index);
+                    //SKILL SHOULD DETERMINE WHICH ANIMATION TO USE
+                    //Currently uses animation length to determine skill duration, probably should work other way around?
+                    try
+                    {
+                        sk.Execute(sk.animationClip.length);
+                        entityAnimator.Play(sk.animationClip.name);
+                    }
+                    catch
+                    {
+                        sk.Execute();
+                        Debug.Log("No skill animation!");
+                    }
+                    _playerManager.StopAttacking();
+                    AddInvulnerability(sk.iFrameDuration);
+                    StartCoroutine(GoOnCooldown(sk));
+                }
             }
         }
     }
     public void ResetAllSkills()
     {
+        //USE WITH CARE
+        this.StopAllCoroutines();
         foreach (var skill in skillList)
         {
             skill.onCooldown = false;
         }
-        this.StopAllCoroutines();
     }
     public void AddInvulnerability(float duration)
     {
@@ -138,6 +157,7 @@ public class SkillUser : MonoBehaviour
     }
     public virtual IEnumerator GoOnCooldown(SkillExecute sk)
     {
+        sk.onCooldown = true;
         yield return new WaitForSeconds(sk.skillCooldown);
         sk.onCooldown = false;
     }
@@ -145,6 +165,6 @@ public class SkillUser : MonoBehaviour
     public virtual IEnumerator UsePersistentEffect(SkillExecute sk)
     {
         yield return new WaitForSeconds(sk.duration);
-        sk.DeActivatePersistentEffect();
+        sk.DeActivateSkillActive();
     }
 }

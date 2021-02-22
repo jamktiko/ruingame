@@ -1,24 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using DefaultNamespace;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AnimationTriggerHandler : MonoBehaviour
 {
-    private DamageCollider _damageCollider;
-
+    private PlayerAttackHandler _attackHandler;
     public void Start()
     {
-        _damageCollider = GetComponentInChildren<DamageCollider>();
+        _attackHandler = GetComponentInParent<PlayerAttackHandler>();
     }
-
-    public void TriggerAttack()
+    
+    public void HandleDamage()
     {
-        _damageCollider.EnableDamage();
-    }
-
-    public void EndAttack()
-    {
-        _damageCollider.DisableDamage();
+        _attackHandler.HandleAttack();
     }
 }

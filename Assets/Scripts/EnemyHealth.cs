@@ -1,20 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using DefaultNamespace;
-using UnityEngine;
-using UnityEngine.Serialization;
-
-
+﻿
 namespace DefaultNamespace
 {
     public class EnemyHealth : Health
     {
         public BaseEnemy enemyController;
-        public void Awake()
-        {
-            //_enemyUI.GetComponentInChildren<EnemyUI>();
-        }
 
         public override void Start()
         {
@@ -26,6 +15,13 @@ namespace DefaultNamespace
         {
             enemyController.stunned = true;
             base.ReactToDamage(amount);
+        }
+
+        public override void Die()
+        {
+            base.Die();
+            enemyController.alive = false;
+            Destroy(gameObject, 0.5f);
         }
     }
 }

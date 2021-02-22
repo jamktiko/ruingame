@@ -18163,6 +18163,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5600401760730486634}
     m_Modifications:
+    - target: {fileID: 2542527907776396690, guid: 24a30ff7b609dc149b445d7a6303bade,
+        type: 3}
+      propertyPath: enemyprefab
+      value: 
+      objectReference: {fileID: 1910478632522504324, guid: 5a47fa785602df84085398023e66d6b6,
+        type: 3}
     - target: {fileID: 4842846113111248328, guid: 24a30ff7b609dc149b445d7a6303bade,
         type: 3}
       propertyPath: m_Name

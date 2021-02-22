@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using DefaultNamespace;
+﻿
 using UnityEngine;
 
 public class Health : MonoBehaviour
@@ -48,9 +46,9 @@ public class Health : MonoBehaviour
     public virtual void Die()
     {
         //Animation
-        EntityAnimator.Play("Death");
+        //EntityAnimator.Play("Death");
         //Particles
-        Destroy(gameObject, 0.6f);
+        
         //Update UI or stats
         SendMessageUpwards("EntityDeath");
     }
