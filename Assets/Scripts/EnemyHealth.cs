@@ -1,21 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
-using DefaultNamespace;
-using UnityEngine;
-using UnityEngine.Serialization;
-
-
+﻿
 namespace DefaultNamespace
 {
     public class EnemyHealth : Health
     {
         public BaseEnemy enemyController;
-        public void Awake()
-        {
-            //_enemyUI.GetComponentInChildren<EnemyUI>();
-        }
 
         public override void Start()
         {

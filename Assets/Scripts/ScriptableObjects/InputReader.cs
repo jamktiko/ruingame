@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
-using UnityEngine.UIElements;
+
 
 [CreateAssetMenu(fileName = "InputReader", menuName = "Game/Input Reader")]
 public class InputReader : ScriptableObject, PlayerInput.IGameplayActions
@@ -16,7 +15,7 @@ public class InputReader : ScriptableObject, PlayerInput.IGameplayActions
     public event UnityAction OpenInventoryEvent = delegate { }; 
     public event UnityAction PauseEvent = delegate { };
     public event UnityAction<Vector2> MoveEvent = delegate { };
-    public event UnityAction<Vector2, bool> CameraMoveEvent = delegate { };
+    public event UnityAction<Vector2> CameraMoveEvent = delegate { };
     public event UnityAction EnableMouseControlCameraEvent = delegate { };
     public event UnityAction DisableMouseControlCameraEvent = delegate { };
     public event UnityAction StartedRunning = delegate { };
@@ -34,9 +33,7 @@ public class InputReader : ScriptableObject, PlayerInput.IGameplayActions
         {
             _playerInput = new PlayerInput();
             _playerInput.Gameplay.SetCallbacks(this);
-            //UI
         }
-
         EnablePlayerInput();
     }
     private void OnDisable()
@@ -76,7 +73,7 @@ public class InputReader : ScriptableObject, PlayerInput.IGameplayActions
 
     public void OnPause(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
+        Debug.Log("No method for pause");
     }
 
     public void OnOpenInventory(InputAction.CallbackContext context)
@@ -86,19 +83,12 @@ public class InputReader : ScriptableObject, PlayerInput.IGameplayActions
 
     public void OnRotateCamera(InputAction.CallbackContext context)
     {
-        CameraMoveEvent.Invoke(context.ReadValue<Vector2>(), IsDeviceMouse(context));
+        CameraMoveEvent.Invoke(context.ReadValue<Vector2>());
     }
 
     public void OnMouseControlCamera(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Performed)
-            EnableMouseControlCameraEvent.Invoke();
-
-        if (context.phase == InputActionPhase.Canceled)
-            DisableMouseControlCameraEvent.Invoke();
     }
-    
-    private bool IsDeviceMouse(InputAction.CallbackContext context) => context.control.device.name == "Mouse";
     
     public void OnRun(InputAction.CallbackContext context)
     {
@@ -141,13 +131,13 @@ public class InputReader : ScriptableObject, PlayerInput.IGameplayActions
     public void DisableAllInput()
     {
         _playerInput.Gameplay.Disable();
-        _playerInput.Menus.Disable();
+        //_playerInput.Menus.Disable();
     }
     public void EnablePlayerInput()
     {
         //Disable other input methods
         _playerInput.Gameplay.Enable();
-        _playerInput.Menus.Disable();
+        //_playerInput.Menus.Disable();
     }
 
 }

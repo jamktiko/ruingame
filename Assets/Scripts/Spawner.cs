@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
@@ -43,6 +43,10 @@ public class Spawner : MonoBehaviour
         var enemy = Instantiate(enemyprefab, gameObject.transform);
         enemiesToSpawn--;
         currentSpawnedEnemies++;
+        if (enemiesToSpawn > 0)
+        {
+            StartCoroutine(SpawnEnemy());
+        }
     }
 
     public void SpawnSingleEnemy()

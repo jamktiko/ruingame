@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections;
+﻿#if (UNITY_EDITOR) 
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
-using DefaultNamespace.Skills;
+using DefaultNamespace;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class SkillData : MonoBehaviour
@@ -73,4 +70,4 @@ static class Extensions
         list = array.ToList();
     }
 }
-
+#endif

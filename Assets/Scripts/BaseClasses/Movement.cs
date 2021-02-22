@@ -1,7 +1,6 @@
-﻿using System;
+﻿
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
+
 
 namespace DefaultNamespace
 {
@@ -13,14 +12,15 @@ namespace DefaultNamespace
         public Rigidbody _entityRigidbody;
 
         //Get from entity stats
-        
+        public bool attacking;
         public float movementSpeed = 1000f;
         [SerializeField]
         protected float turnSmoothing = 15f;
 
         public virtual void Update()
         {
-            _entityRigidbody.AddForce((movementInput * (Time.deltaTime * movementSpeed)));
+            if(!attacking)
+                _entityRigidbody.AddForce((movementInput * (Time.deltaTime * movementSpeed)));
         }
 
         public virtual void Start()
@@ -38,7 +38,10 @@ namespace DefaultNamespace
 
         }
         */
-        
+        public virtual void StopMoving()
+        {
+            
+        }
         public virtual void OnMove(Vector2 movement)
         {
             movementInput = new Vector3(movement.x, 0, movement.y);

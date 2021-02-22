@@ -1,7 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
+#if (UNITY_EDITOR) 
+
 using UnityEngine;
 using UnityEditor;
+
 
 [CustomEditor(typeof(GameManager))]
 public class GameEditorManager : Editor
@@ -14,11 +16,19 @@ public class GameEditorManager : Editor
         DrawDefaultInspector();
 
         GameManager gm = (GameManager) target;
+        EditorGUILayout.LabelField("Gameplay Settings", EditorStyles.centeredGreyMiniLabel);
         if (GUILayout.Button("Spawn Player"))
         {
             gm.ConstructPlayer();
             gm.InitializePlayer();
         }
+        if (GUILayout.Button("Lock Cursor"))
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+
+        EditorGUILayout.LabelField("Player Options", EditorStyles.centeredGreyMiniLabel);
         ValueMultiplier = EditorGUILayout.FloatField("Increase stat by:", ValueMultiplier);
         if (GUILayout.Button("Damage") && gm.currentPlayer != null)
         {
@@ -38,3 +48,4 @@ public class GameEditorManager : Editor
         }
     }
 }
+#endif

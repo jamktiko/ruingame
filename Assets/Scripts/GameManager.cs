@@ -1,13 +1,7 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using DefaultNamespace;
-using DefaultNamespace.Skills;
-using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
-
-
 
 public class GameManager : MonoBehaviour
 {
