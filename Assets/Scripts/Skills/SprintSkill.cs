@@ -10,20 +10,17 @@ namespace DefaultNamespace.Skills
 {
     public class SprintSkill : SkillExecute
     {
-        //Should contain UI IMAGE and Animation Clip
-        public float SprintSpeed = 20f;
         public override void Execute()
         {
-
-            ApplyPersistentEffect();
+            ApplyPersistentEffect(this);
         }
-        public override void ApplyPersistentEffect()
+
+        public override void ApplyPersistentEffect(SkillExecute sk)
         {
             if (!onCooldown)
             {
                 PlayerManager.Instance.ModifyMovementSpeed(SprintSpeed, 1);
-                IEnumerator coroutine = skillUser.UsePersistentEffect(this);
-                skillUser.StartCoroutine(coroutine);
+                base.ApplyPersistentEffect(sk);
             }
         }
 

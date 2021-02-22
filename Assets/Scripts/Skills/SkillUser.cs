@@ -33,6 +33,8 @@ public class SkillUser : MonoBehaviour
             skillList[i].skillUser = this;
         }
         entityHealth = GetComponent<Health>();
+        skillList[0] = gameObject.AddComponent<WhirlwindSkill>();
+        skillList[0].skillUser = this;
         skillList[3] = gameObject.AddComponent<SprintSkill>();
         skillList[3].skillUser = this;
     }
