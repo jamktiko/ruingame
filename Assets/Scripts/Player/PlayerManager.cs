@@ -143,72 +143,52 @@ public class PlayerManager : BaseManager
         //Give artifact stats and add as a string to the artifact list
         Destroy(artifact.gameObject, 0.1f);
     }
+
+    //Give property to modify and perform modification based on type given
+    private void ModifyPlayerData(float dataType, float amount, int type)
+    {
+        switch (type)
+        {
+            case 0:
+                dataType -= amount;
+                break;
+            case 1:
+                dataType += amount;
+                break;
+            default:
+                Debug.Log("No type given for modification type");
+                break;
+        }
+    }
+
     public void ModifyMovementSpeed(float amount, int type)
     {
-        //Should be in a single method (Give property to modify and perform modification based on type given)
-        switch (type)
-        {
-            case 0:
-                _playerData.entityMovementSpeed -= amount;
-                break;
-            case 1:
-                _playerData.entityMovementSpeed += amount;
-                break;
-            default:
-                Debug.Log("No type given for modification type");
-                break;
-        }
+        ModifyPlayerData(_playerData.entityMovementSpeed, amount, type);
         _playerMovement.SetMovementSpeed(_playerData.entityMovementSpeed);
     }
+
     public void ModifyJump(float amount, int type)
     {
-        switch (type)
-        {
-            case 0:
-                _playerData.entityjumpHeight -= amount;
-                break;
-            case 1:
-                _playerData.entityjumpHeight += amount;
-                break;
-            default:
-                Debug.Log("No type given for modification type");
-                break;
-        }
+        ModifyPlayerData(_playerData.entityMovementSpeed, amount, type);
         _playerMovement.SetJumpHeight((_playerData.entityjumpHeight));
     }
 
     public void ModifyDamage(float amount, int type)
     {
-        switch (type)
-        {
-            case 0:
-                _playerData.entityDamage -= amount;
-                break;
-            case 1:
-                _playerData.entityDamage += amount;
-                break;
-            default:
-                Debug.Log("No type given for modification type");
-                break;
-        }
+        ModifyPlayerData(_playerData.entityDamage, amount, type);
         _playerAttack.SetDamage(_playerData.entityDamage);
     }
 
     public void ModifyAttackSpeed(float amount, int type)
     {
-        switch (type)
-        {
-            case 0:
-                _playerData.entityAttackSpeed -= amount;
-                break;
-            case 1:
-                _playerData.entityAttackSpeed += amount;
-                break;
-            default:
-                Debug.Log("No type given for modification type");
-                break;
-        }
+        ModifyPlayerData(_playerData.entityAttackSpeed, amount, type);
         _playerAttack.SetAttackSpeed(_playerData.entityAttackSpeed);
+    }
+
+    public void ModifyResistance(float amount, int type)
+    {
+        ModifyPlayerData(_playerHealth.FlatResistance, amount, type);
+        ModifyPlayerData(_playerHealth.PercentualResistance, amount, type);
     }
 
     public void Die()
