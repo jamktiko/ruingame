@@ -305,7 +305,7 @@ GameObject:
   - component: {fileID: 8775856172880376474}
   m_Layer: 0
   m_Name: WeaponHolder
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -368,7 +368,7 @@ GameObject:
   - component: {fileID: 8775856172946932744}
   m_Layer: 0
   m_Name: Weapon
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -499,6 +499,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementInput: {x: 0, y: 0, z: 0}
+  _entityRigidbody: {fileID: 0}
   movementSpeed: 164.68
   turnSmoothing: 0.2
 --- !u!114 &8775856173488751770
