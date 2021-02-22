@@ -37,13 +37,18 @@ public class SkillUser : MonoBehaviour
             skillList[i].skillUser = this;
         }
         entityHealth = GetComponent<Health>();
-        //MOVE THIS TO CHARACTER CREATION OR SOME SHIT
+        skillList[0] = gameObject.AddComponent<WhirlwindSkill>();
+        skillList[0].skillUser = this;
+        skillList[1] = gameObject.AddComponent<ShieldBashSkill>();
+        skillList[1].skillUser = this;
+        skillList[2] = gameObject.AddComponent<StanceChangeSkill>();
+        skillList[2].skillUser = this;
         skillList[3] = gameObject.AddComponent<SprintSkill>();
         skillList[3].animationClip = sprintAnimation;
         skillList[3].skillUser = this;
     }
     private void OnEnable()
-   
+  
     {
         try
         {

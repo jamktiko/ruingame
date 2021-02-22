@@ -13,7 +13,7 @@ namespace DefaultNamespace
         {
             // THIS LOCKS PLAYER MOVEMENT TO LAST INPUT OR FORCES MOVEMENT IF PLAYER IS NOT INPUTTING ANYTHING
             PlayerManager.Instance._playerMovement.OnDash(duration);
-            
+   
             //APPLIES ENHANCED MOVEMENT SPEED
             WhileSkillActive();
         }

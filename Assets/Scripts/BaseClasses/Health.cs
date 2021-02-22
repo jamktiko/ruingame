@@ -4,8 +4,8 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     public float _maximumHealth = 100f;
-    private float _flatResistance = 10f;
-    private float _percentualResistance = 10f;
+    protected float _flatResistance = 10f;
+    protected float _percentualResistance = 10f;
     private float _reDamageTimer = 0.4f;
     //private float _reDamageTimerDoT = 0.4f;
     
