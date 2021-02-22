@@ -1,4 +1,4 @@
-﻿
+﻿#if (UNITY_EDITOR) 
 using System.Collections.Generic;
 using System.Linq;
 using DefaultNamespace;
@@ -70,4 +70,4 @@ static class Extensions
         list = array.ToList();
     }
 }
-
+#endif

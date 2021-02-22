@@ -28,7 +28,7 @@ public class MenuManager : MonoBehaviour
         //skillSelectionManager = SkillSelection.Instance;
         //skillSelectionManager.StartSkillSelection();
     }
-    private void Awake()
+    private void Start()
     {
         gameManager = GameManager.Instance;
     }

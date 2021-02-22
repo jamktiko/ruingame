@@ -50,7 +50,7 @@ public class CameraManager : MonoBehaviour
 		inputReader.CameraMoveEvent -= OnCameraMove;
 	}
 	
-	private void OnCameraMove(Vector2 cameraMovement, bool isDeviceMouse)
+	private void OnCameraMove(Vector2 cameraMovement)
 	{
 		if (_cameraMovementLock)
 			return;

@@ -27,7 +27,13 @@ namespace DefaultNamespace
             _characterRigidbody = GetComponent<Rigidbody>();
             _attackTargeting = GetComponent<AttackTargeting>();
         }
-
+        
+        //ON ATTACK
+        //CHECK ATTACK CONDITIONS
+        //ATTEMPTATTACK
+        //STARTATTACK
+        //EXECUTE ATTACK
+        //START END ATTACK ROUTINE
         public virtual void OnEnable()
         {
 
@@ -45,13 +51,6 @@ namespace DefaultNamespace
                 AttemptAttack();
             }
         }
-        //ON ATTACK
-            //CHECK ATTACK CONDITIONS
-            //ATTEMPTATTACK
-            //STARTATTACK
-            //EXECUTE ATTACK
-            //START END ATTACK ROUTINE
-
         public virtual void AttemptAttack()
         {
             StartAttack();

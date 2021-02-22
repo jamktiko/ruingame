@@ -5,13 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/Dev_Level.unity
-    guid: d1c3109bdb54ad54c8a2b2838528e640
+  - enabled: 1
+    path: Assets/Scenes/BuildAssistant.unity
+    guid: 916658ba46de8e7488fca980c265f2aa
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 7742bb792eeb2f64cbfb60683845b602
   - enabled: 1
     path: Assets/Scenes/MovementRework.unity
     guid: 8d2371d6e6430db40a8e861489d362bf
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: ef86b54ebb3ffa84f87ce24e6d49f4f1,
+      type: 2}

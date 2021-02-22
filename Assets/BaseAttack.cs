@@ -16,9 +16,13 @@ public class BaseAttack : ScriptableObject
     public basetargetingType targetingType;
     
     public float baseDamage;
-
+    
+    [Tooltip("Used to radius on AoE and radius x distance in Nearest targeting")]
     public float radius;
 
     public float knockBackStrength;
+    
+    [Tooltip("Used to calculate distance from player")]
+    public float range;
 
 }

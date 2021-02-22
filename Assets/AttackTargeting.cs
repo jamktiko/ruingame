@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -7,7 +6,7 @@ using UnityEngine;
 public class AttackTargeting : MonoBehaviour
 {
     public string[] AllowedTargetTags;
-    public LayerMask layerToCheck;
+    public LayerMask LayerToCheck;
     public GameObject[] HandleTargeting(BaseAttack attack)
     {
         switch (attack.targetingType)
@@ -15,7 +14,7 @@ public class AttackTargeting : MonoBehaviour
                 case BaseAttack.basetargetingType.AOE:
                     return GetAOETargets(attack.radius);
                 case BaseAttack.basetargetingType.FRONTAL:
-                    return GetFrontalTargets(attack.radius);
+                    return GetFrontalTargets(attack.radius, attack.range);
                 case BaseAttack.basetargetingType.NEAREST:
                     return GetNearestTargets(attack.radius);
             }
@@ -43,7 +42,7 @@ public class AttackTargeting : MonoBehaviour
     }
     private GameObject[] GetAOETargets(float radius)
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, radius, layerToCheck);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, radius, LayerToCheck);
         List<GameObject> retVal = new List<GameObject>();
         
         foreach (Collider collision in hitColliders)
@@ -55,9 +54,19 @@ public class AttackTargeting : MonoBehaviour
         }
         return retVal.ToArray();
     }
-    private GameObject[] GetFrontalTargets(float radius)
+    private GameObject[] GetFrontalTargets(float radius, float range)
     {
-        return new GameObject[1];
+        List<GameObject> targetList = new List<GameObject>();
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position, radius, transform.forward, range, LayerToCheck);
+        Debug.Log(hits.Length);
+        if (hits != null)
+        {
+            foreach (RaycastHit hit in hits)
+            {
+                targetList.Add(hit.transform.gameObject);
+            }
+        }
+        return targetList.ToArray();
     }
 
     public Vector3 FindNearestTargetInRadius(float radius)
