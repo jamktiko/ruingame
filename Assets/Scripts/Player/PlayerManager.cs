@@ -133,7 +133,7 @@ public class PlayerManager : BaseManager
     }
 
     //Give property to modify and perform modification based on type given
-    private void ModifyPlayerData(float dataType, float amount, int type)
+    private void ModifyPlayerData(ref float dataType, float amount, int type)
     {
         switch (type)
         {
@@ -151,32 +151,32 @@ public class PlayerManager : BaseManager
 
     public void ModifyMovementSpeed(float amount, int type)
     {
-        ModifyPlayerData(_playerData.entityMovementSpeed, amount, type);
+        ModifyPlayerData(ref _playerData.entityMovementSpeed, amount, type);
         _playerMovement.SetMovementSpeed(_playerData.entityMovementSpeed);
     }
 
     public void ModifyJump(float amount, int type)
     {
-        ModifyPlayerData(_playerData.entityMovementSpeed, amount, type);
+        ModifyPlayerData(ref _playerData.entityMovementSpeed, amount, type);
         _playerMovement.SetJumpHeight((_playerData.entityjumpHeight));
     }
 
     public void ModifyDamage(float amount, int type)
     {
-        ModifyPlayerData(_playerData.entityDamage, amount, type);
+        ModifyPlayerData(ref _playerData.entityDamage, amount, type);
         _playerAttack.SetDamage(_playerData.entityDamage);
     }
 
     public void ModifyAttackSpeed(float amount, int type)
     {
-        ModifyPlayerData(_playerData.entityAttackSpeed, amount, type);
+        ModifyPlayerData(ref _playerData.entityAttackSpeed, amount, type);
         _playerAttack.SetAttackSpeed(_playerData.entityAttackSpeed);
     }
 
     public void ModifyResistance(float amount, int type)
     {
-        ModifyPlayerData(_playerHealth.FlatResistance, amount, type);
-        ModifyPlayerData(_playerHealth.PercentualResistance, amount, type);
+        ModifyPlayerData(ref _playerHealth.FlatResistance, amount, type);
+        ModifyPlayerData(ref _playerHealth.PercentualResistance, amount, type);
     }
 
     public void Die()

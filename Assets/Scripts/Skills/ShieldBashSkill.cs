@@ -1,9 +1,4 @@
-﻿
-
-using System.Collections;
-using System.Collections.Generic;
-using System.Dynamic;
-using Data.Util;
+﻿using System.Collections;
 using UnityEngine;
 
 #region Skill description
@@ -23,35 +18,40 @@ namespace DefaultNamespace.Skills
 {
     public class ShieldBashSkill : SkillExecute
     {
+        [SerializeField] protected float SprintSpeed = 20f;
         bool onSkill = false;
 
         private void Awake()
         {
             skillname = "Shield Bash";
-            SprintSpeed *= 1.5f;
+            SprintSpeed *= 3f;
             damage = 10f;
         }
         public override void Execute()
         {
-            ApplyPersistentEffect(this);
+            WhileSkillActive();
         }
 
-        public override void ApplyPersistentEffect(SkillExecute sk)
+        public override void WhileSkillActive()
         {
             if (!onCooldown)
             {
-                base.ApplyPersistentEffect(sk);
+                Debug.Log("Starting ShieldBash");
+                skillUser.usingSkill = true;
                 PlayerManager.Instance.ModifyMovementSpeed(SprintSpeed, 1);
+                Debug.Log(PlayerManager.Instance);
                 onSkill = true;
+                IEnumerator coroutine = skillUser.UsePersistentEffect(this);
+                skillUser.StartCoroutine(coroutine);
             }
         }
-
-        public override void DeActivatePersistentEffect()
+        public override void DeActivateSkillActive()
         {
+            Debug.Log("Disabling ShieldBash");
             PlayerManager.Instance.ModifyMovementSpeed(SprintSpeed, 0);
             onSkill = false;
+            skillUser.usingSkill = false;
         }
-
         private void OnCollisionEnter(Collision collision)
         {
             var enemyGO = collision.gameObject;

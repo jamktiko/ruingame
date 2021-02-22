@@ -1,7 +1,7 @@
 ﻿
 using System.Collections;
-
 using DefaultNamespace;
+using DefaultNamespace.Skills;
 using UnityEngine;
 
 
@@ -29,14 +29,9 @@ public class SkillUser : MonoBehaviour
         entityAnimator = GetComponentInChildren<Animator>();
         _playerManager = PlayerManager.Instance;
         inputReader = _playerManager.playerInputReader;
-        skillList = new SkillExecute[4];
-        //var skills = GetComponentsInChildren<SkillExecute>();
-        for (int i = 0; i < skillList.Length; i++)
-        {
-            skillList[i] = gameObject.AddComponent<SkillExecute>();
-            skillList[i].skillUser = this;
-        }
         entityHealth = GetComponent<Health>();
+        
+        skillList = new SkillExecute[4];
         skillList[0] = gameObject.AddComponent<WhirlwindSkill>();
         skillList[0].skillUser = this;
         skillList[1] = gameObject.AddComponent<ShieldBashSkill>();
@@ -128,9 +123,11 @@ public class SkillUser : MonoBehaviour
                 if (!usingSkill)
                 {
                     skillUI.OnSkillUse(index);
+                    _playerManager.StopAttacking();
                     //SKILL SHOULD DETERMINE WHICH ANIMATION TO USE
                     //Currently uses animation length to determine skill duration, probably should work other way around?
-                    try
+                    sk.Execute();
+                    /*try
                     {
                         sk.Execute(sk.animationClip.length);
                         entityAnimator.Play(sk.animationClip.name);
@@ -140,7 +137,7 @@ public class SkillUser : MonoBehaviour
                         sk.Execute();
                         Debug.Log("No skill animation!");
                     }
-                    _playerManager.StopAttacking();
+                    */
                     AddInvulnerability(sk.iFrameDuration);
                     StartCoroutine(GoOnCooldown(sk));
                 }

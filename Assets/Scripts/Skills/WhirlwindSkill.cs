@@ -36,25 +36,23 @@ namespace DefaultNamespace.Skills
 
         public override void Execute()
         {
-            ApplyPersistentEffect(this);
+            WhileSkillActive();
         }
 
-        public override void ApplyPersistentEffect(SkillExecute sk)
+        public override void WhileSkillActive()
         {
             if (!onCooldown)
             {
-                //Debug.Log("Activate whirlwind");
-                base.ApplyPersistentEffect(sk);
                 targeting.AttackEnemies(attackAllEnemies, attackRadius, attackDistance, damage);
+                IEnumerator coroutine = skillUser.UsePersistentEffect(this);
+                skillUser.StartCoroutine(coroutine);
             }
         }
 
-        public override void DeActivatePersistentEffect()
+        public override void DeActivateSkillActive()
         {
-            //Debug.Log("Deactivate whirlwind");
+            Debug.Log("Disabling whirlwind");
         }
-
-
     }
 
 }
