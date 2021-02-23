@@ -30,6 +30,7 @@ namespace DefaultNamespace.Skills
             skillname = "Shield Bash";
             SprintSpeed *= 1.5f;
             damage = 10f;
+            iFrameDuration = 1f;
         }
         public override void Execute()
         {
@@ -42,7 +43,6 @@ namespace DefaultNamespace.Skills
             {
                 base.ApplyPersistentEffect(sk);
                 PlayerManager.Instance.ModifyMovementSpeed(SprintSpeed, 1);
-                playerHealth.AddIFrame(duration);
                 onSkill = true;
             }
         }
