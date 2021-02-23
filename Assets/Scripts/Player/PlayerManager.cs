@@ -146,17 +146,85 @@ public class PlayerManager : BaseManager
         Destroy(artifact.gameObject, 0.1f);
     }
 
-    #region ModifyData
-    //Give property to modify and perform modification based on type given
-    private void ModifyPlayerData(ref float dataType, float amount, int type)
+    public void ModifyMovementSpeed(float amount, int type)
+    {
+        //Should be in a single method (Give property to modify and perform modification based on type given)
+        switch (type)
+        {
+            case 0:
+                _playerData.entityMovementSpeed -= amount;
+                break;
+            case 1:
+                _playerData.entityMovementSpeed += amount;
+                break;
+            default:
+                Debug.Log("No type given for modification type");
+                break;
+        }
+        _playerMovement.SetMovementSpeed(_playerData.entityMovementSpeed);
+    }
+    public void ModifyJump(float amount, int type)
     {
         switch (type)
         {
             case 0:
-                dataType -= amount;
+                _playerData.entityjumpHeight -= amount;
                 break;
             case 1:
-                dataType += amount;
+                _playerData.entityjumpHeight += amount;
+                break;
+            default:
+                Debug.Log("No type given for modification type");
+                break;
+        }
+        _playerMovement.SetJumpHeight((_playerData.entityjumpHeight));
+    }
+
+    public void ModifyDamage(float amount, int type)
+    {
+        switch (type)
+        {
+            case 0:
+                _playerData.entityDamage -= amount;
+                break;
+            case 1:
+                _playerData.entityDamage += amount;
+                break;
+            default:
+                Debug.Log("No type given for modification type");
+                break;
+        }
+        _playerAttack.SetDamage(_playerData.entityDamage);
+    }
+
+    public void ModifyAttackSpeed(float amount, int type)
+    {
+        switch (type)
+        {
+            case 0:
+                _playerData.entityAttackSpeed -= amount;
+                break;
+            case 1:
+                _playerData.entityAttackSpeed += amount;
+                break;
+            default:
+                Debug.Log("No type given for modification type");
+                break;
+        }
+        _playerAttack.SetAttackSpeed(_playerData.entityAttackSpeed);
+    }
+
+    public void ModifyResistance(float amount, int type)
+    {
+        switch (type)
+        {
+            case 0:
+                _playerHealth._percentualResistance -= amount;
+                _playerHealth._flatResistance -= amount;
+                break;
+            case 1:
+                _playerHealth._percentualResistance += amount;
+                _playerHealth._flatResistance += amount;
                 break;
             default:
                 Debug.Log("No type given for modification type");
@@ -164,38 +232,7 @@ public class PlayerManager : BaseManager
         }
     }
 
-    public void ModifyMovementSpeed(float amount, int type)
-    {
-        ModifyPlayerData(ref _playerData.entityMovementSpeed, amount, type);
-        _playerMovement.SetMovementSpeed(_playerData.entityMovementSpeed);
-    }
 
-    public void ModifyJump(float amount, int type)
-    {
-        ModifyPlayerData(ref _playerData.entityMovementSpeed, amount, type);
-        _playerMovement.SetJumpHeight((_playerData.entityjumpHeight));
-    }
-
-    public void ModifyDamage(float amount, int type)
-    {
-        ModifyPlayerData(ref _playerData.entityDamage, amount, type);
-        _playerAttack.SetDamage(_playerData.entityDamage);
-    }
-
-    public void ModifyAttackSpeed(float amount, int type)
-    {
-        ModifyPlayerData(ref _playerData.entityAttackSpeed, amount, type);
-        _playerAttack.SetAttackSpeed(_playerData.entityAttackSpeed);
-    }
-
-    public void ModifyResistance(float amount, int type)
-    {
-        ModifyPlayerData(ref _playerHealth._flatResistance, amount, type);
-        ModifyPlayerData(ref _playerHealth._percentualResistance, amount, type);
-        _playerAttack.SetAttackSpeed(_playerData.entityAttackSpeed);
-    }
-
-    #endregion
     public void Die()
     {
         DisableScriptsOnPlayer();
