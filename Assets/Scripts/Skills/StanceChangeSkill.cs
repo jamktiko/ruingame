@@ -39,6 +39,7 @@ namespace DefaultNamespace.Skills
 
         public override void Execute()
         {
+            base.Start();
             WhileSkillActive();
         }
 
