@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: AoeAttack
   m_EditorClassIdentifier: 
   targetingType: 0
-  baseDamage: 1
-  radius: 3
+  baseDamage: 2
+  radius: 10
   knockBackStrength: 10
+  range: 0
+  attackType: 0
+  projectilePrefab: {fileID: 0}
+  shootForce: 0
