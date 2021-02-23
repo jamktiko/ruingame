@@ -22,7 +22,6 @@ namespace DefaultNamespace.Skills
 {
     public class StanceChangeSkill : SkillExecute
     {
-        PlayerHealth _playerHealth;
 
         [SerializeField] private float _damageResistance;
         [SerializeField] private float _passiveAttackSpeed;
@@ -40,7 +39,6 @@ namespace DefaultNamespace.Skills
             PlayerManager.Instance.ModifyAttackSpeed(_passiveAttackSpeed, 1);
             PlayerManager.Instance.ModifyResistance(_passiveResistance, 1);
 
-            _playerHealth = GetComponent<PlayerHealth>();
         }
 
         public override void Execute()
@@ -50,11 +48,11 @@ namespace DefaultNamespace.Skills
 
         public override void ApplyPersistentEffect(SkillExecute sk)
         {
-            if (!onCooldown && _playerHealth.CurrentHealth >= 40f)
+            if (!onCooldown && playerHealth.CurrentHealth >= 40f)
             {
                 base.ApplyPersistentEffect(sk);
                 ModifyPlayerStats(1);
-                _playerHealth.DealDamage(_selfDamage);
+                playerHealth.DealDamage(_selfDamage);
             }
         }
 

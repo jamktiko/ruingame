@@ -42,6 +42,7 @@ namespace DefaultNamespace.Skills
             {
                 base.ApplyPersistentEffect(sk);
                 PlayerManager.Instance.ModifyMovementSpeed(SprintSpeed, 1);
+                playerHealth.AddIFrame(duration);
                 onSkill = true;
             }
         }

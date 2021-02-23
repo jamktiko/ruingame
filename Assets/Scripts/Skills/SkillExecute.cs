@@ -20,11 +20,15 @@ public class SkillExecute : MonoBehaviour
     [SerializeField] protected float SprintSpeed = 20f;
 
     protected Targeting targeting;
+    protected PlayerHealth playerHealth;
+
 
 
     private void Start()
     {
         targeting = gameObject.AddComponent<Targeting>();
+        playerHealth = GetComponent<PlayerHealth>();
+
 
     }
     public virtual void Execute()
