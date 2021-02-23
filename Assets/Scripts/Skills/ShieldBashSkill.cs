@@ -24,7 +24,7 @@ namespace DefaultNamespace.Skills
         private void Awake()
         {
             skillname = "Shield Bash";
-            SprintSpeed *= 3f;
+            SprintSpeed *= 1.2f;
             damage = 10f;
             iFrameDuration = 1f;
         }
@@ -37,10 +37,8 @@ namespace DefaultNamespace.Skills
         {
             if (!onCooldown)
             {
-                Debug.Log("Starting ShieldBash");
                 skillUser.usingSkill = true;
                 PlayerManager.Instance.ModifyMovementSpeed(SprintSpeed, 1);
-                Debug.Log(PlayerManager.Instance);
                 onSkill = true;
                 IEnumerator coroutine = skillUser.UsePersistentEffect(this);
                 skillUser.StartCoroutine(coroutine);
@@ -48,7 +46,6 @@ namespace DefaultNamespace.Skills
         }
         public override void DeActivateSkillActive()
         {
-            Debug.Log("Disabling ShieldBash");
             PlayerManager.Instance.ModifyMovementSpeed(SprintSpeed, 0);
             onSkill = false;
             skillUser.usingSkill = false;

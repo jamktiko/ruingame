@@ -32,22 +32,7 @@ namespace DefaultNamespace.Skills
 
         public override void Execute()
         {
-            WhileSkillActive();
-        }
-
-        public override void WhileSkillActive()
-        {
-            if (!onCooldown)
-            {
-                targeting.AttackEnemies(attackAllEnemies, attackRadius, attackDistance, damage);
-                IEnumerator coroutine = skillUser.UsePersistentEffect(this);
-                skillUser.StartCoroutine(coroutine);
-            }
-        }
-
-        public override void DeActivateSkillActive()
-        {
-            Debug.Log("Disabling whirlwind");
+            targeting.AttackEnemies(attackAllEnemies, attackRadius, attackDistance, damage);
         }
     }
 

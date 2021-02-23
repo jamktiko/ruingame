@@ -127,6 +127,7 @@ public class SkillUser : MonoBehaviour
             {
                 if (!usingSkill)
                 {
+                    //SHOULD ONLY BE CALLED AFTER SKILL GOES ON COOLDOWN, EG. Stance change only goes on cooldown after the duration is over
                     skillUI.OnSkillUse(index);
                     _playerManager.StopAttacking();
                     //SKILL SHOULD DETERMINE WHICH ANIMATION TO USE
