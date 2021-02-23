@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff71bc3fc7889e8419b080cfc7644d7f, type: 3}
-  m_Name: AoeAttack
+  m_Name: RangedAttack
   m_EditorClassIdentifier: 
-  targetingType: 0
-  baseDamage: 2
-  radius: 10
-  knockBackStrength: 10
-  range: 0
-  attackType: 0
-  projectilePrefab: {fileID: 0}
-  shootForce: 0
+  targetingType: 1
+  baseDamage: 10
+  radius: 100
+  knockBackStrength: 5
+  range: 100
+  attackType: 1
+  projectilePrefab: {fileID: 4205327783596253581, guid: fb09e1922348d44429921245851d4042,
+    type: 3}
+  shootForce: 500

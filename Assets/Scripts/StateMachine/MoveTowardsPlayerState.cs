@@ -14,10 +14,6 @@ namespace DefaultNamespace
         {
             _destination = PlayerManager.Instance.gameObject.transform.position;
             Enemy.MoveToward(_destination);
-            if (ReachedPlayer())
-            {
-                Enemy.SetState(new AttackPlayerState(Enemy));
-            }
             if (Enemy.stunned)
             {
                 Enemy.SetState(new StunnedState(Enemy));
@@ -25,6 +21,10 @@ namespace DefaultNamespace
             if (!Enemy.alive)
             {
                 Enemy.SetState(new DeathState(Enemy));
+            }
+            if (ReachedPlayer())
+            {
+                Enemy.SetState(new AttackPlayerState(Enemy));
             }
         }
 

@@ -13,7 +13,7 @@ public class AttackTargeting : MonoBehaviour
             {
                 case BaseAttack.basetargetingType.AOE:
                     return GetAOETargets(attack.radius);
-                case BaseAttack.basetargetingType.FRONTAL:
+                case BaseAttack.basetargetingType.CONE:
                     return GetFrontalTargets(attack.radius, attack.range);
                 case BaseAttack.basetargetingType.NEAREST:
                     return GetNearestTargets(attack.radius);
@@ -23,8 +23,11 @@ public class AttackTargeting : MonoBehaviour
 
     private GameObject[] GetNearestTargets(float radius)
     {
-        GameObject[] gos;
-        gos = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject[] gos = new GameObject[] { };
+        foreach (string tag in AllowedTargetTags)
+        {
+            gos.Concat(GameObject.FindGameObjectsWithTag(tag));
+        }
         GameObject closest = null;
         float distance = radius;
         Vector3 position = transform.position;
@@ -71,8 +74,11 @@ public class AttackTargeting : MonoBehaviour
 
     public Vector3 FindNearestTargetInRadius(float radius)
     {
-        GameObject[] gos;
-        gos = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject[] gos = new GameObject[] { };
+        foreach (string tag in AllowedTargetTags)
+        {
+            gos.Concat(GameObject.FindGameObjectsWithTag(tag));
+        }
         GameObject closest = null;
         float distance = radius;
         Vector3 position = transform.position;
@@ -90,9 +96,7 @@ public class AttackTargeting : MonoBehaviour
             target.y = 0;
             return target.normalized;
         }
-        else
-        {
-            return transform.forward;
-        }
+        return transform.forward;
+
     }
 }
