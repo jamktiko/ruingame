@@ -35,7 +35,6 @@ namespace DefaultNamespace.Skills
             resistance = 5f;
             passiveAttackSpeed = 10f;
             passiveResistance = 10f;
-
             PlayerManager.Instance.ModifyAttackSpeed(passiveAttackSpeed, 1);
             PlayerManager.Instance.ModifyResistance(passiveResistance, 1);
 
@@ -64,8 +63,7 @@ namespace DefaultNamespace.Skills
         public override void ModifyPlayerStats(int type)
         {
             PlayerManager.Instance.ModifyDamage(damage, type);
-            type = type == 1 ? 0 : 1;
-            PlayerManager.Instance.ModifyResistance(resistance, type);
+            PlayerManager.Instance.ModifyResistance(-resistance, type);
         }
     }
 }

@@ -25,10 +25,10 @@ public class PlayerManager : BaseManager
     {
         get { return _instance; }
     }
-    
+
     public InputReader playerInputReader { get; private set; }
     public RuntimeAnimatorController playerAnimator { get; private set; }
-    
+
     private AttackHandler _playerAttack;
     private PlayerHealth _playerHealth;
     private MovementController _playerMovement;
@@ -36,10 +36,10 @@ public class PlayerManager : BaseManager
 
     public Combo _weaponData;
     public PlayerData _playerData;
-    
+
     [HideInInspector]
     public UnityEvent pickUpEvent;
-    
+
     private void OnEnable()
     {
         playerInputReader.InteractEvent += OnPickUp;
@@ -54,7 +54,9 @@ public class PlayerManager : BaseManager
         if (_instance != null && _instance != this)
         {
             Destroy(this.gameObject);
-        } else {
+        }
+        else
+        {
             _instance = this;
         }
         playerInputReader = GameManager.Instance.playerInputReader;
@@ -110,7 +112,7 @@ public class PlayerManager : BaseManager
 
     public void UpdateSkills()
     {
-       // _playerSkills.Initialize();
+        // _playerSkills.Initialize();
     }
     public void DisableScriptsOnPlayer()
     {
@@ -144,8 +146,9 @@ public class PlayerManager : BaseManager
         Destroy(artifact.gameObject, 0.1f);
     }
 
+    #region ModifyData
     //Give property to modify and perform modification based on type given
-    private void ModifyPlayerData(float dataType, float amount, int type)
+    private void ModifyPlayerData(ref float dataType, float amount, int type)
     {
         switch (type)
         {
@@ -163,34 +166,36 @@ public class PlayerManager : BaseManager
 
     public void ModifyMovementSpeed(float amount, int type)
     {
-        ModifyPlayerData(_playerData.entityMovementSpeed, amount, type);
+        ModifyPlayerData(ref _playerData.entityMovementSpeed, amount, type);
         _playerMovement.SetMovementSpeed(_playerData.entityMovementSpeed);
     }
 
     public void ModifyJump(float amount, int type)
     {
-        ModifyPlayerData(_playerData.entityMovementSpeed, amount, type);
+        ModifyPlayerData(ref _playerData.entityMovementSpeed, amount, type);
         _playerMovement.SetJumpHeight((_playerData.entityjumpHeight));
     }
 
     public void ModifyDamage(float amount, int type)
     {
-        ModifyPlayerData(_playerData.entityDamage, amount, type);
+        ModifyPlayerData(ref _playerData.entityDamage, amount, type);
         _playerAttack.SetDamage(_playerData.entityDamage);
     }
 
     public void ModifyAttackSpeed(float amount, int type)
     {
-        ModifyPlayerData(_playerData.entityAttackSpeed, amount, type);
+        ModifyPlayerData(ref _playerData.entityAttackSpeed, amount, type);
         _playerAttack.SetAttackSpeed(_playerData.entityAttackSpeed);
     }
 
     public void ModifyResistance(float amount, int type)
     {
-        ModifyPlayerData(_playerHealth.FlatResistance, amount, type);
-        ModifyPlayerData(_playerHealth.PercentualResistance, amount, type);
+        ModifyPlayerData(ref _playerHealth._flatResistance, amount, type);
+        ModifyPlayerData(ref _playerHealth._percentualResistance, amount, type);
+        _playerAttack.SetAttackSpeed(_playerData.entityAttackSpeed);
     }
 
+    #endregion
     public void Die()
     {
         DisableScriptsOnPlayer();
