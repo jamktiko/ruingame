@@ -27,6 +27,7 @@ namespace DefaultNamespace.Skills
         [SerializeField] private float resistance;
         [SerializeField] private float passiveAttackSpeed;
         [SerializeField] private float passiveResistance;
+        [SerializeField] private float selfDamage;
 
         private void Awake()
         {
@@ -35,6 +36,7 @@ namespace DefaultNamespace.Skills
             resistance = 5f;
             passiveAttackSpeed = 10f;
             passiveResistance = 10f;
+            selfDamage = 2f;
             PlayerManager.Instance.ModifyAttackSpeed(passiveAttackSpeed, 1);
             PlayerManager.Instance.ModifyResistance(passiveResistance, 1);
 
@@ -52,6 +54,7 @@ namespace DefaultNamespace.Skills
             {
                 base.ApplyPersistentEffect(sk);
                 ModifyPlayerStats(1);
+                playerHealth.DealDamage(selfDamage);
             }
         }
 
