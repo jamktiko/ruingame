@@ -13,11 +13,11 @@ public class SkillExecute : MonoBehaviour
     public bool onCooldown = false;
     public float duration = 0.5f;
 
+    [SerializeField] protected float SprintSpeed = 20f;
+    [SerializeField] protected float damage = 10f;
     [SerializeField] protected bool attackAllEnemies = true;
     [SerializeField] protected float attackRadius = 3f;
     [SerializeField] protected float attackDistance = 0f;
-    [SerializeField] protected float damage = 10f;
-    [SerializeField] protected float SprintSpeed = 20f;
 
     protected Targeting targeting;
     protected PlayerHealth playerHealth;

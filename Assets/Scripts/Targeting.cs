@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using DefaultNamespace;
+using UnityEngine;
 
 
 public class Targeting : MonoBehaviour
@@ -9,16 +9,23 @@ public class Targeting : MonoBehaviour
     //Attack enemies based on targets in area
     public void AttackEnemies(bool attackAll, float radius, float distance, float damage)
     {
+
         if (attackAll)
-            DealDamageToEnemyHealth(ListOfEnemiesInRange(radius, distance), damage);
+        {
+            var listOfEnemies = GetListOfEnemiesInRange(radius, distance);
+            DealDamageToEnemyHealth(listOfEnemies, damage);
+        }
         else
-            DealDamageToEnemyHealth(ListOfClosestEnemy(radius, distance), damage);
+        {
+            var closestEnemyInList = GetClosestEnemy(radius, distance);
+            DealDamageToEnemyHealth(closestEnemyInList, damage);
+        }
     }
 
     //Deal damage on EnemyHealth
-    void DealDamageToEnemyHealth(List<GameObject> list, float damage)
+    void DealDamageToEnemyHealth(List<GameObject> enemyList, float damage)
     {
-        foreach (var item in list)
+        foreach (var item in enemyList)
         {
             var enemyHealth = item.GetComponent<EnemyHealth>();
             enemyHealth.DealDamage(damage);
@@ -27,7 +34,7 @@ public class Targeting : MonoBehaviour
     }
 
     //Return an array of raycast hits in capsule area 
-    public RaycastHit[] ArrayOfCapsulecastHits(float radius, float distance)
+    public RaycastHit[] GetArrayOfCapsulecastHits(float radius, float distance)
     {
         Vector3 p1 = transform.position;
         Vector3 p2 = transform.up * 20f;
@@ -39,11 +46,11 @@ public class Targeting : MonoBehaviour
     }
 
     //Return a list of enemies in area
-    public List<GameObject> ListOfEnemiesInRange(float radius, float distance)
+    public List<GameObject> GetListOfEnemiesInRange(float radius, float distance)
     {
         List<GameObject> enemiesInRange = new List<GameObject>();
 
-        foreach (var item in ArrayOfCapsulecastHits(radius, distance))
+        foreach (var item in GetArrayOfCapsulecastHits(radius, distance))
         {
             GameObject go = item.transform.gameObject;
             if (go.CompareTag("Enemy"))
@@ -54,11 +61,11 @@ public class Targeting : MonoBehaviour
     }
 
     //Return a closest enemy in a list
-    public List<GameObject> ListOfClosestEnemy(float radius, float distance)
+    public List<GameObject> GetClosestEnemy(float radius, float distance)
     {
-        List<GameObject> gameobjectList = ListOfEnemiesInRange(radius, distance);
+        List<GameObject> gameobjectList = GetListOfEnemiesInRange(radius, distance);
 
-        if (gameobjectList.Count <= 1)
+        if (gameobjectList.Count < 2)
             return gameobjectList;
 
         do
@@ -73,12 +80,12 @@ public class Targeting : MonoBehaviour
         return gameobjectList;
     }
 
-    //Return a list od rigidbodies in area
+    //Return a list of rigidbodies in area
     public List<Rigidbody> ListOfRigidBodiesInRange(float radius, float distance)
     {
         List<Rigidbody> rbList = new List<Rigidbody>();
-
-        foreach (var item in ArrayOfCapsulecastHits(radius, distance))
+        var capsuleCastHits = GetArrayOfCapsulecastHits(radius, distance);
+        foreach (var item in capsuleCastHits)
         {
             if (item.transform.gameObject.tag != "Player" && item.transform.gameObject.TryGetComponent(out Rigidbody rb))
             {
