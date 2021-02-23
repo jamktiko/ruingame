@@ -11,9 +11,10 @@ namespace DefaultNamespace
     {
         public BaseAttack baseAttack;
         public bool attacking = false;
+        public Transform firePoint;
         
         protected float _entityDamage = 10f;
-        protected float _entityAttackSpeed = default;
+        protected float _entityAttackSpeed = 2f;
         public Animator _characterAnimator;
         protected Rigidbody _characterRigidbody;
         
@@ -120,8 +121,7 @@ namespace DefaultNamespace
             EndAttack();
         }
 
-        //New and improved attack logic!
-        public void HandleAttack()
+        public void HandleDamage()
         {
             try
             {
@@ -131,6 +131,43 @@ namespace DefaultNamespace
             {
                 Debug.Log("No current target or attack!");
             }
+        }
+        //New and improved attack logic!
+        public void HandleAttack()
+        {
+            switch (currentAttack.attackType)
+            {
+                case BaseAttack.baseAttackType.RANGED:
+                    ShootProjectile();
+                    break;
+                case BaseAttack.baseAttackType.PHYSICAL:
+                    HandleDamage();
+                    break;
+            }
+        }
+
+        public void ShootProjectile()
+        {
+            foreach (GameObject target in currentTargets)
+            {
+                var pb = Instantiate(currentAttack.projectilePrefab, firePoint);
+                pb.transform.parent = null;
+                ProjectileBehaviour p = pb.GetComponent<ProjectileBehaviour>();
+                p.damage = (currentAttack.baseDamage * _entityDamage);
+                p.AllowedTargetTags = _attackTargeting.AllowedTargetTags;
+                var targetDirection = transform.forward;
+                if (target != null)
+                {
+                    targetDirection = -(transform.position - target.transform.position).normalized;
+                }
+                targetDirection.y = 0;
+                try
+                {
+                    p.GetComponent<Rigidbody>().AddForce(targetDirection * currentAttack.shootForce);
+                }
+                catch{}
+            }
+            ClearTargets();
         }
         private void DamageAllCurrentTargets(GameObject[] targets, BaseAttack attack)
         {
@@ -148,8 +185,7 @@ namespace DefaultNamespace
             }
 
             KnockBackAllTargets(targets, attack);
-            currentAttack = null;
-            currentTargets = null;
+            ClearTargets();
         }
         private void KnockBackAllTargets(GameObject[] targets, BaseAttack attack)
         {
@@ -165,6 +201,12 @@ namespace DefaultNamespace
                     Debug.Log("Target has no knockback handling!");
                 }
             }
+        }
+
+        private void ClearTargets()
+        {
+            currentAttack = null;
+            currentTargets = null;
         }
     }
 }

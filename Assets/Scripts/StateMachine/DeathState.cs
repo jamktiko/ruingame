@@ -10,12 +10,10 @@ public class DeathState : State
     public override void OnStateEnter()
     {
         Name = "Dying";
-        //Enemy.attack.EndAttack();
+        Enemy.attack.EndAttack();
         Enemy.alive = false;
     }
     public override void Tick()
     {
-        if (Enemy.alive)
-            Enemy.SetState(new MoveTowardsPlayerState(Enemy));
     }
 }

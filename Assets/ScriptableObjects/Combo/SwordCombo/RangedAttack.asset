@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff71bc3fc7889e8419b080cfc7644d7f, type: 3}
+  m_Name: RangedAttack
+  m_EditorClassIdentifier: 
+  targetingType: 1
+  baseDamage: 10
+  radius: 100
+  knockBackStrength: 5
+  range: 100
+  attackType: 1
+  projectilePrefab: {fileID: 4205327783596253581, guid: fb09e1922348d44429921245851d4042,
+    type: 3}
+  shootForce: 500

@@ -1,18 +1,16 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "PhysicalAttack", menuName = "Game/PhysicalAttack")]
+[CreateAssetMenu(fileName = "BaseAttack", menuName = "Game/BaseAttack")]
 public class BaseAttack : ScriptableObject
-
 {
     [System.Serializable]
     public enum basetargetingType 
     {
         AOE,
         NEAREST,
-        FRONTAL,
+        CONE,
+        //FRONT,
     }
-
     public basetargetingType targetingType;
     
     public float baseDamage;
@@ -24,5 +22,15 @@ public class BaseAttack : ScriptableObject
     
     [Tooltip("Used to calculate distance from player")]
     public float range;
+    
+    public enum baseAttackType
+    {
+        PHYSICAL,
+        RANGED,
+    }
+    public baseAttackType attackType;
 
+    public GameObject projectilePrefab;
+
+    public float shootForce;
 }

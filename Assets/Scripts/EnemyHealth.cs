@@ -13,7 +13,7 @@ namespace DefaultNamespace
 
         public override void ReactToDamage(float amount)
         {
-            enemyController.stunned = true;
+            enemyController.SetState(new StunnedState(enemyController));
             base.ReactToDamage(amount);
         }
 
