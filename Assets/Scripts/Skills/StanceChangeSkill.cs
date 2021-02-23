@@ -27,6 +27,7 @@ namespace DefaultNamespace.Skills
 
         protected override void Start()
         {
+            base.Start();
             skillname = "Stance Change";
             damage = 50f;
             _damageResistance = 5f;
@@ -39,7 +40,6 @@ namespace DefaultNamespace.Skills
 
         public override void Execute()
         {
-            base.Start();
             WhileSkillActive();
         }
 
