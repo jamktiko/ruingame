@@ -22,25 +22,25 @@ namespace DefaultNamespace.Skills
 {
     public class StanceChangeSkill : SkillExecute
     {
-        PlayerHealth playerHealth;
+        PlayerHealth _playerHealth;
 
-        [SerializeField] private float resistance;
-        [SerializeField] private float passiveAttackSpeed;
-        [SerializeField] private float passiveResistance;
-        [SerializeField] private float selfDamage;
+        [SerializeField] private float _damageResistance;
+        [SerializeField] private float _passiveAttackSpeed;
+        [SerializeField] private float _passiveResistance;
+        [SerializeField] private float _selfDamage;
 
         private void Awake()
         {
             skillname = "Stance Change";
-            damage = 20f;
-            resistance = 5f;
-            passiveAttackSpeed = 10f;
-            passiveResistance = 10f;
-            selfDamage = 2f;
-            PlayerManager.Instance.ModifyAttackSpeed(passiveAttackSpeed, 1);
-            PlayerManager.Instance.ModifyResistance(passiveResistance, 1);
+            damage = 50f;
+            _damageResistance = 5f;
+            _passiveAttackSpeed = 10f;
+            _passiveResistance = 10f;
+            _selfDamage = 2f;
+            PlayerManager.Instance.ModifyAttackSpeed(_passiveAttackSpeed, 1);
+            PlayerManager.Instance.ModifyResistance(_passiveResistance, 1);
 
-            playerHealth = GetComponent<PlayerHealth>();
+            _playerHealth = GetComponent<PlayerHealth>();
         }
 
         public override void Execute()
@@ -50,11 +50,11 @@ namespace DefaultNamespace.Skills
 
         public override void ApplyPersistentEffect(SkillExecute sk)
         {
-            if (!onCooldown && playerHealth.CurrentHealth >= 40f)
+            if (!onCooldown && _playerHealth.CurrentHealth >= 40f)
             {
                 base.ApplyPersistentEffect(sk);
                 ModifyPlayerStats(1);
-                playerHealth.DealDamage(selfDamage);
+                _playerHealth.DealDamage(_selfDamage);
             }
         }
 
@@ -66,7 +66,7 @@ namespace DefaultNamespace.Skills
         public override void ModifyPlayerStats(int type)
         {
             PlayerManager.Instance.ModifyDamage(damage, type);
-            PlayerManager.Instance.ModifyResistance(-resistance, type);
+            PlayerManager.Instance.ModifyResistance(-_damageResistance, type);
         }
     }
 }
