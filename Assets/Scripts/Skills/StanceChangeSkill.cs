@@ -19,24 +19,22 @@ namespace DefaultNamespace.Skills
 {
     public class StanceChangeSkill : SkillExecute
     {
-        PlayerHealth playerHealth;
 
-        [SerializeField] private float resistance;
-        [SerializeField] private float passiveAttackSpeed;
-        [SerializeField] private float passiveResistance;
+        [SerializeField] private float _damageResistance;
+        [SerializeField] private float _passiveAttackSpeed;
+        [SerializeField] private float _passiveResistance;
+        [SerializeField] private float _selfDamage;
 
         protected override void Start()
         {
             skillname = "Stance Change";
-            damage = 20f;
-            resistance = 5f;
-            passiveAttackSpeed = 0.5f;
-            passiveResistance = 10f;
-            
-            PlayerManager.Instance.ModifyAttackSpeed(passiveAttackSpeed, 1);
-            PlayerManager.Instance.ModifyResistance(passiveResistance, 1);
-
-            playerHealth = GetComponent<PlayerHealth>();
+            damage = 50f;
+            _damageResistance = 5f;
+            _passiveAttackSpeed = 10f;
+            _passiveResistance = 10f;
+            _selfDamage = 2f;
+            PlayerManager.Instance.ModifyAttackSpeed(_passiveAttackSpeed, 1);
+            PlayerManager.Instance.ModifyResistance(_passiveResistance, 1);
         }
 
         public override void Execute()
@@ -57,14 +55,14 @@ namespace DefaultNamespace.Skills
                 IEnumerator coroutine = skillUser.UsePersistentEffect(this);
                 skillUser.StartCoroutine(coroutine);
                 ModifyPlayerStats(1);
+                playerHealth.DealDamage(_selfDamage);
             }
         }
         
         public override void ModifyPlayerStats(int type)
         {
             PlayerManager.Instance.ModifyDamage(damage, type);
-            type = type == 1 ? 0 : 1;
-            PlayerManager.Instance.ModifyResistance(resistance, type);
+            PlayerManager.Instance.ModifyResistance(-_damageResistance, type);
         }
     }
 }

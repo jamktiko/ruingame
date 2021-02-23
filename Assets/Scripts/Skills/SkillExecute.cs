@@ -13,16 +13,18 @@ public class SkillExecute : MonoBehaviour
     public float duration = 4f;
     public AnimationClip animationClip;
 
+    [SerializeField] protected float SprintSpeed = 20f;
+    [SerializeField] protected float damage = 10f;
     [SerializeField] protected bool attackAllEnemies = true;
     [SerializeField] protected float attackRadius = 3f;
     [SerializeField] protected float attackDistance = 0f;
-    [SerializeField] protected float damage = 10f;
-
-
+    
     protected Targeting targeting;
+    protected PlayerHealth playerHealth;
 
     protected virtual void Start()
     {
+        playerHealth = GetComponent<PlayerHealth>();
         targeting = skillUser.skillTargeting;
     }
     public virtual void Execute()

@@ -26,6 +26,7 @@ namespace DefaultNamespace.Skills
             skillname = "Shield Bash";
             SprintSpeed *= 3f;
             damage = 10f;
+            iFrameDuration = 1f;
         }
         public override void Execute()
         {
