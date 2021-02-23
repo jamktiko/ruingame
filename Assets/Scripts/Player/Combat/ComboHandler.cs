@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using DefaultNamespace;
 using UnityEngine;
 
 public class ComboHandler : MonoBehaviour
@@ -7,11 +6,11 @@ public class ComboHandler : MonoBehaviour
     public Combo comboData;
     private int comboStep;
     private float lastAttack;
-    public float comboTimer = 5f;
-    private AttackHandler attackHandler;
+    public float comboTimer = 3f;
+    private ComboAttackHandler attackHandler;
     private void Start()
     {
-        attackHandler = GetComponent<AttackHandler>();
+        attackHandler = GetComponent<ComboAttackHandler>();
     }
     public ComboAttack GetComboAttack()
     {
@@ -41,10 +40,5 @@ public class ComboHandler : MonoBehaviour
             comboStep = 0;
         }
         lastAttack = Time.time;
-    }
-
-    private void EndAttack()
-    {
-        attackHandler.attacking = false;
     }
 }

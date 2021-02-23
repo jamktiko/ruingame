@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using UnityEngine;
+﻿using UnityEngine;
     
 namespace DefaultNamespace
 {
@@ -13,15 +12,8 @@ namespace DefaultNamespace
 
         public override void Tick()
         {
-            _destination = Enemy.playerTransform.position;
+            _destination = PlayerManager.Instance.gameObject.transform.position;
             Enemy.MoveToward(_destination);
-            /*
-            if (ReachedPlayer())
-            {
-                Enemy.SetState(new AttackPlayerState(Enemy));
-            }
-            */
-            
             if (Enemy.stunned)
             {
                 Enemy.SetState(new StunnedState(Enemy));
@@ -29,6 +21,10 @@ namespace DefaultNamespace
             if (!Enemy.alive)
             {
                 Enemy.SetState(new DeathState(Enemy));
+            }
+            if (ReachedPlayer())
+            {
+                Enemy.SetState(new AttackPlayerState(Enemy));
             }
         }
 
@@ -39,7 +35,7 @@ namespace DefaultNamespace
 
         private bool ReachedPlayer()
         {
-            return Vector3.Distance(Enemy.transform.position, _destination) < 2f;
+            return Vector3.Distance(Enemy.transform.position, _destination) < Enemy.attackRange;
         }
 
         public override void OnStateExit()

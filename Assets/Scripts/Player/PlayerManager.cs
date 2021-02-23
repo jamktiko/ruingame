@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Management.Instrumentation;
 using DefaultNamespace;
-using UnityEditor;
-using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 
-[RequireComponent(typeof(AttackHandler))]
+[RequireComponent(typeof(PlayerAttackHandler))]
 [RequireComponent(typeof(PlayerHealth))]
 [RequireComponent(typeof(MovementController))]
 [RequireComponent(typeof(SkillUser))]
@@ -28,13 +20,13 @@ public class PlayerManager : BaseManager
 
     public InputReader playerInputReader { get; private set; }
     public RuntimeAnimatorController playerAnimator { get; private set; }
-
-    private AttackHandler _playerAttack;
+    
+    private PlayerAttackHandler _playerAttack;
     private PlayerHealth _playerHealth;
-    private MovementController _playerMovement;
+    public MovementController _playerMovement { get; private set; }
     public SkillUser _playerSkills { get; private set; }
 
-    public Combo _weaponData;
+    public Combo _weaponData { get; private set; }
     public PlayerData _playerData;
 
     [HideInInspector]
@@ -60,7 +52,7 @@ public class PlayerManager : BaseManager
             _instance = this;
         }
         playerInputReader = GameManager.Instance.playerInputReader;
-        _playerAttack = GetComponent<AttackHandler>();
+        _playerAttack = GetComponent<PlayerAttackHandler>();
         _weaponData = GameManager.Instance.weaponCombo;
         _playerHealth = GetComponent<PlayerHealth>();
         _playerMovement = GetComponent<MovementController>();
@@ -76,18 +68,14 @@ public class PlayerManager : BaseManager
         DisableScriptsOnPlayer();
         EnableScriptsOnPlayer();
         UpdatePlayerStats();
+        LockCursorToGame();
     }
 
-    private void Update()
+    private void LockCursorToGame()
     {
-        //For testing updates
-        /*if (Mouse.current.rightButton.wasPressedThisFrame)
-        {
-            UpdatePlayerStats();
-        }*/
-        //MAKE GUI FOR UPDATING PLAYER STATS
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
-
     private void SetupPlayerInput()
     {
         playerAnimator = GameManager.Instance.playerAnimator;
@@ -145,7 +133,6 @@ public class PlayerManager : BaseManager
         //Give artifact stats and add as a string to the artifact list
         Destroy(artifact.gameObject, 0.1f);
     }
-
     public void ModifyMovementSpeed(float amount, int type)
     {
         //Should be in a single method (Give property to modify and perform modification based on type given)
@@ -163,6 +150,7 @@ public class PlayerManager : BaseManager
         }
         _playerMovement.SetMovementSpeed(_playerData.entityMovementSpeed);
     }
+    
     public void ModifyJump(float amount, int type)
     {
         switch (type)
@@ -231,8 +219,6 @@ public class PlayerManager : BaseManager
                 break;
         }
     }
-
-
     public void Die()
     {
         DisableScriptsOnPlayer();

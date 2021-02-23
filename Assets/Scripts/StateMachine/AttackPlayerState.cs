@@ -11,8 +11,10 @@ namespace DefaultNamespace
         public override void OnStateEnter()
         {
             Name = "Attacking Player";
+            Enemy._movementControl.attacking = true;
+            Enemy._movementControl._entityRigidbody.velocity = Vector3.zero;
             Enemy.attack.AttemptAttack();
-            Enemy.attack.currentlyAttacking = true;
+            
         }
         public override void Tick()
         {
@@ -20,10 +22,14 @@ namespace DefaultNamespace
             {
                 Enemy.SetState(new DeathState(Enemy));
             }
-            if (!Enemy.attack.currentlyAttacking)
+            if (!Enemy.attack.attacking)
             {
                 Enemy.SetState(new MoveTowardsPlayerState(Enemy));
             }
+        }
+        public override void OnStateExit()
+        {
+            Enemy._movementControl.attacking = false;
         }
     }
 }

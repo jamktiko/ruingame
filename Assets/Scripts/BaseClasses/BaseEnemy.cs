@@ -1,11 +1,15 @@
-﻿using UnityEngine;
-using UnityEngine.Serialization;
+﻿using System.Collections;
+
+using UnityEngine;
+
 
 namespace DefaultNamespace
 {
+    [RequireComponent(typeof(EnemyHealth))]
+    [RequireComponent(typeof(Movement))]
+    [RequireComponent(typeof(BaseAttackHandler))]
     public class BaseEnemy : MonoBehaviour
     {
-
         public Movement _movementControl;
         
         private State _currentState;
@@ -15,27 +19,50 @@ namespace DefaultNamespace
         //private float _knockbackStrength = default;
         
         [HideInInspector]
-        public Attack attack;
+        public BaseAttackHandler attack;
+
+        public float attackRange;
         
         [HideInInspector]
         public bool stunned;   
         
         public Transform playerTransform;
 
+        private bool findingPlayer;
         private void Start()
         {
-            playerTransform = PlayerManager.Instance.transform;
             _movementControl = GetComponent<Movement>();
-            attack = GetComponent<Attack>();
+            attack = GetComponent<BaseAttackHandler>();
             SetState(new MoveTowardsPlayerState(this));
         }
 
         private void Update()
         {
-            if (PlayerManager.Instance != null) 
+            if (playerTransform != null) 
                 _currentState.Tick();
+            else if (!findingPlayer)
+            {
+                FindPlayer();
+            }
         }
 
+        public void FindPlayer()
+        {
+            findingPlayer = true;
+            StartCoroutine("FindPlayerRoutine");
+        }
+
+        public IEnumerator FindPlayerRoutine()
+        {
+            while (playerTransform == null)
+            {
+                yield return new WaitForSeconds(1f);
+                try {playerTransform = PlayerManager.Instance.transform;}
+                catch{Debug.Log("No player found!");}
+            }
+
+            findingPlayer = false;
+        }
         public void SetState(State state)
         {
             _currentState?.OnStateExit();

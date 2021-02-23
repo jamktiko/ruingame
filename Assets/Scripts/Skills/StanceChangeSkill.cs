@@ -1,7 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using System.Dynamic;
-using Data.Util;
 using UnityEngine;
 
 #region Skill description
@@ -28,7 +25,7 @@ namespace DefaultNamespace.Skills
         [SerializeField] private float _passiveResistance;
         [SerializeField] private float _selfDamage;
 
-        private void Awake()
+        protected override void Start()
         {
             skillname = "Stance Change";
             damage = 50f;
@@ -38,29 +35,30 @@ namespace DefaultNamespace.Skills
             _selfDamage = 2f;
             PlayerManager.Instance.ModifyAttackSpeed(_passiveAttackSpeed, 1);
             PlayerManager.Instance.ModifyResistance(_passiveResistance, 1);
-
         }
 
         public override void Execute()
         {
-            ApplyPersistentEffect(this);
+            WhileSkillActive();
         }
 
-        public override void ApplyPersistentEffect(SkillExecute sk)
+        public override void DeActivateSkillActive()
+        {
+            ModifyPlayerStats(0);
+            skillUser.usingSkill = false;
+        }
+        public override void WhileSkillActive()
         {
             if (!onCooldown && playerHealth.CurrentHealth >= 40f)
             {
-                base.ApplyPersistentEffect(sk);
+                skillUser.usingSkill = true;
+                IEnumerator coroutine = skillUser.UsePersistentEffect(this);
+                skillUser.StartCoroutine(coroutine);
                 ModifyPlayerStats(1);
                 playerHealth.DealDamage(_selfDamage);
             }
         }
-
-        public override void DeActivatePersistentEffect()
-        {
-            ModifyPlayerStats(0);
-        }
-
+        
         public override void ModifyPlayerStats(int type)
         {
             PlayerManager.Instance.ModifyDamage(damage, type);

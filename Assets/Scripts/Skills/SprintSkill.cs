@@ -1,31 +1,44 @@
 ﻿
 
 using System.Collections;
-using System.Collections.Generic;
-using System.Dynamic;
-using Data.Util;
-using UnityEngine;
+using UnityEditor;
 
-namespace DefaultNamespace.Skills
+
+namespace DefaultNamespace
 {
     public class SprintSkill : SkillExecute
     {
-        public override void Execute()
+        //Should contain UI IMAGE and Animation Clip
+        public float SprintSpeed = 20f;
+
+        protected override void Start()
         {
-            ApplyPersistentEffect(this);
+            base.Start();
+            duration = 0.5f;
         }
 
-        public override void ApplyPersistentEffect(SkillExecute sk)
+        public override void Execute(float duration)
+        {
+            // THIS LOCKS PLAYER MOVEMENT TO LAST INPUT OR FORCES MOVEMENT IF PLAYER IS NOT INPUTTING ANYTHING
+            PlayerManager.Instance._playerMovement.OnDash(duration);
+   
+            //APPLIES ENHANCED MOVEMENT SPEED
+            WhileSkillActive();
+        }
+        public override void WhileSkillActive()
         {
             if (!onCooldown)
             {
+                skillUser.usingSkill = true;
                 PlayerManager.Instance.ModifyMovementSpeed(SprintSpeed, 1);
-                base.ApplyPersistentEffect(sk);
+                IEnumerator coroutine = skillUser.UsePersistentEffect(this);
+                skillUser.StartCoroutine(coroutine);
             }
         }
 
-        public override void DeActivatePersistentEffect()
+        public override void DeActivateSkillActive()
         {
+            skillUser.usingSkill = false;
             PlayerManager.Instance.ModifyMovementSpeed(SprintSpeed, 0);
         }
     }

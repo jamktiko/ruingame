@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
     
 namespace DefaultNamespace
@@ -8,7 +7,7 @@ namespace DefaultNamespace
     {
         private float _time = 1f;
         private float initialMoveSpeed;
-        public float StunTimer = 1f;
+        public float StunTimer = 3f;
         public StunnedState(BaseEnemy enemy) : base(enemy)
         {
         }
@@ -18,12 +17,13 @@ namespace DefaultNamespace
             if (StunTimer > 0)
             {
                 Enemy._movementControl.movementSpeed = 0f;
-                
+                Enemy.attack.attacking = true;
                 Enemy.stunned = true;
                 StunTimer -= _time * Time.deltaTime;
             }
             else
             {
+                Enemy.attack.attacking = false;
                 Enemy.stunned = false;
             }
             if (!Enemy.alive)
@@ -39,9 +39,9 @@ namespace DefaultNamespace
 
         public override void OnStateEnter()
         {
-            //Enemy._movementControl._entityRigidbody.velocity = Vector3.zero;
+            Enemy._movementControl._entityRigidbody.velocity = Vector3.zero;
             initialMoveSpeed = Enemy._movementControl.movementSpeed;
-            //Enemy.attack.EndAttack();
+            Enemy.attack.EndAttack();
             Enemy.stunned = true;
             Name = "stunned";
         }

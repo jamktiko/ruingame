@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
+﻿using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -12,21 +9,17 @@ public class MovementController : MonoBehaviour
     private InputReader _inputReader = default;
     
     [Header("Ground Check")]
-    public LayerMask layerMask;
+    [SerializeField] private  LayerMask layerMask;
     [SerializeField] private float groundCheckRadius;
     public bool GroundedEntity { get; private set; }
 
     [Header("Animation parameters")]
-    [SerializeField]
-    private float animatorDeceleration = 1f;
-    [SerializeField]
-    private float animatorAcceleration = 1f;
+    private float animatorDeceleration = 10f;
+    private float animatorAcceleration = 10f;
     private float _animatorVelocity = 0.0f;
     private Animator _characterAnimator;
     
     private Rigidbody _characterRigidBody;
-    private bool _attacking;
-    
     //Used to calculate movement vectors
     private Vector2 _previousMovementInput;
     [HideInInspector] public Vector3 MovementInput { get; private set; }
@@ -44,8 +37,11 @@ public class MovementController : MonoBehaviour
     private GameObject _stepRayUpper;
     private GameObject _stepRayLower;
 
-    public float attackMovement;
+    public bool dashing { get; private set; }
     public bool attacking;
+    
+    private static readonly int MovementSpeed = Animator.StringToHash("movementSpeed");
+
     private void OnEnable()
     {
         try
@@ -66,7 +62,7 @@ public class MovementController : MonoBehaviour
 
     private void OnAttack()
     {
-        if (GroundedEntity)
+        if (GroundedEntity && !dashing)
         {
             _animatorVelocity = 0;
             _characterRigidBody.velocity = Vector3.zero;
@@ -78,6 +74,7 @@ public class MovementController : MonoBehaviour
         _characterAnimator = GetComponentInChildren<Animator>();
         _inputReader = PlayerManager.Instance.playerInputReader;
         CreateStepRays();
+        _characterAnimator.SetFloat(MovementSpeed, _movementSpeed/10);
     }
 
     private void CreateStepRays()
@@ -98,27 +95,27 @@ public class MovementController : MonoBehaviour
     private void Update()
     {
         CalculateMovement();
+        HandleMovementAnimation();
     }
     private void FixedUpdate()
     {
         GroundCheck();
         StepClimb();
-        if (!attacking)
+        if (!attacking && !dashing && MovementInput.magnitude > 0)
         {
-            Move();
-            RotateTowardsMovement();
+            Move(MovementInput);
+            RotateTowardsMovement(turnSmoothing);
         }
         else
         {
             _animatorVelocity = 0.0f;
         }
-        HandleMovementAnimation();
     }
-    private void Move()
+    private void Move(Vector3 MovementInput)
     {
         Vector3 movementVelocity = _movementSpeed * MovementInput;
-        Vector3 attackVelocity = transform.forward * attackMovement;
-        _characterRigidBody.velocity = new Vector3(movementVelocity.x, _characterRigidBody.velocity.y, movementVelocity.z) + attackVelocity;
+       _characterRigidBody.velocity =
+            new Vector3(movementVelocity.x, _characterRigidBody.velocity.y, movementVelocity.z);
     }
 
     private void GroundCheck()
@@ -150,13 +147,20 @@ public class MovementController : MonoBehaviour
             _characterRigidBody.AddForce(Vector3.up * _jumpHeight);
         }
     }
-    private void RotateTowardsMovement()
+    private void RotateTowardsMovement(float amount)
     {
-        float singleStep = turnSmoothing * Time.deltaTime;
+        float singleStep = amount * Time.deltaTime;
         Vector3 newDirection = Vector3.RotateTowards(transform.forward, MovementInput, singleStep, 0.0f);
         transform.rotation = Quaternion.LookRotation(newDirection);
 
     }
+    public void RotateTowardsMovement(Vector3 direction, float amount)
+    {
+        float singleStep = amount * Time.deltaTime;
+        Vector3 newDirection = Vector3.RotateTowards(transform.forward, direction, singleStep, 0.0f);
+        transform.rotation = Quaternion.LookRotation(newDirection);
+    }
+    
     public void CalculateMovement()
     {
         if (_gameplayCameraTransform.isSet)
@@ -212,6 +216,29 @@ public class MovementController : MonoBehaviour
         }
     }
 
+    public void OnDash(float duration)
+    {
+       RotateTowardsMovement(1000f);
+       StartCoroutine(Dashing(duration));
+    }
+    public virtual IEnumerator Dashing(float duration)
+    {
+        _characterAnimator.SetBool("dashing", true);
+        dashing = true;
+        var originalInput = MovementInput;
+        if (originalInput == Vector3.zero)
+        {
+            _animatorVelocity = 0;
+            originalInput = transform.forward;
+        }
+        for (float ft = duration-0.2f; ft >= 0; ft -= 0.1f)
+        {
+            Move(originalInput);
+            yield return new WaitForSeconds(.1f);
+        }
+        dashing = false;
+        _characterAnimator.SetBool("dashing", false);
+    }
     public void SetPlayerCamera(TransformAnchor cam)
     {
         _gameplayCameraTransform = cam;
@@ -220,6 +247,7 @@ public class MovementController : MonoBehaviour
     public void SetMovementSpeed(float amount)
     {
         _movementSpeed = amount;
+        _characterAnimator.SetFloat(MovementSpeed, _movementSpeed/10);
     }
     public void SetJumpHeight(float amount)
     {

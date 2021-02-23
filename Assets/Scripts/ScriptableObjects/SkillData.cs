@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections;
+﻿#if (UNITY_EDITOR) 
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
-using DefaultNamespace.Skills;
+using DefaultNamespace;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class SkillData : MonoBehaviour
 {
+    /*
     [System.Serializable]
     public class SkillListTemplate
     {
@@ -55,6 +53,7 @@ public class SkillData : MonoBehaviour
         }
         return returnSkill;
     }
+    */
 }
 
 static class Extensions
@@ -73,4 +72,4 @@ static class Extensions
         list = array.ToList();
     }
 }
-
+#endif

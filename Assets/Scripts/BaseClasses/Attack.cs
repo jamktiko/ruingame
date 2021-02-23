@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 
 namespace DefaultNamespace
@@ -33,8 +31,8 @@ public class Attack : MonoBehaviour
         }
         catch
         {
+            
         }
-
         DamageCollider.EnableDamage();
         currentlyAttacking = true;
         Invoke("EndAttack", 1f);
