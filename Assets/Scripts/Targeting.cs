@@ -13,23 +13,30 @@ public class Targeting : MonoBehaviour
         if (attackAll)
         {
             var listOfEnemies = GetListOfEnemiesInRange(radius, distance);
-            DealDamageToEnemyHealth(listOfEnemies, damage);
+            DealDamageToEnemies(listOfEnemies, damage);
         }
         else
         {
             var closestEnemyInList = GetClosestEnemy(radius, distance);
-            DealDamageToEnemyHealth(closestEnemyInList, damage);
+            DealDamageToEnemies(closestEnemyInList, damage);
         }
     }
 
     //Deal damage on EnemyHealth
-    void DealDamageToEnemyHealth(List<GameObject> enemyList, float damage)
+    public void DealDamageToEnemies(List<GameObject> enemyList, float damage)
     {
-        foreach (var item in enemyList)
+        foreach (var enemy in enemyList)
         {
-            var enemyHealth = item.GetComponent<EnemyHealth>();
+            DamageEnemy(enemy, damage);
+        }
+    }
+
+    public void DamageEnemy(GameObject enemy, float damage)
+    {
+        if (enemy.TryGetComponent(out EnemyHealth enemyHealth))
+        {
             enemyHealth.DealDamage(damage);
-            Debug.Log("enemy health: " + enemyHealth.CurrentHealth);
+            //Debug.Log(enemyHealth.CurrentHealth);
         }
     }
 
