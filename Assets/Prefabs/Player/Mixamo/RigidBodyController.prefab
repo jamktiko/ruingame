@@ -157,6 +157,8 @@ MonoBehaviour:
   skillUI: {fileID: 5323976581000332772}
   usingSkill: 0
   sprintAnimation: {fileID: 7400000, guid: 06c39531160538a4280f1d087d132a07, type: 2}
+  defaultParticles: {fileID: 4215906668003633787, guid: 602a4f10e9993ca4295a107ea8105b4a,
+    type: 3}
 --- !u!114 &2280579018184987104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,6 +171,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8570592085c9d1143b04375b1eaeb62e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _flatResistance: 10
+  _percentualResistance: 10
   _maximumHealth: 100
   _healthUI: {fileID: 2433242057000738767}
   CurrentHealth: 0

@@ -23,7 +23,8 @@ public class SkillUser : MonoBehaviour
     
     //STORE THIS IN SKILL
     public AnimationClip sprintAnimation;
-    
+
+    public GameObject defaultParticles;
     public Targeting skillTargeting { get; private set; }
     private void Awake()
     {
@@ -143,7 +144,8 @@ public class SkillUser : MonoBehaviour
                         sk.Execute();
                         Debug.Log("No skill animation!");
                     }
-                    
+
+                    Instantiate(defaultParticles, transform.position, Quaternion.identity);
                     AddInvulnerability(sk.iFrameDuration);
                     StartCoroutine(GoOnCooldown(sk));
                 }
