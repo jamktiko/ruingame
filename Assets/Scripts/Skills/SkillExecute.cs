@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class SkillExecute : MonoBehaviour
 {
     public SkillUser skillUser;
-    
+
     //STORE THIS DATA IN A PREFAB OR SCRIPTABLE
     public string skillname;
     public string skillDescription;
@@ -13,19 +14,18 @@ public class SkillExecute : MonoBehaviour
     public float duration = 4f;
     public AnimationClip animationClip;
 
-    [SerializeField] protected float SprintSpeed = 20f;
-    [SerializeField] protected float damage = 10f;
-    [SerializeField] protected bool attackAllEnemies = true;
-    [SerializeField] protected float attackRadius = 3f;
-    [SerializeField] protected float attackDistance = 0f;
-    
+    protected float damage = 10f;
+
     protected Targeting targeting;
     protected PlayerHealth playerHealth;
+    protected Rigidbody playerRb;
 
     protected virtual void Start()
     {
         playerHealth = GetComponent<PlayerHealth>();
         targeting = skillUser.skillTargeting;
+        playerRb = gameObject.GetComponent<Rigidbody>();
+
     }
     public virtual void Execute()
     {
@@ -33,7 +33,7 @@ public class SkillExecute : MonoBehaviour
     }
     public virtual void Execute(float duration)
     {
-        
+
     }
 
     public virtual void WhileSkillActive()

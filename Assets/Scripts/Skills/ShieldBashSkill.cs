@@ -18,18 +18,26 @@ namespace DefaultNamespace.Skills
 {
     public class ShieldBashSkill : SkillExecute
     {
-        [SerializeField] protected float SprintSpeed = 20f;
-        bool onSkill = false;
+        [SerializeField] private bool _stopPlayerAfterDash = true;
+        [SerializeField] private bool _stopPlayerOnEnemyCollision = true;
+        [SerializeField] private float _knockbackForce = 15f;
+        [SerializeField] private float _sprintSpeed = 30f;
+        private bool _onSkill = false;
 
-        private void Awake()
+
+        protected override void Start()
         {
+            base.Start();
             skillname = "Shield Bash";
             SprintSpeed *= 1.2f;
             damage = 10f;
+            duration = 0.5f;
             iFrameDuration = 1f;
         }
+
         public override void Execute()
         {
+            PlayerManager.Instance._playerMovement.OnDash(duration);
             WhileSkillActive();
         }
 
@@ -38,25 +46,36 @@ namespace DefaultNamespace.Skills
             if (!onCooldown)
             {
                 skillUser.usingSkill = true;
-                PlayerManager.Instance.ModifyMovementSpeed(SprintSpeed, 1);
-                onSkill = true;
+                _onSkill = true;
+                PlayerManager.Instance.ModifyMovementSpeed(_sprintSpeed, 1);
                 IEnumerator coroutine = skillUser.UsePersistentEffect(this);
                 skillUser.StartCoroutine(coroutine);
             }
         }
+
         public override void DeActivateSkillActive()
         {
-            PlayerManager.Instance.ModifyMovementSpeed(SprintSpeed, 0);
-            onSkill = false;
             skillUser.usingSkill = false;
+            _onSkill = false;
+            PlayerManager.Instance.ModifyMovementSpeed(_sprintSpeed, 0);
+
+            if (_stopPlayerAfterDash)
+                playerRb.velocity = Vector3.zero;
         }
+
+
         private void OnCollisionEnter(Collision collision)
         {
-            var enemyGO = collision.gameObject;
-            if (onSkill && enemyGO.CompareTag("Enemy"))
+            var go = collision.gameObject;
+            if (_onSkill && go.CompareTag("Enemy"))
             {
-                var tr = enemyGO.GetComponent<EnemyHealth>();
-                tr.DealDamage(damage);
+                EnemyHealth eh = go.GetComponent<EnemyHealth>();
+                KnockbackHandler kbh = go.GetComponent<KnockbackHandler>();
+                kbh.HandleKnockBack(transform.position, _knockbackForce);
+                eh.DealDamage(damage);
+
+                if (_stopPlayerOnEnemyCollision)
+                    playerRb.velocity = Vector3.zero;
             }
         }
     }

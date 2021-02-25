@@ -33,7 +33,7 @@ namespace DefaultNamespace.Skills
             _damageResistance = 5f;
             _passiveAttackSpeed = 10f;
             _passiveResistance = 10f;
-            _selfDamage = 2f;
+            _selfDamage = 20f;
             PlayerManager.Instance.ModifyAttackSpeed(_passiveAttackSpeed, 1);
             PlayerManager.Instance.ModifyResistance(_passiveResistance, 1);
         }
@@ -43,11 +43,6 @@ namespace DefaultNamespace.Skills
             WhileSkillActive();
         }
 
-        public override void DeActivateSkillActive()
-        {
-            ModifyPlayerStats(0);
-            skillUser.usingSkill = false;
-        }
         public override void WhileSkillActive()
         {
             if (playerHealth.CurrentHealth >= 40f)
@@ -56,10 +51,17 @@ namespace DefaultNamespace.Skills
                 IEnumerator coroutine = skillUser.UsePersistentEffect(this);
                 skillUser.StartCoroutine(coroutine);
                 ModifyPlayerStats(1);
+
+                //Might deal negative-negative damage to player. Regfactoring in progress
                 playerHealth.DealDamage(_selfDamage);
             }
         }
-        
+        public override void DeActivateSkillActive()
+        {
+            skillUser.usingSkill = false;
+            ModifyPlayerStats(0);
+        }
+
         public override void ModifyPlayerStats(int type)
         {
             PlayerManager.Instance.ModifyDamage(damage, type);
