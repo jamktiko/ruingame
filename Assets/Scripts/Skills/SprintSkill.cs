@@ -28,13 +28,10 @@ namespace DefaultNamespace
         }
         public override void WhileSkillActive()
         {
-            if (!onCooldown)
-            {
-                skillUser.usingSkill = true;
-                PlayerManager.Instance.ModifyMovementSpeed(SprintSpeed, 1);
-                IEnumerator coroutine = skillUser.UsePersistentEffect(this);
-                skillUser.StartCoroutine(coroutine);
-            }
+            skillUser.usingSkill = true;
+            PlayerManager.Instance.ModifyMovementSpeed(SprintSpeed, 1);
+            IEnumerator coroutine = skillUser.UsePersistentEffect(this);
+            skillUser.StartCoroutine(coroutine);
         }
 
         public override void DeActivateSkillActive()

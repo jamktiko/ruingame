@@ -39,29 +39,11 @@ namespace DefaultNamespace.Skills
 
         public override void Execute()
         {
-            WhileSkillActive();
+             skillUser.usingSkill = true;
+             UpdateAttackRadius();
+             DamageAndKnockbackBasedOnDistanceFromPlayer();
+             skillUser.usingSkill = false;
         }
-
-        public override void WhileSkillActive()
-        {
-            if (!onCooldown)
-            {
-                skillUser.usingSkill = true;
-                UpdateAttackRadius();
-
-                DamageAndKnockbackBasedOnDistanceFromPlayer();
-
-                IEnumerator coroutine = skillUser.UsePersistentEffect(this);
-                skillUser.StartCoroutine(coroutine);
-            }
-        }
-
-        public override void DeActivateSkillActive()
-        {
-            skillUser.usingSkill = false;
-            Debug.Log("Disabling whirlwind");
-        }
-
         private void DamageAndKnockbackBasedOnDistanceFromPlayer()
         {
             List<GameObject> enemyList = targeting.GetListOfEnemiesInRange(_attackRadius, _attackDistance);

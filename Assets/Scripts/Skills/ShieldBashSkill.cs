@@ -29,6 +29,7 @@ namespace DefaultNamespace.Skills
         {
             base.Start();
             skillname = "Shield Bash";
+            SprintSpeed *= 1.2f;
             damage = 10f;
             duration = 0.5f;
             iFrameDuration = 1f;
@@ -44,7 +45,6 @@ namespace DefaultNamespace.Skills
         {
             if (!onCooldown)
             {
-                Debug.Log("Starting ShieldBash");
                 skillUser.usingSkill = true;
                 _onSkill = true;
                 PlayerManager.Instance.ModifyMovementSpeed(_sprintSpeed, 1);
@@ -55,7 +55,6 @@ namespace DefaultNamespace.Skills
 
         public override void DeActivateSkillActive()
         {
-            Debug.Log("Disabling ShieldBash");
             skillUser.usingSkill = false;
             _onSkill = false;
             PlayerManager.Instance.ModifyMovementSpeed(_sprintSpeed, 0);

@@ -45,7 +45,7 @@ namespace DefaultNamespace.Skills
 
         public override void WhileSkillActive()
         {
-            if (!onCooldown && playerHealth.CurrentHealth >= 40f)
+            if (playerHealth.CurrentHealth >= 40f)
             {
                 skillUser.usingSkill = true;
                 IEnumerator coroutine = skillUser.UsePersistentEffect(this);
