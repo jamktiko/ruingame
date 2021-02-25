@@ -29,7 +29,7 @@ namespace DefaultNamespace.Skills
         {
             base.Start();
             skillname = "Shield Bash";
-            SprintSpeed *= 1.2f;
+            _sprintSpeed *= 1.2f;
             damage = 10f;
             duration = 0.5f;
             iFrameDuration = 1f;
