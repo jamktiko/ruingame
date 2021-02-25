@@ -70,7 +70,6 @@ namespace DefaultNamespace.Skills
             var go = collision.gameObject;
             if (_onSkill && go.CompareTag("Enemy"))
             {
-                playerRb.velocity = Vector3.zero;
                 EnemyHealth eh = go.GetComponent<EnemyHealth>();
                 KnockbackHandler kbh = go.GetComponent<KnockbackHandler>();
                 kbh.HandleKnockBack(transform.position, _knockbackForce);
