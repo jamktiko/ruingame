@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: RoomVariants
   m_EditorClassIdentifier: 
   possibleRooms:
-  - {fileID: 7985308490775195244, guid: fbe00bf919fd3b349aef6726fd98f602, type: 3}
+  - {fileID: 1892880382967818623, guid: 262b5b43cdb653847ac56105b2f7a0d1, type: 3}
   - {fileID: 3500716073269009193, guid: 8bf18cc94f36b0c4a882938ee3db8020, type: 3}

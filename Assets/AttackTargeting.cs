@@ -61,7 +61,6 @@ public class AttackTargeting : MonoBehaviour
     {
         List<GameObject> targetList = new List<GameObject>();
         RaycastHit[] hits = Physics.SphereCastAll(transform.position, radius, transform.forward, range, LayerToCheck);
-        Debug.Log(hits.Length);
         if (hits != null)
         {
             foreach (RaycastHit hit in hits)

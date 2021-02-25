@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e207e7ef8e5a949a2fe0a2e51260e7, type: 3}
   m_Name: SwordComboAttack3
   m_EditorClassIdentifier: 
-  animationClip: {fileID: 7400000, guid: 6c35db1d002c9224ca86a74794a236bb, type: 2}
+  animationClip: {fileID: 7400000, guid: 66fac395f3b4dca4f92b4b84e49307d4, type: 2}
   attackData: {fileID: 11400000, guid: 12c17d8fe97e00449a6c11f64521e38f, type: 2}
