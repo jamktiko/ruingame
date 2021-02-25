@@ -43,11 +43,6 @@ namespace DefaultNamespace.Skills
             WhileSkillActive();
         }
 
-        public override void DeActivateSkillActive()
-        {
-            ModifyPlayerStats(0);
-            skillUser.usingSkill = false;
-        }
         public override void WhileSkillActive()
         {
             if (!onCooldown && playerHealth.CurrentHealth >= 40f)
@@ -60,6 +55,11 @@ namespace DefaultNamespace.Skills
                 //Might deal negative-negative damage to player. Regfactoring in progress
                 playerHealth.DealDamage(_selfDamage);
             }
+        }
+        public override void DeActivateSkillActive()
+        {
+            skillUser.usingSkill = false;
+            ModifyPlayerStats(0);
         }
 
         public override void ModifyPlayerStats(int type)

@@ -46,19 +46,19 @@ namespace DefaultNamespace.Skills
         {
             if (!onCooldown)
             {
+                skillUser.usingSkill = true;
                 UpdateAttackRadius();
 
                 DamageAndKnockbackBasedOnDistanceFromPlayer();
 
                 IEnumerator coroutine = skillUser.UsePersistentEffect(this);
                 skillUser.StartCoroutine(coroutine);
-
-                playerRb.velocity = Vector3.zero;
             }
         }
 
         public override void DeActivateSkillActive()
         {
+            skillUser.usingSkill = false;
             Debug.Log("Disabling whirlwind");
         }
 
