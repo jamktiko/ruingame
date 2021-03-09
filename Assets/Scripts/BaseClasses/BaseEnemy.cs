@@ -1,40 +1,68 @@
-﻿using UnityEngine;
-using UnityEngine.Serialization;
+﻿using System.Collections;
+
+using UnityEngine;
+
 
 namespace DefaultNamespace
 {
+    [RequireComponent(typeof(EnemyHealth))]
+    [RequireComponent(typeof(Movement))]
+    [RequireComponent(typeof(BaseAttackHandler))]
     public class BaseEnemy : MonoBehaviour
     {
-        private CharacterController _characterController;
-
-        private Movement _movementControl;
+        public Movement _movementControl;
         
         private State _currentState;
+
+        public bool alive = true;
 
         //private float _knockbackStrength = default;
         
         [HideInInspector]
-        public Attack attack;
+        public BaseAttackHandler attack;
+
+        public float attackRange;
         
         [HideInInspector]
         public bool stunned;   
         
         public Transform playerTransform;
 
+        private bool findingPlayer;
         private void Start()
         {
-            playerTransform = PlayerManager.Instance.transform;
             _movementControl = GetComponent<Movement>();
-            attack = GetComponent<Attack>();
-            _characterController = GetComponent<CharacterController>();
+            attack = GetComponent<BaseAttackHandler>();
             SetState(new MoveTowardsPlayerState(this));
         }
 
         private void Update()
         {
-            _currentState.Tick();
+            if (playerTransform != null) 
+                _currentState.Tick();
+            else if (!findingPlayer)
+            {
+                FindPlayer();
+            }
         }
 
+        public void FindPlayer()
+        {
+            findingPlayer = true;
+            StartCoroutine("FindPlayerRoutine");
+        }
+
+        public IEnumerator FindPlayerRoutine()
+        {
+            while (playerTransform == null)
+            {
+                yield return new WaitForSeconds(1f);
+                try {playerTransform = PlayerManager.Instance.transform;}
+                catch{Debug.Log("No player found!");}
+            }
+
+            findingPlayer = false;
+        }
         public void SetState(State state)
         {
             _currentState?.OnStateExit();

@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class PlayerHealth : Health
 {
+
+    public float flatResistance;
+    public float percentualResistance;
     public override void Die()
     {
         PlayerManager pm = GetComponent<PlayerManager>();

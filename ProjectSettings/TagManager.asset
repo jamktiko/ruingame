@@ -12,6 +12,9 @@ TagManager:
   - Exit
   - Cameras
   - Ground
+  - SkillsUI
+  - SkillIcon
+  - Object
   layers:
   - Default
   - TransparentFX
@@ -22,9 +25,9 @@ TagManager:
   - 
   - 
   - CameraCollision
-  - 
-  - 
-  - 
+  - EnemyLayer
+  - CollisionObject
+  - PostProcessing
   - 
   - 
   - 

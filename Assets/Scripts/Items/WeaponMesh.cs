@@ -1,13 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
+using System;
 using UnityEngine;
-using UnityEngine.Serialization;
+
 
 public class WeaponMesh : MonoBehaviour
 {
     public MeshRenderer wm;
-    void Awake()
+    public ParticleSystem ps;
+    void Start()
     {
-        wm = GetComponent<MeshRenderer>();
+        wm = GetComponentInChildren<MeshRenderer>();
+        ps = GetComponentInChildren<ParticleSystem>();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Enemy")
+        {
+            ps.Play();
+        }
     }
 }

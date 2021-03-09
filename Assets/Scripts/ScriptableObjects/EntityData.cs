@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
@@ -14,7 +15,7 @@ public class EntityData : ScriptableObject
     public float entityjumpHeight = 350f;
 
     [Header("Combat stats")]
-    public float entityDamage = 100f;
-    public float entityAttackSpeed = 1f;
+    public float entityDamage = 30f;
+    public float entityAttackSpeed = 3f;
     public string entityEnemyTag = "Enemy";
 }

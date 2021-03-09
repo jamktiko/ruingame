@@ -1,24 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using DefaultNamespace;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AnimationTriggerHandler : MonoBehaviour
 {
-    private DamageCollider _damageCollider;
-
+    private PlayerAttackHandler _attackHandler;
+    public GameObject _weaponSlash;
+    public Transform _weaponSlashPosition;
     public void Start()
     {
-        _damageCollider = GetComponentInChildren<DamageCollider>();
+        _attackHandler = GetComponentInParent<PlayerAttackHandler>();
     }
 
-    public void TriggerAttack()
+    public void HandleDamage()
     {
-        _damageCollider._damageCollider.enabled = true;
+        _attackHandler.HandleAttack();
     }
 
-    public void EndAttack()
+    public void WeaponSlash()
+
     {
-        _damageCollider._damageCollider.enabled = false;
+        Instantiate(_weaponSlash, _weaponSlashPosition.position, _weaponSlashPosition.rotation);
     }
 }

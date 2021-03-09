@@ -1,57 +1,52 @@
-﻿using System.Collections;
+﻿using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class SkillExecute : MonoBehaviour
 {
+    public SkillUser skillUser;
 
+    //STORE THIS DATA IN A PREFAB OR SCRIPTABLE
     public string skillname;
     public string skillDescription;
-    public float skillCooldown = 5f;
-    public float iFrameDuration = 1f;
+    public float skillCooldown = 3f;
+    public float iFrameDuration = 0.3f;
     public bool onCooldown = false;
-    public bool persistentEffect = false;
-    public float persistentEffectTime = 2f;
-    public SkillUser skillUser;
-    public float duration = 1f;
+    public float duration = 4f;
+    public AnimationClip animationClip;
+
+    protected float damage = 10f;
+
+    protected Targeting targeting;
+    protected PlayerHealth playerHealth;
+    protected Rigidbody playerRb;
+
+    protected virtual void Start()
+    {
+        playerHealth = GetComponent<PlayerHealth>();
+        targeting = skillUser.skillTargeting;
+        playerRb = gameObject.GetComponent<Rigidbody>();
+
+    }
     public virtual void Execute()
     {
+        Debug.Log("Skill base, create an implementation!");
     }
-    public virtual IEnumerator GoOnCooldown()
+    public virtual void Execute(float duration)
     {
-        yield return new WaitForSeconds(skillCooldown);
-        onCooldown = false;
+
     }
 
-    public virtual void ActivateSkill()
+    public virtual void WhileSkillActive()
     {
-        if (!onCooldown)
-        {
-            Execute();
-            skillUser.AddInvulnerability(iFrameDuration);
-            onCooldown = true;
-            StartCoroutine(nameof(GoOnCooldown));
-        }
-        else
-        {
-            //ON COOLDOWN
-        }
+
     }
 
-    public virtual IEnumerator SkillPersistentEffect()
+    public virtual void DeActivateSkillActive()
     {
-        ApplyPersistentEffect();
-        yield return new WaitForSeconds(persistentEffectTime);
-        DeActivatePersistentEffect();
-    }
 
-    public virtual void ApplyPersistentEffect()
-    {
-        
     }
-
-    public virtual void DeActivatePersistentEffect()
+    public virtual void ModifyPlayerStats(int type)
     {
-        
+
     }
 }

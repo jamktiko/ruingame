@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using DefaultNamespace;
+﻿
 using UnityEngine;
-using UnityEngine.Serialization;
-
+using UnityEngine.VFX;
 
 namespace DefaultNamespace
 {
@@ -19,8 +16,15 @@ namespace DefaultNamespace
 
         public override void ReactToDamage(float amount)
         {
-            enemyController.stunned = true;
+            enemyController.SetState(new StunnedState(enemyController));
             base.ReactToDamage(amount);
+        }
+
+        public override void Die()
+        {
+            base.Die();
+            enemyController.alive = false;
+            Destroy(gameObject, 0.5f);
         }
     }
 }
