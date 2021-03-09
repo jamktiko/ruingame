@@ -37,6 +37,7 @@ public class Health : MonoBehaviour
         AddIFrame(_reDamageTimer);
         CheckHealth();
         _healthUI.UpdateUIValue(CurrentHealth);
+        
     }
     public void DealDamageOverTime(float amount, float time)
     {

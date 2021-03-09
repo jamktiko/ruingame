@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff71bc3fc7889e8419b080cfc7644d7f, type: 3}
   m_Name: PhysicalAttack
   m_EditorClassIdentifier: 
-  targetingType: 0
+  targetingType: 2
   baseDamage: 1
-  radius: 3
-  knockBackStrength: 2
+  radius: 1
+  knockBackStrength: 5
+  range: 1
+  attackType: 0
+  projectilePrefab: {fileID: 0}
+  shootForce: 0

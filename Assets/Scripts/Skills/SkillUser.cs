@@ -128,6 +128,7 @@ public class SkillUser : MonoBehaviour
             {
                 if (!usingSkill)
                 {
+                    PlayerManager.Instance.ZoomCameraInAndOut();
                     //SHOULD ONLY BE CALLED AFTER SKILL GOES ON COOLDOWN, EG. Stance change only goes on cooldown after the duration is over
                     skillUI.OnSkillUse(index);
                     _playerManager.StopAttacking();

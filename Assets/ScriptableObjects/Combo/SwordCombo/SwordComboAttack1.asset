@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: SwordComboAttack1
   m_EditorClassIdentifier: 
   animationClip: {fileID: 7400000, guid: 66fac395f3b4dca4f92b4b84e49307d4, type: 2}
-  attackData: {fileID: 11400000, guid: 12c17d8fe97e00449a6c11f64521e38f, type: 2}
+  attackData: {fileID: 11400000, guid: 6a9e328051a3f664e8d773b9f2acc0ba, type: 2}

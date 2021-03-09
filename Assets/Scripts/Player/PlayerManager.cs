@@ -18,6 +18,7 @@ public class PlayerManager : BaseManager
         get { return _instance; }
     }
 
+    private GameObject _mainCamera;
     public InputReader playerInputReader { get; private set; }
     public RuntimeAnimatorController playerAnimator { get; private set; }
     
@@ -83,7 +84,8 @@ public class PlayerManager : BaseManager
 
     private void SetupPlayerCamera()
     {
-        var cam = GameObject.FindGameObjectWithTag("Cameras").GetComponent<CameraManager>();
+        _mainCamera = GameObject.FindGameObjectWithTag("Cameras");
+        var cam = _mainCamera.GetComponent<CameraManager>();
         _playerMovement.SetPlayerCamera(cam.cameraTransformAnchor);
         cam.SetupProtagonistVirtualCamera(gameObject.transform);
         cam.playerTransform = gameObject.transform;
@@ -228,5 +230,10 @@ public class PlayerManager : BaseManager
     public void StopAttacking()
     {
         _playerAttack.EndAttack();
+    }
+
+    public void ZoomCameraInAndOut()
+    {
+        var cam = _mainCamera.GetComponent<CameraManager>();
     }
 }

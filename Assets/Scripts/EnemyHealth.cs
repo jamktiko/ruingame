@@ -1,4 +1,7 @@
 ﻿
+using UnityEngine;
+using UnityEngine.VFX;
+
 namespace DefaultNamespace
 {
     public class EnemyHealth : Health
