@@ -1555,7 +1555,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _weaponSlash
       value: 
-      objectReference: {fileID: 3324230399876472871, guid: 45ed0e7e8e2ae7d42bf1fcabd947e6ff,
+      objectReference: {fileID: 7485154270815277482, guid: 304d5afc5b6479d4ab22b726671796f5,
         type: 3}
     - target: {fileID: 8818163556369248861, guid: a24d53503af86754899f3d3d33a6be92,
         type: 3}
