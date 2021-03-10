@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SlashMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: 2d8412224c40d5e458c3ae27b795d75d,
+  m_Name: SlashMaterial 1
+  m_Shader: {fileID: -6465566751694194690, guid: 0357ea927c8f5b344928e87677763630,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -33,32 +33,32 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_2DB1D0A0:
+    - _SampleTexture2D_283FDC16_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 2730a4ed77ca3ba4fb8e11d8e1a116ef, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_463E70A5_Texture_1:
         m_Texture: {fileID: 2800000, guid: 58c5606f6361da245b44214439d306a6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - Texture2D_50B77FD8:
-        m_Texture: {fileID: 2800000, guid: 6a0a5d30f01f42e4cb864b12ce255b32, type: 3}
+    - _SampleTexture2D_5324B6FE_Texture_1:
+        m_Texture: {fileID: 2800000, guid: a98b0e8d1078bf44895c7dccd5552553, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - Texture2D_936F6E57:
-        m_Texture: {fileID: 2800000, guid: 6a0a5d30f01f42e4cb864b12ce255b32, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Texture2D_B3820695:
+    - _SampleTexture2D_55488EFF_Texture_1:
         m_Texture: {fileID: 2800000, guid: 850129bb4d3e36543a5786cab5a3d551, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_578670AC_Texture_1:
+    - _SampleTexture2D_CACE121F_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 6a0a5d30f01f42e4cb864b12ce255b32, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_D91B1790_Texture_1:
         m_Texture: {fileID: 2800000, guid: 85a9b5a2774482642992ad464b885c16, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - Vector1_247610AB: 5
-    - Vector1_2B2AF337: 1
-    - Vector1_2C59CE45: 5
-    - Vector1_877AE91A: 0
+    m_Floats: []
     m_Colors:
-    - Color_2FF1FBAC: {r: 1, g: 1, b: 1, a: 0}
-    - Color_C6FBB33E: {r: 1, g: 0.3330517, b: 0, a: 0}
-    - Color_ED8AEF7B: {r: 1, g: 0.77220356, b: 0, a: 0}
+    - Color_48E1B485: {r: 2, g: 1.082353, b: 0, a: 0}
+    - Color_834E168D: {r: 1, g: 0.3483723, b: 0, a: 0}
+    - Color_B0266AD7: {r: 2, g: 2, b: 2, a: 0}
