@@ -63,6 +63,6 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats: []
     m_Colors:
-    - Color_48E1B485: {r: 0.8060851, g: 0, b: 0.044255745, a: 0}
-    - Color_834E168D: {r: 2, g: 0, b: 0.24313726, a: 0}
+    - Color_48E1B485: {r: 0.2859045, g: 0.86792445, b: 0, a: 0}
+    - Color_834E168D: {r: 0.3151765, g: 1, b: 0, a: 0}
     - Color_B0266AD7: {r: 2, g: 2, b: 2, a: 0}
