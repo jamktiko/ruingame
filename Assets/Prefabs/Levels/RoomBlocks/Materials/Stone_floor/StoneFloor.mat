@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8829822891531780207
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 2
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: StoneFloor
+  m_Shader: {fileID: -6465566751694194690, guid: 7b3ecc282a1840541bcb0136bc73429b,
+    type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_184EEBDC:
+        m_Texture: {fileID: 2800000, guid: 970eefbfcf6b02b41a09337466ff23ba, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_68ACBA:
+        m_Texture: {fileID: 2800000, guid: f3215a50f5cbd204d9fa69808071785b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_755DF74A:
+        m_Texture: {fileID: 2800000, guid: 203baaa3dc047444295cf257c0e9ed9f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_756852C4:
+        m_Texture: {fileID: 2800000, guid: 203baaa3dc047444295cf257c0e9ed9f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_95F8D057:
+        m_Texture: {fileID: 2800000, guid: b4036acbe2ef8ab4d972c7cb5e2eaaa4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_9DA12556:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_CF9D7F73:
+        m_Texture: {fileID: 2800000, guid: 24da9b4b45df31745b8d6507f9db7cb8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_DFC1E9BE:
+        m_Texture: {fileID: 2800000, guid: 4625971028060eb4090dadf220860420, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_EA29A106:
+        m_Texture: {fileID: 2800000, guid: d849f00ffe748334c99af3360eced6cc, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_21F75A91_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 2730a4ed77ca3ba4fb8e11d8e1a116ef, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - LIGHTMAP: 0
+    - Vector1_2A8810C8: 0
+    - Vector1_38AB17B4: 0
+    - Vector1_4885DE4A: 1
+    - Vector1_4C0F2A1B: 1
+    - Vector1_4D126782: 5
+    - Vector1_6F3D24C0: -7.12
+    - Vector1_870E5DF8: 0
+    - Vector1_B04D038D: 2
+    - Vector1_B2F91ACD: 1
+    - Vector1_B6E4000F: 1
+    - Vector1_CFF7EC7F: 0
+    m_Colors:
+    - Color_1A7889C2: {r: 0.016019935, g: 0.2264151, b: 0.0182066, a: 0}
+    - Color_765C5F4F: {r: 1, g: 1, b: 1, a: 0}
+    - Color_811CCAE8: {r: 0, g: 0, b: 0, a: 0}
+    - Color_AB572BCE: {r: 0.33018863, g: 0.33018863, b: 0.33018863, a: 0}
+    - Vector2_1B232758: {r: 1, g: 1, b: 0, a: 0}
+    - Vector2_238D7B2B: {r: 0, g: 0, b: 0, a: 0}

@@ -28,7 +28,7 @@ TagManager:
   - EnemyLayer
   - CollisionObject
   - PostProcessing
-  - 
+  - CameraCollisionPassThrough
   - 
   - 
   - 
