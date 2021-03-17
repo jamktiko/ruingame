@@ -20,9 +20,13 @@ public class SkillUser : MonoBehaviour
     private PlayerManager _playerManager;
 
     public bool usingSkill;
+
+    public Transform VFXPoint;
     
     //STORE THIS IN SKILL
     public AnimationClip sprintAnimation;
+    public AnimationClip stanceChangeAnimation;
+    public AnimationClip whirlWindAnimation;
 
     public GameObject defaultParticles;
     public Targeting skillTargeting { get; private set; }
@@ -38,9 +42,11 @@ public class SkillUser : MonoBehaviour
         skillList = new SkillExecute[4];
         skillList[0] = gameObject.AddComponent<WhirlwindSkill>();
         skillList[0].skillUser = this;
+        skillList[0].animationClip = whirlWindAnimation;
         skillList[1] = gameObject.AddComponent<ShieldBashSkill>();
         skillList[1].skillUser = this;
         skillList[2] = gameObject.AddComponent<StanceChangeSkill>();
+        skillList[2].animationClip = stanceChangeAnimation;
         skillList[2].skillUser = this;
         skillList[3] = gameObject.AddComponent<SprintSkill>();
         skillList[3].animationClip = sprintAnimation;
@@ -128,29 +134,76 @@ public class SkillUser : MonoBehaviour
             {
                 if (!usingSkill)
                 {
-                    PlayerManager.Instance.ZoomCameraInAndOut();
+                    //PlayerManager.Instance.ZoomCameraInAndOut();
                     //SHOULD ONLY BE CALLED AFTER SKILL GOES ON COOLDOWN, EG. Stance change only goes on cooldown after the duration is over
-                    skillUI.OnSkillUse(index);
-                    _playerManager.StopAttacking();
+
+                    try
+                    {
+                        skillUI.OnSkillUse(index);
+                    }
+                    catch
+                    {
+                        Debug.Log("skill UI not updating correctly");
+                    }
+
+                    try
+                    {
+                        _playerManager.StopAttacking();
+                    }
+                    catch
+                    {
+                        Debug.Log("Playermanager.StopAttacking");
+                    }
                     //SKILL SHOULD DETERMINE WHICH ANIMATION TO USE
                     //Currently uses animation length to determine skill duration, probably should work other way around?
           
                     try
                     {
                         sk.Execute(sk.animationClip.length);
-                        entityAnimator.Play(sk.animationClip.name);
                     }
                     catch
                     {
-                        sk.Execute();
+                        try {sk.Execute();}
+                        catch{Debug.Log("Skill Execute");}
                         Debug.Log("No skill animation!");
                     }
 
-                    Instantiate(defaultParticles, transform.position, Quaternion.identity);
-                    AddInvulnerability(sk.iFrameDuration);
-                    StartCoroutine(GoOnCooldown(sk));
+                    try
+                    {
+                        var ps =Instantiate(defaultParticles, VFXPoint.position, Quaternion.identity);
+                        Destroy(ps, 0.5f);
+                    }
+                    catch{Debug.Log("Particles");}
+                    try
+                    {
+                        AddInvulnerability(sk.iFrameDuration);
+                    }
+                    catch
+                    {
+                        Debug.Log("Iframe");
+                    }
+                    try
+                    {
+                        StartCoroutine(GoOnCooldown(sk));
+                    }
+                    catch
+                    {
+                        Debug.Log("Cooldown");
+                    }
+                }
+                else
+                {
+                    Debug.Log("Using a skill!");
                 }
             }
+            else
+            {
+                Debug.Log("Skill on Cooldown!");
+            }
+        }
+        else
+        {
+            Debug.Log("Animation in progress!");
         }
     }
     public void ResetAllSkills()
@@ -177,5 +230,10 @@ public class SkillUser : MonoBehaviour
     {
         yield return new WaitForSeconds(sk.duration);
         sk.DeActivateSkillActive();
+    }
+
+    public void PlayAnimation(SkillExecute sk)
+    {
+        entityAnimator.Play(sk.animationClip.name);
     }
 }

@@ -52,5 +52,4 @@ public class PlayerAttackHandler : ComboAttackHandler
         _movementControl.RotateTowardsMovement(nearestTarget, 1000f);
     }
 
-    //New and improved attack logic!
 }

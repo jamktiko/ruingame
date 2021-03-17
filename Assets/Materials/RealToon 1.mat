@@ -100,7 +100,7 @@ Material:
     - _DoubleSidedOutline: 1
     - _DynamicNoisyOutline: 0
     - _EnableTextureTransparent: 0
-    - _EnvironmentalLightingIntensity: 0
+    - _EnvironmentalLightingIntensity: 1
     - _FarDistanceMaxWidth: 10
     - _GIFlatShade: 0
     - _GIShadeThreshold: 0

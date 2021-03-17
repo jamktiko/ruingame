@@ -39,6 +39,7 @@ namespace DefaultNamespace.Skills
 
         public override void Execute()
         {
+            base.Execute();
              skillUser.usingSkill = true;
              UpdateAttackRadius();
              DamageAndKnockbackBasedOnDistanceFromPlayer();
