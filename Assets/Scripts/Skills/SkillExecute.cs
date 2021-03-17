@@ -33,12 +33,15 @@ public class SkillExecute : MonoBehaviour
         {
             skillUser.PlayAnimation(this);
         }
-        catch{Debug.Log("No Animation " + this.name + animationClip.name)
-            ;}
+        catch{Debug.Log("No Animation");}
     }
     public virtual void Execute(float duration)
     {
-
+        try
+        {
+            skillUser.PlayAnimation(this);
+        }
+        catch{Debug.Log("No Animation");}
     }
 
     public virtual void WhileSkillActive()

@@ -134,10 +134,26 @@ public class SkillUser : MonoBehaviour
             {
                 if (!usingSkill)
                 {
-                    PlayerManager.Instance.ZoomCameraInAndOut();
+                    //PlayerManager.Instance.ZoomCameraInAndOut();
                     //SHOULD ONLY BE CALLED AFTER SKILL GOES ON COOLDOWN, EG. Stance change only goes on cooldown after the duration is over
-                    skillUI.OnSkillUse(index);
-                    _playerManager.StopAttacking();
+
+                    try
+                    {
+                        skillUI.OnSkillUse(index);
+                    }
+                    catch
+                    {
+                        Debug.Log("skill UI not updating correctly");
+                    }
+
+                    try
+                    {
+                        _playerManager.StopAttacking();
+                    }
+                    catch
+                    {
+                        Debug.Log("Playermanager.StopAttacking");
+                    }
                     //SKILL SHOULD DETERMINE WHICH ANIMATION TO USE
                     //Currently uses animation length to determine skill duration, probably should work other way around?
           
@@ -147,15 +163,47 @@ public class SkillUser : MonoBehaviour
                     }
                     catch
                     {
-                        sk.Execute();
+                        try {sk.Execute();}
+                        catch{Debug.Log("Skill Execute");}
                         Debug.Log("No skill animation!");
                     }
 
-                    Instantiate(defaultParticles, VFXPoint.position, Quaternion.identity);
-                    AddInvulnerability(sk.iFrameDuration);
-                    StartCoroutine(GoOnCooldown(sk));
+                    try
+                    {
+                        var ps =Instantiate(defaultParticles, VFXPoint.position, Quaternion.identity);
+                        Destroy(ps, 0.5f);
+                    }
+                    catch{Debug.Log("Particles");}
+                    try
+                    {
+                        AddInvulnerability(sk.iFrameDuration);
+                    }
+                    catch
+                    {
+                        Debug.Log("Iframe");
+                    }
+                    try
+                    {
+                        StartCoroutine(GoOnCooldown(sk));
+                    }
+                    catch
+                    {
+                        Debug.Log("Cooldown");
+                    }
+                }
+                else
+                {
+                    Debug.Log("Using a skill!");
                 }
             }
+            else
+            {
+                Debug.Log("Skill on Cooldown!");
+            }
+        }
+        else
+        {
+            Debug.Log("Animation in progress!");
         }
     }
     public void ResetAllSkills()

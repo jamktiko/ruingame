@@ -150,7 +150,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 181873949443222881}
-  m_Material: {fileID: 13400000, guid: d23a16decab1fb147a88d834ec673b8f, type: 2}
+  m_Material: {fileID: 13400000, guid: 9c410268da547b0418ee3f4c7598072e, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.3
@@ -220,7 +220,7 @@ MonoBehaviour:
   entityHealth: {fileID: 0}
   skillUI: {fileID: 6107597504458783004}
   usingSkill: 0
-  VFXPoint: {fileID: 0}
+  VFXPoint: {fileID: 2859707322100604140}
   sprintAnimation: {fileID: 7400000, guid: d848a6fdc350d9d4c8782e484d6dbfe0, type: 2}
   stanceChangeAnimation: {fileID: 7400000, guid: 974ed3eb38276ee4dbfe061157e45c9d,
     type: 2}
