@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PhysicalAttack
   m_EditorClassIdentifier: 
   targetingType: 2
-  baseDamage: 10
+  baseDamage: 50
   radius: 1
   knockBackStrength: 10
   range: 1
