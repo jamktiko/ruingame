@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="EncodableAsset" id="{eaa97210-41e1-425f-989a-0a1fddf078ed}">
+		<property name="assetPath">
+			<value>Whirlwind/</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{e054b132-225b-44aa-b2ac-5b652f386173}</destination>
+		</relationship>
+	</object>
+</objects>
