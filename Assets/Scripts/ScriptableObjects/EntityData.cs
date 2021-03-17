@@ -16,6 +16,6 @@ public class EntityData : ScriptableObject
 
     [Header("Combat stats")]
     public float entityDamage = 30f;
-    public float entityAttackSpeed = 3f;
+    public float entityAttackSpeed = 1f;
     public string entityEnemyTag = "Enemy";
 }

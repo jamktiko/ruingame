@@ -71,10 +71,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - LIGHTMAP: 0
-    - Vector1_2A8810C8: 0.2
-    - Vector1_38AB17B4: 0.5
-    - Vector1_B6E4000F: 5
-    - Vector1_CFF7EC7F: 10.87
+    - Vector1_2A8810C8: 0.25
+    - Vector1_38AB17B4: 0.25
+    - Vector1_B6E4000F: 1
+    - Vector1_CFF7EC7F: 0.25
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1

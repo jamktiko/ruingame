@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
     }
     public void StartGameplayLoop()
     {
-        SceneManager.LoadScene("MovementRework");
+        SceneManager.LoadScene("Proto_Room");
         StartCoroutine("CreateGame");
     }
 
@@ -85,6 +85,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         ConstructPlayer();
         InitializePlayer();
+        DontDestroyOnLoad(currentPlayer);
         yield return new WaitForSeconds(0.2f);
         CreateRoomManager();
         roomManager.StartRoomManager();

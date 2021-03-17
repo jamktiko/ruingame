@@ -164,6 +164,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22bda2f9af239d843bd2742bb700a8af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  camerasPrefab: {fileID: 7831688449576266619, guid: 53bc2a04e1e31b54ab17415cd2ba4a53,
+    type: 3}
   _playerData: {fileID: 0}
   pickUpEvent:
     m_PersistentCalls:

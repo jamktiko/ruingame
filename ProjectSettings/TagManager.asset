@@ -15,6 +15,7 @@ TagManager:
   - SkillsUI
   - SkillIcon
   - Object
+  - Room
   layers:
   - Default
   - TransparentFX

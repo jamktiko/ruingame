@@ -1,4 +1,5 @@
 ﻿
+using System;
 using UnityEngine;
 
 
@@ -7,11 +8,12 @@ public class RoomExit : DoorSwitch
         //SWITCHES DOOR LOGIC FROM CLOSED TO OPEN WHEN ALL ENEMIES ARE KILLED
         //REQUIRES INTERACTION OR TRIGGER?
         public RoomManager roomManager;
-        
+        public bool CanExit = true;
         private void OnTriggerEnter(Collider other)
         {
             if (roomManager.AllEnemiesCleared())
             {
+                CanExit = true;
                 try
                 {
                     roomManager.GoToNextLevel();
@@ -23,7 +25,12 @@ public class RoomExit : DoorSwitch
             }
             else
             {
-                //ENEMIES STILL REMAINING
+                CanExit = false;
             }
+        }
+
+        private void Awake()
+        {
+            roomManager = GameManager.Instance.GetComponent<RoomManager>();
         }
     }

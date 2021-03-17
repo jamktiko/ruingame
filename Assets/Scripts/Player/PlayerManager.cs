@@ -1,3 +1,4 @@
+using System.Collections;
 using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.Events;
@@ -13,6 +14,8 @@ using UnityEngine.Events;
 public class PlayerManager : BaseManager
 {
     private static PlayerManager _instance;
+    public GameObject camerasPrefab;
+    private GameObject cameras;
     public static PlayerManager Instance
     {
         get { return _instance; }
@@ -59,6 +62,11 @@ public class PlayerManager : BaseManager
         _playerMovement = GetComponent<MovementController>();
         _playerSkills = GetComponent<SkillUser>();
         _playerData = ScriptableObject.CreateInstance<PlayerData>();
+        if (cameras == null)
+        {
+            cameras = Instantiate(camerasPrefab);
+            DontDestroyOnLoad(cameras);
+        }
     }
 
     private void Start()
@@ -71,7 +79,6 @@ public class PlayerManager : BaseManager
         UpdatePlayerStats();
         LockCursorToGame();
     }
-
     private void LockCursorToGame()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -84,13 +91,13 @@ public class PlayerManager : BaseManager
 
     private void SetupPlayerCamera()
     {
+        
         _mainCamera = GameObject.FindGameObjectWithTag("Cameras");
         var cam = _mainCamera.GetComponent<CameraManager>();
         _playerMovement.SetPlayerCamera(cam.cameraTransformAnchor);
         cam.SetupProtagonistVirtualCamera(gameObject.transform);
         cam.playerTransform = gameObject.transform;
-        cam.enabled = false;
-        cam.enabled = true;
+        
     }
 
     private void SetupPlayerAnimations()
@@ -224,6 +231,9 @@ public class PlayerManager : BaseManager
     public void Die()
     {
         DisableScriptsOnPlayer();
+        Destroy(gameObject);
+        Destroy(cameras);
+        Cursor.lockState = CursorLockMode.None;
         GameManager.Instance.GameOver();
     }
 
