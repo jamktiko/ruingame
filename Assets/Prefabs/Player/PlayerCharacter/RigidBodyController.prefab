@@ -140,8 +140,8 @@ MonoBehaviour:
     m_Bits: 256
   groundCheckRadius: 0.1
   turnSmoothing: 15
-  stepHeight: 0.5
-  stepSmooth: 2
+  stepHeight: 0.75
+  stepSmooth: 3
   attacking: 0
 --- !u!136 &181873949443222813
 CapsuleCollider:
