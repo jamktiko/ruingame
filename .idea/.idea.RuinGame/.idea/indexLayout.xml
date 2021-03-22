@@ -34,7 +34,9 @@
       <Path>Logs</Path>
       <Path>ProjectDocumentation</Path>
       <Path>Temp</Path>
+      <Path>fmod_audio_assets</Path>
       <Path>obj</Path>
+      <Path>ruin_fmod</Path>
       <Path>ruingame</Path>
     </explicitExcludes>
   </component>

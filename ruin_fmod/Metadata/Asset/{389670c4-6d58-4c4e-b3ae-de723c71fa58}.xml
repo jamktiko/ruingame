@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="EncodableAsset" id="{389670c4-6d58-4c4e-b3ae-de723c71fa58}">
+		<property name="assetPath">
+			<value>Stance_change/</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{e054b132-225b-44aa-b2ac-5b652f386173}</destination>
+		</relationship>
+	</object>
+</objects>

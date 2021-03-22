@@ -29,11 +29,19 @@ public class SkillExecute : MonoBehaviour
     }
     public virtual void Execute()
     {
-        Debug.Log("Skill base, create an implementation!");
+        try
+        {
+            skillUser.PlayAnimation(this);
+        }
+        catch{Debug.Log("No Animation");}
     }
     public virtual void Execute(float duration)
     {
-
+        try
+        {
+            skillUser.PlayAnimation(this);
+        }
+        catch{Debug.Log("No Animation");}
     }
 
     public virtual void WhileSkillActive()

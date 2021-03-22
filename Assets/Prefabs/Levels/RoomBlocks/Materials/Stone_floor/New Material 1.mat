@@ -22,7 +22,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: New Material 1
   m_Shader: {fileID: 4800000, guid: 6459b2db96a08ca41b0f9b39dc7ad59e, type: 3}
-  m_ShaderKeywords: N_F_EAL_ON N_F_NM_ON N_F_O_ON N_F_RELGI_ON N_F_SS_ON
+  m_ShaderKeywords: N_F_CLD_ON N_F_EAL_ON N_F_FR_ON N_F_NM_ON N_F_O_ON N_F_RELGI_ON
+    N_F_R_ON N_F_SCT_ON N_F_SON_ON N_F_SS_ON N_F_ST_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -123,14 +124,14 @@ Material:
     - _CustomLightDirectionIntensity: 0
     - _Cutoff: 0.5
     - _Cutout: 0
-    - _DirectionalLightIntensity: 0
+    - _DirectionalLightIntensity: 1
     - _DoubleSided: 2
     - _DoubleSidedOutline: 1
     - _DstBlend: 0
     - _DynamicNoisyOutline: 0
     - _EnableTextureTransparent: 0
     - _EnvironmentReflections: 1
-    - _EnvironmentalLightingIntensity: 1
+    - _EnvironmentalLightingIntensity: 10
     - _FarDistanceMaxWidth: 10
     - _GIFlatShade: 0
     - _GIShadeThreshold: 0
@@ -157,11 +158,11 @@ Material:
     - _Metallic: 0
     - _MixMainTexToOutline: 0
     - _N_F_CA: 0
-    - _N_F_CLD: 0
+    - _N_F_CLD: 1
     - _N_F_CO: 0
     - _N_F_DCS: 0
     - _N_F_EAL: 1
-    - _N_F_FR: 0
+    - _N_F_FR: 1
     - _N_F_GLO: 0
     - _N_F_GLOT: 0
     - _N_F_HDLS: 0
@@ -171,17 +172,17 @@ Material:
     - _N_F_NM: 1
     - _N_F_O: 1
     - _N_F_PT: 0
-    - _N_F_R: 0
+    - _N_F_R: 1
     - _N_F_RL: 0
-    - _N_F_SCT: 0
+    - _N_F_SCT: 1
     - _N_F_SL: 0
-    - _N_F_SON: 0
+    - _N_F_SON: 1
     - _N_F_SS: 1
-    - _N_F_ST: 0
+    - _N_F_ST: 1
     - _N_F_STIAL: 0
     - _N_F_STIS: 0
     - _NoisyOutlineIntensity: 0
-    - _NormalMapIntensity: 1
+    - _NormalMapIntensity: 10
     - _OcclusionStrength: 1
     - _Oper: 0
     - _OutlineExtrudeMethod: 0
@@ -191,7 +192,7 @@ Material:
     - _OverallShadowColorPower: 1
     - _PSGLOTEX: 0
     - _PTexturePower: 1
-    - _PointSpotlightIntensity: 0
+    - _PointSpotlightIntensity: 1
     - _QueueOffset: 0
     - _RELG: 1
     - _ReceiveShadows: 1

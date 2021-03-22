@@ -37,6 +37,7 @@ namespace DefaultNamespace.Skills
 
         public override void Execute()
         {
+            base.Execute();
             PlayerManager.Instance._playerMovement.OnDash(duration);
             WhileSkillActive();
         }

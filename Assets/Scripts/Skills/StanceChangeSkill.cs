@@ -31,7 +31,7 @@ namespace DefaultNamespace.Skills
             skillname = "Stance Change";
             damage = 50f;
             _damageResistance = 5f;
-            _passiveAttackSpeed = 10f;
+            _passiveAttackSpeed = 0.5f;
             _passiveResistance = 10f;
             _selfDamage = 20f;
             PlayerManager.Instance.ModifyAttackSpeed(_passiveAttackSpeed, 1);
@@ -40,21 +40,22 @@ namespace DefaultNamespace.Skills
 
         public override void Execute()
         {
-            WhileSkillActive();
+            if (playerHealth.CurrentHealth >= 40f)
+            {
+                base.Execute();
+                WhileSkillActive();
+            }
         }
 
         public override void WhileSkillActive()
         {
-            if (playerHealth.CurrentHealth >= 40f)
-            {
-                skillUser.usingSkill = true;
+            skillUser.usingSkill = true;
                 IEnumerator coroutine = skillUser.UsePersistentEffect(this);
                 skillUser.StartCoroutine(coroutine);
                 ModifyPlayerStats(1);
 
                 //Might deal negative-negative damage to player. Regfactoring in progress
                 playerHealth.DealDamage(_selfDamage);
-            }
         }
         public override void DeActivateSkillActive()
         {
