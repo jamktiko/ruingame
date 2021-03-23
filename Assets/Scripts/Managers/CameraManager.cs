@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Cinemachine;
+using UnityEngine.InputSystem.Controls;
 
 
 public class CameraManager : MonoBehaviour
@@ -8,12 +9,14 @@ public class CameraManager : MonoBehaviour
 	private Camera mainCamera;
 	private CinemachineFreeLook freeLookVCam;
 
-	private int xAxisMulti = 1;
-	private int yAxisMulti = 1;
-
+	public float zoom = 0f;
+	private float zoomPercent = 1f;
+	public float minimumZoom = -0.5f;
+	public float maximumZoom = 1f;
 	public Transform playerTransform;
 
 	public CameraSettings _cameraData;
+	private CinemachineFreeLook.Orbit[] originalOrbits;
 	
 	public float speedMultiplier = 0f; 
 	public TransformAnchor cameraTransformAnchor = default;
@@ -30,6 +33,12 @@ public class CameraManager : MonoBehaviour
 	{
 		_cameraData = Resources.Load<CameraSettings>("CameraSettings");
 		freeLookVCam = GetComponentInChildren<CinemachineFreeLook>();
+		originalOrbits = new CinemachineFreeLook.Orbit[freeLookVCam.m_Orbits.Length];
+		for (int i = 0; i < freeLookVCam.m_Orbits.Length; i++)
+		{
+			originalOrbits[i].m_Height = freeLookVCam.m_Orbits[i].m_Height;
+			originalOrbits[i].m_Radius = freeLookVCam.m_Orbits[i].m_Radius;
+		}
 		mainCamera = GetComponentInChildren<Camera>();
 		cameraTransformAnchor.Transform = mainCamera.transform;
 		inputReader = GameManager.Instance.playerInputReader;
@@ -37,16 +46,26 @@ public class CameraManager : MonoBehaviour
 	}
 	private void OnEnable()
 	{
-		try
-		{
-			inputReader.CameraMoveEvent += OnCameraMove;
-		}
-		catch{}
+		inputReader.CameraMoveEvent += OnCameraMove;
+		inputReader.ScrollEvent += OnScroll;
+
 	}
 
 	private void OnDisable()
 	{
 		inputReader.CameraMoveEvent -= OnCameraMove;
+	}
+
+	private void OnScroll(float scrollY)
+	{
+		zoom -= scrollY / 12000;
+		zoom = Mathf.Clamp(zoom, minimumZoom, maximumZoom);
+		zoomPercent = zoom + 1;
+		for (int i = 0; i < freeLookVCam.m_Orbits.Length; i++)
+		{
+			freeLookVCam.m_Orbits[i].m_Height = originalOrbits[i].m_Height * zoomPercent;
+			freeLookVCam.m_Orbits[i].m_Radius = originalOrbits[i].m_Radius * zoomPercent;
+		}
 	}
 	
 	private void OnCameraMove(Vector2 cameraMovement)
