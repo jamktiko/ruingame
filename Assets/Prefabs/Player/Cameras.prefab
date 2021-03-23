@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputReader: {fileID: 0}
   playerTransform: {fileID: 0}
+  _cameraData: {fileID: 0}
   speedMultiplier: 15
   cameraTransformAnchor: {fileID: 11400000, guid: 612800d3903195747a1006a6b6464522,
     type: 2}
@@ -128,7 +129,7 @@ MonoBehaviour:
     m_DecelTime: 0.1
     m_InputAxisName: 
     m_InputAxisValue: 0
-    m_InvertInput: 1
+    m_InvertInput: 0
     m_MinValue: 0
     m_MaxValue: 1
     m_Wrap: 0

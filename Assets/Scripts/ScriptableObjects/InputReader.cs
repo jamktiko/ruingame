@@ -21,6 +21,7 @@ public class InputReader : ScriptableObject, PlayerInput.IGameplayActions
     public event UnityAction StartedRunning = delegate { };
     public event UnityAction StoppedRunning = delegate { };
 
+    public event UnityAction<float> ScrollEvent = delegate { };
     public event UnityAction ActivateSkill1 = delegate { };
     public event UnityAction ActivateSkill2 = delegate { };
     public event UnityAction ActivateSkill3 = delegate { };
@@ -47,6 +48,11 @@ public class InputReader : ScriptableObject, PlayerInput.IGameplayActions
             AttackEvent.Invoke();
     }
 
+    public void OnScroll(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+            ScrollEvent.Invoke(context.ReadValue<float>());
+    }
     public void OnMove(InputAction.CallbackContext context)
     {
         MoveEvent.Invoke(context.ReadValue<Vector2>());
@@ -73,7 +79,8 @@ public class InputReader : ScriptableObject, PlayerInput.IGameplayActions
 
     public void OnPause(InputAction.CallbackContext context)
     {
-        Debug.Log("No method for pause");
+        if (context.phase == InputActionPhase.Performed)
+            PauseEvent.Invoke();
     }
 
     public void OnOpenInventory(InputAction.CallbackContext context)

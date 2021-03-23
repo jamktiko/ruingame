@@ -15,6 +15,7 @@ public class PlayerManager : BaseManager
 {
     private static PlayerManager _instance;
     public GameObject camerasPrefab;
+    public CameraManager cameraManager;
     private GameObject cameras;
     public static PlayerManager Instance
     {
@@ -77,12 +78,6 @@ public class PlayerManager : BaseManager
         DisableScriptsOnPlayer();
         EnableScriptsOnPlayer();
         UpdatePlayerStats();
-        LockCursorToGame();
-    }
-    private void LockCursorToGame()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
     private void SetupPlayerInput()
     {
@@ -91,9 +86,9 @@ public class PlayerManager : BaseManager
 
     private void SetupPlayerCamera()
     {
-        
         _mainCamera = GameObject.FindGameObjectWithTag("Cameras");
         var cam = _mainCamera.GetComponent<CameraManager>();
+        cameraManager = cam;
         _playerMovement.SetPlayerCamera(cam.cameraTransformAnchor);
         cam.SetupProtagonistVirtualCamera(gameObject.transform);
         cam.playerTransform = gameObject.transform;
@@ -233,7 +228,6 @@ public class PlayerManager : BaseManager
         DisableScriptsOnPlayer();
         Destroy(gameObject);
         Destroy(cameras);
-        Cursor.lockState = CursorLockMode.None;
         GameManager.Instance.GameOver();
     }
 
@@ -244,6 +238,5 @@ public class PlayerManager : BaseManager
 
     public void ZoomCameraInAndOut()
     {
-        var cam = _mainCamera.GetComponent<CameraManager>();
     }
 }
