@@ -7,7 +7,9 @@ public class CameraManager : MonoBehaviour
 	public InputReader inputReader;
 	private Camera mainCamera;
 	private CinemachineFreeLook freeLookVCam;
-	private bool _isRmbPressed;
+
+	private int xAxisMulti = 1;
+	private int yAxisMulti = 1;
 
 	public Transform playerTransform;
 
@@ -59,7 +61,7 @@ public class CameraManager : MonoBehaviour
 	{
 		SetupProtagonistVirtualCamera(value);
 	}
-
+	
 	public void UpdateCameraSettings()
 	{
 		speedMultiplier = _cameraData.CameraSensitivity;

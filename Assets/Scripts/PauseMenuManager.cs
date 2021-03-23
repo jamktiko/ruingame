@@ -57,6 +57,5 @@ public class PauseMenuManager : MenuManager
     {
         StopPause();
         gameManager.playerManager.Die();
-        Destroy(gameObject);
     }
 }

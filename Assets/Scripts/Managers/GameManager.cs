@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     }
 
     public GameObject pauseMenu;
-    
+    public GameObject currentPauseMenu;
     public PlayerManager playerManager { get; private set; }
     public GameObject currentPlayer { get; private set; }
 
@@ -95,12 +95,13 @@ public class GameManager : MonoBehaviour
 
     private void CreateMenuManager()
     {
-        Instantiate(pauseMenu);
+        currentPauseMenu = Instantiate(pauseMenu);
     }
     public void GameOver()
     {
         roomManager.enabled = false;
         Destroy(roomManager);
+        Destroy(currentPauseMenu);
         currentPlayer.GetComponent<PlayerManager>().enabled = false;
         Destroy(currentPlayer);
         SceneManager.LoadScene("MainMenu");

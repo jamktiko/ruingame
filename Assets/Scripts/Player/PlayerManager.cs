@@ -238,6 +238,5 @@ public class PlayerManager : BaseManager
 
     public void ZoomCameraInAndOut()
     {
-        var cam = _mainCamera.GetComponent<CameraManager>();
     }
 }
