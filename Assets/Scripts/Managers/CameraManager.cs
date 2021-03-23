@@ -67,5 +67,9 @@ public class CameraManager : MonoBehaviour
 		speedMultiplier = _cameraData.CameraSensitivity;
 		freeLookVCam.m_XAxis.m_InvertInput = _cameraData.invertAxisX;
 		freeLookVCam.m_YAxis.m_InvertInput = _cameraData.invertAxisY;
+		freeLookVCam.m_XAxis.m_AccelTime = _cameraData.XAcceleration;
+		freeLookVCam.m_YAxis.m_AccelTime = _cameraData.YAcceleration;
+		freeLookVCam.m_XAxis.m_DecelTime = _cameraData.XSmoothing;
+		freeLookVCam.m_YAxis.m_DecelTime = _cameraData.YSmoothing;
 	}
 }

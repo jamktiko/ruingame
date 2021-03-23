@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39a4d5012bb54d4abff981e35544dc24, type: 3}
   m_Name: DefaultCameraSettings
   m_EditorClassIdentifier: Assembly-CSharp:DefaultNamespace:CameraData
-  CameraSensitivity: 23
-  invertAxisX: 1
-  invertAxisY: -1
+  CameraSensitivity: 5
+  invertAxisX: 0
+  invertAxisY: 255
+  XSmoothing: 0
+  YSmoothing: 0
+  XAcceleration: 0
+  YAcceleration: 0

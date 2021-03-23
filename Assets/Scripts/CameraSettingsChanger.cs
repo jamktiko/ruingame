@@ -13,19 +13,31 @@ public class CameraSettingsChanger : MonoBehaviour
     [Header("Invert")] 
     public Toggle invertXToggle;
     public Toggle invertYToggle;
+    [Header("Smoothing")] 
+    public Slider xSmoothingSlider;
+    public TextMeshProUGUI xSmoothingValueText;
+    public Slider ySmoothingSlider;
+    public TextMeshProUGUI ySmoothingValueText;
+    [Header("Acceleration")]
+    public Slider xAccelerationSlider;
+    public TextMeshProUGUI xAccelerationValueText;
+    public Slider yAccelerationSlider;
+    public TextMeshProUGUI yAccelerationValueText;
     
     
     private void Awake()
     {
         _cameraData = Resources.Load<CameraSettings>("CameraSettings");
         _defaultCameraData = Resources.Load<CameraSettings>("DefaultCameraSettings");
-        sensitivitySlider.value = _cameraData.CameraSensitivity;
-        sensitivityValueText.text = _cameraData.CameraSensitivity.ToString();
         sensitivitySlider.onValueChanged.AddListener (delegate {ChangeCameraSensitivity();});
         invertXToggle.onValueChanged.AddListener(delegate { ChangeAxisInvertX();});
         invertYToggle.onValueChanged.AddListener(delegate { ChangeAxisInvertY();});
-        UpdateXToggle();
-        UpdateYToggle();
+        xSmoothingSlider.onValueChanged.AddListener (delegate {ChangeXSmoothing();});
+        ySmoothingSlider.onValueChanged.AddListener (delegate {ChangeYSmoothing();});
+        xAccelerationSlider.onValueChanged.AddListener (delegate {ChangeXAcceleration();});
+        yAccelerationSlider.onValueChanged.AddListener (delegate {ChangeYAcceleration();});
+
+        UpdateValues();
     }
 
     public void ChangeCameraSensitivity()
@@ -33,47 +45,79 @@ public class CameraSettingsChanger : MonoBehaviour
         _cameraData.CameraSensitivity = sensitivitySlider.value;
         sensitivityValueText.text = _cameraData.CameraSensitivity.ToString();
     }
+    
+    private void ChangeAxisInvertX()
+    {
+        _cameraData.invertAxisX = invertXToggle.isOn;
+    }
 
+    private void ChangeAxisInvertY()
+    {
+        _cameraData.invertAxisY = invertYToggle.isOn;
+    }
+    private void ChangeXSmoothing()
+    { 
+        _cameraData.XSmoothing = xSmoothingSlider.value;
+       xSmoothingValueText.text = _cameraData.XSmoothing.ToString();
+    }
+    private void ChangeYSmoothing()
+    { 
+        _cameraData.YSmoothing = ySmoothingSlider.value;
+        ySmoothingValueText.text = _cameraData.YSmoothing.ToString();
+    }
+    private void ChangeXAcceleration()
+    { 
+        _cameraData.XAcceleration = xAccelerationSlider.value;
+        xAccelerationValueText.text = _cameraData.XAcceleration.ToString();
+    }
+    private void ChangeYAcceleration()
+    { 
+        _cameraData.YAcceleration = yAccelerationSlider.value;
+        yAccelerationValueText.text = _cameraData.YAcceleration.ToString();
+    }
+    
     private void UpdateSensitivity()
     {
         sensitivitySlider.value = _cameraData.CameraSensitivity;
         sensitivityValueText.text = _cameraData.CameraSensitivity.ToString();
     }
-    private void UpdateXToggle()
+    private void UpdateToggles()
     {
         invertXToggle.isOn = _cameraData.invertAxisX;
-    }
-    private void UpdateYToggle()
-    {
         invertYToggle.isOn = _cameraData.invertAxisY;
     }
-    public void ChangeAxisInvertX()
-    {
-        _cameraData.invertAxisX = invertXToggle.isOn;
-    }
 
-    public void ChangeAxisInvertY()
+    private void UpdateSmoothing()
     {
-        _cameraData.invertAxisY = invertYToggle.isOn;
+        xSmoothingSlider.value = _cameraData.XSmoothing;
+        xSmoothingValueText.text = _cameraData.XSmoothing.ToString();
+        ySmoothingSlider.value = _cameraData.YSmoothing;
+        ySmoothingValueText.text = _cameraData.YSmoothing.ToString();
     }
-
-    private void UpdateDefaults()
+    private void UpdateAcceleration()
+    {
+        xAccelerationSlider.value = _cameraData.XAcceleration;
+        xAccelerationValueText.text = _cameraData.XAcceleration.ToString();
+        yAccelerationSlider.value = _cameraData.YAcceleration;
+        yAccelerationValueText.text = _cameraData.YAcceleration.ToString();
+    }
+    private void UpdateValues()
     {
         UpdateSensitivity();
-        UpdateXToggle();
-        UpdateYToggle();
+        UpdateSmoothing();
+        UpdateAcceleration();
+        UpdateToggles();
     }
     public void RestoreDefaults()
     {
         _cameraData.CameraSensitivity = _defaultCameraData.CameraSensitivity;
         _cameraData.invertAxisX = _defaultCameraData.invertAxisX;
         _cameraData.invertAxisY = _defaultCameraData.invertAxisY;
-        UpdateDefaults();
+        _cameraData.XSmoothing = _defaultCameraData.XSmoothing;
+        _cameraData.XAcceleration = _defaultCameraData.XAcceleration;
+        _cameraData.YSmoothing = _defaultCameraData.YSmoothing;
+        _cameraData.YAcceleration= _defaultCameraData.YAcceleration;
+        UpdateValues();
     }
 
-    private void OnDisable()
-    {
-        sensitivitySlider.onValueChanged.RemoveAllListeners();
-        
-    }
 }

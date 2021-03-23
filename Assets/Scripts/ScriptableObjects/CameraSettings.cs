@@ -6,4 +6,8 @@
         public float CameraSensitivity;
         public bool invertAxisX;
         public bool invertAxisY;
+        public float XSmoothing;
+        public float YSmoothing;
+        public float XAcceleration;
+        public float YAcceleration;
     }
