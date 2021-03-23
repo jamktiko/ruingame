@@ -29,11 +29,11 @@ public class CameraManager : MonoBehaviour
 	private void Awake()
 	{
 		_cameraData = Resources.Load<CameraSettings>("CameraSettings");
-		UpdateCameraSettings();
 		freeLookVCam = GetComponentInChildren<CinemachineFreeLook>();
 		mainCamera = GetComponentInChildren<Camera>();
 		cameraTransformAnchor.Transform = mainCamera.transform;
 		inputReader = GameManager.Instance.playerInputReader;
+		UpdateCameraSettings();
 	}
 	private void OnEnable()
 	{
@@ -65,5 +65,7 @@ public class CameraManager : MonoBehaviour
 	public void UpdateCameraSettings()
 	{
 		speedMultiplier = _cameraData.CameraSensitivity;
+		freeLookVCam.m_XAxis.m_InvertInput = _cameraData.invertAxisX;
+		freeLookVCam.m_YAxis.m_InvertInput = _cameraData.invertAxisY;
 	}
 }
