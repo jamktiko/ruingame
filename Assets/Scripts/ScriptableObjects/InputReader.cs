@@ -73,7 +73,7 @@ public class InputReader : ScriptableObject, PlayerInput.IGameplayActions
 
     public void OnPause(InputAction.CallbackContext context)
     {
-        Debug.Log("No method for pause");
+        PauseEvent.Invoke();
     }
 
     public void OnOpenInventory(InputAction.CallbackContext context)

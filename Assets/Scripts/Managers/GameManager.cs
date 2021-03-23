@@ -21,7 +21,8 @@ public class GameManager : MonoBehaviour
             _instance = this;
         }
     }
-    
+
+    public GameObject pauseMenu;
     
     public PlayerManager playerManager { get; private set; }
     public GameObject currentPlayer { get; private set; }
@@ -89,8 +90,13 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         CreateRoomManager();
         roomManager.StartRoomManager();
+        CreateMenuManager();
     }
 
+    private void CreateMenuManager()
+    {
+        Instantiate(pauseMenu);
+    }
     public void GameOver()
     {
         roomManager.enabled = false;
@@ -112,5 +118,10 @@ public class GameManager : MonoBehaviour
     private void AddSkills(GameObject sk)
     {
         sk.AddComponent<SprintSkill>();
+    }
+
+    public void SetTimeScale(float amount)
+    {
+        Time.timeScale = amount;
     }
 }

@@ -10,9 +10,10 @@ public class CameraManager : MonoBehaviour
 	private bool _isRmbPressed;
 
 	public Transform playerTransform;
+
+	public CameraSettings _cameraData;
 	
-	[SerializeField, Range(.5f, 100f)]
-	private float speedMultiplier = 10f; 
+	public float speedMultiplier = 0f; 
 	public TransformAnchor cameraTransformAnchor = default;
 	
 	private bool _cameraMovementLock = false;
@@ -25,6 +26,8 @@ public class CameraManager : MonoBehaviour
 
 	private void Awake()
 	{
+		_cameraData = Resources.Load<CameraSettings>("CameraSettings");
+		UpdateCameraSettings();
 		freeLookVCam = GetComponentInChildren<CinemachineFreeLook>();
 		mainCamera = GetComponentInChildren<Camera>();
 		cameraTransformAnchor.Transform = mainCamera.transform;
@@ -55,5 +58,10 @@ public class CameraManager : MonoBehaviour
 	private void OnFrameObjectEvent(Transform value)
 	{
 		SetupProtagonistVirtualCamera(value);
+	}
+
+	public void UpdateCameraSettings()
+	{
+		speedMultiplier = _cameraData.CameraSensitivity;
 	}
 }
