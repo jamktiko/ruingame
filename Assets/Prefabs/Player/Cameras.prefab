@@ -123,12 +123,12 @@ MonoBehaviour:
   m_YAxis:
     Value: 0.38873947
     m_SpeedMode: 0
-    m_MaxSpeed: 2
+    m_MaxSpeed: 1.35
     m_AccelTime: 0.2
     m_DecelTime: 0.1
     m_InputAxisName: 
     m_InputAxisValue: 0
-    m_InvertInput: 0
+    m_InvertInput: 1
     m_MinValue: 0
     m_MaxValue: 1
     m_Wrap: 0
@@ -145,11 +145,11 @@ MonoBehaviour:
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
-    Value: 104.828476
-    m_SpeedMode: 0
-    m_MaxSpeed: 300
-    m_AccelTime: 5
-    m_DecelTime: 0.1
+    Value: 104.82849
+    m_SpeedMode: 1
+    m_MaxSpeed: 1.2
+    m_AccelTime: 0.03
+    m_DecelTime: 0.5
     m_InputAxisName: 
     m_InputAxisValue: 0
     m_InvertInput: 0
@@ -516,7 +516,7 @@ MonoBehaviour:
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
-    Value: 104.828476
+    Value: 104.82849
     m_SpeedMode: 0
     m_MaxSpeed: 300
     m_AccelTime: 0.1
@@ -816,7 +816,7 @@ MonoBehaviour:
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
-    Value: 104.828476
+    Value: 104.82849
     m_SpeedMode: 0
     m_MaxSpeed: 300
     m_AccelTime: 0.1
@@ -942,7 +942,7 @@ MonoBehaviour:
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
-    Value: 104.828476
+    Value: 104.82849
     m_SpeedMode: 0
     m_MaxSpeed: 300
     m_AccelTime: 0.1

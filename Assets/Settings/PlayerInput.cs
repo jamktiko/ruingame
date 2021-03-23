@@ -470,7 +470,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""id"": ""88e5a69d-cf1d-43ce-b5ab-9db67f819255"",
                     ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
-                    ""processors"": ""ScaleVector2(x=2,y=2)"",
+                    ""processors"": ""ScaleVector2"",
                     ""groups"": ""KeyboardOrGamepad"",
                     ""action"": ""RotateCamera"",
                     ""isComposite"": false,
