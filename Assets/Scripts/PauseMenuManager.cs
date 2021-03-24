@@ -28,6 +28,11 @@ public class PauseMenuManager : MenuManager
         gameManager.playerManager.playerInputReader.PauseEvent -= OnPause;
     }
 
+    public override void Start()
+    {
+        
+    }
+
     public void OnPause()
     {
         if (_gamePaused)
