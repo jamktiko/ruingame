@@ -1,6 +1,6 @@
 ﻿
 using UnityEngine;
-
+using UnityEngine.EventSystems;
 
 public class MenuManager : MonoBehaviour
 {
@@ -8,6 +8,8 @@ public class MenuManager : MonoBehaviour
     public Canvas initialCanvas;
     public Canvas[] childCanvases;
     public Canvas currentCanvas;
+    public MenuSelectionHandler MSH;
+    
     public virtual void StartGame()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -17,15 +19,16 @@ public class MenuManager : MonoBehaviour
     
     public virtual void Awake()
     {
+        MSH = GetComponent<MenuSelectionHandler>();
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         currentCanvas = initialCanvas;
         childCanvases = GetComponentsInChildren<Canvas>();
         foreach (Canvas c in childCanvases)
         {
-            c.enabled = false;
+            c.gameObject.SetActive(false);
         }
-        currentCanvas.enabled = true;
+        currentCanvas.gameObject.SetActive(true);
     }
 
     public virtual void Start()
@@ -39,9 +42,12 @@ public class MenuManager : MonoBehaviour
 
     public void SwitchCanvas(Canvas newCanvas)
     {
-        currentCanvas.enabled = false;
-        newCanvas.enabled = true;
+        currentCanvas.gameObject.SetActive(false);
+        newCanvas.gameObject.SetActive(true);
         currentCanvas = newCanvas;
+        var newTarget = currentCanvas.GetComponentInChildren<MultiButton>().gameObject;
+        EventSystem.current.SetSelectedGameObject(newTarget);
+        MSH.UpdateSelection(newTarget);
     }
 }
 

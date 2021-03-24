@@ -88,6 +88,7 @@ public class GameManager : MonoBehaviour
         CreateRoomManager();
         roomManager.StartRoomManager();
         CreateMenuManager();
+        PlayerManager.Instance.playerInputReader.EnablePlayerInput();
     }
 
     private void CreateMenuManager()

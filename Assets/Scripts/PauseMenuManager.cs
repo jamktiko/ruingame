@@ -13,8 +13,9 @@ public class PauseMenuManager : MenuManager
         childCanvases = GetComponentsInChildren<Canvas>();
         foreach (Canvas c in childCanvases)
         {
-            c.enabled = false;
+            c.gameObject.SetActive(false);
         }
+        currentCanvas.gameObject.SetActive(false);
     }
 
     public void OnEnable()
@@ -35,11 +36,12 @@ public class PauseMenuManager : MenuManager
         }
         else
         {
+            PlayerManager.Instance.playerInputReader.EnableMenuInput();
             _gamePaused = true;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             gameManager.SetTimeScale(0f);
-            currentCanvas.enabled = true;
+            currentCanvas.gameObject.SetActive(true);
         }
     }
 
@@ -47,10 +49,11 @@ public class PauseMenuManager : MenuManager
     {
         _gamePaused = false;
         PlayerManager.Instance.cameraManager.UpdateCameraSettings();
+        PlayerManager.Instance.playerInputReader.EnablePlayerInput();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         gameManager.SetTimeScale(1f);
-        currentCanvas.enabled = false;
+        currentCanvas.gameObject.SetActive(false);
     }
 
     public void ExitToMain()
