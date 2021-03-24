@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ww_pulse
+  m_Name: whirlwind_shock
   m_Shader: {fileID: -6465566751694194690, guid: b5a6743a263fa624cb4e7b67d3a10f46,
     type: 3}
   m_ShaderKeywords: 
@@ -37,6 +37,7 @@ Material:
     - Vector1_283E59AC: -0.9
     - Vector1_364065A2: 5
     - Vector1_B08E9D73: 97.5
+    - Vector1_ww1E331F9A: 0
     m_Colors:
     - Color_2DA30488: {r: 0.1728818, g: 0.990566, b: 0.5102511, a: 0}
     - Vector2_5C46464E: {r: 0.28, g: 0, b: 0, a: 0}
