@@ -1,4 +1,5 @@
 ﻿
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -9,7 +10,9 @@ public class MenuManager : MonoBehaviour
     public Canvas[] childCanvases;
     public Canvas currentCanvas;
     public MenuSelectionHandler MSH;
-    
+
+
+    private bool loadingMenu;
     public virtual void StartGame()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -28,12 +31,29 @@ public class MenuManager : MonoBehaviour
         {
             c.gameObject.SetActive(false);
         }
-        currentCanvas.gameObject.SetActive(true);
+        currentCanvas.gameObject.SetActive(false);
     }
 
     public virtual void Start()
     {
-        gameManager = GameManager.Instance;
+        LoadMenu();
+    }
+    public void LoadMenu()
+    {
+        loadingMenu = true;
+        StartCoroutine("FindGMRoutine");
+    }
+
+    public IEnumerator FindGMRoutine()
+    {
+        while (gameManager == null)
+        {
+            yield return new WaitForSeconds(1f);
+            try {gameManager = GameManager.Instance;}
+            catch{Debug.Log("No Game Manager loaded!");}
+        }
+        loadingMenu = false;
+        currentCanvas.gameObject.SetActive(true);
     }
     public void StopGame()
     {
