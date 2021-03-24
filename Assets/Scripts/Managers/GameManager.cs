@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
         } else {
             _instance = this;
         }
+        DontDestroyOnLoad(gameObject);
     }
 
     public GameObject pauseMenu;
@@ -66,10 +67,6 @@ public class GameManager : MonoBehaviour
         currentPlayer.tag = "Player";
     }
 
-    public void Start()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
     public void StartGameplayLoop()
     {
         SceneManager.LoadScene("Proto_Room");

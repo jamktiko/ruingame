@@ -19,7 +19,6 @@ public class MenuManager : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        gameManager = GameManager.Instance;
         currentCanvas = initialCanvas;
         childCanvases = GetComponentsInChildren<Canvas>();
         foreach (Canvas c in childCanvases)
@@ -27,6 +26,11 @@ public class MenuManager : MonoBehaviour
             c.enabled = false;
         }
         currentCanvas.enabled = true;
+    }
+
+    public virtual void Start()
+    {
+        gameManager = GameManager.Instance;
     }
     public void StopGame()
     {
