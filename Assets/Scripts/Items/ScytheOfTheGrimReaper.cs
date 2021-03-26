@@ -12,18 +12,18 @@ public class ScytheOfTheGrimReaper : ArtifactEffect
         _playerReference = PlayerManager.Instance;
         if (_playerReference.TryGetComponent(out _playerAttackHandler))
         {
-            //_playerAttackHandler.PlayerAttackEvent += TryCriticalHit;
+            _playerAttackHandler.PlayerAttackEvent += TryCriticalHit;
         }
     }
 
-    private void TryCriticalHit(float damage)
+    private void TryCriticalHit(float damage, Health enemyHealth)
     {
 
         float rnd = Random.Range(0, 11);
-        //Debug.Log(rnd);
         if (rnd <= 1)
         {
-            //_playerAttackHandler.artifactModifier = damage;
+            _playerAttackHandler.artifactDamageModifier = damage;
+
             if (_playerReference.TryGetComponent(out PlayerHealth playerHealth))
             {
                 float addHealth = playerHealth.CurrentHealth + playerHealth._maximumHealth * 0.1f;
@@ -38,6 +38,6 @@ public class ScytheOfTheGrimReaper : ArtifactEffect
 
     private void OnDestroy()
     {
-        //_playerAttackHandler.PlayerAttackEvent -= TryCriticalHit;
+        _playerAttackHandler.PlayerAttackEvent -= TryCriticalHit;
     }
 }
