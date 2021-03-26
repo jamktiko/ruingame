@@ -169,7 +169,7 @@ namespace DefaultNamespace
             }
             ClearTargets();
         }
-        private void DamageAllCurrentTargets(GameObject[] targets, BaseAttack attack)
+        protected virtual void DamageAllCurrentTargets(GameObject[] targets, BaseAttack attack)
         {
             foreach (GameObject target in targets)
             {
