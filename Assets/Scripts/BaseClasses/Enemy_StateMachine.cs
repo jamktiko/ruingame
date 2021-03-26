@@ -6,44 +6,37 @@ using UnityEngine;
     public class Enemy_StateMachine : MonoBehaviour
     {
 	    //Gains information from the group
-	    
+	    public AreaCheck areaInformation;
+		
+	    public float attackRange;
+	    public bool alerted;
 	    public Enemy_Group enemyGroup;
+	    public bool checkingForPlayer;
 	    public enum NPC_EnemyAction { NONE = 0, IDLE, PATROL, INSPECT, ATTACK, APPROACH}
-	public enum NPC_WeaponType { KNIFE = 0, RIFLE, SHOTGUN }
-	public Animator npcAnimator;
-
-	public LayerMask hitTestLayer;
+	    public Animator npcAnimator;
+	    public GameObject playerTarget;
+	    public LayerMask hitTestLayer;
 	
 	Vector3 targetPos, startingPos;
-	
-	public NPC_WeaponType weaponType = NPC_WeaponType.KNIFE;
-	public Transform firePoint;
-	float weaponRange;
-	float weaponActionTime, weaponTime;
 
 	public NPC_PatrolNode patrolNode;
 
 	public NPC_EnemyAction currentAction = NPC_EnemyAction.NONE;
 
-	bool canHearPlayer = false;
-
-	static Enemy_StateMachine rifleSolider = null, shotgunSolider = null;
+	static Enemy_StateMachine rangedEnemy = null, casterEnemy = null;
 	
 	void Start()
 	{
 		startingPos = transform.position;
-		GoToState(NPC_EnemyAction.IDLE);
+		GoToState(NPC_EnemyAction.PATROL);
 	}
 	
 	void Update()
 	{
 		switch (currentAction)
 		{
-			case NPC_EnemyAction.IDLE:
-				ActionUpdate_Idle();
-				break;
-			case NPC_EnemyAction.INSPECT:
-				ActionUpdate_Inspect();
+			case NPC_EnemyAction.APPROACH:
+				ActionUpdate_Approach();
 				break;
 			case NPC_EnemyAction.PATROL:
 				ActionUpdate_Patrol();
@@ -60,11 +53,8 @@ using UnityEngine;
 		{
 			switch (currentAction)
 			{
-				case NPC_EnemyAction.IDLE:
-					ActionEnd_Idle();
-					break;
-				case NPC_EnemyAction.INSPECT:
-					ActionEnd_Inspect();
+				case NPC_EnemyAction.APPROACH:
+					ActionEnd_Approach();
 					break;
 				case NPC_EnemyAction.PATROL:
 					ActionEnd_Patrol();
@@ -77,11 +67,8 @@ using UnityEngine;
 		currentAction = newState;
 		switch (currentAction)
 		{
-			case NPC_EnemyAction.IDLE:
-				ActionInit_Idle();
-				break;
-			case NPC_EnemyAction.INSPECT:
-				ActionInit_Inspect();
+			case NPC_EnemyAction.APPROACH:
+				ActionInit_Approach();
 				break;
 			case NPC_EnemyAction.PATROL:
 				ActionInit_Patrol();
@@ -131,17 +118,16 @@ using UnityEngine;
 
 	void AttackAction()
 	{
-
+		Debug.Log("Attack!");
 	}
 	
-	public bool HasReachedMyDestination()
+	public bool HasReachedAttackRange()
 	{
-		/*float dist = Vector3.Distance(transform.position, );
-		if (dist <= 1.5f)
+		float dist = Vector3.Distance(transform.position, playerTarget.transform.position);
+		if (dist <= attackRange)
 		{
 			return true;
 		}
-*/
 		return false;
 	}
 
@@ -165,23 +151,15 @@ using UnityEngine;
 		
 	}
 
-	void AssignWeapons()
-	{
-		
-	}
-
 	////////////////////////////// Action: IDLE //////////////////////////////
 	void ActionInit_Idle()
 	{
-		
+		Debug.Log("Patrolling!");
 	}
 
 	void ActionUpdate_Idle()
 	{
-		if (CanSeePlayer() || rifleSolider != null || shotgunSolider != null)
-		{
-			GoToState(NPC_EnemyAction.INSPECT);
-		}
+		GoToState(NPC_EnemyAction.PATROL);
 	}
 
 	void ActionEnd_Idle()
@@ -190,44 +168,23 @@ using UnityEngine;
 	}
 	//////////////////////////////////////////////////////////////////////////
 
-	//////////////////////////// Action: INSPECT /////////////////////////////
-	bool inspectWait;
-	void ActionInit_Inspect()
-	{
-	}
-
-	void ActionUpdate_Inspect()
-	{
-		if (HasReachedMyDestination() && !inspectWait)
-		{
-			inspectWait = true;
-		}
-		
-		else if (CanSeePlayer())
-		{
-			transform.forward = targetPos - transform.position;
-		}
-	}
-	void ActionEnd_Inspect()
-	{
-	}
-	//////////////////////////////////////////////////////////////////////////
-
 	///////////////////////////// Action: ATTACK /////////////////////////////
 	bool actionDone;
 	void ActionInit_Attack()
 	{
+		StartCoroutine("AttackPlayerRoutine");
+		/*
 		npcAnimator.SetBool("Attack", true);
+		//Stops previous attacks
 		CancelInvoke("AttackAction");
-		Invoke("AttackAction", weaponActionTime);
-
-		actionDone = false;
+		actionDone = false
+		*/
 	}
 	void ActionUpdate_Attack()
 	{
-		//AFTER ATTACKING 
-		GoToState(NPC_EnemyAction.INSPECT);
-		//}
+		//AFTER ATTACKING
+		//GoToState(NPC_EnemyAction.APPROACH);
+		
 	}
 	void ActionEnd_Attack()
 	{
@@ -235,12 +192,12 @@ using UnityEngine;
 	///////////////////////////// Action: ATTACK /////////////////////////////
 	void ActionInit_Approach()
 	{
+		Debug.Log("Approaching!");
+		alerted = true;
 	}
 	void ActionUpdate_Approach()
 	{
-		RaycastHit hit;
-		Physics.Raycast(transform.position, transform.forward, out hit, weaponRange, hitTestLayer);
-		if (hit.collider != null && hit.collider.tag == "Player")
+		if (HasReachedAttackRange())
 		{
 			GoToState(NPC_EnemyAction.ATTACK);
 		}
@@ -253,13 +210,18 @@ using UnityEngine;
 	///////////////////////////// Action: PATROL /////////////////////////////
 	void ActionInit_Patrol()
 	{
+		if (!checkingForPlayer)
+		{
+			FindPlayer();
+		}
 	}
 	void ActionUpdate_Patrol()
 	{
-		if (HasReachedMyDestination())
+		/*if (HasReachedPatrolDestination())
 		{
 			patrolNode = patrolNode.nextNode;
 		}
+		*/
 	}
 	void ActionEnd_Patrol() { }
 
@@ -267,6 +229,48 @@ using UnityEngine;
 	{
 		enemyGroup.AlertManager();
 	}
-	//////////////////////////////////////////////////////////////////////////
+
+	public void FindPlayer()
+	{
+		checkingForPlayer = true;
+		StartCoroutine("FindPlayerRoutine");
+	}
+
+	public IEnumerator FindPlayerRoutine()
+	{
+		while (playerTarget == null)
+		{
+			yield return new WaitForSeconds(1f);
+			if (CheckForPlayer())
+			{
+				AlertEnemies();
+			}
+		}
+		checkingForPlayer = false;
+	}
+
+	public IEnumerator AttackPlayerRoutine()
+	{
+		AttackAction();
+		yield return new WaitForSeconds(2f);
+		GoToState(NPC_EnemyAction.APPROACH);
+	}
+	private bool CheckForPlayer()
+	{
+		Debug.Log("Sweeping!");
+		RaycastHit[] hitTargets = areaInformation.RayCastAroundArea(hitTestLayer).hitInfo;
+		foreach (RaycastHit hit in hitTargets)
+		{
+			if (hit.collider != null)
+			{
+				if (hit.collider.gameObject.tag == "Player")
+				{
+					Debug.Log("Player found!");
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 }
 

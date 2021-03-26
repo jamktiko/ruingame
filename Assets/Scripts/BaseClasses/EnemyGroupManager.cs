@@ -4,6 +4,7 @@ public class EnemyGroupManager : MonoBehaviour
 {
     public Enemy_Group[] enemyGroups;
 
+    public GameObject playerTarget;
     //Serves as a blackboard to alert all groups controlled by this manager
     
     public void Awake()
@@ -19,7 +20,8 @@ public class EnemyGroupManager : MonoBehaviour
     {
         foreach (Enemy_Group eg in enemyGroups)
         {
-           eg.AlertEnemies();
+            eg.playerTarget = playerTarget;
+            eg.AlertEnemies();
         }
     }
 }

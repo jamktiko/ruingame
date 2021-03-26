@@ -4,6 +4,7 @@ using System.Collections;
 public class NPC_PatrolNode : MonoBehaviour {
 	
     public NPC_PatrolNode nextNode;
+    
 /*	public override void DefineNode(){
 	
 	}
@@ -16,10 +17,16 @@ public class NPC_PatrolNode : MonoBehaviour {
 
 	}*/
 
+	private void DefinePatrolArea()
+	{
+		
+	}
+
     public Vector3 GetNextNodePosition(){
         return nextNode.GetPosition ();
     }
     public Vector3 GetPosition(){
+	    
         return transform.position;
     }
 
