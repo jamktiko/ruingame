@@ -187,7 +187,7 @@ namespace DefaultNamespace
             KnockBackAllTargets(targets, attack);
             ClearTargets();
         }
-        private void KnockBackAllTargets(GameObject[] targets, BaseAttack attack)
+        protected void KnockBackAllTargets(GameObject[] targets, BaseAttack attack)
         {
             foreach (GameObject target in targets)
             {
@@ -203,7 +203,7 @@ namespace DefaultNamespace
             }
         }
 
-        private void ClearTargets()
+        protected void ClearTargets()
         {
             currentAttack = null;
             currentTargets = null;
