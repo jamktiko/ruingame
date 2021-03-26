@@ -60,7 +60,7 @@ public class Targeting : MonoBehaviour
         foreach (var item in GetArrayOfCapsulecastHits(radius, distance))
         {
             GameObject go = item.transform.gameObject;
-            if (go.CompareTag("Enemy"))
+            if (go.tag == "Enemy" && item.collider.name != "EnemyCharacter")
                 enemiesInRange.Add(go);
         }
 
