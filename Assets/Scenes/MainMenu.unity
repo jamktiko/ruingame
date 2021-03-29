@@ -396,8 +396,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   artifactPrefab: {fileID: 0}
   spawnPoint: {fileID: 0}
-  spawnType: 1
-  listIndex: 2
+  spawnType: 0
+  listIndex: 7
   spawnedArtifact: 
   artifactPrefabList:
   - {fileID: 4835026549342000777, guid: c3bcd75b8671245458d14295e2cde05a, type: 3}
