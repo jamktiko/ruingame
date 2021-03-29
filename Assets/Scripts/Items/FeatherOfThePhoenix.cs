@@ -8,7 +8,6 @@ public class FeatherOfThePhoenix : ArtifactEffect
     public float burningRadius = 20f;
     public float burningTime = 3f;
     private float counter = 1;
-    private PlayerManager _playerReference;
     private PlayerHealth _playerHealth;
 
     public override void AddEffect()

@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class EssenceOfKraken : ArtifactEffect
 {
-    private PlayerManager _playerReference;
-    private SprintSkill sprintSkill;
+    //private SprintSkill sprintSkill;
     public override void AddEffect()
     {
         _playerReference = PlayerManager.Instance;

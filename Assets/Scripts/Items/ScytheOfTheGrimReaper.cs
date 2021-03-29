@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class ScytheOfTheGrimReaper : ArtifactEffect
 {
-    private PlayerManager _playerReference;
     private PlayerAttackHandler _playerAttackHandler;
 
     public override void AddEffect()
