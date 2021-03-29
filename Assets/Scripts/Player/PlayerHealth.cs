@@ -12,6 +12,7 @@ public class PlayerHealth : Health
     public event UnityAction DamagePlayerEvent = delegate { };
     public event UnityAction DiePlayerEvent = delegate { };
     public bool revivePlayer = false;
+    public bool dodgeAttack = false;
 
     public override void Die()
     {
@@ -24,6 +25,9 @@ public class PlayerHealth : Health
     public override void DealDamage(float amount)
     {
         DamagePlayerEvent.Invoke();
+        if (dodgeAttack)
+            return;
         base.DealDamage(amount);
+        dodgeAttack = false;
     }
 }
