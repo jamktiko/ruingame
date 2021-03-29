@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ss_active
-  m_Shader: {fileID: -6465566751694194690, guid: eb43b43f1380e2c4e8a664803a412c2c,
+  m_Name: stancechange_active
+  m_Shader: {fileID: -6465566751694194690, guid: c3a5e0ffd4cc93d489b2e8205385866c,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -39,9 +39,10 @@ Material:
     m_Floats:
     - Boolean_4211368C: 1
     - Vector1_12B0FD20: -0.26
-    - Vector1_283E59AC: -0.79
+    - Vector1_283E59AC: -0.98
     - Vector1_364065A2: 2.01
     - Vector1_B08E9D73: 97.19
+    - Vector1_ss283E59AC: 0
     m_Colors:
     - Color_2DA30488: {r: 0.6037736, g: 0.030391548, b: 0.014239941, a: 0}
     - Vector2_5C46464E: {r: 0.28, g: -0.24, b: 0, a: 0}
