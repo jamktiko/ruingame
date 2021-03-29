@@ -33,9 +33,4 @@ public class ScytheOfTheGrimReaper : ArtifactEffect
             }
         }
     }
-
-    private void OnDestroy()
-    {
-        _playerAttackHandler.PlayerAttackEvent -= TryCriticalHit;
-    }
 }

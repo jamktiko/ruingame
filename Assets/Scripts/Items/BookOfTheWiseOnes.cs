@@ -21,6 +21,7 @@ public class BookOfTheWiseOnes : ArtifactEffect
 
     private void OnDestroy()
     {
+        PlayerHealth _playerHealth = PlayerManager.Instance.GetComponent<PlayerHealth>();
         if (_playerHealth._maximumHealth > maxHealth)
             _playerHealth._maximumHealth /= maxHealthModifier;
     }

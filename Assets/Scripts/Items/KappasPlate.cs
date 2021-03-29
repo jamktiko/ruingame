@@ -18,6 +18,6 @@ public class KappasPlate : ArtifactEffect
 
     private void OnDestroy()
     {
-        _playerHealth.flatResistance -= blockedDamage;
+        PlayerManager.Instance.GetComponent<PlayerHealth>()._flatResistance -= blockedDamage;
     }
 }

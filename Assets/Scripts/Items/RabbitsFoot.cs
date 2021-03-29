@@ -22,8 +22,4 @@ public class RabbitsFoot : ArtifactEffect
         if (rnd <= 1f)
             _playerHealth.dodgeAttack = true;
     }
-    private void OnDestroy()
-    {
-        _playerHealth.DamagePlayerEvent -= DodgeAttack;
-    }
 }

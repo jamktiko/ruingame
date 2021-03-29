@@ -2,6 +2,7 @@
 using DefaultNamespace;
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class TheRuinedRing : ArtifactEffect
 {
@@ -19,8 +20,8 @@ public class TheRuinedRing : ArtifactEffect
 
     private void OnDestroy()
     {
-        if (firstCooldownTime > _playerReference._playerSkills.skillList[0].skillCooldown)
-            foreach (var skill in _playerReference._playerSkills.skillList)
+        if (firstCooldownTime > PlayerManager.Instance._playerSkills.skillList[0].skillCooldown)
+            foreach (var skill in PlayerManager.Instance._playerSkills.skillList)
                 skill.skillCooldown /= cooldownModifier;
     }
 }

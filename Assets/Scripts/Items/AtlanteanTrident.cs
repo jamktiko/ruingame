@@ -36,9 +36,4 @@ public class AtlanteanTrident : ArtifactEffect
     {
         enemyMovement.movementSpeed = normalEnemySpeed;
     }
-
-    private void OnDestroy()
-    {
-        playerAttackHandler.PlayerAttackEvent -= SlowEnemyDown;
-    }
 }

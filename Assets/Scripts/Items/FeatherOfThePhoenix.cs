@@ -40,9 +40,4 @@ public class FeatherOfThePhoenix : ArtifactEffect
             }
         }
     }
-
-    private void OnDestroy()
-    {
-        _playerHealth.DiePlayerEvent -= RevivePlayer;
-    }
 }
