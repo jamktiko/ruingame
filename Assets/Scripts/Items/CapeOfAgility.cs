@@ -9,6 +9,7 @@ public class CapeOfAgility : ArtifactEffect
 
     private void Start()
     {
+        _playerReference = PlayerManager.Instance;
         normalSpeed = _playerReference._playerData.entityMovementSpeed;
     }
 
