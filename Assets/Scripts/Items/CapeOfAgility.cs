@@ -1,12 +1,8 @@
 ﻿
 using DefaultNamespace;
-using UnityEngine;
-using System.Collections;
 
 public class CapeOfAgility : ArtifactEffect
 {
-    //public string  description = "5% movement speed. After dashing double the stat change for 2 seconds";
-
     private SprintSkill sprintSkill;
     private float normalSpeed;
     private float speedModifier = 0.05f;

@@ -1,7 +1,5 @@
 ﻿
 using DefaultNamespace;
-using UnityEngine;
-using System.Collections;
 
 public class KappasPlate : ArtifactEffect
 {

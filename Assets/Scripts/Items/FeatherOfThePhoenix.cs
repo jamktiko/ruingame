@@ -1,6 +1,5 @@
 ﻿
 using DefaultNamespace;
-using UnityEngine;
 
 public class FeatherOfThePhoenix : ArtifactEffect
 {

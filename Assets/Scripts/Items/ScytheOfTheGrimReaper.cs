@@ -1,6 +1,5 @@
 ﻿using DefaultNamespace;
 using UnityEngine;
-using System.Collections.Generic;
 
 public class ScytheOfTheGrimReaper : ArtifactEffect
 {
