@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8e61e0053ae596e4bbc7fe18382f94b8, type: 2}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -105,10 +105,10 @@ GameObject:
   - component: {fileID: 1250241272940618212}
   - component: {fileID: 2550641457589842860}
   - component: {fileID: 8211011167226655821}
-  - component: {fileID: 7895683501998904556}
+  - component: {fileID: -3823559076819756044}
   m_Layer: 0
-  m_Name: ScytheOfTheGrimReaper
-  m_TagString: Untagged
+  m_Name: LeviathansHide
+  m_TagString: Artifact
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerReference: {fileID: 0}
-  ArtifactEffect: {fileID: 7895683501998904556}
+  ArtifactEffect: {fileID: -3823559076819756044}
 --- !u!65 &2550641457589842860
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -171,7 +171,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7895683501998904556
+--- !u!114 &-3823559076819756044
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -180,7 +180,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 4835026549342000777}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45a6547aa1af93f48b2fb194285fa159, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a6447fe7abebcb4483b2427148ab616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   artifactModifiers: []
+  blockedDamage: 10
