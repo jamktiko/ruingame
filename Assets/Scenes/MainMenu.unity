@@ -397,7 +397,7 @@ MonoBehaviour:
   artifactPrefab: {fileID: 0}
   spawnPoint: {fileID: 0}
   spawnType: 0
-  listIndex: 7
+  listIndex: 0
   spawnedArtifact: 
   artifactPrefabList:
   - {fileID: 4835026549342000777, guid: c3bcd75b8671245458d14295e2cde05a, type: 3}
