@@ -1,9 +1,16 @@
 ﻿using DefaultNamespace;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(ComboHandler))]
 public class PlayerAttackHandler : ComboAttackHandler
 {
+    /// <summary>
+    /// For artifact effects
+    /// </summary>
+    public event UnityAction<float, Health> PlayerAttackEvent = delegate { };
+    public float artifactDamageModifier = 0;
+
     private InputReader _inputReader;
     private MovementController _movementControl;
     
@@ -52,4 +59,31 @@ public class PlayerAttackHandler : ComboAttackHandler
         _movementControl.RotateTowardsMovement(nearestTarget, 1000f);
     }
 
+    /// <summary>
+    /// For artifact events
+    /// </summary>
+    /// <param name="targets"></param>
+    /// <param name="attack"></param>
+    protected override void DamageAllCurrentTargets(GameObject[] targets, BaseAttack attack)
+    {
+        foreach (GameObject target in targets)
+        {
+            try
+            {
+                var targetHealth = target.GetComponent<Health>();
+                float damage = attack.baseDamage * _entityDamage;
+                PlayerAttackEvent.Invoke(damage, targetHealth); 
+                targetHealth.DealDamage(damage + artifactDamageModifier);
+            }
+            catch
+            {
+                Debug.Log("Target has no health!");
+            }
+        }
+
+        KnockBackAllTargets(targets, attack);
+        ClearTargets();
+
+        artifactDamageModifier = 0;
+    }
 }

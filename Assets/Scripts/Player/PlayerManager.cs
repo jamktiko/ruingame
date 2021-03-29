@@ -135,7 +135,10 @@ public class PlayerManager : BaseManager
     public void AddArtifact(Artifact artifact)
     {
         //Give artifact stats and add as a string to the artifact list
-        Destroy(artifact.gameObject, 0.1f);
+        //Destroy(artifact.gameObject, 0.1f);
+
+        //For artifact events
+        artifact.gameObject.SetActive(false);
     }
     public void ModifyMovementSpeed(float amount, int type)
     {

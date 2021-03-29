@@ -8,7 +8,7 @@ namespace DefaultNamespace
 {
     public class ArtifactEffect : MonoBehaviour
     {
-        private PlayerManager _playerReference;
+        protected PlayerManager _playerReference;
         [System.Serializable]
         public class ArtifactModifier
         {

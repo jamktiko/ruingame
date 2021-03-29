@@ -1,5 +1,6 @@
 ﻿
 using UnityEngine;
+using UnityEngine.Events;
 using System.Collections;
 using UnityEditor;
 
@@ -8,6 +9,8 @@ namespace DefaultNamespace
 {
     public class SprintSkill : SkillExecute
     {
+        public event UnityAction EndSprintEvent = delegate { };
+
         //Should contain UI IMAGE and Animation Clip
         [SerializeField] private bool _stopPlayerAfterDash = true;
         public float SprintSpeed = 20f;
@@ -42,6 +45,8 @@ namespace DefaultNamespace
 
             if (_stopPlayerAfterDash)
                 playerRb.velocity = Vector3.zero;
+
+            EndSprintEvent.Invoke();
         }
     }
 }
