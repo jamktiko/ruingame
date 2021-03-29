@@ -820,6 +820,7 @@ MonoBehaviour:
   hitTestLayer:
     serializedVersion: 2
     m_Bits: 1
+  movementSpeed: 10
   patrolNode: {fileID: 0}
   currentAction: 0
 --- !u!114 &1088858162
@@ -1385,7 +1386,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1612288130}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.06, y: 0.37, z: 0.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1088858166}
@@ -1924,7 +1925,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b8512ef241f865543a709df6a3dba65f, type: 2}
+  - {fileID: 2100000, guid: 8bce2fce45d19034097efdf699e0ed35, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

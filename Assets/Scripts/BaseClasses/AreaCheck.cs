@@ -35,14 +35,14 @@ public class AreaCheck : MonoBehaviour
             Vector3 dir = transform.TransformDirection(Vector3.forward) * maximumSize;
             dir = Quaternion.Euler(0, angle, 0) * dir;
             angle += 360 / AmountOfRaycasts;
-           // Debug.DrawRay(transform.position, dir, Color.red);
+           Debug.DrawRay(transform.position, dir, Color.red);
             Ray ray = new Ray(transform.position, dir);
             RaycastHit hit;
             if (Physics.SphereCast(ray,detectionSensitivity, out hit, maximumSize, layerToCheck))
             {
                 areaVertices[i] = hit.point;
                 hitInfos[i] = hit;
-               // Debug.DrawLine(hit.point, transform.position, Color.blue);
+               Debug.DrawLine(hit.point, transform.position, Color.blue);
             }
             else
             {
@@ -60,18 +60,16 @@ public class AreaCheck : MonoBehaviour
     
     void OnDrawGizmos()
     {
-        /*
+        
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, maximumSize);
         
         Gizmos.color = Color.green;
-        for (int i = 0; i < areaVertices.Length; i++)
-        {
-            Gizmos.DrawWireSphere(areaVertices[i], 0.1f + detectionSensitivity);
-        }
-        
-        */
-        
+        if (areaVertices != null) 
+            for (int i = 0; i < areaVertices.Length; i++)
+            {
+                Gizmos.DrawWireSphere(areaVertices[i], 0.1f + detectionSensitivity);
+            }
     }
     
 }
