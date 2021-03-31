@@ -12,7 +12,7 @@ public class AnimationTriggerHandler : MonoBehaviour
 
     public void HandleDamage()
     {
-        _attackHandler.HandleAttack();
+        _attackHandler.ExecuteAttack();
     }
 
     public void WeaponSlash()

@@ -9,7 +9,6 @@ public class Targeting : MonoBehaviour
     //Attack enemies based on targets in area
     public void AttackEnemies(bool attackAll, float radius, float distance, float damage)
     {
-
         if (attackAll)
         {
             var listOfEnemies = GetListOfEnemiesInRange(radius, distance);
@@ -35,7 +34,7 @@ public class Targeting : MonoBehaviour
     {
         if (enemy.TryGetComponent(out EnemyHealth enemyHealth))
         {
-            enemyHealth.DealDamage(damage);
+            //enemyHealth.DealDamage(damage);
             //Debug.Log(enemyHealth.CurrentHealth);
         }
     }

@@ -55,7 +55,7 @@ namespace DefaultNamespace.Skills
                 float kbForce = CalculateForce(distance);
                 float damage = CalculateDamage(distance);
 
-                if (go.TryGetComponent(out KnockbackHandler kbh))
+                if (go.TryGetComponent(out BaseMovement kbh))
                 {
                     kbh.HandleKnockBack(transform.position, kbForce);
                 }

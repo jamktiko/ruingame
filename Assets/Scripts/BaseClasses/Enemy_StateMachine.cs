@@ -1,5 +1,5 @@
 ﻿
-    public class Enemy_StateMachine : IEnemy_StateMachine
+    public class Enemy_StateMachine : IEnemy
     {
         public void Awake()
         {

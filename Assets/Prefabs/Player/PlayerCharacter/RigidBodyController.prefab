@@ -82,7 +82,6 @@ GameObject:
   - component: {fileID: 6354800191026446151}
   - component: {fileID: 2255675017410230752}
   - component: {fileID: 6733865835571997555}
-  - component: {fileID: 2175944506227012699}
   m_Layer: 0
   m_Name: RigidBodyController
   m_TagString: Player
@@ -143,6 +142,7 @@ MonoBehaviour:
   stepHeight: 0.75
   stepSmooth: 3
   attacking: 0
+  canKnockback: 1
 --- !u!136 &181873949443222813
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -219,6 +219,7 @@ MonoBehaviour:
   skillList: []
   entityAnimator: {fileID: 0}
   entityHealth: {fileID: 0}
+  attackHandler: {fileID: 0}
   skillUI: {fileID: 6107597504458783004}
   usingSkill: 0
   VFXPoint: {fileID: 2859707322100604140}
@@ -242,12 +243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _flatResistance: 10
   _percentualResistance: 10
-  _maximumHealth: 100
   _healthUI: {fileID: 4387780569933816631}
-  CurrentHealth: 0
-  _damageable: 1
-  flatResistance: 0
-  percentualResistance: 0
 --- !u!114 &6354800191026446151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,10 +270,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f265421dd558ff747aed7bda24fadffe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseAttack: {fileID: 0}
   attacking: 0
-  firePoint: {fileID: 1210103419889925812}
+  criticalHitChance: 0
+  AllowedTargetTags: []
   _characterAnimator: {fileID: 0}
+  firePoint: {fileID: 1210103419889925812}
   comboHandler: {fileID: 0}
 --- !u!114 &6733865835571997555
 MonoBehaviour:
@@ -297,19 +294,6 @@ MonoBehaviour:
   LayerToCheck:
     serializedVersion: 2
     m_Bits: 1536
---- !u!114 &2175944506227012699
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 181873949443222881}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72c4c3f844aa93a499aea6f44e2096ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canKnockback: 0
 --- !u!1 &187905290454374266
 GameObject:
   m_ObjectHideFlags: 0
@@ -5188,6 +5172,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entityHealth: {fileID: 181873949443222808}
+  _entityUI: {fileID: 0}
+  _healthSlider: {fileID: 0}
 --- !u!1 &7503545786610745087
 GameObject:
   m_ObjectHideFlags: 0
@@ -5420,6 +5406,7 @@ MonoBehaviour:
   skillImages: []
   skillIconPrefab: {fileID: 5243744037893086847, guid: 3ffd26e9b4023cb449f4c525668fb549,
     type: 3}
+  UIUpdateRate: 0.05
 --- !u!1 &7801123744900214451
 GameObject:
   m_ObjectHideFlags: 0

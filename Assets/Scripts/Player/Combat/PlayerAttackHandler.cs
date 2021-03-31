@@ -5,13 +5,13 @@ using UnityEngine;
 public class PlayerAttackHandler : ComboAttackHandler
 {
     private InputReader _inputReader;
-    private MovementController _movementControl;
+    private PlayerMovementController _movementControl;
     
     public override void Awake()
     {
         base.Awake();
         _inputReader = GameManager.Instance.playerInputReader;
-        _movementControl = GetComponent<MovementController>();
+        _movementControl = GetComponent<PlayerMovementController>();
     }
     public override void OnEnable()
     {

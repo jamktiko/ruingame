@@ -8,7 +8,7 @@ namespace DefaultNamespace
         public AreaCheck areaInformation;
         public float attackRange;
         public bool alerted;
-        public Enemy_Group enemyGroup;
+       // public Enemy_Group enemyGroup;
         public bool checkingForPlayer;
         public enum NPC_EnemyAction { NONE = 0, IDLE, PATROL, INSPECT, ATTACK, APPROACH}
         public Animator npcAnimator;

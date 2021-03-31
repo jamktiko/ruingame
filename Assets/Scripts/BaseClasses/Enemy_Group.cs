@@ -1,4 +1,4 @@
-﻿
+﻿/*
 using UnityEngine;
 
 public class Enemy_Group : MonoBehaviour
@@ -56,7 +56,8 @@ public class Enemy_Group : MonoBehaviour
         Gizmos.DrawSphere(transform.position, 0.1f); //center sphere
         if (transform.GetComponent<Renderer>() != null)
             Gizmos.DrawWireCube(patrolArea.center, patrolArea.size);
-        */
+        
     }
 
 }
+*/

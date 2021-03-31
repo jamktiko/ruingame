@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.Events;
@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 [RequireComponent(typeof(PlayerAttackHandler))]
 [RequireComponent(typeof(PlayerHealth))]
-[RequireComponent(typeof(MovementController))]
+[RequireComponent(typeof(PlayerMovementController))]
 [RequireComponent(typeof(SkillUser))]
 
 //Move player initialization to another script
@@ -28,7 +28,7 @@ public class PlayerManager : BaseManager
     
     private PlayerAttackHandler _playerAttack;
     private PlayerHealth _playerHealth;
-    public MovementController _playerMovement { get; private set; }
+    public PlayerMovementController _playerMovement { get; private set; }
     public SkillUser _playerSkills { get; private set; }
 
     public Combo _weaponData { get; private set; }
@@ -36,11 +36,13 @@ public class PlayerManager : BaseManager
 
     [HideInInspector]
     public UnityEvent pickUpEvent;
-
+    
     private void OnEnable()
     {
         playerInputReader.InteractEvent += OnPickUp;
+        _playerSkills.SkillActivated += StopAttacking;
     }
+
     private void OnDisable()
     {
         playerInputReader.InteractEvent -= OnPickUp;
@@ -60,7 +62,7 @@ public class PlayerManager : BaseManager
         _playerAttack = GetComponent<PlayerAttackHandler>();
         _weaponData = GameManager.Instance.weaponCombo;
         _playerHealth = GetComponent<PlayerHealth>();
-        _playerMovement = GetComponent<MovementController>();
+        _playerMovement = GetComponent<PlayerMovementController>();
         _playerSkills = GetComponent<SkillUser>();
         _playerData = ScriptableObject.CreateInstance<PlayerData>();
         if (cameras == null)
@@ -231,12 +233,21 @@ public class PlayerManager : BaseManager
         GameManager.Instance.GameOver();
     }
 
-    public void StopAttacking()
+    public void StopAttacking(SkillActivatedEventArgs e)
     {
         _playerAttack.EndAttack();
     }
 
     public void ZoomCameraInAndOut()
     {
+    }
+    public void DisablePlayerInput()
+    {
+        playerInputReader.DisableAllInput();
+    }
+
+    public void EnablePlayerInput()
+    {
+        playerInputReader.EnablePlayerInput();;
     }
 }

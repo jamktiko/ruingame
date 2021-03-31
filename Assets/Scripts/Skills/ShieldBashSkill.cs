@@ -24,7 +24,7 @@ namespace DefaultNamespace.Skills
         [SerializeField] private float _sprintSpeed = 30f;
         private bool _onSkill = false;
 
-
+        private MeleeAttack _shieldBash;
         protected override void Start()
         {
             base.Start();
@@ -33,6 +33,7 @@ namespace DefaultNamespace.Skills
             damage = 10f;
             duration = 0.5f;
             iFrameDuration = 1f;
+            _shieldBash = ShieldBashAttack();
         }
 
         public override void Execute()
@@ -71,13 +72,21 @@ namespace DefaultNamespace.Skills
             if (_onSkill && go.CompareTag("Enemy"))
             {
                 EnemyHealth eh = go.GetComponent<EnemyHealth>();
-                KnockbackHandler kbh = go.GetComponent<KnockbackHandler>();
+                BaseMovement kbh = go.GetComponent<BaseMovement>();
                 kbh.HandleKnockBack(transform.position, _knockbackForce);
-                eh.DealDamage(damage);
+                eh.DealDamage(_shieldBash, skillUser.attackHandler);
 
                 if (_stopPlayerOnEnemyCollision)
                     playerRb.velocity = Vector3.zero;
             }
+        }
+
+        private MeleeAttack ShieldBashAttack()
+        {
+            var sb = ScriptableObject.CreateInstance<MeleeAttack>();
+            sb.baseDamage = 10f;
+            sb.TargetingType = basetargetingType.NEAREST;
+            return sb;
         }
     }
 }

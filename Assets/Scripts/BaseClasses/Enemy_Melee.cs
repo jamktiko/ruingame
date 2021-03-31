@@ -1,7 +1,7 @@
 ﻿
 using System.Collections;
 using UnityEngine;
-
+/*
     public class Enemy_Melee : IEnemy_StateMachine
     {
 	    //Gains information from the group
@@ -183,7 +183,7 @@ using UnityEngine;
 		//Stops previous attacks
 		CancelInvoke("AttackAction");
 		actionDone = false
-		*/
+		
 	}
 	void ActionUpdate_Attack()
 	{
@@ -226,7 +226,7 @@ using UnityEngine;
 		{
 			patrolNode = patrolNode.nextNode;
 		}
-		*/
+		
 	}
 	void ActionEnd_Patrol() { }
 
@@ -294,4 +294,4 @@ using UnityEngine;
 		}
 	}
 }
-
+*/
