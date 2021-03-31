@@ -35,6 +35,7 @@ namespace DefaultNamespace.Skills
             base.Start();
             damage = 20f;
             _attackRadius = _knockbackForce / 2f;
+            skillname = "WhirlWind";
         }
 
         public override void Execute()

@@ -234,6 +234,6 @@ public class SkillUser : MonoBehaviour
 
     public void PlayAnimation(SkillExecute sk)
     {
-        entityAnimator.Play(sk.animationClip.name);
+        entityAnimator.Play(sk.skillname);
     }
 }
