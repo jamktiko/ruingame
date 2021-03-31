@@ -1,28 +1,36 @@
 ﻿
+using System;
 using System.Collections;
 using DefaultNamespace;
 using DefaultNamespace.Skills;
 using UnityEngine;
 
 
+
 public class SkillUser : MonoBehaviour
 {
     public InputReader inputReader = default;
-    
+
     public SkillExecute[] skillList;
 
     public Animator entityAnimator;
-    
+
     [SerializeField] private Health entityHealth;
 
+    public BaseAttackHandler attackHandler;
+
     public SkillsUI skillUI;
-    
+
     private PlayerManager _playerManager;
 
     public bool usingSkill;
 
     public Transform VFXPoint;
-    
+
+    public delegate void SkillActivatedHandler(SkillActivatedEventArgs e);
+
+    public event SkillActivatedHandler SkillActivated;
+
     //STORE THIS IN SKILL
     public AnimationClip sprintAnimation;
     public AnimationClip stanceChangeAnimation;
@@ -30,13 +38,14 @@ public class SkillUser : MonoBehaviour
 
     public GameObject defaultParticles;
     public Targeting skillTargeting { get; private set; }
+    
     private void Awake()
     {
         entityAnimator = GetComponentInChildren<Animator>();
         _playerManager = PlayerManager.Instance;
         inputReader = _playerManager.playerInputReader;
         entityHealth = GetComponent<Health>();
-        
+        attackHandler = GetComponent<BaseAttackHandler>();
         skillTargeting = gameObject.AddComponent<Targeting>();
         
         skillList = new SkillExecute[4];
@@ -52,8 +61,7 @@ public class SkillUser : MonoBehaviour
         skillList[3].animationClip = sprintAnimation;
         skillList[3].skillUser = this;
         
-        
-    }
+}
     private void OnEnable()
   
     {
@@ -66,7 +74,7 @@ public class SkillUser : MonoBehaviour
         }
         catch{}
     }
-    
+
     private void OnDisable()
     {
         try
@@ -82,7 +90,7 @@ public class SkillUser : MonoBehaviour
     {
         try
         {
-            ActivateSkill(skillList[0], 0);
+            ActivateSkill(0);
         }
         catch
         {
@@ -94,7 +102,7 @@ public class SkillUser : MonoBehaviour
     {
         try
         {
-            ActivateSkill(skillList[1], 1);
+            ActivateSkill(1);
         }
         catch
         {
@@ -106,7 +114,7 @@ public class SkillUser : MonoBehaviour
     {
         try
         {
-            ActivateSkill(skillList[2], 2);
+            ActivateSkill(2);
         }
         catch
         {
@@ -118,7 +126,7 @@ public class SkillUser : MonoBehaviour
     {
         try
         {
-            ActivateSkill(skillList[3], 3);
+            ActivateSkill(3);
         }
         catch
         {
@@ -126,8 +134,9 @@ public class SkillUser : MonoBehaviour
         }
     }
     
-    public virtual void ActivateSkill(SkillExecute sk, int index)
+    public virtual void ActivateSkill(int index)
     {
+        var sk = skillList[index];
         if (entityAnimator.GetFloat("attackCancelFloat") < 1f)
         {
             if (!sk.onCooldown)
@@ -136,27 +145,12 @@ public class SkillUser : MonoBehaviour
                 {
                     //PlayerManager.Instance.ZoomCameraInAndOut();
                     //SHOULD ONLY BE CALLED AFTER SKILL GOES ON COOLDOWN, EG. Stance change only goes on cooldown after the duration is over
-
-                    try
-                    {
-                        skillUI.OnSkillUse(index);
-                    }
-                    catch
-                    {
-                        Debug.Log("skill UI not updating correctly");
-                    }
-
-                    try
-                    {
-                        _playerManager.StopAttacking();
-                    }
-                    catch
-                    {
-                        Debug.Log("Playermanager.StopAttacking");
-                    }
-                    //SKILL SHOULD DETERMINE WHICH ANIMATION TO USE
+                    SkillActivatedEventArgs e = new SkillActivatedEventArgs();
+                    e.SkillIndex = index;
+                    SkillActivated?.Invoke(e);
+                     // _playerManager.StopAttacking();
+                        //SKILL SHOULD DETERMINE WHICH ANIMATION TO USE
                     //Currently uses animation length to determine skill duration, probably should work other way around?
-          
                     try
                     {
                         sk.Execute(sk.animationClip.length);
@@ -170,7 +164,7 @@ public class SkillUser : MonoBehaviour
 
                     try
                     {
-                        var ps =Instantiate(defaultParticles, VFXPoint.position, Quaternion.identity);
+                        var ps = Instantiate(defaultParticles, VFXPoint.position, Quaternion.identity);
                         Destroy(ps, 0.5f);
                     }
                     catch{Debug.Log("Particles");}
@@ -236,4 +230,8 @@ public class SkillUser : MonoBehaviour
     {
         entityAnimator.Play(sk.skillname);
     }
+}
+public class SkillActivatedEventArgs : EventArgs
+{
+    public int SkillIndex { get; set; }
 }

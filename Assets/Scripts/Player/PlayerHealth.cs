@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 using UnityEngine.Events;
 public class PlayerHealth : Health
 {
@@ -14,6 +15,11 @@ public class PlayerHealth : Health
     public bool revivePlayer = false;
     public bool dodgeAttack = false;
 
+=======
+
+public class PlayerHealth : EntityHealth
+{
+>>>>>>> enemy-ai
     public override void Die()
     {
         PlayerManager pm = GetComponent<PlayerManager>();

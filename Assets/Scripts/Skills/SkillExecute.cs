@@ -8,7 +8,7 @@ public class SkillExecute : MonoBehaviour
     //STORE THIS DATA IN A PREFAB OR SCRIPTABLE
     public string skillname;
     public string skillDescription;
-    public float skillCooldown = 3f;
+    public float skillCooldown = 5f;
     public float iFrameDuration = 0.3f;
     public bool onCooldown = false;
     public float duration = 4f;
