@@ -133,12 +133,6 @@ using UnityEngine;
             AttackToExecute.AttackAllTargets(TargetAttack(AttackToExecute), this);
             ClearTargets();
         }
-        
-        private void ClearTargets()
-        {
-            currentAttack = null;
-            currentTargets = null;
-        }
 
         private bool CheckForCritical()
         {
@@ -150,30 +144,7 @@ using UnityEngine;
             }
             return retVal;
         }
-<<<<<<< HEAD:Assets/Scripts/Combat/BaseAttackHandler.cs
-        protected virtual void DamageAllCurrentTargets(GameObject[] targets, BaseAttack attack)
-        {
-            foreach (GameObject target in targets)
-            {
-                try
-                {
-                    var targetHealth = target.GetComponent<Health>();
-                    targetHealth.DealDamage(attack.baseDamage * _entityDamage);
-                }
-                catch
-                {
-                    Debug.Log("Target has no health!");
-                }
-            }
-
-            KnockBackAllTargets(targets, attack);
-            ClearTargets();
-        }
-        protected void KnockBackAllTargets(GameObject[] targets, BaseAttack attack)
-=======
-
         protected virtual float AttackDamageCalculation(IAttack AttackToCalculate)
->>>>>>> enemy-ai:Assets/Scripts/Combat/BasicAttack/BaseAttackHandler.cs
         {
             var retVal = 0f;
             retVal += AttackToCalculate.baseDamage;
@@ -183,13 +154,12 @@ using UnityEngine;
                 retVal *= 2;
             }
 
-<<<<<<< HEAD:Assets/Scripts/Combat/BaseAttackHandler.cs
+            return retVal;
+        }
+
         protected void ClearTargets()
         {
             currentAttack = null;
             currentTargets = null;
-=======
-            return retVal;
->>>>>>> enemy-ai:Assets/Scripts/Combat/BasicAttack/BaseAttackHandler.cs
         }
     }

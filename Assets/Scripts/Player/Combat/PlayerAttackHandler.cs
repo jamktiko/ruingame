@@ -64,26 +64,5 @@ public class PlayerAttackHandler : ComboAttackHandler
     /// </summary>
     /// <param name="targets"></param>
     /// <param name="attack"></param>
-    protected override void DamageAllCurrentTargets(GameObject[] targets, BaseAttack attack)
-    {
-        foreach (GameObject target in targets)
-        {
-            try
-            {
-                var targetHealth = target.GetComponent<Health>();
-                float damage = attack.baseDamage * _entityDamage;
-                PlayerAttackEvent.Invoke(damage, targetHealth); 
-                targetHealth.DealDamage(damage + artifactDamageModifier);
-            }
-            catch
-            {
-                Debug.Log("Target has no health!");
-            }
-        }
 
-        KnockBackAllTargets(targets, attack);
-        ClearTargets();
-
-        artifactDamageModifier = 0;
-    }
 }

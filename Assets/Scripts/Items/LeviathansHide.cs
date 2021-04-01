@@ -18,6 +18,6 @@ public class LeviathansHide : ArtifactEffect
 
     private void OnDestroy()
     {
-        PlayerManager.Instance.GetComponent<PlayerHealth>()._flatResistance -= blockedDamage;
+        PlayerManager.Instance.GetComponent<PlayerHealth>().flatResistance -= blockedDamage;
     }
 }
