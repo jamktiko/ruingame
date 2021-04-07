@@ -314,6 +314,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4679750203203434461, guid: 6c7fea62e0718c04ebb81a40698d8be9,
         type: 3}
+    - target: {fileID: 7757926612644807248, guid: 4454bad354f988c4b8591a93185f3422,
+        type: 3}
+      propertyPath: playerMasterPrefab
+      value: 
+      objectReference: {fileID: 181873949443222881, guid: 5aaa3e2969f309a4a9600ed8becff734,
+        type: 3}
     - target: {fileID: 7757926612644807249, guid: 4454bad354f988c4b8591a93185f3422,
         type: 3}
       propertyPath: m_RootOrder
