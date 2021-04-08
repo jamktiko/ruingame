@@ -43,7 +43,7 @@ public class SkillUser : MonoBehaviour
         skillList[0] = gameObject.AddComponent<WhirlwindSkill>();
         skillList[0].skillUser = this;
         skillList[0].animationClip = whirlWindAnimation;
-        skillList[1] = gameObject.AddComponent<ShieldBashSkill>();
+        skillList[1] = gameObject.AddComponent<TeleportSkill>();
         skillList[1].skillUser = this;
         skillList[2] = gameObject.AddComponent<StanceChangeSkill>();
         skillList[2].animationClip = stanceChangeAnimation;
