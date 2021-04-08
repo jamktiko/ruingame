@@ -6,7 +6,7 @@ namespace DefaultNamespace
 {
     public class SpawnArtifact : MonoBehaviour
     {
-        public enum SpawnType { DragAndDrop, ListIndex, NextFromList }
+        public enum SpawnType {Random, DragAndDrop, ListIndex, NextFromList }
 
         public GameObject artifactPrefab;
         public Transform spawnPoint;
@@ -17,6 +17,9 @@ namespace DefaultNamespace
         public string spawnedArtifact;
         public List<GameObject> artifactPrefabList;
         GameObject prefab;
+        public List<GameObject> Commons;
+        public List<GameObject> Rares;
+        public List<GameObject> Mythics;
         public void BuildObject()
         {
             Vector3 spawnPos = PlayerManager.Instance.transform.position + Vector3.up * 5f;
