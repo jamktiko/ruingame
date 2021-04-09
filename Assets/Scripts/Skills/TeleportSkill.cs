@@ -2,21 +2,28 @@
 public class TeleportSkill : SkillExecute
 {
     public float teleportDistance = 10f;
+    private float capsuleRadius;
+    private float capsuleHeight;
+
+    private void Start()
+    {
+        CapsuleCollider collider = GetComponent<CapsuleCollider>();
+        capsuleHeight = collider.height;
+        capsuleRadius = collider.radius;
+    }
 
     public override void Execute()
     {
         var tr = skillUser.transform;
-        tr.position += transform.forward * TeleportDistance();
+        tr.position += tr.forward * TeleportDistance();
     }
 
-    float TeleportDistance()
+    private float TeleportDistance()
     {
         LayerMask layer = LayerMask.GetMask("CameraCollision");
-        float capsuleRadius = 0.4f;
-        float capsuleHeight = 1f;
         if (Physics.CapsuleCast(transform.position, transform.position + Vector3.up * capsuleHeight, capsuleRadius, transform.forward, out RaycastHit hit, teleportDistance, layer, QueryTriggerInteraction.Collide))
         {
-            return hit.distance - 0.7f;
+            return hit.distance;
         }
         return teleportDistance;
     }
