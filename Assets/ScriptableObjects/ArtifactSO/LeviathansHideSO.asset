@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ec15052390e22b4098abc1d33ed6eee, type: 3}
+  m_Name: LeviathansHideSO
+  m_EditorClassIdentifier: 
+  Name: "Leviathan\u2019s hide"
+  VisualDescription: Armor made of scales from the mythical creature, Leviathan.
+  Description: "It is said that you can create an impenetrable suit of armor with
+    enough of Leviathan scales, they aren\u2019t easy to come by though\u2026"
+  Rarity: Rare
+  StatChanges: No stat change
+  SpecialEffect: Blocks 10 damage per hit from enemies
