@@ -179,7 +179,7 @@
                     "id": "f8b893c4-85c2-492d-89ab-41f8d1520def",
                     "path": "2DVector",
                     "interactions": "",
-                    "processors": "ScaleVector2(x=0.6,y=0.6)",
+                    "processors": "ScaleVector2",
                     "groups": "",
                     "action": "Move",
                     "isComposite": true,

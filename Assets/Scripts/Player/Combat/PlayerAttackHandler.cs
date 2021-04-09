@@ -58,11 +58,6 @@ public class PlayerAttackHandler : ComboAttackHandler
         var nearestTarget = _attackTargeting.FindNearestTargetInRadius(currentAttack.radius + 10f);
         _movementControl.RotateTowardsMovement(nearestTarget, 1000f);
     }
-
-    /// <summary>
-    /// For artifact events
-    /// </summary>
-    /// <param name="targets"></param>
-    /// <param name="attack"></param>
+    
 
 }

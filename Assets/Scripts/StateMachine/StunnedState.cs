@@ -8,7 +8,7 @@ namespace DefaultNamespace
         private float _time = 1f;
         private float initialMoveSpeed;
         public float StunTimer = 3f;
-        public StunnedState(BaseEnemy enemy) : base(enemy)
+        public StunnedState(Enemy_StateMachine enemy) : base(enemy)
         {
         }
 
@@ -16,14 +16,11 @@ namespace DefaultNamespace
         {
             if (StunTimer > 0)
             {
-                Enemy._movementControl.movementSpeed = 0f;
-                Enemy.attack.attacking = true;
-                Enemy.stunned = true;
                 StunTimer -= _time * Time.deltaTime;
             }
             else
             {
-                Enemy.attack.attacking = false;
+                Enemy.attackHandler.attacking = false;
                 Enemy.stunned = false;
             }
             if (!Enemy.alive)
@@ -32,16 +29,16 @@ namespace DefaultNamespace
             }
             if (!Enemy.stunned)
             {
-                Enemy._movementControl.movementSpeed = initialMoveSpeed;
+                Enemy.movementController.OnStunEnd();
                 Enemy.SetState(new MoveTowardsPlayerState(Enemy));
             }
         }
 
         public override void OnStateEnter()
         {
-            Enemy._movementControl._entityRigidbody.velocity = Vector3.zero;
-            initialMoveSpeed = Enemy._movementControl.movementSpeed;
-            Enemy.attack.EndAttack();
+            initialMoveSpeed = Enemy.movementController._movementSpeed;
+            //Stun animation
+            Enemy.attackHandler.EndAttack();
             Enemy.stunned = true;
             Name = "stunned";
         }

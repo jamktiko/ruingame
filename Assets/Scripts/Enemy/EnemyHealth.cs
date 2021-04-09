@@ -6,10 +6,11 @@ namespace DefaultNamespace
 {
     public class EnemyHealth : EntityHealth
     {
-        public BaseEnemy enemyController;
+        public Enemy_StateMachine enemyController;
 
         public override void Start()
         {
+            enemyController = GetComponent<Enemy_StateMachine>();
         }
 
         public override void ReactToDamage(float amount)
@@ -21,8 +22,7 @@ namespace DefaultNamespace
         public override void Die()
         {
             base.Die();
-            enemyController.alive = false;
-            Destroy(gameObject, 0.5f);
+            enemyController.Die();
         }
     }
 }

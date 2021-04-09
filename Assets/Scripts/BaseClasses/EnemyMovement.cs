@@ -3,52 +3,15 @@
     using System.Collections;
     
     [RequireComponent(typeof(Rigidbody))]
-    public class BaseMovement : MonoBehaviour
-    { 
-        [Header("Ground Check")]
-    [SerializeField] protected LayerMask layerMask;
-    [SerializeField] protected float groundCheckRadius;
-    public bool GroundedEntity;
-
-    [Header("Animation parameters")]
-    protected float animatorDeceleration = 10f;
-    protected float animatorAcceleration = 10f;
-    protected float _animatorVelocity = 0.0f;
-    public Animator _characterAnimator;
-    
-    protected Rigidbody _characterRigidBody;
-    //Used to calculate movement vectors
-    protected Vector2 _previousMovementInput;
-    [HideInInspector] public Vector3 MovementInput { get; protected set; }
-
-    public float _movementSpeed = default;
-    public float _jumpHeight = default;
-    
-    [Header("Turn Rotation")]
-    [SerializeField]
-    protected float turnSmoothing = 15f;
-    
-    [Header("Stair stepping")]
-    [SerializeField] protected float stepHeight = 0.3f;
-    [SerializeField] protected float stepSmooth = 0.3f;
-    protected GameObject _stepRayUpper;
-    protected GameObject _stepRayLower;
-
-    public bool dashing { get; protected set; }
-    public bool attacking;
-    public bool canKnockback = true;
-    protected Vector3 currentTarget;
-
-    protected static readonly int MovementSpeed = Animator.StringToHash("movementSpeed");
-    public virtual void OnEnable()
+    public class EnemyMovement : BaseMovement
     {
-    }
-
-    public virtual void OnDisable()
-    {
-    }
-
-    public virtual void OnAttack()
+        
+        [HideInInspector] public Vector3 MovementInput { get; protected set; }
+        public Enemy_StateMachine _characterController;
+        private bool stunned = false;
+        protected static readonly int MovementSpeed = Animator.StringToHash("movementSpeed");
+        
+    public override void OnAttack()
     {
         if (GroundedEntity && !dashing)
         {
@@ -57,29 +20,23 @@
         }
     }
 
-    public virtual void OnStun()
+    public void OnStun()
     {
-        _animatorVelocity = 0;
-        _movementSpeed = 0;
+        stunned = true;
+    }
+
+    public void OnStunEnd()
+    {
+        stunned = false;
     }
     public virtual void Start()
     {
         _characterRigidBody = GetComponent<Rigidbody>();
         _characterAnimator = GetComponentInChildren<Animator>();
         CreateStepRays();
-        _characterAnimator.SetFloat(MovementSpeed, _movementSpeed/10);
+        //_characterAnimator.SetFloat(MovementSpeed, _movementSpeed/10);
     }
-
-    public virtual void CreateStepRays()
-    {
-        _stepRayLower = new GameObject("stepRayLower");
-        _stepRayUpper = new GameObject("stepRayUpper");
-        _stepRayLower.transform.parent = gameObject.transform;
-        _stepRayUpper.transform.parent = gameObject.transform;
-        _stepRayLower.transform.position = new Vector3(0, 0.08f, 0);
-        var stp = _stepRayUpper.transform.position;
-        _stepRayUpper.transform.position = new Vector3(0, stepHeight, 0);
-    }
+    
     public virtual void OnMove(Vector2 movementInput)
     {
         _previousMovementInput = movementInput;
@@ -87,26 +44,29 @@
 
     public virtual void Update()
     {
-        CalculateMovement();
-        HandleMovementAnimation();
+       CalculateMovement();
+       // HandleMovementAnimation();
     }
     public virtual void FixedUpdate()
     {
-        GroundCheck();
-        StepClimb();
-        if (!attacking && !dashing && MovementInput.magnitude > 0)
+       // GroundCheck();
+       // StepClimb();
+        if (!stunned && !attacking && !dashing && MovementInput.magnitude > 0)
         {
-            Move(MovementInput);
             RotateTowardsMovement(turnSmoothing);
         }
         else
         {
             _animatorVelocity = 0.0f;
         }
+        
     }
-    public virtual void Move(Vector3 MovementInput)
+    public override void Move(Vector3 movementInput)
     {
-
+        MovementInput = movementInput;
+        Vector3 movementVelocity = _movementSpeed * MovementInput;
+        _characterRigidBody.velocity =
+            new Vector3(movementVelocity.x, _characterRigidBody.velocity.y, movementVelocity.z);
     }
 
     public virtual void GroundCheck()
@@ -134,17 +94,18 @@
     public virtual void OnJump()
     {
     }
-    public virtual void RotateTowardsMovement(float amount)
+    public override void RotateTowardsMovement(float amount)
     {
+        float singleStep = amount * Time.deltaTime;
+        Vector3 newDirection = Vector3.RotateTowards(transform.forward, MovementInput, singleStep, 0.0f);
+        transform.rotation = Quaternion.LookRotation(newDirection);
 
     }
-    public virtual void RotateTowardsMovement(Vector3 direction, float amount)
+    public override void RotateTowardsMovement(Vector3 direction, float amount)
     {
-
-    }
-    
-    public virtual void CalculateMovement()
-    {
+        float singleStep = amount * Time.deltaTime;
+        Vector3 newDirection = Vector3.RotateTowards(transform.forward, direction, singleStep, 0.0f);
+        transform.rotation = Quaternion.LookRotation(newDirection);
     }
 
     public virtual void StepClimb()
@@ -190,43 +151,30 @@
         }
         }
     }
-
-    public virtual void OnDash(float duration)
+    public override void SetMovementSpeed(float amount)
     {
-       RotateTowardsMovement(1000f);
-       StartCoroutine(Dashing(duration));
+        _movementSpeed = amount;
     }
-    public virtual IEnumerator Dashing(float duration)
+    public override void SetJumpHeight(float amount)
     {
-       // _characterAnimator.SetBool("dashing", true);
-        dashing = true;
-        var originalInput = MovementInput;
-        if (originalInput == Vector3.zero)
+        _jumpHeight = amount;
+    }
+    public override void HandleKnockBack(Vector3 target, float force)
+    {
+        if (canKnockback)
         {
-            _animatorVelocity = 0;
-            originalInput = transform.forward;
+            stunned = true;
+            var dir = target - transform.position;
+            dir.y = 0;
+            _characterRigidBody.AddForce(dir * force);
+            canKnockback = false;
+            StartCoroutine("KnockbackReset");
         }
-        for (float ft = duration-0.2f; ft >= 0; ft -= 0.1f)
-        {
-            Move(originalInput);
-            yield return new WaitForSeconds(.1f);
-        }
-        dashing = false;
-        //_characterAnimator.SetBool("dashing", false);
     }
-    public virtual void SetMovementSpeed(float amount)
-    {
-    }
-    public virtual void SetJumpHeight(float amount)
-    {
-        
-    }
-    public virtual void HandleKnockBack(Vector3 target, float force)
-    {
-
-    }
-    public virtual IEnumerator KnockbackReset()
+    public override IEnumerator KnockbackReset()
     {
         yield return new WaitForSeconds(1f);
+        canKnockback = true;
     }
+    
 }

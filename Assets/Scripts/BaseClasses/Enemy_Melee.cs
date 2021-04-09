@@ -10,11 +10,11 @@ using UnityEngine;
 	    private bool alerted;
 	    public Enemy_Group enemyGroup;
 	    public bool checkingForPlayer;
+	    public LayerMask obstacleLayer;
 	    public enum NPC_EnemyAction { NONE = 0, IDLE, PATROL, INSPECT, ATTACK, APPROACH}
 	    public Animator npcAnimator;
 	    public GameObject playerTarget;
 	    public LayerMask hitTestLayer;
-	    public LayerMask obstacleLayer;
 	    Vector3 targetPos, startingPos;
 
 	    private Vector3 movementInput;

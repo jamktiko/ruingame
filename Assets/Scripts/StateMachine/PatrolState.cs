@@ -1,22 +1,20 @@
-﻿using System.Collections;
-using UnityEngine;
-    
+﻿using UnityEngine;
+using UnityEngine.Rendering;
+
 namespace DefaultNamespace
 {
-    public class MoveTowardsPlayerState : State
+    public class PatrolState : State
     {
         private Vector3 _destination;
         private float time = 1f;
-        private float newDestination = 1f;
-
-        public MoveTowardsPlayerState(Enemy_StateMachine enemy) : base(enemy)
+        private float newDestination = 3f;
+        public PatrolState(Enemy_StateMachine enemy) : base(enemy)
         {
         }
 
         public override void Tick()
         {
-            Enemy.currentTargetPos = GameManager.Instance.transform.position;
-
+            
             if (newDestination > 0)
             {
                 newDestination -= time * Time.deltaTime;
@@ -29,25 +27,22 @@ namespace DefaultNamespace
                     newDestination = 1f;
                 }
             }
-            
-            /*if (Enemy.HasReachedAttackRange())
+            if (Enemy.CanSeePlayer())
             {
                 Enemy.SetState(new AttackPlayerState(Enemy));
             }
-            */
         }
 
         public override void UseMovement()
         {
-            Enemy.movementController.Move(Enemy.DecidePathToPlayer());
+            Enemy.movementController.Move(Enemy.DecidePatrolDirection());
         }
 
         public override void OnStateEnter()
         {
-            Name = "moving towards player";
-            
+            Name = "patrol";
         }
-
+        
         public override void OnStateExit()
         {
         }

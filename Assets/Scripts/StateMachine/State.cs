@@ -1,11 +1,9 @@
 ﻿
-
-namespace DefaultNamespace
-{
+    using UnityEngine;
 
     public abstract class State
     {
-        protected BaseEnemy Enemy;
+        protected Enemy_StateMachine Enemy;
         public string Name;
 
         public abstract void Tick();
@@ -18,10 +16,14 @@ namespace DefaultNamespace
         {
         }
 
-        public State(BaseEnemy enemy)
+        public virtual void UseMovement()
         {
-            this.Enemy = enemy;
+            
+        }
+
+        public State(Enemy_StateMachine enemy)
+        {
+            Enemy = enemy;
         }
 
     }
-}

@@ -1,21 +1,26 @@
 ﻿
-using System.Collections;
 using UnityEngine;
 
     public interface IEnemy
     {
-	    void GoToState();
+	    State _currentState
+	    {
+		    get;
+		    set;
+	    }
+
+	    void SetState(State state);
 	    string GetStateText();
 	    bool CanSeePlayer();
 	    void AttackAction();
 	    bool HasReachedAttackRange();
-	    void SetTargetPos();
+	    void SetTargetPos(Vector3 target);
 	    void Alert();
 	    void Die();
 	    void AlertAllEnemies();
-	    void FindPlayer();
-		bool CheckForPlayer();
-		void MoveTowardsDirection();
-		void DecideDirection();
+	    bool CheckForPlayer();
+	    Vector3 DecidePatrolDirection();
+		Vector3 DecidePathToPlayer();
+
     }
 

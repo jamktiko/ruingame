@@ -33,7 +33,6 @@ namespace DefaultNamespace
         {
             _movementControl = GetComponent<Movement>();
             attack = GetComponent<BaseAttackHandler>();
-            SetState(new MoveTowardsPlayerState(this));
         }
 
         private void Update()

@@ -1,9 +1,11 @@
-﻿/*
+﻿
+using DefaultNamespace;
 using UnityEngine;
 
 public class Enemy_Group : MonoBehaviour
 {
-    public IEnemy_StateMachine[] enemyStateMachines;
+    
+    public Enemy_StateMachine[] enemyStateMachines;
 
     public GameObject playerTarget;
 
@@ -25,15 +27,9 @@ public class Enemy_Group : MonoBehaviour
         }
         _patrolArea = gameObject.AddComponent<PatrolArea>();
     }
-
     public void Start()
     {
         _patrolArea.SetPatrolAreaSettings(PAS);
-        patrolArea = _patrolArea.CreateArea();
-    }
-
-    public void Update()
-    {
         patrolArea = _patrolArea.CreateArea();
     }
     public void AlertManager()
@@ -41,23 +37,14 @@ public class Enemy_Group : MonoBehaviour
         EGM.Alert();
     }
 
+
     public void AlertEnemies()
     {
         foreach (Enemy_StateMachine esm in enemyStateMachines)
         {
             esm.playerTarget = playerTarget;
-            esm.GoToState(Enemy_StateMachine.NPC_EnemyAction.APPROACH);
+            esm.SetState(new MoveTowardsPlayerState(esm));
         }
     }
-    void OnDrawGizmos()
-    {
-        /*
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(transform.position, 0.1f); //center sphere
-        if (transform.GetComponent<Renderer>() != null)
-            Gizmos.DrawWireCube(patrolArea.center, patrolArea.size);
-        
-    }
-
 }
-*/
+
