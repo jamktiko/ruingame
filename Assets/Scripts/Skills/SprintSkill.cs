@@ -26,7 +26,7 @@ namespace DefaultNamespace
         {
             // THIS LOCKS PLAYER MOVEMENT TO LAST INPUT OR FORCES MOVEMENT IF PLAYER IS NOT INPUTTING ANYTHING
             base.Execute();
-            PlayerManager.Instance._playerMovement.OnDash(duration);
+
             switch (dashType)
             {
                 case DashType.DashWithVelocity:
