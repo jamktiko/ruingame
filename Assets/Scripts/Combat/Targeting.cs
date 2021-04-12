@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class Targeting : MonoBehaviour
 {
+    LayerMask enemyLayer;
+    void Start() => enemyLayer = LayerMask.GetMask("EnemyLayer");
+
     //Attack enemies based on targets in area
     public void AttackEnemies(bool attackAll, float radius, float distance, float damage)
     {
@@ -38,6 +41,12 @@ public class Targeting : MonoBehaviour
             enemyHealth.DealDamage(damage);
             //Debug.Log(enemyHealth.CurrentHealth);
         }
+    }
+
+    public Collider[] FindColliderOverlaps(Vector3 p1, Vector3 p2, float radius)
+    {
+        Collider[] colliders = Physics.OverlapCapsule(p1, p2, radius, enemyLayer, QueryTriggerInteraction.Collide);
+        return colliders;
     }
 
     //Return an array of raycast hits in capsule area 
