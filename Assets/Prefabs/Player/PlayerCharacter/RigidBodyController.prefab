@@ -388,9 +388,23 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Left Click -/ Attack\nSpacebar -/ Jump\nWASD -/ Movement\nMouse -/ Camera
-    Movement\nMouse Wheel -/ Zoom\nQ , E , R -/ Various skills\nShift -/ Dodge/Dash\n
-    F -/ Pickup Item"
+  m_text: 'Left Click -/ Attack
+
+    Spacebar -/ Jump
+
+    WASD -/ Movement
+
+    Mouse
+    -/ Camera Movement
+
+    Mouse Wheel -/ Zoom
+
+    Q , E , R -/ Various skills
+
+    Shift
+    -/ Dodge/Dash
+
+    F -/ Pickup Item'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -542,7 +556,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0.964
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -786,7 +800,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9216309219386233860}
-  - component: {fileID: 5487578946536443770}
+  - component: {fileID: 1241401891605894694}
   - component: {fileID: 6107597504458783004}
   m_Layer: 0
   m_Name: Skills
@@ -811,10 +825,10 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -300, y: 75}
+  m_AnchoredPosition: {x: -200, y: 190}
   m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 1, y: 0}
---- !u!114 &5487578946536443770
+  m_Pivot: {x: 0, y: 0}
+--- !u!114 &1241401891605894694
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -832,13 +846,13 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 0
+  m_Spacing: -125
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
-  m_ChildScaleWidth: 1
-  m_ChildScaleHeight: 1
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
 --- !u!114 &6107597504458783004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -853,8 +867,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillIconPrefabs: []
   skillImages: []
-  skillIconPrefab: {fileID: 5243744037893086847, guid: 3ffd26e9b4023cb449f4c525668fb549,
-    type: 3}
+  skillIconPrefab:
+  - {fileID: 5243744037893086847, guid: 5949244f27cdfff4c8d14ce9d45a36a2, type: 3}
+  - {fileID: 5243744037893086847, guid: 3fac41ca620ab774180ee98a580144fc, type: 3}
+  - {fileID: 5243744037893086847, guid: 19fecb412e0b78f4684230e54fe6b89e, type: 3}
 --- !u!1 &8280980760768009157
 GameObject:
   m_ObjectHideFlags: 0
@@ -889,7 +905,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 165, y: 116}
-  m_SizeDelta: {x: 0, y: 10}
+  m_SizeDelta: {x: 0, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &3088306795879178049
 PrefabInstance:
