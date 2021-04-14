@@ -129,7 +129,7 @@ MonoBehaviour:
   Path: ruin_fmod/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637520049980193733
+  lastModified: 637539547556569574
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -200,12 +200,13 @@ MonoBehaviour:
   - {fileID: 5078697885699536848}
   - {fileID: -2522394998494817697}
   - {fileID: -4717534653658079554}
+  - {fileID: 8730545987287378666}
   EditorParameters: []
   MasterBanks:
   - {fileID: -1637625578712108758}
   StringsBanks:
   - {fileID: 7027093623470749303}
-  stringsBankWriteTime: 637520049980193733
+  stringsBankWriteTime: 637539547556609540
   cacheVersion: 6
 --- !u!114 &3970242748867270104
 MonoBehaviour:
@@ -354,9 +355,32 @@ MonoBehaviour:
   Path: ruin_fmod/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637520049980193733
+  lastModified: 637539547556609540
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 944
+    Value: 980
   Exists: 1
+--- !u!114 &8730545987287378666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player/Dash
+  m_EditorClassIdentifier: 
+  Path: event:/Player/Dash
+  guid: 18a7bf462e1c8446955f9aa40b09b743
+  Banks:
+  - {fileID: -1637625578712108758}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
