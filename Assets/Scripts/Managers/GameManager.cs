@@ -69,7 +69,6 @@ public class GameManager : MonoBehaviour
 
     public void StartGameplayLoop()
     {
-        SceneManager.LoadScene("Proto_Room");
         StartCoroutine("CreateGame");
     }
 

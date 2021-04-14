@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7657182892947826520}
   - component: {fileID: 7657182892947826521}
   - component: {fileID: 7657182892947826522}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: OuterRoof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
