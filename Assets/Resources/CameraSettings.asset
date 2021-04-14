@@ -13,5 +13,9 @@ MonoBehaviour:
   m_Name: CameraSettings
   m_EditorClassIdentifier: Assembly-CSharp:DefaultNamespace:CameraData
   CameraSensitivity: 23
-  invertAxisX: 1
-  invertAxisY: -1
+  invertAxisX: 0
+  invertAxisY: 255
+  XSmoothing: 0
+  YSmoothing: 0
+  XAcceleration: 0
+  YAcceleration: 0
