@@ -2,20 +2,15 @@
 public class TeleportSkill : SkillExecute
 {
     public float teleportDistance = 10f;
-    private float capsuleRadius;
-    private float capsuleHeight;
-
-    private void Start()
-    {
-        CapsuleCollider collider = GetComponent<CapsuleCollider>();
-        capsuleHeight = collider.height;
-        capsuleRadius = collider.radius;
-    }
+    private float capsuleRadius = 0.49f;
+    private float capsuleHeight = 1.99f;
 
     public override void Execute()
     {
         var tr = skillUser.transform;
-        tr.position += tr.forward * TeleportDistance();
+        Vector3 maxDistance = tr.position + tr.forward * TeleportDistance();
+        CheckOverlaps(ref maxDistance);
+        tr.position = maxDistance;
     }
 
     private float TeleportDistance()
@@ -26,5 +21,22 @@ public class TeleportSkill : SkillExecute
             return hit.distance;
         }
         return teleportDistance;
+    }
+
+    private void CheckOverlaps(ref Vector3 maxDistance)
+    {
+        LayerMask enemyLayer = LayerMask.GetMask("EnemyLayer");
+        LayerMask collisionObject = LayerMask.GetMask("CollisionObject");
+        Vector3 dir = (transform.position - maxDistance).normalized;
+        while (CheckOverlapOnLayer(enemyLayer, maxDistance) || CheckOverlapOnLayer(collisionObject, maxDistance))
+        {
+            maxDistance -= -dir * 0.1f; 
+        }
+    }
+
+    private bool CheckOverlapOnLayer(LayerMask layer, Vector3 maxDistance)
+    {
+        bool overlap = Physics.CheckCapsule(maxDistance, maxDistance + Vector3.up * capsuleHeight, capsuleRadius, layer, QueryTriggerInteraction.Collide);
+        return overlap;
     }
 }
