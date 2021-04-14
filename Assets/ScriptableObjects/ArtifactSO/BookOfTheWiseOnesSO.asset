@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ec15052390e22b4098abc1d33ed6eee, type: 3}
+  m_Name: BookOfTheWiseOnesSO
+  m_EditorClassIdentifier: 
+  Name: Book of the wise ones
+  VisualDescription: 'A dusty old book. '
+  Description: It was written by the wise ones, It has many wisdoms in it, but only
+    a few can understand them.
+  Rarity: Common
+  StatChanges: Increase max hp by 15%
+  SpecialEffect: No special effect

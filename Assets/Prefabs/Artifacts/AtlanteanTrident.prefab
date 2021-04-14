@@ -141,6 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerReference: {fileID: 0}
+  ArtifactInfo: {fileID: 11400000, guid: c575a352a256cf94eb67c29c87a57bb1, type: 2}
   ArtifactEffect: {fileID: 2026040664942091334}
 --- !u!65 &2550641457589842860
 BoxCollider:

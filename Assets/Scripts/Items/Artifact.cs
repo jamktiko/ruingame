@@ -6,7 +6,7 @@ using UnityEngine;
 public class Artifact : MonoBehaviour
 {
     public PlayerManager PlayerReference;
-    
+    public ArtifactInfo ArtifactInfo;
     public ArtifactEffect ArtifactEffect;
 
     private int _pickupeventcount = 0;

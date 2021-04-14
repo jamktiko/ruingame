@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ec15052390e22b4098abc1d33ed6eee, type: 3}
+  m_Name: FeatherOfThePhoenixSO
+  m_EditorClassIdentifier: 
+  Name: Feather of the Phoenix
+  VisualDescription: A flaming feather
+  Description: Like the legendary Phoenix, you too can be reborn once.
+  Rarity: Mythic
+  StatChanges: No stats
+  SpecialEffect: Revives player upon death, player is reborn inside a fire, and the
+    fire will briefly deal damage to enemies.
