@@ -9,11 +9,10 @@ public class SpawnerManager : MonoBehaviour
     public Spawner[] spawnerList;
     public int _totalEnemiesRemaining;
     private int _spawnersDone;
-    
+    public int enemiesToSpawn;
     void Start()
     {
         spawnerList = GetComponentsInChildren<Spawner>();
-        StartSpawners();
     }
 
     public int EnemiesRemaining()
@@ -33,9 +32,10 @@ public class SpawnerManager : MonoBehaviour
 
     public void StartSpawners()
     {
+        var singleSpawner = Mathf.CeilToInt(enemiesToSpawn / spawnerList.Length);
         foreach (Spawner sp in spawnerList)
         {
-            sp.StartSpawning(1);
+            sp.StartSpawning(singleSpawner);
         }
     }
 

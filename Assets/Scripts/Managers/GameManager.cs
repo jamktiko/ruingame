@@ -69,12 +69,12 @@ public class GameManager : MonoBehaviour
 
     public void StartGameplayLoop()
     {
-        SceneManager.LoadScene("Proto_Room");
         StartCoroutine("CreateGame");
     }
 
     public void StopGameplayLoop()
     {
+        GameOver();
         //Cleanup gameplay loop
         //Save XP gained etc
     }
@@ -87,6 +87,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         CreateRoomManager();
         roomManager.StartRoomManager();
+        yield return new WaitForSeconds(0.2f);
         CreateMenuManager();
         PlayerManager.Instance.playerInputReader.EnablePlayerInput();
     }

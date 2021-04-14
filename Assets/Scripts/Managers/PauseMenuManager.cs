@@ -20,6 +20,7 @@ public class PauseMenuManager : MenuManager
 
     public void OnEnable()
     {
+        Cursor.visible = false;
         gameManager.playerManager.playerInputReader.PauseEvent += OnPause;
     }
 
@@ -30,7 +31,7 @@ public class PauseMenuManager : MenuManager
 
     public override void Start()
     {
-        
+        MSH = GetComponent<MenuSelectionHandler>();
     }
 
     public void OnPause()

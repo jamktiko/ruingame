@@ -15,11 +15,12 @@ namespace DefaultNamespace
         //Should contain UI IMAGE and Animation Clip
         [SerializeField] private bool _stopPlayerAfterDash = true;
         public float SprintSpeed = 20f;
-
+        
         protected override void Start()
         {
             base.Start();
-            duration = 0.5f;
+            skillname = "Sprint";
+            duration = 0.2f;
         }
 
         public override void Execute(float duration)

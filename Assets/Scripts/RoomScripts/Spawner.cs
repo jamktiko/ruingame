@@ -30,8 +30,6 @@ public class Spawner : MonoBehaviour
             //ALL ENEMIES SPAWNED
             if (currentSpawnedEnemies == 0)
             {
-                //ALL ENEMIES DEAD
-                SendMessageUpwards("SpawnerDone");
             }
         }
     }

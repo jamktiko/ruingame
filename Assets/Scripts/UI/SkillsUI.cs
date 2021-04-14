@@ -7,7 +7,7 @@ public class SkillsUI : MonoBehaviour
     private SkillUser skillUser;
     public GameObject[] skillIconPrefabs;
     public Image[] skillImages;
-    public GameObject skillIconPrefab;
+    public GameObject[] skillIconPrefab;
     void Start()
     {
         skillUser = PlayerManager.Instance._playerSkills;
@@ -16,7 +16,7 @@ public class SkillsUI : MonoBehaviour
         skillImages = new Image[skillUser.skillList.Length];
         for (int i = 0; i < skillUser.skillList.Length; i++)
         {
-            skillIconPrefabs[i] = Instantiate(skillIconPrefab);
+            skillIconPrefabs[i] = Instantiate(skillIconPrefab[i]);
             skillIconPrefabs[i].transform.SetParent(gameObject.transform);
             var skI = skillIconPrefabs[i].GetComponent<SkillImage>();
             //skI.skillImage = skillUser.skillList[i]
