@@ -92,7 +92,7 @@ namespace DefaultNamespace
         
         protected virtual bool CheckAttackConditions()
         {
-            if (attacking)
+            if (_characterAnimator.GetFloat("attackCancelFloat") > 0)
                 return false;
             return true;
         }
