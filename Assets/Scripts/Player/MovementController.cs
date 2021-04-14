@@ -253,4 +253,70 @@ public class MovementController : MonoBehaviour
     {
         _jumpHeight = amount;
     }
+
+    /// <summary>
+    /// Dash with translate on FixedUpdate. 
+    /// Changes and reverts rigidbody properties, disables/enables colliders and checks if dash hit walls 
+    /// </summary>
+    /// <param name="duration"></param>
+    /// <returns></returns>
+    public void OnDash2(float duration)
+    {
+        RotateTowardsMovement(1000f);
+        StartCoroutine(Dashing2(duration));
+    }
+
+    public virtual IEnumerator Dashing2(float duration)
+    {
+        Vector3 startPos = transform.position;
+        float capsuleMaxHeight = 1.99f;
+        float capsuleMaxRadius = 0.49f;
+        RaycastHit hit;
+        bool hitWalls = Physics.CapsuleCast(transform.position, transform.position + Vector3.up * capsuleMaxHeight, capsuleMaxRadius, transform.forward, out hit, 20f, LayerMask.GetMask("CameraCollision"), QueryTriggerInteraction.Collide);
+        float hitDistance = hit.distance - capsuleMaxRadius;
+        CapsuleCollider[] colliders = GetComponents<CapsuleCollider>();
+
+        ChangeRigidbodyToKinematic(true, RigidbodyInterpolation.Interpolate, CollisionDetectionMode.Discrete);
+        EneableColliders(false, colliders);
+
+        _characterAnimator.SetBool("dashing", true);
+        dashing = true;
+        for (float ft = duration; ft >= 0; ft -= Time.deltaTime)
+        {
+            Move2(hitWalls, hitDistance, startPos);
+            yield return new WaitForFixedUpdate();
+        }
+        dashing = false;
+        _characterAnimator.SetBool("dashing", false);
+
+        EneableColliders(true, colliders);
+        ChangeRigidbodyToKinematic(false, RigidbodyInterpolation.Interpolate, CollisionDetectionMode.ContinuousDynamic);
+    }
+
+    private void Move2(bool hitWall, float hitDistance, Vector3 startPos)
+    {
+        float dashDistance = Vector3.Distance(transform.position, startPos);
+        float step = _movementSpeed * Time.deltaTime;
+
+        if (!hitWall || dashDistance + step <= hitDistance)
+        {
+            transform.Translate(Vector3.forward * step);
+        }
+    }
+
+    void ChangeRigidbodyToKinematic(bool isKinematic, RigidbodyInterpolation interpolation, CollisionDetectionMode collisionDetection)
+    {
+        //Camera may jitter without interpolation or if its changed back to None 
+        _characterRigidBody.interpolation = interpolation;
+        _characterRigidBody.collisionDetectionMode = collisionDetection;
+        _characterRigidBody.isKinematic = isKinematic;
+    }
+
+    private void EneableColliders(bool enable, CapsuleCollider[] colliders)
+    {
+        foreach (var item in colliders)
+        {
+            item.enabled = enable;
+        }
+    }
 }
