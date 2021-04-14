@@ -66,7 +66,7 @@ The following document aims to explain the course of action taken to test the co
 
 ### Testing Activities
 
-- Testing will be conducted weekly via a demo and concept evaluation. 
+- Testing will be conducted bi-weekly via a gameplay test and concept evaluation discussion. 
 
 - Feedback will be submitted via a form or recorded by a member of the testing team.
 
