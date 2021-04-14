@@ -18,6 +18,7 @@ public class RoomManager : MonoBehaviour
     public bool EnemiesCleared = false;
     public SpawnerManager spawnerManager;
     private bool _creatingRoom = false;
+    private int enemiesToSpawn = 2;
     private void Awake()
     {
         //Created by Game Manager
@@ -43,6 +44,11 @@ public class RoomManager : MonoBehaviour
         if (_creatingRoom)
             return;
         _creatingRoom = true;
+        _currentRoom += 1;
+        if (_currentRoom > 4)
+        {
+            GameManager.Instance.GameOver();
+        }
         StartCoroutine(WaitCreation());
     }
     
@@ -78,15 +84,19 @@ public class RoomManager : MonoBehaviour
         currentRoomGO.GetComponentInChildren<RoomExit>().roomManager = gameObject.GetComponent<RoomManager>();
         _currentRoom++;
         */
-        SceneManager.LoadScene("Proto_Room");
+        SceneManager.LoadScene("Room" + _currentRoom);
         yield return new WaitForSeconds(0.5f);
         currentRoomGO = GameObject.FindGameObjectWithTag("Room");
-        spawnerManager = currentRoomGO.GetComponentInChildren<SpawnerManager>();
+        spawnerManager = GameObject.FindGameObjectWithTag("SpawnerManager").GetComponent<SpawnerManager>();
         _entryPoint = GameObject.FindGameObjectWithTag("Entry").transform;
         
         PlacePlayerAtEntry();
+        
+        spawnerManager.enemiesToSpawn = enemiesToSpawn;
+        enemiesToSpawn += 2;
         yield return new WaitForSeconds(1f);
         //Deactivate loading screen
+        spawnerManager.StartSpawners();
         _creatingRoom = false;
     }
     public void StartRoomManager()
