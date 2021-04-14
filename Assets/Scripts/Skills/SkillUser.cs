@@ -156,7 +156,7 @@ public class SkillUser : MonoBehaviour
 
                     try
                     {
-                        var ps =Instantiate(defaultParticles, VFXPoint.position, Quaternion.identity);
+                        var ps = Instantiate(defaultParticles, VFXPoint.position, Quaternion.identity);
                         Destroy(ps, 0.5f);
                     }
                     catch{Debug.Log("Particles");}

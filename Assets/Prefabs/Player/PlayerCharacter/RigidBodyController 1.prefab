@@ -386,7 +386,7 @@ MonoBehaviour:
   skillUI: {fileID: 6886649193230862142}
   usingSkill: 0
   VFXPoint: {fileID: 0}
-  sprintAnimation: {fileID: 7400000, guid: be9e600659db70c4b9f1ca754d430547, type: 2}
+  sprintAnimation: {fileID: 7400000, guid: aecff721d7e9f0d4bba298785bc967c1, type: 2}
   stanceChangeAnimation: {fileID: 7400000, guid: 8cbb0626325c92c4ab842b23228a4f10,
     type: 2}
   whirlWindAnimation: {fileID: 7400000, guid: e9a5211b5b7d031479733f2c95aec912, type: 2}
@@ -4214,13 +4214,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weaponSlash: {fileID: 7485154270815277482, guid: 304d5afc5b6479d4ab22b726671796f5,
     type: 3}
-  _weaponSlashPosition: {fileID: 0}
+  _weaponSlashPosition: {fileID: 7326632221843813687}
   _whirlWind: {fileID: 7409864417918984925, guid: 526d3186389afac4abb6a06587a57ecc,
     type: 3}
-  _whirlWindPosition: {fileID: 0}
+  _whirlWindPosition: {fileID: 7326632222960827972}
   _stanceChange: {fileID: 2876549060377359625, guid: e9b5315e26950b94895767680ac47595,
     type: 3}
-  _stanceChangePosition: {fileID: 0}
+  _stanceChangePosition: {fileID: 7326632222780294412}
 --- !u!1 &6945712697815791153
 GameObject:
   m_ObjectHideFlags: 0
