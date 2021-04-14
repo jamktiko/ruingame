@@ -45,6 +45,10 @@ public class RoomManager : MonoBehaviour
             return;
         _creatingRoom = true;
         _currentRoom += 1;
+        if (_currentRoom > 4)
+        {
+            GameManager.Instance.GameOver();
+        }
         StartCoroutine(WaitCreation());
     }
     

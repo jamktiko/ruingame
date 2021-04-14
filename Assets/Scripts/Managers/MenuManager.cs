@@ -34,8 +34,10 @@ public class MenuManager : MonoBehaviour
         currentCanvas.gameObject.SetActive(false);
     }
 
+
     public virtual void Start()
     {
+        MSH = GetComponent<MenuSelectionHandler>();
         LoadMenu();
     }
     public void LoadMenu()
