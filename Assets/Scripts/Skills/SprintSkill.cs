@@ -4,7 +4,7 @@ using UnityEngine.Events;
 using System.Collections;
 using UnityEditor;
 
-public enum DashType { DashWithVelocity, DashWithTranslate }
+public enum DashType { DashWithTranslate, DashWithVelocity}
 namespace DefaultNamespace
 {
     public class SprintSkill : SkillExecute
@@ -20,6 +20,7 @@ namespace DefaultNamespace
         {
             base.Start();
             skillname = "Sprint";
+            skillCooldown = 2f;
             duration = 0.2f;
         }
 

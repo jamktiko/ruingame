@@ -271,43 +271,66 @@ public class MovementController : MonoBehaviour
         Vector3 startPos = transform.position;
         float capsuleMaxHeight = 1.99f;
         float capsuleMaxRadius = 0.49f;
-        RaycastHit hit;
-        bool hitWalls = Physics.CapsuleCast(transform.position, transform.position + Vector3.up * capsuleMaxHeight, capsuleMaxRadius, transform.forward, out hit, 20f, LayerMask.GetMask("CameraCollision"), QueryTriggerInteraction.Collide);
-        float hitDistance = hit.distance - capsuleMaxRadius;
+        float maxDistance = 10f;
         CapsuleCollider[] colliders = GetComponents<CapsuleCollider>();
 
-        ChangeRigidbodyToKinematic(true, RigidbodyInterpolation.Interpolate, CollisionDetectionMode.Discrete);
+        Vector3 p1 = transform.position;
+        Vector3 p2 = transform.position + Vector3.up * capsuleMaxHeight;
+        Vector3 dir = transform.forward;
+        LayerMask layer = LayerMask.GetMask("CameraCollision");
+        RaycastHit[] hits = Physics.CapsuleCastAll(p1, p2, capsuleMaxRadius, dir, maxDistance, layer, QueryTriggerInteraction.Collide);
+
+        foreach (var item in hits)
+        {
+            if (item.transform.tag != "Ground")
+            {
+                maxDistance = item.distance;
+                break;
+            }
+        }
+        CheckOverlaps(ref maxDistance, 2f, 0.8f);
+        FreezePosition(true);
+        //ChangeRigidbodyToKinematic(true, RigidbodyInterpolation.None, CollisionDetectionMode.Discrete);
         EneableColliders(false, colliders);
 
         _characterAnimator.SetBool("dashing", true);
         dashing = true;
         for (float ft = duration; ft >= 0; ft -= Time.deltaTime)
         {
-            Move2(hitWalls, hitDistance, startPos);
+            Move2(maxDistance, startPos);
             yield return new WaitForFixedUpdate();
         }
         dashing = false;
         _characterAnimator.SetBool("dashing", false);
 
         EneableColliders(true, colliders);
-        ChangeRigidbodyToKinematic(false, RigidbodyInterpolation.Interpolate, CollisionDetectionMode.ContinuousDynamic);
+        FreezePosition(false);
+        //ChangeRigidbodyToKinematic(false, RigidbodyInterpolation.None, CollisionDetectionMode.ContinuousDynamic);
     }
 
-    private void Move2(bool hitWall, float hitDistance, Vector3 startPos)
+    private void Move2(float hitDistance, Vector3 startPos)
     {
         float dashDistance = Vector3.Distance(transform.position, startPos);
         float step = _movementSpeed * Time.deltaTime;
 
-        if (!hitWall || dashDistance + step <= hitDistance)
+        if (dashDistance + step <= hitDistance)
         {
             transform.Translate(Vector3.forward * step);
         }
     }
 
+    private void FreezePosition(bool all)
+    {
+        if (all)
+            _characterRigidBody.constraints = RigidbodyConstraints.FreezeAll;
+        else
+            _characterRigidBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+    }
+
     void ChangeRigidbodyToKinematic(bool isKinematic, RigidbodyInterpolation interpolation, CollisionDetectionMode collisionDetection)
     {
         //Camera may jitter without interpolation or if its changed back to None 
-        _characterRigidBody.interpolation = interpolation;
+        //_characterRigidBody.interpolation = interpolation;
         _characterRigidBody.collisionDetectionMode = collisionDetection;
         _characterRigidBody.isKinematic = isKinematic;
     }
@@ -318,5 +341,23 @@ public class MovementController : MonoBehaviour
         {
             item.enabled = enable;
         }
+    }
+
+    private void CheckOverlaps(ref float maxDistance, float capsuleMaxHeight, float capsuleMaxRadius)
+    {
+        LayerMask enemyLayer = LayerMask.GetMask("EnemyLayer");
+        LayerMask collisionObject = LayerMask.GetMask("CollisionObject");
+        Vector3 maxPos = transform.position + transform.forward * maxDistance;
+        while (CheckOverlapOnLayer(enemyLayer, maxPos, capsuleMaxHeight, capsuleMaxRadius) || CheckOverlapOnLayer(collisionObject, maxPos, capsuleMaxHeight, capsuleMaxRadius))
+        {
+            maxDistance -= 0.5f;
+            maxPos = transform.position + transform.forward * maxDistance;
+        }
+    }
+
+    private bool CheckOverlapOnLayer(LayerMask layer, Vector3 maxPos, float capsuleMaxHeight, float capsuleMaxRadius)
+    {
+        bool overlap = Physics.CheckCapsule(maxPos, maxPos + Vector3.up * capsuleMaxHeight, capsuleMaxRadius, layer, QueryTriggerInteraction.Collide);
+        return overlap;
     }
 }
