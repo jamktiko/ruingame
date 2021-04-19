@@ -38,19 +38,19 @@ public class SkillUser : MonoBehaviour
         entityHealth = GetComponent<Health>();
         
         skillTargeting = gameObject.AddComponent<Targeting>();
-        
-        skillList = new SkillExecute[4];
-        skillList[0] = gameObject.AddComponent<WhirlwindSkill>();
+
+        skillList = new SkillExecute[3];
+        skillList[0] = gameObject.AddComponent<SprintSkill>();
+        skillList[0].animationClip = sprintAnimation;
         skillList[0].skillUser = this;
-        skillList[0].animationClip = whirlWindAnimation;
-        skillList[1] = gameObject.AddComponent<ShieldBashSkill>();
+        skillList[1] = gameObject.AddComponent<TeleportSkill>();
+        skillList[1].animationClip = whirlWindAnimation;
         skillList[1].skillUser = this;
+        skillList[1].animationClip = whirlWindAnimation;
         skillList[2] = gameObject.AddComponent<StanceChangeSkill>();
         skillList[2].animationClip = stanceChangeAnimation;
         skillList[2].skillUser = this;
-        skillList[3] = gameObject.AddComponent<SprintSkill>();
-        skillList[3].animationClip = sprintAnimation;
-        skillList[3].skillUser = this;
+
         
         
     }
@@ -61,7 +61,6 @@ public class SkillUser : MonoBehaviour
         {
             inputReader.ActivateSkill1 += OnSkill1;
             inputReader.ActivateSkill2 += OnSkill2;
-            inputReader.ActivateSkill3 += OnSKill3;
             inputReader.ActivateSprintSkill += OnSprint;
         }
         catch{}
@@ -73,24 +72,11 @@ public class SkillUser : MonoBehaviour
         {
             inputReader.ActivateSkill1 -= OnSkill1;
             inputReader.ActivateSkill2 -= OnSkill2;
-            inputReader.ActivateSkill3 -= OnSKill3;
             inputReader.ActivateSprintSkill -= OnSprint;
         }
         catch{}
     }
     void OnSkill1()
-    {
-        try
-        {
-            ActivateSkill(skillList[0], 0);
-        }
-        catch
-        {
-            Debug.Log("Cant Execute Skill!");
-        }
-    }
-
-    void OnSkill2()
     {
         try
         {
@@ -102,7 +88,7 @@ public class SkillUser : MonoBehaviour
         }
     }
 
-    void OnSKill3()
+    void OnSkill2()
     {
         try
         {
@@ -114,11 +100,12 @@ public class SkillUser : MonoBehaviour
         }
     }
 
+
     void OnSprint()
     {
         try
         {
-            ActivateSkill(skillList[3], 3);
+            ActivateSkill(skillList[0], 0);
         }
         catch
         {
@@ -170,7 +157,7 @@ public class SkillUser : MonoBehaviour
 
                     try
                     {
-                        var ps =Instantiate(defaultParticles, VFXPoint.position, Quaternion.identity);
+                        var ps = Instantiate(defaultParticles, VFXPoint.position, Quaternion.identity);
                         Destroy(ps, 0.5f);
                     }
                     catch{Debug.Log("Particles");}
@@ -234,6 +221,6 @@ public class SkillUser : MonoBehaviour
 
     public void PlayAnimation(SkillExecute sk)
     {
-        entityAnimator.Play(sk.animationClip.name);
+        entityAnimator.Play(sk.skillname);
     }
 }

@@ -28,7 +28,7 @@ namespace DefaultNamespace.Skills
         protected override void Start()
         {
             base.Start();
-            skillname = "Stance Change";
+            skillname = "StanceChange";
             damage = 50f;
             _damageResistance = 5f;
             _passiveAttackSpeed = 0.5f;

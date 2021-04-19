@@ -46,5 +46,5 @@ MonoBehaviour:
   enemiesToSpawn: 0
   currentSpawnedEnemies: 0
   remainingEnemies: 0
-  enemyprefab: {fileID: 1910478632522504324, guid: 5a47fa785602df84085398023e66d6b6,
+  enemyprefab: {fileID: 2820430217921150076, guid: 0dbf118da68cfb140ae3ecd7117ea4de,
     type: 3}

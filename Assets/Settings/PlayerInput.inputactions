@@ -108,6 +108,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Scroll",
+                    "type": "Value",
+                    "id": "76e8fdc9-ee5c-4cb8-8609-3b9cd7939e88",
+                    "expectedControlType": "Analog",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -171,7 +179,7 @@
                     "id": "f8b893c4-85c2-492d-89ab-41f8d1520def",
                     "path": "2DVector",
                     "interactions": "",
-                    "processors": "ScaleVector2(x=0.6,y=0.6)",
+                    "processors": "ScaleVector2",
                     "groups": "",
                     "action": "Move",
                     "isComposite": true,
@@ -226,7 +234,7 @@
                     "id": "b437a09d-8ca4-4996-a2f1-edf980623f6e",
                     "path": "2DVector",
                     "interactions": "",
-                    "processors": "ScaleVector2(x=0.6,y=0.6)",
+                    "processors": "ScaleVector2",
                     "groups": "",
                     "action": "Move",
                     "isComposite": true,
@@ -457,7 +465,7 @@
                     "id": "88e5a69d-cf1d-43ce-b5ab-9db67f819255",
                     "path": "<Mouse>/delta",
                     "interactions": "",
-                    "processors": "ScaleVector2(x=2,y=2)",
+                    "processors": "ScaleVector2",
                     "groups": "KeyboardOrGamepad",
                     "action": "RotateCamera",
                     "isComposite": false,
@@ -581,6 +589,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "36f338c7-316f-40d9-9075-792cc11ae47d",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Scroll",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -16,6 +16,8 @@ TagManager:
   - SkillIcon
   - Object
   - Room
+  - Artifact
+  - SpawnerManager
   layers:
   - Default
   - TransparentFX

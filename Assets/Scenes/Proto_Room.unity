@@ -4579,7 +4579,7 @@ PrefabInstance:
     - target: {fileID: 5918574885705776622, guid: 9d1789aa60bf722408748afb998844d6,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -18.782387
+      value: -21.33
       objectReference: {fileID: 0}
     - target: {fileID: 5918574885705776622, guid: 9d1789aa60bf722408748afb998844d6,
         type: 3}
@@ -28658,8 +28658,8 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7285511784473999228}
-  m_Enabled: 1
-  m_CastShadows: 1
+  m_Enabled: 0
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1

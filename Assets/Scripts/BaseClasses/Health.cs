@@ -1,6 +1,6 @@
 ﻿
+using System.Collections;
 using UnityEngine;
-
 public class Health : MonoBehaviour
 {
     public float _flatResistance = 10f;
@@ -39,9 +39,26 @@ public class Health : MonoBehaviour
         _healthUI.UpdateUIValue(CurrentHealth);
         
     }
+
     public void DealDamageOverTime(float amount, float time)
     {
-        //Make this a coroutine which applies damage over time
+        StartCoroutine(DamageOverTime(amount, time));
+    }
+    
+    public IEnumerator DamageOverTime(float amount, float time)
+    {
+        var damagePassed = amount;
+        damagePassed -= _flatResistance;
+        damagePassed = damagePassed * ((100 - _percentualResistance) / 100);
+        damagePassed *= (0.1f / time);
+        for (float ft = time; ft >= 0; ft -= 0.1f)
+        {
+            CurrentHealth -= damagePassed;
+            CheckHealth();
+            _healthUI.UpdateUIValue(CurrentHealth);
+            yield return new WaitForSeconds(.1f);
+        }
+        AddIFrame(_reDamageTimer);
     }
 
     public virtual void Die()

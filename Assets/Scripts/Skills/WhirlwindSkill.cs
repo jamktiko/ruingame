@@ -26,57 +26,44 @@ namespace DefaultNamespace.Skills
     public class WhirlwindSkill : SkillExecute
     {
 
-        [SerializeField] private float _attackRadius;
-        [SerializeField] private float _knockbackForce = 20f;
-        private float _attackDistance = 0f;
+        [SerializeField] private float _attackRadius = 5f;
+        [SerializeField] private float _knockbackForce = 10f;
+        private float _attackDistance;
 
         protected override void Start()
         {
             base.Start();
+            skillname = "WhirlWind";
             damage = 20f;
-            _attackRadius = _knockbackForce / 2f;
+            skillCooldown = 5f;
+            _attackDistance = _attackRadius / 2f;
         }
 
-        public override void Execute()
+        public override void Execute(float duration)
         {
-            base.Execute();
-             skillUser.usingSkill = true;
-             UpdateAttackRadius();
-             DamageAndKnockbackBasedOnDistanceFromPlayer();
-             skillUser.usingSkill = false;
+            skillUser.usingSkill = true;
+            iFrameDuration = duration;
+            base.Execute(duration);
+            DamageAndKnockback();
+            skillUser.usingSkill = false;
         }
-        private void DamageAndKnockbackBasedOnDistanceFromPlayer()
-        {
-            List<GameObject> enemyList = targeting.GetListOfEnemiesInRange(_attackRadius, _attackDistance);
 
-            foreach (var go in enemyList)
+        private void DamageAndKnockback()
+        {
+            Vector3 p1 = transform.position + transform.forward * _attackDistance;
+            Vector3 p2 = transform.position + transform.forward * _attackDistance + Vector3.up * 2f;
+            Collider[] colliders = targeting.FindColliderOverlaps(p1, p2, _attackRadius);
+            foreach (var collider in colliders)
             {
-                float distance = Vector3.Distance(go.transform.position, transform.position);
-                float kbForce = CalculateForce(distance);
-                float damage = CalculateDamage(distance);
-
-                if (go.TryGetComponent(out KnockbackHandler kbh))
+                if (collider.gameObject.TryGetComponent(out KnockbackHandler kbh))
                 {
-                    kbh.HandleKnockBack(transform.position, kbForce);
+                    kbh.HandleKnockBack(transform.position, _knockbackForce);
                 }
 
-                targeting.DamageEnemy(go, damage);
+                targeting.DamageEnemy(collider.gameObject, damage);
             }
         }
 
-        //Damage and KnockBack are at the edge of AttackRadius 0
-        float CalculateForce(float distance)
-        {
-            return _knockbackForce - distance * 2f;
-        }
-
-        float CalculateDamage(float distance)
-        {
-            float per = distance / _attackRadius;
-            return damage * per;
-        }
-
-        private void UpdateAttackRadius() => _attackRadius = _knockbackForce / 2f;
     }
 
 }

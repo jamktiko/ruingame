@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ec15052390e22b4098abc1d33ed6eee, type: 3}
+  m_Name: AtlanteanTridentSO
+  m_EditorClassIdentifier: 
+  Name: Atlantean Trident
+  VisualDescription: A glowing golden trident from the lost city of Atlantis
+  Description: It is said that the true Atlanteans could control the power of the
+    sea with these.
+  Rarity: Rare
+  StatChanges: +10 damage
+  SpecialEffect: 'Hitting an enemy will slow them for 2 seconds. '
