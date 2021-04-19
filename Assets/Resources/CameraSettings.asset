@@ -12,15 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39a4d5012bb54d4abff981e35544dc24, type: 3}
   m_Name: CameraSettings
   m_EditorClassIdentifier: Assembly-CSharp:DefaultNamespace:CameraData
-<<<<<<< HEAD
-  CameraSensitivity: 23
+  CameraSensitivity: 15
   invertAxisX: 0
-=======
-  CameraSensitivity: 10
-  invertAxisX: 1
->>>>>>> enemy-ai-2
   invertAxisY: 255
-  XSmoothing: 0
-  YSmoothing: 0
-  XAcceleration: 0
-  YAcceleration: 0
+  XSmoothing: 2
+  YSmoothing: 1
+  XAcceleration: 0.5
+  YAcceleration: 0.5

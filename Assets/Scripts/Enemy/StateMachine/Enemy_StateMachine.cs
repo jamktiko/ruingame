@@ -25,10 +25,22 @@
 
         public bool alive = true;
         private bool alerted;
-
+        
         public WeightedDirection[] pD;
         public Vector3 currentTargetPos;
         public Vector3 currentTargetDirection;
+        
+        public enum baseStates
+        {
+            PATROL,
+            MOVE,
+            ATTACK,
+            DEATH
+        }
+
+        [SerializeField]
+        public baseStates BaseStates;
+
         public virtual void Awake()
         {
             areaInformation = gameObject.AddComponent<AreaCheck>();
@@ -43,7 +55,6 @@
         }
         public virtual void Start()
         {
-            currentTargetPos = GameManager.Instance.transform.position;
             SetState(new PatrolState(this));
         }
 
@@ -125,6 +136,7 @@
 
         public virtual void Die()
         {
+            enemyGroup.GetComponent<Spawner>().EntityDeath();
             alive = false;
             Destroy(gameObject, 0.5f);
         }
@@ -155,6 +167,7 @@
             var finalDecision = new Vector3();
             var p = enemyGroup.patrolArea;
             var rp = RandomPointInPatrolArea();
+            rp.y = 0;
             RaycastHit hit;
             Vector3 dir = (rp - transform.position);
             Ray ray = new Ray(transform.position, dir);
@@ -164,6 +177,7 @@
             }
             finalDecision = rp;
             currentTargetDirection = dir;
+            finalDecision.y = 0;
             return finalDecision;
         }
 
@@ -209,7 +223,7 @@
                 {
                     if (h.collider.tag == "Enemy")
                     {
-                        pD[i].weight -= 1f;
+                        pD[i].weight -= 0.1f;
                     }
 
                     if (h.collider.tag == "Ground")
@@ -231,6 +245,7 @@
 
             var weightedMax = WeightedMax(pD);
             currentTargetDirection = weightedMax * 10f;
+            weightedMax.y = 0f;
             return weightedMax;
         }
 

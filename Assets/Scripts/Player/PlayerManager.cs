@@ -231,8 +231,8 @@ public class PlayerManager : BaseManager
     public void Die()
     {
         DisableScriptsOnPlayer();
-        Destroy(gameObject);
         Destroy(cameras);
+        Destroy(gameObject);
         GameManager.Instance.GameOver();
     }
 

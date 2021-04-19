@@ -17,26 +17,31 @@ namespace DefaultNamespace
             
             if (newDestination > 0)
             {
+                UseMovement();
                 newDestination -= time * Time.deltaTime;
             }
             else
             {
                 if (newDestination <= 0)
                 {
-                    UseMovement();
+                    GetNewDirection();
                     newDestination = 1f;
                 }
             }
-            if (Enemy.CheckForPlayer())
+            if (Enemy.CheckForPlayer() && Enemy.CanSeePlayer())
             {
                 Enemy.AlertAllEnemies();
                 Enemy.SetState(new MoveTowardsPlayerState(Enemy));
             }
         }
 
+        public void GetNewDirection()
+        {
+            Enemy.currentTargetDirection = Enemy.DecidePatrolDirection();
+        }
         public override void UseMovement()
         {
-            Enemy.movementController.Move(Enemy.DecidePatrolDirection());
+            Enemy.movementController.Move(Enemy.currentTargetDirection);
         }
 
         public override void OnStateEnter()

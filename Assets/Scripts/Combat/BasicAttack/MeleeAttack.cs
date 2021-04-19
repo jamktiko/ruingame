@@ -6,8 +6,7 @@ public class MeleeAttack : BaseAttack
     public override void AttackAllTargets(GameObject[] targets, BaseAttackHandler attacker)
     {
         foreach (GameObject target in targets)
-        {
-            Debug.Log(target.name);
+        { 
             try
             {
                 var targetHealth = target.GetComponent<EntityHealth>();

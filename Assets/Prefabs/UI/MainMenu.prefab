@@ -300,6 +300,18 @@ PrefabInstance:
       propertyPath: m_Colors.m_SelectedColor.g
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2236619894635263615, guid: 9b5a98347fd525146821fa1c3761be4c,
+        type: 3}
+      propertyPath: _cameraData
+      value: 
+      objectReference: {fileID: 11400000, guid: 643de29be79606c4bacc17c960f498f1,
+        type: 2}
+    - target: {fileID: 2236619894635263615, guid: 9b5a98347fd525146821fa1c3761be4c,
+        type: 3}
+      propertyPath: _defaultCameraData
+      value: 
+      objectReference: {fileID: 11400000, guid: eee67e75c3783504bb1720dcf4576858,
+        type: 2}
     - target: {fileID: 2871479081334975698, guid: 9b5a98347fd525146821fa1c3761be4c,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -449,6 +461,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlayCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 4650942327673808026, guid: b62c87bba34a934408b155e02df136d8,
+        type: 3}
+      propertyPath: m_RenderMode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4650942327673808029, guid: b62c87bba34a934408b155e02df136d8,
         type: 3}

@@ -15,8 +15,7 @@ namespace DefaultNamespace
 
         public override void Tick()
         {
-            Enemy.currentTargetPos = Enemy.playerTarget.transform.position;
-
+        
             if (newDestination > 0)
             {
                 newDestination -= time * Time.deltaTime;
@@ -25,11 +24,12 @@ namespace DefaultNamespace
             {
                 if (newDestination <= 0)
                 {
+                    Enemy.currentTargetPos = PlayerManager.Instance.gameObject.transform.position;
                     UseMovement();
                     newDestination = 0.2f;
                 }
             }
-            if (Enemy.HasReachedAttackRange())
+            if (Enemy.HasReachedAttackRange() && Enemy.CanSeePlayer())
             {
                 Enemy.SetState(new AttackPlayerState(Enemy));
             }
@@ -44,7 +44,6 @@ namespace DefaultNamespace
         public override void OnStateEnter()
         {
             Name = "moving towards player";
-            
         }
 
         public override void OnStateExit()

@@ -41,6 +41,7 @@ namespace DefaultNamespace
             Enemy.attackHandler.EndAttack();
             Enemy.stunned = true;
             Name = "stunned";
+            Enemy.gameObject.transform.parent = null;
         }
 
         public override void OnStateExit()

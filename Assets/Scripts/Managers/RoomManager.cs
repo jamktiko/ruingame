@@ -18,7 +18,7 @@ public class RoomManager : MonoBehaviour
     public bool EnemiesCleared = false;
     public SpawnerManager spawnerManager;
     private bool _creatingRoom = false;
-    private int enemiesToSpawn = 2;
+    private int enemiesToSpawn = 4;
     private void Awake()
     {
         //Created by Game Manager
@@ -47,7 +47,7 @@ public class RoomManager : MonoBehaviour
         _currentRoom += 1;
         if (_currentRoom > 4)
         {
-            GameManager.Instance.GameOver();
+            _currentRoom = 1;
         }
         StartCoroutine(WaitCreation());
     }
