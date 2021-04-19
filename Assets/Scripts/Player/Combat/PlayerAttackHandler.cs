@@ -12,13 +12,13 @@ public class PlayerAttackHandler : ComboAttackHandler
     public float artifactDamageModifier = 0;
 
     private InputReader _inputReader;
-    private MovementController _movementControl;
+    private PlayerMovementController _movementControl;
     
     public override void Awake()
     {
         base.Awake();
         _inputReader = GameManager.Instance.playerInputReader;
-        _movementControl = GetComponent<MovementController>();
+        _movementControl = GetComponent<PlayerMovementController>();
     }
     public override void OnEnable()
     {
@@ -58,32 +58,6 @@ public class PlayerAttackHandler : ComboAttackHandler
         var nearestTarget = _attackTargeting.FindNearestTargetInRadius(currentAttack.radius + 10f);
         _movementControl.RotateTowardsMovement(nearestTarget, 1000f);
     }
+    
 
-    /// <summary>
-    /// For artifact events
-    /// </summary>
-    /// <param name="targets"></param>
-    /// <param name="attack"></param>
-    protected override void DamageAllCurrentTargets(GameObject[] targets, BaseAttack attack)
-    {
-        foreach (GameObject target in targets)
-        {
-            try
-            {
-                var targetHealth = target.GetComponent<Health>();
-                float damage = attack.baseDamage * _entityDamage;
-                PlayerAttackEvent.Invoke(damage, targetHealth); 
-                targetHealth.DealDamage(damage + artifactDamageModifier);
-            }
-            catch
-            {
-                Debug.Log("Target has no health!");
-            }
-        }
-
-        KnockBackAllTargets(targets, attack);
-        ClearTargets();
-
-        artifactDamageModifier = 0;
-    }
 }

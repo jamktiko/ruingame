@@ -25,7 +25,13 @@ public class AnimationTriggerHandler : MonoBehaviour
 
     public void HandleDamage()
     {
-        _attackHandler.HandleAttack();
+        try
+        {
+            _attackHandler.HandleAttack(_attackHandler.currentAttack);
+        }
+        catch
+        {
+            Debug.Log("Attack failed");}
     }
 
     public void WeaponSlash()

@@ -1,5 +1,10 @@
 fileFormatVersion: 2
-guid: e3b3aa212cc37bd43848ac96956b3fcc
+<<<<<<< HEAD:Assets/Scenes/Rooms/Room1.unity.meta
+guid: 5840a7fb4916c2b46911e3db4aba8dd9
+=======
+guid: 2ed73e19afe077942951ded744d8cf47
+folderAsset: yes
+>>>>>>> enemy-ai-2:Assets/Animations_30fps.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

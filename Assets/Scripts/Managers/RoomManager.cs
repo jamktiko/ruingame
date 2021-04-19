@@ -59,6 +59,7 @@ public class RoomManager : MonoBehaviour
 
     public void PlacePlayerInLoading()
     {
+        PlayerManager.Instance.DisablePlayerInput();
         MovePlayerToLocation(gameObject.transform);
     }
     public void PlacePlayerAtEntry()
@@ -95,6 +96,7 @@ public class RoomManager : MonoBehaviour
         spawnerManager.enemiesToSpawn = enemiesToSpawn;
         enemiesToSpawn += 2;
         yield return new WaitForSeconds(1f);
+        PlayerManager.Instance.EnablePlayerInput();
         //Deactivate loading screen
         spawnerManager.StartSpawners();
         _creatingRoom = false;

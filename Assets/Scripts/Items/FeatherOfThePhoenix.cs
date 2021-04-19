@@ -23,7 +23,7 @@ public class FeatherOfThePhoenix : ArtifactEffect
            _playerHealth.revivePlayer = false;
         else
         {
-            _playerHealth.CurrentHealth = _playerHealth._maximumHealth;
+            _playerHealth.currentHealth = _playerHealth.maximumHealth;
             BurningDamage();
             counter--;
         }

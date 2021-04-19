@@ -1,30 +1,25 @@
 ﻿
-using UnityEngine;
-using UnityEngine.VFX;
-
 namespace DefaultNamespace
 {
-    public class EnemyHealth : Health
+    public class EnemyHealth : EntityHealth
     {
-        public BaseEnemy enemyController;
+        public Enemy_StateMachine enemyController;
 
         public override void Start()
         {
-            base.Start();
-            enemyController = GetComponent<BaseEnemy>();
+            enemyController = GetComponent<Enemy_StateMachine>();
         }
 
         public override void ReactToDamage(float amount)
         {
-            enemyController.SetState(new StunnedState(enemyController));
             base.ReactToDamage(amount);
+            enemyController.SetState(new StunnedState(enemyController));
         }
 
         public override void Die()
         {
             base.Die();
-            enemyController.alive = false;
-            Destroy(gameObject, 0.5f);
+            enemyController.Die();
         }
     }
 }

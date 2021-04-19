@@ -1,28 +1,36 @@
 ﻿
+using System;
 using System.Collections;
 using DefaultNamespace;
 using DefaultNamespace.Skills;
 using UnityEngine;
 
 
+
 public class SkillUser : MonoBehaviour
 {
     public InputReader inputReader = default;
-    
+
     public SkillExecute[] skillList;
 
     public Animator entityAnimator;
-    
-    [SerializeField] private Health entityHealth;
+
+    [SerializeField] private EntityHealth entityHealth;
+
+    public BaseAttackHandler attackHandler;
 
     public SkillsUI skillUI;
-    
+
     private PlayerManager _playerManager;
 
     public bool usingSkill;
 
     public Transform VFXPoint;
-    
+
+    public delegate void SkillActivatedHandler(SkillActivatedEventArgs e);
+
+    public event SkillActivatedHandler SkillActivated;
+
     //STORE THIS IN SKILL
     public AnimationClip sprintAnimation;
     public AnimationClip stanceChangeAnimation;
@@ -30,30 +38,29 @@ public class SkillUser : MonoBehaviour
 
     public GameObject defaultParticles;
     public Targeting skillTargeting { get; private set; }
+    
     private void Awake()
     {
         entityAnimator = GetComponentInChildren<Animator>();
         _playerManager = PlayerManager.Instance;
         inputReader = _playerManager.playerInputReader;
-        entityHealth = GetComponent<Health>();
-        
+        entityHealth = GetComponent<EntityHealth>();
+        attackHandler = GetComponent<BaseAttackHandler>();
         skillTargeting = gameObject.AddComponent<Targeting>();
 
         skillList = new SkillExecute[3];
-        skillList[0] = gameObject.AddComponent<SprintSkill>();
-        skillList[0].animationClip = sprintAnimation;
+        skillList[0] = gameObject.AddComponent<TeleportSkill>();
+        skillList[0].animationClip = whirlWindAnimation;
         skillList[0].skillUser = this;
-        skillList[1] = gameObject.AddComponent<TeleportSkill>();
-        skillList[1].animationClip = whirlWindAnimation;
+        skillList[1] = gameObject.AddComponent<StanceChangeSkill>();
+        skillList[1].animationClip = stanceChangeAnimation;
         skillList[1].skillUser = this;
-        skillList[1].animationClip = whirlWindAnimation;
-        skillList[2] = gameObject.AddComponent<StanceChangeSkill>();
-        skillList[2].animationClip = stanceChangeAnimation;
+        skillList[2] = gameObject.AddComponent<SprintSkill>();
+        skillList[2].animationClip = sprintAnimation;
         skillList[2].skillUser = this;
 
         
-        
-    }
+}
     private void OnEnable()
   
     {
@@ -65,7 +72,7 @@ public class SkillUser : MonoBehaviour
         }
         catch{}
     }
-    
+
     private void OnDisable()
     {
         try
@@ -80,7 +87,7 @@ public class SkillUser : MonoBehaviour
     {
         try
         {
-            ActivateSkill(skillList[1], 1);
+            ActivateSkill(0);
         }
         catch
         {
@@ -92,20 +99,18 @@ public class SkillUser : MonoBehaviour
     {
         try
         {
-            ActivateSkill(skillList[2], 2);
+            ActivateSkill(1);
         }
         catch
         {
             Debug.Log("Cant Execute Skill!");
         }
     }
-
-
     void OnSprint()
     {
         try
         {
-            ActivateSkill(skillList[0], 0);
+            ActivateSkill(2);
         }
         catch
         {
@@ -113,8 +118,9 @@ public class SkillUser : MonoBehaviour
         }
     }
     
-    public virtual void ActivateSkill(SkillExecute sk, int index)
+    public virtual void ActivateSkill(int index)
     {
+        var sk = skillList[index];
         if (entityAnimator.GetFloat("attackCancelFloat") < 1f)
         {
             if (!sk.onCooldown)
@@ -123,27 +129,12 @@ public class SkillUser : MonoBehaviour
                 {
                     //PlayerManager.Instance.ZoomCameraInAndOut();
                     //SHOULD ONLY BE CALLED AFTER SKILL GOES ON COOLDOWN, EG. Stance change only goes on cooldown after the duration is over
-
-                    try
-                    {
-                        skillUI.OnSkillUse(index);
-                    }
-                    catch
-                    {
-                        Debug.Log("skill UI not updating correctly");
-                    }
-
-                    try
-                    {
-                        _playerManager.StopAttacking();
-                    }
-                    catch
-                    {
-                        Debug.Log("Playermanager.StopAttacking");
-                    }
-                    //SKILL SHOULD DETERMINE WHICH ANIMATION TO USE
+                    SkillActivatedEventArgs e = new SkillActivatedEventArgs();
+                    e.SkillIndex = index;
+                    SkillActivated?.Invoke(e);
+                     // _playerManager.StopAttacking();
+                        //SKILL SHOULD DETERMINE WHICH ANIMATION TO USE
                     //Currently uses animation length to determine skill duration, probably should work other way around?
-          
                     try
                     {
                         sk.Execute(sk.animationClip.length);
@@ -154,13 +145,6 @@ public class SkillUser : MonoBehaviour
                         catch{Debug.Log("Skill Execute");}
                         Debug.Log("No skill animation!");
                     }
-
-                    try
-                    {
-                        var ps = Instantiate(defaultParticles, VFXPoint.position, Quaternion.identity);
-                        Destroy(ps, 0.5f);
-                    }
-                    catch{Debug.Log("Particles");}
                     try
                     {
                         AddInvulnerability(sk.iFrameDuration);
@@ -223,4 +207,8 @@ public class SkillUser : MonoBehaviour
     {
         entityAnimator.Play(sk.skillname);
     }
+}
+public class SkillActivatedEventArgs : EventArgs
+{
+    public int SkillIndex { get; set; }
 }

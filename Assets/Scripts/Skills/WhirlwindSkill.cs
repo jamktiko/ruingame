@@ -55,11 +55,10 @@ namespace DefaultNamespace.Skills
             Collider[] colliders = targeting.FindColliderOverlaps(p1, p2, _attackRadius);
             foreach (var collider in colliders)
             {
-                if (collider.gameObject.TryGetComponent(out KnockbackHandler kbh))
+                if (collider.gameObject.TryGetComponent(out BaseMovement kbh))
                 {
                     kbh.HandleKnockBack(transform.position, _knockbackForce);
                 }
-
                 targeting.DamageEnemy(collider.gameObject, damage);
             }
         }

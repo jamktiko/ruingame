@@ -26,7 +26,6 @@ namespace DefaultNamespace
                 Plus,
                 Minus
             }
-
             public Type type;
             public enumModifiedValues modifiedValues;
         }

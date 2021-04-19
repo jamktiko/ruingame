@@ -14,15 +14,15 @@ public class BookOfTheWiseOnes : ArtifactEffect
 
         if (_playerReference.TryGetComponent(out _playerHealth))
         {
-            maxHealth = _playerHealth._maximumHealth;
-            _playerHealth._maximumHealth *= maxHealthModifier;
+            maxHealth = _playerHealth.maximumHealth;
+            _playerHealth.maximumHealth *= maxHealthModifier;
         }
     }
 
     private void OnDestroy()
     {
         PlayerHealth _playerHealth = PlayerManager.Instance.GetComponent<PlayerHealth>();
-        if (_playerHealth._maximumHealth > maxHealth)
-            _playerHealth._maximumHealth /= maxHealthModifier;
+        if (_playerHealth.maximumHealth > maxHealth)
+            _playerHealth.maximumHealth /= maxHealthModifier;
     }
 }
