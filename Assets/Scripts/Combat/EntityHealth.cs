@@ -3,7 +3,7 @@ public abstract class EntityHealth : Health
 {
     public float _flatResistance = 10f;
     public float _percentualResistance = 10f;
-    private float _reDamageTimer = 0.4f;
+    private float _reDamageTimer = 0.5f;
     //private float _reDamageTimerDoT = 0.4f;
     private bool _damageable;
     
@@ -28,8 +28,8 @@ public abstract class EntityHealth : Health
     {
         var incomingDamage = DamageCalculation(attack);
         currentHealth -= incomingDamage;
-        ReactToDamage(incomingDamage);
         AddIFrame(_reDamageTimer);
+        ReactToDamage(incomingDamage);
     }
     public override void ReactToDamage(float amount)
     {

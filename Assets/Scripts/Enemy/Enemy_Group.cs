@@ -42,5 +42,13 @@ public class Enemy_Group : MonoBehaviour
             esm.SetState(new MoveTowardsPlayerState(esm));
         }
     }
+
+    public void DisableEnemies()
+    {
+        foreach (Enemy_StateMachine esm in enemyStateMachines)
+        {
+            esm.enabled = false;
+        }
+    }
 }
 

@@ -230,6 +230,7 @@ public class PlayerManager : BaseManager
     }
     public void Die()
     {
+        EnemyGroupManager.Instance.DisableAllEnemies();
         DisableScriptsOnPlayer();
         Destroy(cameras);
         Destroy(gameObject);
