@@ -44,17 +44,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 046338bd76ae49dc865a541a78fb2a9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacleLayer:
+  obstacleLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
+  maximumSize: 47.92765
+  AmountOfRaycasts: 10
+  detectionSensitivity: 0.5
+  sizeCorrection: 0
   heightRange: 100
   heightCorrection: 1
-  sizeCorrection: 0
-  maximumSize: 47.92765
-  overLapRays: 20
-  patrolArea:
-    m_Center: {x: 30.422, y: -6.999999, z: -21.63}
-    m_Extent: {x: 0.48240873, y: 0.1, z: 0.48240873}
 --- !u!120 &999287286043438773
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -287,7 +285,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 999287287562791200}
-  - component: {fileID: 999287287562791205}
   - component: {fileID: 999287287562791206}
   m_Layer: 0
   m_Name: SpawnArea
@@ -310,50 +307,6 @@ Transform:
   m_Father: {fileID: 999287286364988615}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &999287287562791205
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 999287287562791201}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c68dddce0844e03bf19054c4d03392a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  heightRange: 100
-  heightCorrection: 0
-  sizeCorrection: 0
-  maximumSize: 54.04
-  overLapRays: 20
-  mesh: {fileID: 0}
-  areaVertices:
-  - {x: 42.501007, y: -8, z: -44.41198}
-  - {x: 42.70382, y: -8, z: -44.4441}
-  - {x: 42.886784, y: -8, z: -44.537323}
-  - {x: 43.03198, y: -8, z: -44.68252}
-  - {x: 43.1252, y: -8, z: -44.865475}
-  - {x: 43.15732, y: -8, z: -45.06829}
-  - {x: 43.1252, y: -8, z: -45.27111}
-  - {x: 43.031975, y: -8, z: -45.454063}
-  - {x: 42.88678, y: -8, z: -45.599262}
-  - {x: 42.703823, y: -8, z: -45.692486}
-  - {x: 42.501007, y: -8, z: -45.7246}
-  - {x: 42.2982, y: -8, z: -45.692482}
-  - {x: 42.115234, y: -8, z: -45.599262}
-  - {x: 41.97004, y: -8, z: -45.454063}
-  - {x: 41.876812, y: -8, z: -45.2711}
-  - {x: 41.844692, y: -8, z: -45.06829}
-  - {x: 41.87681, y: -8, z: -44.86547}
-  - {x: 41.97004, y: -8, z: -44.682518}
-  - {x: 42.11523, y: -8, z: -44.537323}
-  - {x: 42.2982, y: -8, z: -44.444103}
-  - {x: 0, y: 0, z: 0}
-  areaPosition: {x: 25.66, y: -4.8300033, z: -27.21}
 --- !u!33 &999287287562791206
 MeshFilter:
   m_ObjectHideFlags: 0

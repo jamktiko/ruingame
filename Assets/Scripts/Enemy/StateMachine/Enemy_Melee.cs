@@ -6,8 +6,4 @@
             throw new System.NotImplementedException();
         }
 
-        public override void Alert()
-        {
-            throw new System.NotImplementedException();
-        }
     }

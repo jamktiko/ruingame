@@ -44,6 +44,7 @@ public class Enemy_Group : MonoBehaviour
         {
             esm.playerTarget = playerTarget;
             esm.SetState(new MoveTowardsPlayerState(esm));
+            esm.transform.parent = null;
         }
     }
 }

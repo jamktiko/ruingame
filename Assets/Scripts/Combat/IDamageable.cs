@@ -7,13 +7,13 @@
             set;
         }
 
-        float currentHealth
+        float CurrentHealth
         {
             get;
             set;
         }
 
-        float maximumHealth
+        float MaximumHealth
         {
             get;
             set;

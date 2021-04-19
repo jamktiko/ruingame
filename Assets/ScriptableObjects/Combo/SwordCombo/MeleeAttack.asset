@@ -12,19 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70fe997e6d5144b9bac1bbdfa5b0e4f3, type: 3}
   m_Name: MeleeAttack
   m_EditorClassIdentifier: 
-<<<<<<< HEAD:Assets/ScriptableObjects/Combo/SwordCombo/PhysicalAttack.asset
-  targetingType: 2
-  baseDamage: 50
-  radius: 1.5
-  knockBackStrength: 10
-  range: 1.5
-  attackType: 0
-  projectilePrefab: {fileID: 0}
-  shootForce: 0
-=======
-  TargetingType: 0
-  BaseDamage: 0
-  Radius: 0
-  KnockBackStrength: 0
-  Range: 0
->>>>>>> enemy-ai:Assets/ScriptableObjects/Combo/SwordCombo/MeleeAttack.asset
+  TargetingType: 1
+  DamageType: 0
+  BaseDamage: 20
+  InflictedDamage: 30
+  Radius: 10
+  KnockBackStrength: 10
+  KnockBack: 1
+  Range: 10

@@ -14,12 +14,16 @@ public abstract class EntityHealth : Health
     private Rigidbody _characterRigidbody;
     public override void Start()
     {
+        _healthUI.UpdateUIValue(currentHealth);
+    }
+
+    public override void Awake()
+    {
         maximumHealth = 100f;
         currentHealth = 100f;
         _characterRigidbody = gameObject.GetComponent<Rigidbody>();
         EntityAnimator = GetComponentInChildren<Animator>();
     }
-
     public override void DealDamage(IAttack attack, BaseAttackHandler attacker)
     {
         var incomingDamage = DamageCalculation(attack);
@@ -29,8 +33,8 @@ public abstract class EntityHealth : Health
     }
     public override void ReactToDamage(float amount)
     {
-        CheckHealth();
         _healthUI.UpdateUIValue(currentHealth);
+        CheckHealth();
         
     }
     public override void DealDamageOverTime(float amount, float time)
@@ -44,7 +48,6 @@ public abstract class EntityHealth : Health
         //EntityAnimator.Play("Death");
         //Particles
         //Update UI or stats
-        SendMessageUpwards("EntityDeath");
     }
 
     public override void AddIFrame(float duration)

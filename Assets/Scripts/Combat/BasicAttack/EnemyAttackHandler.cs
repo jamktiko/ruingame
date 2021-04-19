@@ -3,9 +3,9 @@ using System.Collections;
 using Data.Util;
 using UnityEngine;
 [RequireComponent(typeof(AttackTargeting))]
-    public class BaseAttackHandler : MonoBehaviour
+    public class EnemyAttackHandler : BaseAttackHandler
     {
-        public BaseAttack baseAttack;
+        public IAttack baseAttack;
         public bool attacking = false;
         public float criticalHitChance;
         
@@ -17,7 +17,7 @@ using UnityEngine;
         
         protected AttackTargeting _attackTargeting;
         public Transform firePoint;
-        public IAttack currentAttack;
+        protected IAttack currentAttack;
         protected GameObject[] currentTargets;
 
         public virtual void Awake()
@@ -56,6 +56,9 @@ using UnityEngine;
             StartAttack();
             try { currentAttack = GetAttack(); }
             catch {Debug.Log("No attack to execute!");}
+            try { currentTargets = TargetAttack(currentAttack); }
+            catch {Debug.Log("No targets found!");}
+
             TurnTowardsNearest();
             ExecuteAttack();
             StartCoroutine(EndAttackRoutine(GetAttackEndDuration()));
@@ -67,7 +70,7 @@ using UnityEngine;
         }
         protected virtual float GetAttackEndDuration()
         {
-            return 2f;
+            return 1f;
         }
         protected virtual IAttack GetAttack()
         {
@@ -83,7 +86,7 @@ using UnityEngine;
         {
             /*try {_characterAnimator.Play("Attack");}
             catch {Debug.Log("No animation found!");*/
-            HandleAttack(baseAttack);
+            HandleAttack(currentAttack);
         }
         
         protected virtual bool CheckAttackConditions()
@@ -128,6 +131,7 @@ using UnityEngine;
         {
             AttackToExecute.inflictedDamage = AttackToExecute.baseDamage;
             AttackToExecute.AttackAllTargets(TargetAttack(AttackToExecute), this);
+            ClearTargets();
         }
 
         private bool CheckForCritical()
@@ -155,6 +159,7 @@ using UnityEngine;
 
         protected void ClearTargets()
         {
-
+            currentAttack = null;
+            currentTargets = null;
         }
     }

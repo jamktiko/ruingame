@@ -42,5 +42,10 @@ namespace DefaultNamespace
             Enemy.stunned = true;
             Name = "stunned";
         }
+
+        public override void OnStateExit()
+        {
+            Enemy.playerTarget = GameManager.Instance.currentPlayer;
+        }
     }
 }

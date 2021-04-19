@@ -62,8 +62,6 @@ public class GameManager : MonoBehaviour
         sk.transform.SetParent(currentPlayer.transform);
         //UPDATE Skills on playermanager
         //_playerManager.UpdateSkills();
-        
-        sk.tag = "Player";
         currentPlayer.tag = "Player";
     }
 

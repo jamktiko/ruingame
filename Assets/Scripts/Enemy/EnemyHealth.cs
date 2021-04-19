@@ -15,8 +15,8 @@ namespace DefaultNamespace
 
         public override void ReactToDamage(float amount)
         {
-            enemyController.SetState(new StunnedState(enemyController));
             base.ReactToDamage(amount);
+            enemyController.SetState(new StunnedState(enemyController));
         }
 
         public override void Die()

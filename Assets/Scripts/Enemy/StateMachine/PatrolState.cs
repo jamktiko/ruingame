@@ -27,9 +27,10 @@ namespace DefaultNamespace
                     newDestination = 1f;
                 }
             }
-            if (Enemy.CanSeePlayer())
+            if (Enemy.CheckForPlayer())
             {
-                Enemy.SetState(new AttackPlayerState(Enemy));
+                Enemy.AlertAllEnemies();
+                Enemy.SetState(new MoveTowardsPlayerState(Enemy));
             }
         }
 

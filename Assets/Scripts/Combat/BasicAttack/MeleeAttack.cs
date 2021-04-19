@@ -7,9 +7,10 @@ public class MeleeAttack : BaseAttack
     {
         foreach (GameObject target in targets)
         {
+            Debug.Log(target.name);
             try
             {
-                var targetHealth = target.GetComponent<Health>();
+                var targetHealth = target.GetComponent<EntityHealth>();
                 targetHealth.DealDamage(this, attacker);
             }
             catch

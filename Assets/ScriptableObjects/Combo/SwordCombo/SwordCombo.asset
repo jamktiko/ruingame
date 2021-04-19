@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: SwordCombo
   m_EditorClassIdentifier: 
   ComboAttacks:
-  - {fileID: 11400000, guid: 0c6038a865c5caf4f9057c6a6f0be414, type: 2}
+  - {fileID: 11400000, guid: 7d1b07d758a2638488740fba7c375f5d, type: 2}
+  - {fileID: 11400000, guid: ae1df6fc2ea2b9945a82aa2947a69fde, type: 2}
+  - {fileID: 11400000, guid: c82a00f6d920449478e3ba0d43f0f258, type: 2}

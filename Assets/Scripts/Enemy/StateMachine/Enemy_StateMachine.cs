@@ -21,10 +21,9 @@
         public GameObject playerTarget;
         public LayerMask hitTestLayer;
         
-        [HideInInspector]
         public bool stunned;
-        [HideInInspector]
-        public bool alive;
+
+        public bool alive = true;
         private bool alerted;
 
         public WeightedDirection[] pD;
@@ -34,7 +33,9 @@
         {
             areaInformation = gameObject.AddComponent<AreaCheck>();
             areaInformation.AmountOfRaycasts = areaRaycasts;
-            
+            attackHandler = GetComponent<BaseAttackHandler>();
+
+            attackRange = attackHandler.baseAttack.range;
             entityAnimator = GetComponentInChildren<Animator>();
             movementController = GetComponent<EnemyMovement>();
             movementController._characterController = this;
@@ -116,11 +117,16 @@
         {
             currentTargetPos = target;
         }
-        public abstract void Alert();
+
+        public virtual void Alert()
+        {
+            playerTarget = GameObject.FindWithTag("Player");
+        }
 
         public virtual void Die()
         {
-            throw new System.NotImplementedException();
+            alive = false;
+            Destroy(gameObject, 0.5f);
         }
 
         public void AlertAllEnemies()
@@ -130,7 +136,6 @@
         
         public bool CheckForPlayer()
         {
-            Debug.Log("Sweeping!");
             RaycastHit[] hitTargets = areaInformation.RayCastAroundArea(hitTestLayer).hitInfo;
             foreach (RaycastHit hit in hitTargets)
             {
@@ -138,7 +143,7 @@
                 {
                     if (hit.collider.gameObject.tag == "Player")
                     {
-                        Debug.Log("Player found!");
+                        playerTarget = hit.collider.gameObject;
                         return true;
                     }
                 }
@@ -155,9 +160,8 @@
             Ray ray = new Ray(transform.position, dir);
             if (Physics.SphereCast(ray, 0.5f, out hit, obstacleLayer))
             {
-                Debug.Log("Point is obstructed!");
+
             }
-            Debug.Log("Returning point!");
             finalDecision = rp;
             currentTargetDirection = dir;
             return finalDecision;
@@ -220,9 +224,9 @@
                 }
                 else
                 {
-                    pD[i].weight += 0.5f;
+                    pD[i].weight += 0.3f;
                 }
-                pD[i].weight += 0.1f * Vector3.Dot(transform.forward, pD[i].direction);
+                pD[i].weight += 0.05f * Vector3.Dot(transform.forward, pD[i].direction);
             }
 
             var weightedMax = WeightedMax(pD);

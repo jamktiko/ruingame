@@ -18,6 +18,7 @@ public class EnemyGroupManager : MonoBehaviour
 
     public void Alert()
     {
+        playerTarget = GameObject.FindWithTag("Player");
         foreach (Enemy_Group eg in enemyGroups)
         {
            eg.playerTarget = playerTarget;

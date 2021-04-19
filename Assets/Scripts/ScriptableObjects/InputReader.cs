@@ -165,7 +165,6 @@ public class InputReader : ScriptableObject, PlayerInput.IGameplayActions, Playe
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            Debug.Log("Moving selection");
             moveSelectionEvent();
         }
     }

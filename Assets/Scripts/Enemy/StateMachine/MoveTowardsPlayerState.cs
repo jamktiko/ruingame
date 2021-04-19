@@ -7,7 +7,7 @@ namespace DefaultNamespace
     {
         private Vector3 _destination;
         private float time = 1f;
-        private float newDestination = 1f;
+        private float newDestination = 0.2f;
 
         public MoveTowardsPlayerState(Enemy_StateMachine enemy) : base(enemy)
         {
@@ -15,7 +15,7 @@ namespace DefaultNamespace
 
         public override void Tick()
         {
-            Enemy.currentTargetPos = GameManager.Instance.transform.position;
+            Enemy.currentTargetPos = Enemy.playerTarget.transform.position;
 
             if (newDestination > 0)
             {
@@ -26,15 +26,14 @@ namespace DefaultNamespace
                 if (newDestination <= 0)
                 {
                     UseMovement();
-                    newDestination = 1f;
+                    newDestination = 0.2f;
                 }
             }
-            
-            /*if (Enemy.HasReachedAttackRange())
+            if (Enemy.HasReachedAttackRange())
             {
                 Enemy.SetState(new AttackPlayerState(Enemy));
             }
-            */
+            
         }
 
         public override void UseMovement()

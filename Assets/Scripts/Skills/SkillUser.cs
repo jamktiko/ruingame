@@ -161,13 +161,6 @@ public class SkillUser : MonoBehaviour
                         catch{Debug.Log("Skill Execute");}
                         Debug.Log("No skill animation!");
                     }
-
-                    try
-                    {
-                        var ps = Instantiate(defaultParticles, VFXPoint.position, Quaternion.identity);
-                        Destroy(ps, 0.5f);
-                    }
-                    catch{Debug.Log("Particles");}
                     try
                     {
                         AddInvulnerability(sk.iFrameDuration);

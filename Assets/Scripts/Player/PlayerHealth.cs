@@ -2,9 +2,6 @@
 using UnityEngine.Events;
 public class PlayerHealth : EntityHealth
 {
-    public float flatResistance;
-    public float percentualResistance;
-    
     /// <summary>
     /// for artifact effects
     /// </summary>

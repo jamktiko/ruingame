@@ -15,26 +15,18 @@ public class HealthUI : MonoBehaviour
         _entityUI = GetComponent<Canvas>();
         _entityHealth = GetComponentInParent<EntityHealth>();
         _healthSlider = _entityUI.GetComponentInChildren<Slider>();
-        try
-        {
-            var cam = GameObject.FindGameObjectWithTag("Cameras");
-            _entityUI.worldCamera = cam.GetComponentInChildren<Camera>();
-        }
-        catch {}
-
+        
         StartCoroutine("UpdateUI");
     }
 
     public void UpdateUIValue(float amount)
     {
-        Debug.Log(_entityHealth.currentHealth);
         _healthSlider.value = _entityHealth.currentHealth;
     }
     public IEnumerator UpdateUI()
     {
         yield return new WaitForSeconds(1f);
         _healthSlider.maxValue = _entityHealth.maximumHealth;
-        Debug.Log(_entityHealth.maximumHealth);
         _healthSlider.minValue = 0;
         _healthSlider.value = _entityHealth.maximumHealth;
     }

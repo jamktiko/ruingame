@@ -7,6 +7,7 @@ public class AttackTargeting : MonoBehaviour
 {
     public string[] AllowedTargetTags;
     public LayerMask LayerToCheck;
+    public GameObject[] currentTargets;
     public GameObject[] HandleTargeting(IAttack attack)
     {
         switch (attack.targetingType)
@@ -28,11 +29,13 @@ public class AttackTargeting : MonoBehaviour
 
     private GameObject[] GetNearestTargets(float radius)
     {
-        GameObject[] gos = new GameObject[] { };
-        foreach (string tag in AllowedTargetTags)
+        Debug.Log("Getting nearest targets");
+        GameObject[] gos = GameObject.FindGameObjectsWithTag(AllowedTargetTags[0]);
+        for(int i = 1; i < AllowedTargetTags.Length; i++)
         {
-            gos.Concat(GameObject.FindGameObjectsWithTag(tag));
+            gos.Concat(GameObject.FindGameObjectsWithTag(AllowedTargetTags[i]));
         }
+        
         GameObject closest = null;
         float distance = radius;
         Vector3 position = transform.position;
@@ -44,8 +47,6 @@ public class AttackTargeting : MonoBehaviour
                 distance = curDistance;
             }
         }
-        gos = new GameObject[1];
-        gos[0] = closest;
         return gos;
     }
     private GameObject[] GetAOETargets(float radius)

@@ -12,12 +12,12 @@ public class KappasPlate : ArtifactEffect
 
         if (_playerReference.TryGetComponent(out _playerHealth))
         {
-            _playerHealth.flatResistance += blockedDamage;
+            _playerHealth._flatResistance += blockedDamage;
         }
     }
 
     private void OnDestroy()
     {
-        PlayerManager.Instance.GetComponent<PlayerHealth>().flatResistance -= blockedDamage;
+        PlayerManager.Instance.GetComponent<PlayerHealth>()._flatResistance -= blockedDamage;
     }
 }

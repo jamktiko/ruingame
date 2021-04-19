@@ -3,11 +3,26 @@ using UnityEngine;
 
 public abstract class Health : MonoBehaviour, IDamageable
 {
-    public float maximumHealth { get; set; }
-    public float currentHealth { get; set; }
+    public float maximumHealth;
+    public float MaximumHealth
+    {
+        get { return maximumHealth;}
+        set { maximumHealth = value; }
+    }
+    public float currentHealth;
+    public float CurrentHealth
+    {
+        get { return currentHealth;}
+        set { currentHealth = value; }
+    }
     public bool damageable { get; set; }
     public virtual void Start()
     {
+    }
+
+    public virtual void Awake()
+    {
+        
     }
 
     public virtual void DealDamage(IAttack attack, BaseAttackHandler attacker)
