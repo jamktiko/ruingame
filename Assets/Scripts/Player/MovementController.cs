@@ -288,7 +288,7 @@ public class MovementController : MonoBehaviour
                 break;
             }
         }
-        CheckOverlaps(ref maxDistance, 2f, 0.8f);
+        CheckOverlaps(ref maxDistance, startPos, 2f, 0.8f);
         FreezePosition(true);
         //ChangeRigidbodyToKinematic(true, RigidbodyInterpolation.None, CollisionDetectionMode.Discrete);
         EneableColliders(false, colliders);
@@ -343,15 +343,15 @@ public class MovementController : MonoBehaviour
         }
     }
 
-    private void CheckOverlaps(ref float maxDistance, float capsuleMaxHeight, float capsuleMaxRadius)
+    private void CheckOverlaps(ref float maxDistance, Vector3 startPos, float capsuleMaxHeight, float capsuleMaxRadius)
     {
         LayerMask enemyLayer = LayerMask.GetMask("EnemyLayer");
         LayerMask collisionObject = LayerMask.GetMask("CollisionObject");
-        Vector3 maxPos = transform.position + transform.forward * maxDistance;
+        Vector3 maxPos = startPos + transform.forward * maxDistance;
         while (CheckOverlapOnLayer(enemyLayer, maxPos, capsuleMaxHeight, capsuleMaxRadius) || CheckOverlapOnLayer(collisionObject, maxPos, capsuleMaxHeight, capsuleMaxRadius))
         {
             maxDistance -= 0.5f;
-            maxPos = transform.position + transform.forward * maxDistance;
+            maxPos = startPos + transform.forward * maxDistance;
         }
     }
 
