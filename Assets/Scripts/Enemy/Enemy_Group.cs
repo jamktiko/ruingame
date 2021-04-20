@@ -47,7 +47,8 @@ public class Enemy_Group : MonoBehaviour
     {
         foreach (Enemy_StateMachine esm in enemyStateMachines)
         {
-            esm.enabled = false;
+            try{esm.enabled = false;}
+            catch{}
         }
     }
 }

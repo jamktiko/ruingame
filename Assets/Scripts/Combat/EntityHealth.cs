@@ -5,7 +5,7 @@ public abstract class EntityHealth : Health
     public float _percentualResistance = 10f;
     private float _reDamageTimer = 0.5f;
     //private float _reDamageTimerDoT = 0.4f;
-    private bool _damageable;
+    private bool _damageable = true;
     
     public HealthUI _healthUI;
 
@@ -35,7 +35,6 @@ public abstract class EntityHealth : Health
     {
         _healthUI.UpdateUIValue(currentHealth);
         CheckHealth();
-        
     }
     public override void DealDamageOverTime(float amount, float time)
     {

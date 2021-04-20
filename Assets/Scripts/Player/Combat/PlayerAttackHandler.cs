@@ -47,7 +47,14 @@ public class PlayerAttackHandler : ComboAttackHandler
         base.EndAttack();
         _movementControl.attacking = attacking;
     }
-
+    public override void AttemptAttack()
+    {
+        StartAttack();
+        try { currentAttack = GetAttack(); }
+        catch {Debug.Log("No attack to execute!");}
+        TurnTowardsNearest();
+        ExecuteAttack();
+    }
     protected override void StartAttack()
     {
         base.StartAttack();

@@ -37,7 +37,7 @@ namespace DefaultNamespace
 
         public void GetNewDirection()
         {
-            Enemy.currentTargetDirection = Enemy.DecidePatrolDirection();
+            Enemy.currentTargetPos = Enemy.DecidePatrolDirection();
         }
         public override void UseMovement()
         {

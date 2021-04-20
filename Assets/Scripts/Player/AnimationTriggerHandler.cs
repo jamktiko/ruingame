@@ -34,6 +34,11 @@ public class AnimationTriggerHandler : MonoBehaviour
             Debug.Log("Attack failed");}
     }
 
+    public void EndAttack()
+    {
+        _attackHandler.EndAttack();
+    }
+
     public void WeaponSlash()
 
     {
