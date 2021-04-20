@@ -271,7 +271,7 @@ public class MovementController : MonoBehaviour
         Vector3 startPos = transform.position;
         float capsuleMaxHeight = 1.99f;
         float capsuleMaxRadius = 0.49f;
-        float maxDistance = 15f;
+        float maxDistance = 10f;
         CapsuleCollider[] colliders = GetComponents<CapsuleCollider>();
         Vector3 direction = DashDirection();
 
@@ -289,7 +289,7 @@ public class MovementController : MonoBehaviour
         }
         dashing = false;
         _characterAnimator.SetBool("dashing", false);
-
+        Debug.Log(Vector3.Distance(startPos, transform.position));
         EneableColliders(true, colliders);
         FreezePosition(false);
     }
