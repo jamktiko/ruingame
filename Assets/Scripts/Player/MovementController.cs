@@ -295,9 +295,10 @@ public class MovementController : MonoBehaviour
 
         _characterAnimator.SetBool("dashing", true);
         dashing = true;
+        Vector3 direction = DashDirection();
         for (float ft = duration; ft >= 0; ft -= Time.deltaTime)
         {
-            Move2(maxDistance, startPos);
+            Move2(maxDistance, startPos, direction);
             yield return new WaitForFixedUpdate();
         }
         dashing = false;
@@ -308,14 +309,24 @@ public class MovementController : MonoBehaviour
         //ChangeRigidbodyToKinematic(false, RigidbodyInterpolation.None, CollisionDetectionMode.ContinuousDynamic);
     }
 
-    private void Move2(float hitDistance, Vector3 startPos)
+    Vector3 DashDirection()
+    {
+        if (MovementInput == Vector3.zero)
+        {
+            _animatorVelocity = 0;
+            return transform.forward;
+        }
+        return MovementInput;
+    }
+
+    private void Move2(float hitDistance, Vector3 startPos, Vector3 direction)
     {
         float dashDistance = Vector3.Distance(transform.position, startPos);
         float step = _movementSpeed * Time.deltaTime;
 
         if (dashDistance + step <= hitDistance)
         {
-            transform.Translate(Vector3.forward * step);
+            transform.position += direction * step;
         }
     }
 
