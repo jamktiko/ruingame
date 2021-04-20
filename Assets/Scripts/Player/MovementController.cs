@@ -271,31 +271,17 @@ public class MovementController : MonoBehaviour
         Vector3 startPos = transform.position;
         float capsuleMaxHeight = 1.99f;
         float capsuleMaxRadius = 0.49f;
-        float maxDistance = 10f;
+        float maxDistance = 15f;
         CapsuleCollider[] colliders = GetComponents<CapsuleCollider>();
+        Vector3 direction = DashDirection();
 
-        Vector3 p1 = transform.position;
-        Vector3 p2 = transform.position + Vector3.up * capsuleMaxHeight;
-        Vector3 dir = transform.forward;
-        LayerMask layer = LayerMask.GetMask("CameraCollision");
-        RaycastHit[] hits = Physics.CapsuleCastAll(p1, p2, capsuleMaxRadius, dir, maxDistance, layer, QueryTriggerInteraction.Collide);
-
-        foreach (var item in hits)
-        {
-            if (item.transform.tag != "Ground")
-            {
-                maxDistance = item.distance;
-                break;
-            }
-        }
+        CheckDashHitOnWalls(ref maxDistance, capsuleMaxHeight, capsuleMaxRadius, direction);
         CheckOverlaps(ref maxDistance, startPos, 2f, 0.8f);
         FreezePosition(true);
-        //ChangeRigidbodyToKinematic(true, RigidbodyInterpolation.None, CollisionDetectionMode.Discrete);
         EneableColliders(false, colliders);
 
         _characterAnimator.SetBool("dashing", true);
         dashing = true;
-        Vector3 direction = DashDirection();
         for (float ft = duration; ft >= 0; ft -= Time.deltaTime)
         {
             Move2(maxDistance, startPos, direction);
@@ -306,7 +292,6 @@ public class MovementController : MonoBehaviour
 
         EneableColliders(true, colliders);
         FreezePosition(false);
-        //ChangeRigidbodyToKinematic(false, RigidbodyInterpolation.None, CollisionDetectionMode.ContinuousDynamic);
     }
 
     Vector3 DashDirection()
@@ -338,19 +323,28 @@ public class MovementController : MonoBehaviour
             _characterRigidBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
     }
 
-    void ChangeRigidbodyToKinematic(bool isKinematic, RigidbodyInterpolation interpolation, CollisionDetectionMode collisionDetection)
-    {
-        //Camera may jitter without interpolation or if its changed back to None 
-        //_characterRigidBody.interpolation = interpolation;
-        _characterRigidBody.collisionDetectionMode = collisionDetection;
-        _characterRigidBody.isKinematic = isKinematic;
-    }
-
     private void EneableColliders(bool enable, CapsuleCollider[] colliders)
     {
         foreach (var item in colliders)
         {
             item.enabled = enable;
+        }
+    }
+
+    private void CheckDashHitOnWalls(ref float maxDistance,  float capsuleMaxHeight, float capsuleMaxRadius, Vector3 direction)
+    {
+        Vector3 p1 = transform.position;
+        Vector3 p2 = transform.position + Vector3.up * capsuleMaxHeight;
+        LayerMask layer = LayerMask.GetMask("CameraCollision");
+        RaycastHit[] hits = Physics.CapsuleCastAll(p1, p2, capsuleMaxRadius, direction, maxDistance, layer, QueryTriggerInteraction.Collide);
+
+        foreach (var item in hits)
+        {
+            if (item.transform.tag != "Ground")
+            {
+                maxDistance = item.distance;
+                break;
+            }
         }
     }
 
