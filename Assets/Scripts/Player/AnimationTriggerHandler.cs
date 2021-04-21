@@ -59,12 +59,10 @@ public class AnimationTriggerHandler : MonoBehaviour
     public void StanceChange()
     {
         Instantiate(_stanceChange, _stanceChangePosition);
-
     }
 
     public void DashEffect()
     {
-
         Instantiate(_dashEffect, _dashPosition);
     }
     
