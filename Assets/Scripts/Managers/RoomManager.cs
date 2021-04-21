@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
+
 public class RoomManager : MonoBehaviour
 {
     public CanvasGroup canvasGroup;
@@ -25,6 +26,11 @@ public class RoomManager : MonoBehaviour
     {
         //Created by Game Manager
         DontDestroyOnLoad(gameObject);
+    }
+
+    private void Start()
+    {
+       canvasGroup = GameObject.FindGameObjectWithTag("LoadingScreen").GetComponent<CanvasGroup>();
     }
 
     public bool AllEnemiesCleared()
@@ -86,9 +92,11 @@ public class RoomManager : MonoBehaviour
         currentRoomGO.GetComponentInChildren<RoomExit>().roomManager = gameObject.GetComponent<RoomManager>();
         _currentRoom++;
         */
-        SceneManager.LoadScene("Room" + _currentRoom);
+        PlayerManager.Instance.DisablePlayerInput();
         yield return new WaitForSeconds(0.2f);
-        canvasGroup = GameObject.FindGameObjectWithTag("LoadingScreen").GetComponent<CanvasGroup>();
+        StartCoroutine(FadeLoadingScreenIn(0.5f));
+        yield return new WaitForSeconds(0.5f);
+        SceneManager.LoadScene("Room" + _currentRoom);
         yield return new WaitForSeconds(0.2f);
         PlacePlayerInLoading();
         yield return new WaitForSeconds(0.5f);
@@ -118,7 +126,22 @@ public class RoomManager : MonoBehaviour
             time += Time.deltaTime;
             yield return null;
         }
-        
+
+        canvasGroup.alpha = 0f;
+    }
+    IEnumerator FadeLoadingScreenIn(float duration)
+    {
+        float startValue = 0;
+        float time = 0;
+
+        while (time < duration)
+        {
+            canvasGroup.alpha = Mathf.Lerp(0, 1, time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        canvasGroup.alpha = 1f;
     }
     public void StartRoomManager()
     {
