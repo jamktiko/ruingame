@@ -9637,7 +9637,7 @@ GameObject:
   - component: {fileID: 6536514144657714137}
   - component: {fileID: 5422494723491074136}
   - component: {fileID: 5054253623446984346}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FireBarrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}

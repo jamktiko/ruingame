@@ -325,7 +325,7 @@ GameObject:
   - component: {fileID: 4934047643186974636}
   - component: {fileID: 4934047643186974638}
   - component: {fileID: 4934047643186974637}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EXIT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -362,6 +362,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomManager: {fileID: 0}
+  CanExit: 1
 --- !u!65 &4934047643186974637
 BoxCollider:
   m_ObjectHideFlags: 0
