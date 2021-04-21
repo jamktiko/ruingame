@@ -5,8 +5,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class RoomManager : MonoBehaviour
 {
+    public CanvasGroup canvasGroup;
     private int _currentRoom = 0;
     public List<GameObject> possibleRooms;
     //Get total enemies 
@@ -75,7 +77,6 @@ public class RoomManager : MonoBehaviour
     public virtual IEnumerator WaitCreation()
     {
         //Activate Loading Screen
-        PlacePlayerInLoading();
         /*
         if (currentRoomGO != null)
         {
@@ -86,20 +87,38 @@ public class RoomManager : MonoBehaviour
         _currentRoom++;
         */
         SceneManager.LoadScene("Room" + _currentRoom);
+        yield return new WaitForSeconds(0.2f);
+        canvasGroup = GameObject.FindGameObjectWithTag("LoadingScreen").GetComponent<CanvasGroup>();
+        yield return new WaitForSeconds(0.2f);
+        PlacePlayerInLoading();
         yield return new WaitForSeconds(0.5f);
         currentRoomGO = GameObject.FindGameObjectWithTag("Room");
         spawnerManager = GameObject.FindGameObjectWithTag("SpawnerManager").GetComponent<SpawnerManager>();
         _entryPoint = GameObject.FindGameObjectWithTag("Entry").transform;
-        
+
         PlacePlayerAtEntry();
-        
         spawnerManager.enemiesToSpawn = enemiesToSpawn;
         enemiesToSpawn += 2;
         yield return new WaitForSeconds(1f);
-        PlayerManager.Instance.EnablePlayerInput();
+        StartCoroutine(FadeLoadingScreen(1));
+        yield return new WaitForSeconds(1f);
         //Deactivate loading screen
+        PlayerManager.Instance.EnablePlayerInput();
         spawnerManager.StartSpawners();
         _creatingRoom = false;
+    }
+    IEnumerator FadeLoadingScreen(float duration)
+    {
+        float startValue = 0;
+        float time = 0;
+
+        while (time < duration)
+        {
+            canvasGroup.alpha = Mathf.Lerp(1, 0, time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        
     }
     public void StartRoomManager()
     {

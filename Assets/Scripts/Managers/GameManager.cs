@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour
         Destroy(currentPauseMenu);
         currentPlayer.GetComponent<PlayerManager>().enabled = false;
         Destroy(currentPlayer);
-        SceneManager.LoadScene("MainMenu");
+        AsyncOperation loadingOperation = SceneManager.LoadSceneAsync("MainMenu");
     }
     public void InitializePlayer()
     {
