@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: ruin_fmod/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637544365072335431
+  lastModified: 637540117474166793
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -189,7 +189,7 @@ MonoBehaviour:
   Path: ruin_fmod/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637544365072345403
+  lastModified: 637540117474166793
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -222,7 +222,7 @@ MonoBehaviour:
   - {fileID: -8482669008628703421}
   StringsBanks:
   - {fileID: -3012258315468212392}
-  stringsBankWriteTime: 637544365072345403
+  stringsBankWriteTime: 637540117474166793
   cacheVersion: 6
 --- !u!114 &1975878321125533561
 MonoBehaviour:
