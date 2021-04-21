@@ -274,10 +274,11 @@ public class MovementController : MonoBehaviour
         float maxDistance = 10f;
         CapsuleCollider[] colliders = GetComponents<CapsuleCollider>();
         Vector3 direction = DashDirection();
-        
-        if (!CheckIfPlayerTouchesWall(ref maxDistance, capsuleMaxHeight, capsuleMaxRadius))
+        LayerMask cameraCollision = LayerMask.GetMask("CameraCollision");
+
+        if (!CheckIfPlayerTouchesWall(ref maxDistance, capsuleMaxHeight, capsuleMaxRadius, cameraCollision))
         {
-            CheckDashHitOnWalls(ref maxDistance, capsuleMaxHeight, capsuleMaxRadius, direction);
+            CheckDashHitOnWalls(ref maxDistance, capsuleMaxHeight, capsuleMaxRadius, direction, cameraCollision);
             CheckOverlaps(ref maxDistance, startPos, 2f, 0.8f);
         }
         FreezePosition(true);
@@ -333,11 +334,10 @@ public class MovementController : MonoBehaviour
         }
     }
 
-    private bool CheckIfPlayerTouchesWall(ref float maxDistance, float capsuleMaxHeight, float capsuleMaxRadius)
+    private bool CheckIfPlayerTouchesWall(ref float maxDistance, float capsuleMaxHeight, float capsuleMaxRadius, LayerMask layer)
     {
         Vector3 p1 = transform.position;
         Vector3 p2 = transform.position + Vector3.up * capsuleMaxHeight;
-        LayerMask layer = LayerMask.GetMask("CameraCollision");
         Collider[] colliders = Physics.OverlapCapsule(p1, p2, capsuleMaxRadius, layer, QueryTriggerInteraction.Collide);
 
         foreach (var item in colliders)
@@ -351,11 +351,10 @@ public class MovementController : MonoBehaviour
         return false;
     }
 
-    private void CheckDashHitOnWalls(ref float maxDistance,  float capsuleMaxHeight, float capsuleMaxRadius, Vector3 direction)
+    private void CheckDashHitOnWalls(ref float maxDistance,  float capsuleMaxHeight, float capsuleMaxRadius, Vector3 direction, LayerMask layer)
     {
         Vector3 p1 = transform.position;
         Vector3 p2 = transform.position + Vector3.up * capsuleMaxHeight;
-        LayerMask layer = LayerMask.GetMask("CameraCollision");
         RaycastHit[] hits = Physics.CapsuleCastAll(p1, p2, capsuleMaxRadius, direction, maxDistance, layer, QueryTriggerInteraction.Collide);
 
         foreach (var item in hits)
