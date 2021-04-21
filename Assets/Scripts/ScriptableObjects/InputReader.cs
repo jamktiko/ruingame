@@ -159,6 +159,7 @@ public class InputReader : ScriptableObject, PlayerInput.IGameplayActions, Playe
     public void EnableMenuInput()
     {
      _playerInput.Gameplay.Disable();
+     Debug.Log("Enabled playermenu");
      _playerInput.Menus.Enable();
     }
     public void OnMoveSelection(InputAction.CallbackContext context)

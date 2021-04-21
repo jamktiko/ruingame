@@ -5,13 +5,13 @@ public class AtlanteanTrident : ArtifactEffect
 {
     public float slowDownTime = 2f;
     PlayerAttackHandler playerAttackHandler;
-    private Movement enemyMovement;
+    private BaseMovement enemyMovement;
     private float normalEnemySpeed;
 
     private void Start()
     {
         _playerReference = PlayerManager.Instance;
-        normalEnemySpeed = gameObject.AddComponent<Movement>().movementSpeed;
+        normalEnemySpeed = gameObject.AddComponent<BaseMovement>()._movementSpeed;
     }
 
     public override void AddEffect()
@@ -26,7 +26,7 @@ public class AtlanteanTrident : ArtifactEffect
     {
         if (enemyHealth.TryGetComponent(out enemyMovement))
         {
-            enemyMovement.movementSpeed = normalEnemySpeed / 2f;
+            enemyMovement._movementSpeed = normalEnemySpeed / 2f;
             float time = enemyHealth.GetComponent<StunnedState>().StunTimer + slowDownTime;
             Invoke("NormilizeMovementSpeed", time);
         }
@@ -34,6 +34,6 @@ public class AtlanteanTrident : ArtifactEffect
 
     void NormilizeMovementSpeed()
     {
-        enemyMovement.movementSpeed = normalEnemySpeed;
+        enemyMovement._movementSpeed = normalEnemySpeed;
     }
 }

@@ -25,6 +25,7 @@ namespace DefaultNamespace.Skills
         [SerializeField] private float _passiveResistance;
         [SerializeField] private float _selfDamage;
 
+        public MeleeAttack _selfAttack;
         protected override void Start()
         {
             base.Start();
@@ -36,14 +37,16 @@ namespace DefaultNamespace.Skills
             _selfDamage = 20f;
             PlayerManager.Instance.ModifyAttackSpeed(_passiveAttackSpeed, 1);
             PlayerManager.Instance.ModifyResistance(_passiveResistance, 1);
+            _selfAttack = SelfDamage();
         }
 
-        public override void Execute()
+        public override void Execute(float duration)
         {
-            if (playerHealth.CurrentHealth >= 40f)
+            if (playerHealth.currentHealth > 40f)
             {
                 base.Execute();
-                WhileSkillActive();
+                try {WhileSkillActive();}
+                catch{Debug.Log("whileskillactive");}
             }
         }
 
@@ -53,9 +56,10 @@ namespace DefaultNamespace.Skills
                 IEnumerator coroutine = skillUser.UsePersistentEffect(this);
                 skillUser.StartCoroutine(coroutine);
                 ModifyPlayerStats(1);
-
-                //Might deal negative-negative damage to player. Regfactoring in progress
-                playerHealth.DealDamage(_selfDamage);
+                try {skillUser.attackHandler.HandleSelfAttack(_selfAttack);}
+                catch{Debug.Log("selfattack");}
+                //Might deal negative-negative damage to player. Refactoring in progress
+            
         }
         public override void DeActivateSkillActive()
         {
@@ -67,6 +71,16 @@ namespace DefaultNamespace.Skills
         {
             PlayerManager.Instance.ModifyDamage(damage, type);
             PlayerManager.Instance.ModifyResistance(-_damageResistance, type);
+        }
+
+        public MeleeAttack SelfDamage()
+        {
+            var _self = ScriptableObject.CreateInstance<MeleeAttack>();
+            _self.TargetingType = basetargetingType.SELF;
+            _self.DamageType = baseDamageType.DIRECT;
+            _self.baseDamage = _selfDamage;
+            _self.KnockBack = false;
+            return _self;
         }
     }
 }

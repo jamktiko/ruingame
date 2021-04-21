@@ -5,8 +5,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+
 public class RoomManager : MonoBehaviour
 {
+    public CanvasGroup canvasGroup;
     private int _currentRoom = 0;
     public List<GameObject> possibleRooms;
     //Get total enemies 
@@ -18,11 +21,16 @@ public class RoomManager : MonoBehaviour
     public bool EnemiesCleared = false;
     public SpawnerManager spawnerManager;
     private bool _creatingRoom = false;
-    private int enemiesToSpawn = 2;
+    private int enemiesToSpawn = 4;
     private void Awake()
     {
         //Created by Game Manager
         DontDestroyOnLoad(gameObject);
+    }
+
+    private void Start()
+    {
+       canvasGroup = GameObject.FindGameObjectWithTag("LoadingScreen").GetComponent<CanvasGroup>();
     }
 
     public bool AllEnemiesCleared()
@@ -47,7 +55,7 @@ public class RoomManager : MonoBehaviour
         _currentRoom += 1;
         if (_currentRoom > 4)
         {
-            GameManager.Instance.GameOver();
+            _currentRoom = 1;
         }
         StartCoroutine(WaitCreation());
     }
@@ -59,6 +67,7 @@ public class RoomManager : MonoBehaviour
 
     public void PlacePlayerInLoading()
     {
+        PlayerManager.Instance.DisablePlayerInput();
         MovePlayerToLocation(gameObject.transform);
     }
     public void PlacePlayerAtEntry()
@@ -74,7 +83,6 @@ public class RoomManager : MonoBehaviour
     public virtual IEnumerator WaitCreation()
     {
         //Activate Loading Screen
-        PlacePlayerInLoading();
         /*
         if (currentRoomGO != null)
         {
@@ -84,20 +92,56 @@ public class RoomManager : MonoBehaviour
         currentRoomGO.GetComponentInChildren<RoomExit>().roomManager = gameObject.GetComponent<RoomManager>();
         _currentRoom++;
         */
+        PlayerManager.Instance.DisablePlayerInput();
+        yield return new WaitForSeconds(0.2f);
+        StartCoroutine(FadeLoadingScreenIn(0.5f));
+        yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene("Room" + _currentRoom);
+        yield return new WaitForSeconds(0.2f);
+        PlacePlayerInLoading();
         yield return new WaitForSeconds(0.5f);
         currentRoomGO = GameObject.FindGameObjectWithTag("Room");
         spawnerManager = GameObject.FindGameObjectWithTag("SpawnerManager").GetComponent<SpawnerManager>();
         _entryPoint = GameObject.FindGameObjectWithTag("Entry").transform;
-        
+
         PlacePlayerAtEntry();
-        
         spawnerManager.enemiesToSpawn = enemiesToSpawn;
         enemiesToSpawn += 2;
         yield return new WaitForSeconds(1f);
+        StartCoroutine(FadeLoadingScreen(1));
+        yield return new WaitForSeconds(1f);
         //Deactivate loading screen
+        PlayerManager.Instance.EnablePlayerInput();
         spawnerManager.StartSpawners();
         _creatingRoom = false;
+    }
+    IEnumerator FadeLoadingScreen(float duration)
+    {
+        float startValue = 0;
+        float time = 0;
+
+        while (time < duration)
+        {
+            canvasGroup.alpha = Mathf.Lerp(1, 0, time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        canvasGroup.alpha = 0f;
+    }
+    IEnumerator FadeLoadingScreenIn(float duration)
+    {
+        float startValue = 0;
+        float time = 0;
+
+        while (time < duration)
+        {
+            canvasGroup.alpha = Mathf.Lerp(0, 1, time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        canvasGroup.alpha = 1f;
     }
     public void StartRoomManager()
     {
