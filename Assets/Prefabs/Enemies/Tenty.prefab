@@ -83,14 +83,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2820430217921150074}
-  - component: {fileID: 2820430217921150077}
   - component: {fileID: 2820430217921150072}
-  - component: {fileID: 2820430217921150075}
-  - component: {fileID: 2820430217921150068}
-  - component: {fileID: 2820430217921150071}
-  - component: {fileID: 2820430217921150070}
-  - component: {fileID: 2820430217921150073}
   - component: {fileID: 6653065071612980812}
+  - component: {fileID: 7934569266134613002}
+  - component: {fileID: 5246645207812936781}
+  - component: {fileID: 5093285676590536613}
+  - component: {fileID: 5952070737997653679}
+  - component: {fileID: 2546118709117486936}
   m_Layer: 9
   m_Name: Tenty
   m_TagString: Enemy
@@ -115,25 +114,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2820430217921150077
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2820430217921150076}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4abbfb463cf49559cdc4c5181bdab7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _flatResistance: 10
-  _percentualResistance: 10
-  _maximumHealth: 100
-  _healthUI: {fileID: 4083498064577310034}
-  CurrentHealth: 0
-  _damageable: 1
-  enemyController: {fileID: 0}
 --- !u!54 &2820430217921150072
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -148,22 +128,22 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &2820430217921150075
-MonoBehaviour:
+--- !u!65 &6653065071612980812
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2820430217921150076}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72c4c3f844aa93a499aea6f44e2096ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canKnockback: 1
---- !u!114 &2820430217921150068
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 2.41, z: 1.5}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7934569266134613002
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -179,8 +159,9 @@ MonoBehaviour:
   - Player
   LayerToCheck:
     serializedVersion: 2
-    m_Bits: 0
---- !u!114 &2820430217921150071
+    m_Bits: 1
+  currentTargets: []
+--- !u!114 &5246645207812936781
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -192,11 +173,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e55c1e43e734451b9bad47ca5c6516c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseAttack: {fileID: 11400000, guid: cae366f63c39732459e7a74738e954de, type: 2}
+  baseAttack: {fileID: 11400000, guid: 0c7ef3e8dd56d1a4586fb34838df6645, type: 2}
   attacking: 0
-  firePoint: {fileID: 4480989522483578009}
+  criticalHitChance: 0
+  AllowedTargetTags: []
   _characterAnimator: {fileID: 0}
---- !u!114 &2820430217921150070
+  firePoint: {fileID: 0}
+--- !u!114 &5093285676590536613
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -205,15 +188,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 2820430217921150076}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d63d6826758a4d4e8878966b60050c3, type: 3}
+  m_Script: {fileID: 11500000, guid: bcc97485f8e84843888179d3598e37fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementInput: {x: 0, y: 0, z: 0}
-  _entityRigidbody: {fileID: 0}
-  attacking: 0
-  movementSpeed: 1000
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  groundCheckRadius: 0.5
+  GroundedEntity: 0
+  _characterAnimator: {fileID: 0}
+  _movementSpeed: 5
+  _jumpHeight: 0
   turnSmoothing: 15
---- !u!114 &2820430217921150073
+  stepHeight: 0.3
+  stepSmooth: 0.3
+  attacking: 0
+  canKnockback: 1
+  _characterController: {fileID: 0}
+--- !u!114 &5952070737997653679
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -222,28 +214,47 @@ MonoBehaviour:
   m_GameObject: {fileID: 2820430217921150076}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa4aafd8afbe44c2a3d9dcbeef8fc330, type: 3}
+  m_Script: {fileID: 11500000, guid: d4abbfb463cf49559cdc4c5181bdab7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movementControl: {fileID: 0}
-  alive: 1
-  attack: {fileID: 0}
-  attackRange: 10
-  stunned: 0
-  playerTransform: {fileID: 0}
---- !u!65 &6653065071612980812
-BoxCollider:
+  maximumHealth: 0
+  currentHealth: 0
+  _flatResistance: 10
+  _percentualResistance: 10
+  _healthUI: {fileID: 4083498064577310034}
+  enemyController: {fileID: 0}
+--- !u!114 &2546118709117486936
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2820430217921150076}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.5, y: 1, z: 1.5}
-  m_Center: {x: 0, y: -0.8, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0ac8208a0114eb5a764dc826b8ec1d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementController: {fileID: 0}
+  attackHandler: {fileID: 0}
+  areaRaycasts: 30
+  areaInformation: {fileID: 0}
+  attackRange: 0
+  enemyGroup: {fileID: 0}
+  checkingForPlayer: 0
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 1280
+  playerTarget: {fileID: 0}
+  hitTestLayer:
+    serializedVersion: 2
+    m_Bits: 1
+  stunned: 0
+  alive: 1
+  currentTargetPos: {x: 0, y: 0, z: 0}
+  currentTargetDirection: {x: 0, y: 0, z: 0}
+  BaseStates: 0
+  state: 
 --- !u!1 &3207569381267311845
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,7 +397,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bddcfca1af046f642a36388162bd78b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _entityHealth: {fileID: 2820430217921150077}
+  _entityHealth: {fileID: 0}
+  _entityUI: {fileID: 0}
+  _healthSlider: {fileID: 0}
 --- !u!1 &5272047599385763920
 GameObject:
   m_ObjectHideFlags: 0

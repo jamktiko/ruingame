@@ -34,7 +34,7 @@ namespace DefaultNamespace.Skills
         {
             base.Start();
             skillname = "WhirlWind";
-            damage = 100f;
+            damage = 20f;
             skillCooldown = 5f;
             _attackDistance = _attackRadius / 2f;
         }
@@ -55,13 +55,9 @@ namespace DefaultNamespace.Skills
             Collider[] colliders = targeting.FindColliderOverlaps(p1, p2, _attackRadius);
             foreach (var collider in colliders)
             {
-                if (collider.gameObject.TryGetComponent(out KnockbackHandler kbh))
+                if (collider.gameObject.TryGetComponent(out BaseMovement kbh))
                 {
                     kbh.HandleKnockBack(transform.position, _knockbackForce);
-                }
-                if (collider.gameObject.TryGetComponent(out BaseEnemy enemy))
-                {
-                    enemy.stunned = true;
                 }
                 targeting.DamageEnemy(collider.gameObject, damage);
             }

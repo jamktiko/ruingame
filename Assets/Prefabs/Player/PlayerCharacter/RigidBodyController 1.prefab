@@ -4149,6 +4149,7 @@ GameObject:
   - component: {fileID: 7717186085094416634}
   - component: {fileID: 6940930448894966342}
   - component: {fileID: 6940930448894966337}
+  - component: {fileID: 2178994866843642577}
   m_Layer: 0
   m_Name: PlayerCharacter2
   m_TagString: Untagged
@@ -4221,9 +4222,18 @@ MonoBehaviour:
   _stanceChange: {fileID: 2876549060377359625, guid: e9b5315e26950b94895767680ac47595,
     type: 3}
   _stanceChangePosition: {fileID: 7326632222780294412}
-  _dashEffect: {fileID: 1304514083103518325, guid: a0695b1e8f089d9469ee5cd71826a21f,
-    type: 3}
-  _dashPosition: {fileID: 7584998813961259151}
+--- !u!114 &2178994866843642577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6940930448894966336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 933a479818b381043a94885d39ee4d4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6945712697815791153
 GameObject:
   m_ObjectHideFlags: 0
@@ -4360,7 +4370,6 @@ GameObject:
   - component: {fileID: 5745137938756063206}
   - component: {fileID: 4216054620355309338}
   - component: {fileID: 4013910443689401621}
-  - component: {fileID: 2336829016960986273}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -4463,14 +4472,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entityHealth: {fileID: 709004692178834234}
---- !u!222 &2336829016960986273
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7159633608963003866}
-  m_CullTransparentMesh: 0
 --- !u!1 &7305616874439435601
 GameObject:
   m_ObjectHideFlags: 0
@@ -4622,7 +4623,6 @@ Transform:
   - {fileID: 7326632221843813687}
   - {fileID: 7326632222960827972}
   - {fileID: 7326632222780294412}
-  - {fileID: 7584998813961259151}
   m_Father: {fileID: 7717186085094416634}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5277,36 +5277,6 @@ Transform:
   m_Father: {fileID: 33533015940488353}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -2.1309576, y: -19.494291, z: -106.73821}
---- !u!1 &8348673063726144327
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7584998813961259151}
-  m_Layer: 0
-  m_Name: DashEffect
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7584998813961259151
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8348673063726144327}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.85, z: 0.023}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 7326632223092050803}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8446678862246379619
 GameObject:
   m_ObjectHideFlags: 0

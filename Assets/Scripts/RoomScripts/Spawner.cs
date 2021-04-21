@@ -8,7 +8,7 @@ public class Spawner : MonoBehaviour
     public int currentSpawnedEnemies;
     public int remainingEnemies;
     public GameObject enemyprefab;
-    
+    public Enemy_Group EG;
     public void EntityDeath()
     {
         currentSpawnedEnemies--;
@@ -34,16 +34,26 @@ public class Spawner : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        EG = GetComponent<Enemy_Group>();
+    }
     private IEnumerator SpawnEnemy()
     {
         //Spawns one enemy
         yield return new WaitForSeconds(1f);
         var enemy = Instantiate(enemyprefab, gameObject.transform);
+        enemyprefab.GetComponent<Enemy_StateMachine>().enemyGroup = EG;
         enemiesToSpawn--;
         currentSpawnedEnemies++;
         if (enemiesToSpawn > 0)
         {
             StartCoroutine(SpawnEnemy());
+        }
+        EG.enemyStateMachines = GetComponentsInChildren<Enemy_StateMachine>();
+        foreach (Enemy_StateMachine esm in EG.enemyStateMachines)
+        {
+            esm.enemyGroup = EG;
         }
     }
 

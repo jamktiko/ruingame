@@ -24,11 +24,11 @@ public class ScytheOfTheGrimReaper : ArtifactEffect
 
             if (_playerReference.TryGetComponent(out PlayerHealth playerHealth))
             {
-                float addHealth = playerHealth.CurrentHealth + playerHealth._maximumHealth * 0.1f;
-                if (addHealth > playerHealth._maximumHealth)
-                    playerHealth.CurrentHealth = playerHealth._maximumHealth;
+                float addHealth = playerHealth.currentHealth + playerHealth.maximumHealth * 0.1f;
+                if (addHealth > playerHealth.maximumHealth)
+                    playerHealth.currentHealth = playerHealth.maximumHealth;
                 else
-                    playerHealth.CurrentHealth = addHealth;
+                    playerHealth.currentHealth = addHealth;
 
             }
         }

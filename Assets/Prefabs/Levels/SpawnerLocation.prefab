@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2064530737490587144}
   - component: {fileID: 6555232305304339995}
+  - component: {fileID: -3209452748132662734}
   m_Layer: 0
   m_Name: SpawnerLocation
   m_TagString: SpawnerLocation
@@ -48,3 +49,23 @@ MonoBehaviour:
   remainingEnemies: 0
   enemyprefab: {fileID: 2820430217921150076, guid: 0dbf118da68cfb140ae3ecd7117ea4de,
     type: 3}
+  EG: {fileID: 0}
+--- !u!114 &-3209452748132662734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2064530737490587145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c23f27cba8549a3b1a88734355c099e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyStateMachines: []
+  playerTarget: {fileID: 0}
+  EGM: {fileID: 0}
+  PAS: {fileID: 11400000, guid: 5dc6aceae0239cb4296d46695c37ed4d, type: 2}
+  patrolArea:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}

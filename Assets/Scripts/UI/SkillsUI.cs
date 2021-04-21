@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Channels;
 using UnityEngine;
 using UnityEngine.UI;
 public class SkillsUI : MonoBehaviour
@@ -7,16 +8,18 @@ public class SkillsUI : MonoBehaviour
     private SkillUser skillUser;
     public GameObject[] skillIconPrefabs;
     public Image[] skillImages;
-    public GameObject[] skillIconPrefab;
+    public GameObject skillIconPrefab;
+    public float UIUpdateRate = 0.05f;
     void Start()
     {
         skillUser = PlayerManager.Instance._playerSkills;
+        skillUser.SkillActivated += OnSkillUse;
         skillUser.skillUI = this;
         skillIconPrefabs = new GameObject[skillUser.skillList.Length];
         skillImages = new Image[skillUser.skillList.Length];
         for (int i = 0; i < skillUser.skillList.Length; i++)
         {
-            skillIconPrefabs[i] = Instantiate(skillIconPrefab[i]);
+            skillIconPrefabs[i] = Instantiate(skillIconPrefab);
             skillIconPrefabs[i].transform.SetParent(gameObject.transform);
             var skI = skillIconPrefabs[i].GetComponent<SkillImage>();
             //skI.skillImage = skillUser.skillList[i]
@@ -30,45 +33,26 @@ public class SkillsUI : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public IEnumerator StartCooldown(int index)
     {
-        for (int i = 0; i < skillUser.skillList.Length; i++)
+        var sk = skillUser.skillList[index];
+        var cd = sk.skillCooldown;
+        var ui = UIUpdateRate / sk.skillCooldown;
+        while (cd > 0)
         {
-            try
-            {
-                SkillUpdate(skillUser.skillList[i], i);
-            }
-            catch
-            {
-            }
+            skillImages[index].fillAmount -= ui;
+            cd -= UIUpdateRate;
+            yield return new WaitForSeconds(UIUpdateRate);
+        }
+        if (skillImages[index].fillAmount <= 0)
+        {
+            skillImages[index].fillAmount = 0;
         }
     }
-    
-
-    void SkillUpdate(SkillExecute sk, int index)
+    public void OnSkillUse(SkillActivatedEventArgs e)
     {
-        if (sk != null)
-        {
-            if (sk.onCooldown)
-            {
-                try
-                {
-                    skillImages[index].fillAmount -= 1 / sk.skillCooldown * Time.deltaTime;
-                    if (skillImages[index].fillAmount <= 0)
-                    {
-                        skillImages[index].fillAmount = 0;
-                    }
-                    
-                }
-                catch {Debug.Log("No UI element assigned!");}
-            }
-        }
-
-    }
-    public void OnSkillUse(int index)
-    {
-        skillImages[index].fillAmount = 1;
+        skillImages[e.SkillIndex].fillAmount = 1;
+        StartCoroutine(StartCooldown(e.SkillIndex));
     }
     
 }
