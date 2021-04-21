@@ -62,8 +62,6 @@ public class GameManager : MonoBehaviour
         sk.transform.SetParent(currentPlayer.transform);
         //UPDATE Skills on playermanager
         //_playerManager.UpdateSkills();
-        
-        sk.tag = "Player";
         currentPlayer.tag = "Player";
     }
 
@@ -103,7 +101,7 @@ public class GameManager : MonoBehaviour
         Destroy(currentPauseMenu);
         currentPlayer.GetComponent<PlayerManager>().enabled = false;
         Destroy(currentPlayer);
-        SceneManager.LoadScene("MainMenu");
+        AsyncOperation loadingOperation = SceneManager.LoadSceneAsync("MainMenu");
     }
     public void InitializePlayer()
     {

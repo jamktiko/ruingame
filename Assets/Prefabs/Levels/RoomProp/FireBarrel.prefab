@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8662905818059505544}
   - component: {fileID: 3117145186723434547}
   - component: {fileID: 1254780705641838717}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4823,7 +4823,7 @@ GameObject:
   - component: {fileID: 4561385554702804875}
   - component: {fileID: 298656838956110740}
   - component: {fileID: 6809437852997880605}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9639,7 +9639,7 @@ GameObject:
   - component: {fileID: 5054253623446984346}
   m_Layer: 10
   m_Name: FireBarrel
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9733,7 +9733,7 @@ GameObject:
   - component: {fileID: 6812298385396688565}
   - component: {fileID: 8741498114736987004}
   - component: {fileID: 183178553916437958}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9812,7 +9812,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5758373197816230512}
   - component: {fileID: 8226777610332890200}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: OuterLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9904,7 +9904,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7133258530420407804}
   - component: {fileID: 7546075005999091101}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Light Probe Group
   m_TagString: Untagged
   m_Icon: {fileID: 0}
