@@ -4728,6 +4728,9 @@ MonoBehaviour:
   _stanceChange: {fileID: 2876549060377359625, guid: e9b5315e26950b94895767680ac47595,
     type: 3}
   _stanceChangePosition: {fileID: 0}
+  _dashEffect: {fileID: 1304514083103518325, guid: a0695b1e8f089d9469ee5cd71826a21f,
+    type: 3}
+  _dashPosition: {fileID: 0}
 --- !u!1 &8341623147409387651
 GameObject:
   m_ObjectHideFlags: 0
