@@ -34,7 +34,7 @@ namespace DefaultNamespace.Skills
         {
             base.Start();
             skillname = "WhirlWind";
-            damage = 20f;
+            damage = 100f;
             skillCooldown = 5f;
             _attackDistance = _attackRadius / 2f;
         }
@@ -58,6 +58,10 @@ namespace DefaultNamespace.Skills
                 if (collider.gameObject.TryGetComponent(out BaseMovement kbh))
                 {
                     kbh.HandleKnockBack(transform.position, _knockbackForce);
+                }
+                if (collider.gameObject.TryGetComponent(out Enemy_StateMachine enemy))
+                {
+                    enemy.SetState(new StunnedState(enemy));
                 }
                 targeting.DamageEnemy(collider.gameObject, damage);
             }
