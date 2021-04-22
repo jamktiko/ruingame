@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenuManager : MenuManager
 {
-    private bool _gamePaused;
+    public bool _gamePaused;
     public override void Awake()
     {
         DontDestroyOnLoad(this);

@@ -29,7 +29,6 @@ public class AttackTargeting : MonoBehaviour
 
     private GameObject[] GetNearestTargets(float radius)
     {
-        Debug.Log("Getting nearest targets");
         GameObject[] gos = GameObject.FindGameObjectsWithTag(AllowedTargetTags[0]);
         for(int i = 1; i < AllowedTargetTags.Length; i++)
         {

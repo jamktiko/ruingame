@@ -74,8 +74,11 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 256
-  groundCheckRadius: 0.1
+  groundCheckRadius: 0.6
   GroundedEntity: 0
+  _characterAnimator: {fileID: 0}
+  _movementSpeed: 0
+  _jumpHeight: 0
   turnSmoothing: 15
   stepHeight: 0.75
   stepSmooth: 3
@@ -94,7 +97,7 @@ CapsuleCollider:
   m_Radius: 0.3
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &181873949443222811
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -108,7 +111,7 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 1.3
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &181873949443222810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,11 +182,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8570592085c9d1143b04375b1eaeb62e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maximumHealth: 0
+  currentHealth: 0
   _flatResistance: 10
   _percentualResistance: 10
   _healthUI: {fileID: 4387780569933816631}
-  flatResistance: 0
-  percentualResistance: 0
   revivePlayer: 0
   dodgeAttack: 0
 --- !u!114 &6354800191026446151
@@ -212,6 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f265421dd558ff747aed7bda24fadffe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseAttack: {fileID: 0}
   attacking: 0
   criticalHitChance: 0
   AllowedTargetTags: []
@@ -237,6 +241,7 @@ MonoBehaviour:
   LayerToCheck:
     serializedVersion: 2
     m_Bits: 1536
+  currentTargets: []
 --- !u!1 &664489811316693147
 GameObject:
   m_ObjectHideFlags: 0
@@ -915,7 +920,7 @@ PrefabInstance:
     - target: {fileID: 26893933330021398, guid: 010a60488de22bd4891b4d85aac207c2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 26893933330021398, guid: 010a60488de22bd4891b4d85aac207c2,
         type: 3}

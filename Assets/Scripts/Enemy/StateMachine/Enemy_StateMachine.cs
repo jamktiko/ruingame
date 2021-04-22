@@ -1,7 +1,7 @@
 ﻿
     using DefaultNamespace;
     using UnityEngine;
-    [RequireComponent(typeof(BaseAttackHandler))]
+    [RequireComponent(typeof(EnemyAttackHandler))]
     [RequireComponent(typeof(EnemyMovement))]
     [RequireComponent(typeof(EnemyHealth))]
     public abstract class Enemy_StateMachine : MonoBehaviour, IEnemy
@@ -9,7 +9,7 @@
         public EnemyMovement movementController;
         public BaseAttackHandler attackHandler;
         private EnemyHealth healthSystem;
-        private Animator entityAnimator;
+        public Animator entityAnimator;
         
         public int areaRaycasts = 30;
         public AreaCheck areaInformation;
@@ -29,6 +29,15 @@
         public WeightedDirection[] pD;
         public Vector3 currentTargetPos;
         public Vector3 currentTargetDirection;
+
+        public enum EnemyType
+        {
+            Melee,
+            Ranged,
+            Caster
+        }
+
+        public EnemyType enemyType;
         
         public enum baseStates
         {
@@ -83,7 +92,7 @@
         public  virtual void SetState(State state)
         {
             _currentState?.OnStateExit();
-
+            
             _currentState = state;
 
             _currentState?.OnStateEnter();

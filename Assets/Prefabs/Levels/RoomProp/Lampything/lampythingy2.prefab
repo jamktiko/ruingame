@@ -4923,7 +4923,7 @@ GameObject:
   - component: {fileID: 2377640728023647574}
   - component: {fileID: 3149356485275394003}
   - component: {fileID: 7054808138847241789}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: lampythingy2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

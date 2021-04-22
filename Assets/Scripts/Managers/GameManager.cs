@@ -87,7 +87,6 @@ public class GameManager : MonoBehaviour
         roomManager.StartRoomManager();
         yield return new WaitForSeconds(0.2f);
         CreateMenuManager();
-        PlayerManager.Instance.playerInputReader.EnablePlayerInput();
     }
 
     private void CreateMenuManager()

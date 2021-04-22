@@ -59,6 +59,10 @@ namespace DefaultNamespace.Skills
                 {
                     kbh.HandleKnockBack(transform.position, _knockbackForce);
                 }
+                if (collider.gameObject.TryGetComponent(out Enemy_StateMachine enemy))
+                {
+                    enemy.SetState(new StunnedState(enemy));
+                }
                 targeting.DamageEnemy(collider.gameObject, damage);
             }
         }

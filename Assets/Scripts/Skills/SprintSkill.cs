@@ -20,7 +20,7 @@ namespace DefaultNamespace
         {
             base.Start();
             skillname = "Sprint";
-            skillCooldown = 2f;
+            skillCooldown = 1.5f;
             duration = 0.2f;
         }
 
@@ -32,11 +32,11 @@ namespace DefaultNamespace
             switch (dashType)
             {
                 case DashType.DashWithVelocity:
-                    SprintSpeed = 20f;
+                    //SprintSpeed = 20f;
                     PlayerManager.Instance._playerMovement.OnDash(duration);
                     break;
                 case DashType.DashWithTranslate:
-                    SprintSpeed = 10f;
+                    //SprintSpeed = 10f;
                     PlayerManager.Instance._playerMovement.OnDash2(duration);
                     break;
                 default:
