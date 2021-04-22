@@ -2,7 +2,7 @@
 
 public class AnimationTriggerHandler : MonoBehaviour
 {
-    private PlayerAttackHandler _attackHandler;
+    private BaseAttackHandler _attackHandler;
 
 
     public GameObject _weaponSlash;
@@ -20,18 +20,12 @@ public class AnimationTriggerHandler : MonoBehaviour
 
     public void Start()
     {
-        _attackHandler = GetComponentInParent<PlayerAttackHandler>();
+        _attackHandler = GetComponentInParent<BaseAttackHandler>();
     }
 
     public void HandleDamage()
     {
-        try
-        {
-            _attackHandler.HandleAttack(_attackHandler.currentAttack);
-        }
-        catch
-        {
-            Debug.Log("Attack failed");}
+        _attackHandler.HandleAttack(_attackHandler.currentAttack);
     }
 
     public void EndAttack()

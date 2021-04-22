@@ -7,7 +7,7 @@ namespace DefaultNamespace
     {
         private Vector3 _destination;
         private float time = 1f;
-        private float newDestination = 0.2f;
+        private float newDestination = 0.1f;
 
         public MoveTowardsPlayerState(Enemy_StateMachine enemy) : base(enemy)
         {
@@ -24,16 +24,15 @@ namespace DefaultNamespace
             {
                 if (newDestination <= 0)
                 {
+                    if (Enemy.HasReachedAttackRange() && Enemy.CanSeePlayer())
+                    {
+                        Enemy.SetState(new AttackPlayerState(Enemy));
+                    }
                     Enemy.currentTargetPos = PlayerManager.Instance.gameObject.transform.position;
                     UseMovement();
-                    newDestination = 0.2f;
+                    newDestination = 0.1f;
                 }
             }
-            if (Enemy.HasReachedAttackRange() && Enemy.CanSeePlayer())
-            {
-                Enemy.SetState(new AttackPlayerState(Enemy));
-            }
-            
         }
 
         public override void UseMovement()

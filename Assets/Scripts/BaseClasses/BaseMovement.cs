@@ -111,7 +111,8 @@
 
     public virtual void GroundCheck()
     {
-        GroundedEntity = Physics.CheckSphere(new Vector3(transform.position.x, transform.position.y, transform.position.z),groundCheckRadius, layerMask);
+        Ray ray = new Ray(transform.position, Vector3.down);
+        GroundedEntity = Physics.SphereCast(ray, 0.5f,groundCheckRadius, layerMask);
     }
 
     public virtual void HandleMovementAnimation()

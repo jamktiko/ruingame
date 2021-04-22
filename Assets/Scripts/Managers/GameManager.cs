@@ -87,7 +87,6 @@ public class GameManager : MonoBehaviour
         roomManager.StartRoomManager();
         yield return new WaitForSeconds(0.2f);
         CreateMenuManager();
-        PlayerManager.Instance.playerInputReader.EnablePlayerInput();
     }
 
     private void CreateMenuManager()
@@ -101,7 +100,7 @@ public class GameManager : MonoBehaviour
         Destroy(currentPauseMenu);
         currentPlayer.GetComponent<PlayerManager>().enabled = false;
         Destroy(currentPlayer);
-        AsyncOperation loadingOperation = SceneManager.LoadSceneAsync("MainMenu");
+        SceneManager.LoadScene("MainMenu");
     }
     public void InitializePlayer()
     {
