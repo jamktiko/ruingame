@@ -14,6 +14,9 @@ public class AnimationTriggerHandler : MonoBehaviour
     public GameObject _stanceChange;
     public Transform _stanceChangePosition;
 
+    public GameObject _dashEffect;
+    public Transform _dashPosition;
+
     private GameObject currentEffectSpawned;
 
 
@@ -50,9 +53,14 @@ public class AnimationTriggerHandler : MonoBehaviour
     public void StanceChange()
     {
         Instantiate(_stanceChange, _stanceChangePosition);
+    }
 
+    public void DashEffect()
+    {
+        Instantiate(_dashEffect, _dashPosition);
     }
     
+       
 
     public void DetachFromParent()
     {

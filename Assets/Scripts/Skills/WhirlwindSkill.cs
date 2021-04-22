@@ -34,7 +34,7 @@ namespace DefaultNamespace.Skills
         {
             base.Start();
             skillname = "WhirlWind";
-            damage = 100f;
+            damage = 20f;
             skillCooldown = 5f;
             _attackDistance = _attackRadius / 2f;
         }

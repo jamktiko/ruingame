@@ -289,7 +289,7 @@ GameObject:
   - component: {fileID: 798363430222292659}
   - component: {fileID: 798363430222292658}
   m_Layer: 0
-  m_Name: PlayerCharacter
+  m_Name: PC_Older
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -358,6 +358,9 @@ MonoBehaviour:
   _stanceChange: {fileID: 2876549060377359625, guid: e9b5315e26950b94895767680ac47595,
     type: 3}
   _stanceChangePosition: {fileID: 3249602730122011709}
+  _dashEffect: {fileID: 1304514083103518325, guid: a0695b1e8f089d9469ee5cd71826a21f,
+    type: 3}
+  _dashPosition: {fileID: 3803894614238320011}
 --- !u!114 &798363430222292658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3457,6 +3460,36 @@ Transform:
   m_Father: {fileID: 7404764020157053309}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 99.1, y: -39.11, z: 0}
+--- !u!1 &5634695162420647660
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3803894614238320011}
+  m_Layer: 0
+  m_Name: DashEffect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3803894614238320011
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5634695162420647660}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.88, z: -0.28}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7404764020157053309}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5649350909080068837
 GameObject:
   m_ObjectHideFlags: 0
@@ -4524,6 +4557,7 @@ Transform:
   - {fileID: 5611592586226838210}
   - {fileID: 7559392374150073257}
   - {fileID: 3249602730122011709}
+  - {fileID: 3803894614238320011}
   m_Father: {fileID: 26893933330021398}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
