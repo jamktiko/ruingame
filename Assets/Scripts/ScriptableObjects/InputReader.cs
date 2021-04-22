@@ -190,7 +190,7 @@ public class InputReader : ScriptableObject, PlayerInput.IGameplayActions, Playe
     public void OnUnpause(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
-            menuUnpauseEvent();
+            PauseEvent();
     }
     public bool LeftMouseDown() => Mouse.current.leftButton.isPressed;
 }

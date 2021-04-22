@@ -10,20 +10,18 @@ namespace DefaultNamespace
 
         public override void OnStateEnter()
         {
+            Debug.Log("Started attacking!");
             Name = "Attacking Player";
             Enemy.movementController.attacking = true;
             Enemy.movementController.Move(Vector3.zero);
-            Enemy.attackHandler.AttemptAttack();
+            Enemy.attackHandler.OnAttack();
         }
         public override void Tick()
         {
-            if (!Enemy.attackHandler.attacking)
-            {
-                Enemy.SetState(new MoveTowardsPlayerState(Enemy));
-            }
         }
         public override void OnStateExit()
         {
+            Debug.Log("Stopped attacking!");
             Enemy.movementController.attacking = false;
             Enemy.attackHandler.attacking = false;
         }

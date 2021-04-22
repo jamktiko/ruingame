@@ -2,7 +2,7 @@
 
 public class AnimationTriggerHandler : MonoBehaviour
 {
-    private PlayerAttackHandler _attackHandler;
+    private BaseAttackHandler _attackHandler;
 
 
     public GameObject _weaponSlash;
@@ -14,24 +14,21 @@ public class AnimationTriggerHandler : MonoBehaviour
     public GameObject _stanceChange;
     public Transform _stanceChangePosition;
 
+    public GameObject _dashEffect;
+    public Transform _dashPosition;
+
     private GameObject currentEffectSpawned;
 
 
 
     public void Start()
     {
-        _attackHandler = GetComponentInParent<PlayerAttackHandler>();
+        _attackHandler = GetComponentInParent<BaseAttackHandler>();
     }
 
     public void HandleDamage()
     {
-        try
-        {
-            _attackHandler.HandleAttack(_attackHandler.currentAttack);
-        }
-        catch
-        {
-            Debug.Log("Attack failed");}
+        _attackHandler.HandleAttack(_attackHandler.currentAttack);
     }
 
     public void EndAttack()
@@ -56,9 +53,14 @@ public class AnimationTriggerHandler : MonoBehaviour
     public void StanceChange()
     {
         Instantiate(_stanceChange, _stanceChangePosition);
+    }
 
+    public void DashEffect()
+    {
+        Instantiate(_dashEffect, _dashPosition);
     }
     
+       
 
     public void DetachFromParent()
     {

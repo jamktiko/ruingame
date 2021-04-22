@@ -44,7 +44,7 @@ using UnityEngine;
             
         }
 
-        protected virtual void OnAttack()
+        public virtual void OnAttack()
         {
             if (CheckAttackConditions())
             {

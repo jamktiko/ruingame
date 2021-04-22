@@ -247,7 +247,6 @@ GameObject:
   - component: {fileID: 6007811234393833829}
   - component: {fileID: 1449320274215815106}
   - component: {fileID: 6207013801820820817}
-  - component: {fileID: 1540865050863848057}
   m_Layer: 0
   m_Name: RigidBodyController 1
   m_TagString: Player
@@ -303,10 +302,15 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   groundCheckRadius: 0.1
+  GroundedEntity: 0
+  _characterAnimator: {fileID: 0}
+  _movementSpeed: 0
+  _jumpHeight: 0
   turnSmoothing: 15
   stepHeight: 0.75
   stepSmooth: 3
   attacking: 0
+  canKnockback: 1
 --- !u!136 &709004692178834239
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -383,6 +387,7 @@ MonoBehaviour:
   skillList: []
   entityAnimator: {fileID: 0}
   entityHealth: {fileID: 0}
+  attackHandler: {fileID: 0}
   skillUI: {fileID: 6886649193230862142}
   usingSkill: 0
   VFXPoint: {fileID: 0}
@@ -404,14 +409,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8570592085c9d1143b04375b1eaeb62e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maximumHealth: 0
+  currentHealth: 0
   _flatResistance: 10
   _percentualResistance: 10
-  _maximumHealth: 100
   _healthUI: {fileID: 4013910443689401621}
-  CurrentHealth: 0
-  _damageable: 1
-  flatResistance: 0
-  percentualResistance: 0
   revivePlayer: 0
   dodgeAttack: 0
 --- !u!114 &6007811234393833829
@@ -442,8 +444,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseAttack: {fileID: 0}
   attacking: 0
-  firePoint: {fileID: 1989438473426452630}
+  criticalHitChance: 0
+  AllowedTargetTags: []
   _characterAnimator: {fileID: 0}
+  firePoint: {fileID: 1989438473426452630}
   comboHandler: {fileID: 0}
   artifactDamageModifier: 0
 --- !u!114 &6207013801820820817
@@ -464,19 +468,7 @@ MonoBehaviour:
   LayerToCheck:
     serializedVersion: 2
     m_Bits: 1536
---- !u!114 &1540865050863848057
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 709004692178834243}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72c4c3f844aa93a499aea6f44e2096ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canKnockback: 0
+  currentTargets: []
 --- !u!1 &736967431801441098
 GameObject:
   m_ObjectHideFlags: 0
@@ -1590,6 +1582,36 @@ Transform:
   m_Father: {fileID: 33533015940488353}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0.18373454, y: 1.3125787, z: -172.81253}
+--- !u!1 &2565683860721908176
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7749922496811584404}
+  m_Layer: 0
+  m_Name: DashEffect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7749922496811584404
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2565683860721908176}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.876, z: -0.108}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7326632223092050803}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2583068560332641191
 GameObject:
   m_ObjectHideFlags: 0
@@ -4134,10 +4156,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillIconPrefabs: []
   skillImages: []
-  skillIconPrefab:
-  - {fileID: 5243744037893086847, guid: 5949244f27cdfff4c8d14ce9d45a36a2, type: 3}
-  - {fileID: 5243744037893086847, guid: 3fac41ca620ab774180ee98a580144fc, type: 3}
-  - {fileID: 5243744037893086847, guid: 19fecb412e0b78f4684230e54fe6b89e, type: 3}
+  skillIconPrefab: {fileID: 0}
+  UIUpdateRate: 0.05
 --- !u!1 &6940930448894966336
 GameObject:
   m_ObjectHideFlags: 0
@@ -4222,6 +4242,9 @@ MonoBehaviour:
   _stanceChange: {fileID: 2876549060377359625, guid: e9b5315e26950b94895767680ac47595,
     type: 3}
   _stanceChangePosition: {fileID: 7326632222780294412}
+  _dashEffect: {fileID: 1304514083103518325, guid: a0695b1e8f089d9469ee5cd71826a21f,
+    type: 3}
+  _dashPosition: {fileID: 7749922496811584404}
 --- !u!114 &2178994866843642577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4472,6 +4495,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entityHealth: {fileID: 709004692178834234}
+  _entityUI: {fileID: 0}
+  _healthSlider: {fileID: 0}
 --- !u!1 &7305616874439435601
 GameObject:
   m_ObjectHideFlags: 0
@@ -4623,6 +4648,7 @@ Transform:
   - {fileID: 7326632221843813687}
   - {fileID: 7326632222960827972}
   - {fileID: 7326632222780294412}
+  - {fileID: 7749922496811584404}
   m_Father: {fileID: 7717186085094416634}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

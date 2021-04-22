@@ -48,7 +48,10 @@
         Vector3 newDirection = Vector3.RotateTowards(transform.forward, direction, singleStep, 0.0f);
         transform.rotation = Quaternion.LookRotation(newDirection);
     }
-
+    public override void HandleMovementAnimation()
+    {
+        _characterAnimator.SetFloat("movementSpeed", _movementSpeed);
+    }
     public override void SetMovementSpeed(float amount)
     {
         _movementSpeed = amount;
