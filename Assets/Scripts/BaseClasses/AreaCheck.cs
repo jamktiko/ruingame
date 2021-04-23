@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class AreaCheck : MonoBehaviour
 {
-    [SerializeField]
-    protected LayerMask obstacleLayers;
+    
+    public LayerMask obstacleLayers;
 
     [SerializeField] [Range(0, 100)] protected float maximumSize = 10f;
     [SerializeField]

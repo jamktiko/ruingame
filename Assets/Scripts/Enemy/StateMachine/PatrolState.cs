@@ -5,29 +5,21 @@ namespace DefaultNamespace
 {
     public class PatrolState : State
     {
-        private Vector3 _destination;
-        private float time = 1f;
-        private float newDestination = 3f;
         public PatrolState(Enemy_StateMachine enemy) : base(enemy)
         {
         }
 
         public override void Tick()
         {
-            
-            if (newDestination > 0)
+            if (Enemy.HasReachedTargetDestination())
             {
-                UseMovement();
-                newDestination -= time * Time.deltaTime;
+                GetNewDirection();
             }
             else
             {
-                if (newDestination <= 0)
-                {
-                    GetNewDirection();
-                    newDestination = 1f;
-                }
+                UseMovement();
             }
+            
             if (Enemy.CheckForPlayer() && Enemy.CanSeePlayer())
             {
                 Enemy.AlertAllEnemies();
@@ -41,8 +33,7 @@ namespace DefaultNamespace
         }
         public override void UseMovement()
         {
-            Enemy.entityAnimator.SetBool("Stunned", false);
-            //Enemy.movementController.Move(Enemy.currentTargetDirection);
+            Enemy.movementController.Move(Enemy.DecidePathToPlayer());
         }
 
         public override void OnStateEnter()

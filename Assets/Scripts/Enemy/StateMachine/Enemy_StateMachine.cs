@@ -54,6 +54,7 @@
         {
             areaInformation = gameObject.AddComponent<AreaCheck>();
             areaInformation.AmountOfRaycasts = areaRaycasts;
+            areaInformation.obstacleLayers = obstacleLayer;
             attackHandler = GetComponent<BaseAttackHandler>();
 
             attackRange = attackHandler.baseAttack.range;
@@ -64,31 +65,15 @@
         }
         public virtual void Start()
         {
-            transform.parent = null;
+            enemyGroup = transform.root.GetComponentInChildren<Enemy_Group>();
+            currentTargetPos = enemyGroup.transform.position;
             SetState(new PatrolState(this));
-            
         }
 
         public string state;
         public virtual void Update()
         {
-           Debug.DrawRay(transform.position, currentTargetDirection, Color.black);
-           _currentState.Tick();
-           state = _currentState.Name;
-           if (pD != null)
-           {
-               foreach (WeightedDirection wd in pD)
-               {
-                   if (wd.weight > 0f)
-                   {
-                       Debug.DrawRay(transform.position, wd.direction * wd.weight * 5f, Color.green);
-                   }
-                   else if (wd.weight < 0f)
-                   {
-                       Debug.DrawRay(transform.position, wd.direction * Mathf.Abs(wd.weight) * 5f, Color.red);
-                   }
-               }
-           }
+            _currentState.Tick();
         }
         public State _currentState { get; set; }
         public  virtual void SetState(State state)
@@ -176,20 +161,10 @@
         public virtual Vector3 DecidePatrolDirection()
         {
             var finalDecision = new Vector3();
-            var p = enemyGroup.patrolArea;
             var rp = RandomPointInPatrolArea();
             rp.y = 0;
-            RaycastHit hit;
-            Vector3 dir = (rp - transform.position);
-            Ray ray = new Ray(transform.position, dir);
-            if (Physics.SphereCast(ray, 0.5f, out hit, obstacleLayer))
-            {
-
-            }
-            finalDecision = rp;
             finalDecision.y = 0;
-            currentTargetDirection = dir;
-            currentTargetDirection.y = 0;
+            finalDecision = rp;
             return finalDecision;
         }
 
@@ -197,6 +172,16 @@
         {
             public Vector3 direction;
             public float weight;
+        }
+
+        public bool HasReachedTargetDestination()
+        {
+            float dist = Vector3.Distance(transform.position, currentTargetPos);
+            if (dist <= 5f)
+            {
+                return true;
+            }
+            return false;
         }
 
         private Vector3 RandomPointInPatrolArea()
@@ -207,10 +192,8 @@
                 0,
                 Random.Range(p.min.z, p.max.z)
             );
-            rp = transform.TransformDirection(rp);
             return rp;
         }
-        private float sense = 0.08f;
         public virtual Vector3 DecidePathToPlayer()
         {
             var targetDir = currentTargetPos - transform.position;
@@ -256,8 +239,7 @@
             }
 
             var weightedMax = WeightedMax(pD);
-            currentTargetDirection = weightedMax * 10f;
-            weightedMax.y = 0f;
+            weightedMax.y = 0;
             return weightedMax;
         }
 
