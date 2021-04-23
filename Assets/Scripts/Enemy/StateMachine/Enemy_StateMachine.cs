@@ -143,9 +143,25 @@
             enemyGroup.AlertManager();
         }
 
+        public bool waitingForDirection;
         public void GetNewDirection()
         {
+            if (!waitingForDirection)
+            {
+                waitingForDirection = true;
+                StartCoroutine(Direction());
+            }
+            else
+            {
+                currentTargetDirection = Vector3.zero;
+            }
+                
+        }
+        IEnumerator Direction()
+        {
+            yield  return new WaitForSeconds(2f);
             currentTargetPos = DecidePatrolDirection();
+            waitingForDirection = false;
         }
         public bool CheckForPlayer()
         {
