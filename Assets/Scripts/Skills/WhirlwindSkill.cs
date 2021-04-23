@@ -26,7 +26,7 @@ namespace DefaultNamespace.Skills
     public class WhirlwindSkill : SkillExecute
     {
 
-        [SerializeField] private float _attackRadius = 5f;
+        [SerializeField] private float _attackRadius = 50f;
         [SerializeField] private float _knockbackForce = 10f;
         private float _attackDistance;
 

@@ -22,6 +22,7 @@
         {
             base.Start();
             _characterController = GetComponent<Enemy_StateMachine>();
+            canKnockback = true;
         }
 
         public override void OnStun()
@@ -32,6 +33,7 @@
     public void OnStunEnd()
     {
         stunned = false;
+        attacking = false;
     }
     
     public override void Move(Vector3 movementInput)
@@ -75,8 +77,7 @@
     {
         if (canKnockback)
         {
-            stunned = true;
-            var dir = target - transform.position;
+            var dir = transform.position - target;
             dir.y = 0;
             _characterRigidBody.AddForce(dir * force);
             canKnockback = false;

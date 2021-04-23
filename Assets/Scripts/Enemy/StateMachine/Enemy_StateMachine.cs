@@ -75,6 +75,7 @@
         public virtual void Update()
         {
             _currentState.Tick();
+            state = _currentState.Name;
         }
         public State _currentState { get; set; }
         public  virtual void SetState(State state)
