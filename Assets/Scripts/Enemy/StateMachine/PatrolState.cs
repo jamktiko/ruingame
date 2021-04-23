@@ -5,6 +5,7 @@ namespace DefaultNamespace
 {
     public class PatrolState : State
     {
+
         public PatrolState(Enemy_StateMachine enemy) : base(enemy)
         {
         }
@@ -13,29 +14,22 @@ namespace DefaultNamespace
         {
             if (Enemy.HasReachedTargetDestination())
             {
-                GetNewDirection();
+                Enemy.GetNewDirection();
             }
             else
             {
-                UseMovement();
+                UseMovement(Enemy.DecidePathToPlayer());
             }
-            
             if (Enemy.CheckForPlayer() && Enemy.CanSeePlayer())
             {
                 Enemy.AlertAllEnemies();
                 Enemy.SetState(new MoveTowardsPlayerState(Enemy));
             }
         }
-
-        public void GetNewDirection()
+        public override void UseMovement(Vector3 direction)
         {
-            Enemy.currentTargetPos = Enemy.DecidePatrolDirection();
+            Enemy.movementController.Move(direction);
         }
-        public override void UseMovement()
-        {
-            Enemy.movementController.Move(Enemy.DecidePathToPlayer());
-        }
-
         public override void OnStateEnter()
         {
             Name = "patrol";

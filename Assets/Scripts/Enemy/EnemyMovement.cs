@@ -1,7 +1,8 @@
 ﻿
     using UnityEngine;
     using System.Collections;
-    
+    using DefaultNamespace;
+
     [RequireComponent(typeof(Rigidbody))]
     public class EnemyMovement : BaseMovement
     {
@@ -17,7 +18,13 @@
         }
     }
 
-    public override void OnStun()
+        public override void Start()
+        {
+            base.Start();
+            _characterController = GetComponent<Enemy_StateMachine>();
+        }
+
+        public override void OnStun()
     {
         stunned = true;
     }
@@ -33,6 +40,10 @@
         Vector3 movementVelocity = _movementSpeed * MovementInput;
         _characterRigidBody.velocity =
             new Vector3(movementVelocity.x, _characterRigidBody.velocity.y, movementVelocity.z);
+    }
+    public override void FixedUpdate()
+    {
+        RotateTowardsMovement(turnSmoothing);
     }
 
     public override void RotateTowardsMovement(float amount)

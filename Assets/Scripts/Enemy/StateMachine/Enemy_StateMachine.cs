@@ -1,4 +1,5 @@
 ﻿
+    using System.Collections;
     using DefaultNamespace;
     using UnityEngine;
     [RequireComponent(typeof(EnemyAttackHandler))]
@@ -141,7 +142,11 @@
         {
             enemyGroup.AlertManager();
         }
-        
+
+        public void GetNewDirection()
+        {
+            currentTargetPos = DecidePatrolDirection();
+        }
         public bool CheckForPlayer()
         {
             RaycastHit[] hitTargets = areaInformation.RayCastAroundArea(hitTestLayer).hitInfo;
@@ -163,8 +168,14 @@
             var finalDecision = new Vector3();
             var rp = RandomPointInPatrolArea();
             rp.y = 0;
-            finalDecision.y = 0;
+            Ray ray = new Ray(rp, rp-transform.position);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, Vector3.Distance(transform.position, rp), obstacleLayer))
+            {
+                rp = transform.position;
+            }
             finalDecision = rp;
+            finalDecision.y = 0;
             return finalDecision;
         }
 
@@ -177,7 +188,7 @@
         public bool HasReachedTargetDestination()
         {
             float dist = Vector3.Distance(transform.position, currentTargetPos);
-            if (dist <= 5f)
+            if (dist <= 6f)
             {
                 return true;
             }
