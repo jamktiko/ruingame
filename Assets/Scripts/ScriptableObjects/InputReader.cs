@@ -90,7 +90,7 @@ public class InputReader : ScriptableObject, PlayerInput.IGameplayActions, Playe
     public void OnPause(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
-            PauseEvent.Invoke();
+            PauseEvent();
     }
 
     public void OnOpenInventory(InputAction.CallbackContext context)
@@ -159,7 +159,6 @@ public class InputReader : ScriptableObject, PlayerInput.IGameplayActions, Playe
     public void EnableMenuInput()
     {
      _playerInput.Gameplay.Disable();
-     Debug.Log("Enabled playermenu");
      _playerInput.Menus.Enable();
     }
     public void OnMoveSelection(InputAction.CallbackContext context)
@@ -190,7 +189,7 @@ public class InputReader : ScriptableObject, PlayerInput.IGameplayActions, Playe
     public void OnUnpause(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
-            PauseEvent();
+            menuUnpauseEvent();
     }
     public bool LeftMouseDown() => Mouse.current.leftButton.isPressed;
 }

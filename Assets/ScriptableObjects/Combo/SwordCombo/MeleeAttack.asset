@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70fe997e6d5144b9bac1bbdfa5b0e4f3, type: 3}
   m_Name: MeleeAttack
   m_EditorClassIdentifier: 
-  TargetingType: 1
-  DamageType: 0
+  TargetingType: 2
+  DamageType: 1
   BaseDamage: 20
-  InflictedDamage: 30
+  InflictedDamage: 50
   Radius: 10
   KnockBackStrength: 10
   KnockBack: 1

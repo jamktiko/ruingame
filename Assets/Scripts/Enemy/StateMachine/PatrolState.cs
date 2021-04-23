@@ -42,7 +42,7 @@ namespace DefaultNamespace
         public override void UseMovement()
         {
             Enemy.entityAnimator.SetBool("Stunned", false);
-            Enemy.movementController.Move(Enemy.currentTargetDirection);
+            //Enemy.movementController.Move(Enemy.currentTargetDirection);
         }
 
         public override void OnStateEnter()

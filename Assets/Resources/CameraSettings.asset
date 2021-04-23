@@ -15,7 +15,7 @@ MonoBehaviour:
   CameraSensitivity: 15
   invertAxisX: 0
   invertAxisY: 255
-  XSmoothing: 2
-  YSmoothing: 1
-  XAcceleration: 0.5
-  YAcceleration: 0.5
+  XSmoothing: 0
+  YSmoothing: 0
+  XAcceleration: 0
+  YAcceleration: 0

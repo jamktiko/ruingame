@@ -93,6 +93,17 @@ public class GameManager : MonoBehaviour
     {
         currentPauseMenu = Instantiate(pauseMenu);
     }
+
+    public void ResetPauseMenu()
+    {
+        StartCoroutine(ResetPause());
+    }
+    public virtual IEnumerator ResetPause()
+    {
+        currentPauseMenu.gameObject.SetActive(false);
+        yield return new WaitForSeconds(1f);
+        currentPauseMenu.gameObject.SetActive(true);
+    }
     public void GameOver()
     {
         roomManager.enabled = false;

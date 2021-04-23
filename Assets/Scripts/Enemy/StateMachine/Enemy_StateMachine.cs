@@ -64,7 +64,9 @@
         }
         public virtual void Start()
         {
+            transform.parent = null;
             SetState(new PatrolState(this));
+            
         }
 
         public string state;
@@ -185,8 +187,9 @@
 
             }
             finalDecision = rp;
-            currentTargetDirection = dir;
             finalDecision.y = 0;
+            currentTargetDirection = dir;
+            currentTargetDirection.y = 0;
             return finalDecision;
         }
 
