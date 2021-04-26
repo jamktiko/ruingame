@@ -50,9 +50,24 @@ namespace DefaultNamespace.Skills
             skillUser.usingSkill = true;
             iFrameDuration = duration;
             base.Execute(duration);
-            ExecuteWhirlWind();
+            try { skillUser.attackHandler.HandleAttack(whirlwind); }
+            catch { Debug.Log("whirlwind"); }
             skillUser.usingSkill = false;
         }
+
+        public MeleeAttack Whirlwind()
+        {
+            var _whirlwind = ScriptableObject.CreateInstance<MeleeAttack>();
+            _whirlwind.TargetingType = basetargetingType.AOE;
+            _whirlwind.Radius = _attackRadius;
+            _whirlwind.DamageType = baseDamageType.DIRECT;
+            _whirlwind.baseDamage = damage;
+            _whirlwind.KnockBack = true;
+            _whirlwind.KnockBackStrength = _knockbackForce;
+            return _whirlwind;
+        }
+
+
 
         private void ExecuteWhirlWind()
         {
@@ -86,15 +101,6 @@ namespace DefaultNamespace.Skills
             return enmyGos;
         }
 
-        public MeleeAttack Whirlwind()
-        {
-            var _whirlwind = ScriptableObject.CreateInstance<MeleeAttack>();
-            _whirlwind.DamageType = baseDamageType.DIRECT;
-            _whirlwind.baseDamage = damage;
-            _whirlwind.KnockBack = true;
-            _whirlwind.KnockBackStrength = _knockbackForce;
-            return _whirlwind;
-        }
 
     }
 
