@@ -17,6 +17,7 @@ namespace DefaultNamespace
             if (StunTimer > 0)
             {
                 StunTimer -= _time * Time.deltaTime;
+                Enemy.movementController.Move(Vector3.zero);
             }
             else
             {
@@ -36,16 +37,17 @@ namespace DefaultNamespace
 
         public override void OnStateEnter()
         {
-            initialMoveSpeed = Enemy.movementController._movementSpeed;
-            //Stun animation
-            Enemy.attackHandler.EndAttack();
+            Enemy.entityAnimator.SetBool("Stunned", true);
+            Enemy.entityAnimator.SetTrigger("Stun");
             Enemy.stunned = true;
+            Enemy.attackHandler.EndAttack();
             Name = "stunned";
-            Enemy.gameObject.transform.parent = null;
         }
 
         public override void OnStateExit()
         {
+            Enemy.entityAnimator.ResetTrigger("Stun");
+            Enemy.entityAnimator.SetBool("Stunned", false);
             Enemy.playerTarget = GameManager.Instance.currentPlayer;
         }
     }

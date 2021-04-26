@@ -87,12 +87,22 @@ public class GameManager : MonoBehaviour
         roomManager.StartRoomManager();
         yield return new WaitForSeconds(0.2f);
         CreateMenuManager();
-        PlayerManager.Instance.playerInputReader.EnablePlayerInput();
     }
 
     private void CreateMenuManager()
     {
         currentPauseMenu = Instantiate(pauseMenu);
+    }
+
+    public void ResetPauseMenu()
+    {
+        StartCoroutine(ResetPause());
+    }
+    public virtual IEnumerator ResetPause()
+    {
+        currentPauseMenu.gameObject.SetActive(false);
+        yield return new WaitForSeconds(1f);
+        currentPauseMenu.gameObject.SetActive(true);
     }
     public void GameOver()
     {

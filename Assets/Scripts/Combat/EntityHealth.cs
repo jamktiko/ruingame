@@ -3,10 +3,9 @@ public abstract class EntityHealth : Health
 {
     public float _flatResistance = 10f;
     public float _percentualResistance = 10f;
-    private float _reDamageTimer = 0.5f;
+    private float _reDamageTimer = 0.3f;
     //private float _reDamageTimerDoT = 0.4f;
-    private bool _damageable = true;
-    
+
     public HealthUI _healthUI;
 
     protected Animator EntityAnimator;
@@ -52,7 +51,7 @@ public abstract class EntityHealth : Health
     public override void AddIFrame(float duration)
     {
         //Effect for Iframe?
-        _damageable = false;
+        damageable = false;
         Invoke("TurnDamageOn", duration);
     }
     public virtual float DamageCalculation(IAttack attack)

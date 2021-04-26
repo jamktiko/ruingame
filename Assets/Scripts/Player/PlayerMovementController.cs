@@ -108,7 +108,6 @@ public class PlayerMovementController : BaseMovement
         if (canKnockback)
         {
             canKnockback = false;
-            //_characterRigidbody.velocity = Vector3.zero;
             Vector3 direction = (transform.position - target).normalized;
             _characterRigidBody.AddForce(direction * force, ForceMode.Impulse);
             StartCoroutine("KnockbackReset");

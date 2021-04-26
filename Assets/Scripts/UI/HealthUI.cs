@@ -25,7 +25,7 @@ public class HealthUI : MonoBehaviour
     }
     public IEnumerator UpdateUI()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.2f);
         _healthSlider.maxValue = _entityHealth.maximumHealth;
         _healthSlider.minValue = 0;
         _healthSlider.value = _entityHealth.maximumHealth;

@@ -43,7 +43,7 @@ public class Spawner : MonoBehaviour
         //Spawns one enemy
         yield return new WaitForSeconds(1f);
         var enemy = Instantiate(enemyprefab, gameObject.transform);
-        enemyprefab.GetComponent<Enemy_StateMachine>().enemyGroup = EG;
+        yield return new WaitForSeconds(0.2f);
         enemiesToSpawn--;
         currentSpawnedEnemies++;
         if (enemiesToSpawn > 0)

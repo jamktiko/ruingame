@@ -1,4 +1,5 @@
 ﻿
+using FMOD;
 using UnityEngine;
 
 public class PatrolArea : AreaCheck
@@ -22,7 +23,6 @@ public class PatrolArea : AreaCheck
         {
             height = (transform.position.y - hit.distance) + heightCorrection;
         }
-
         return height;
     }
 
@@ -32,7 +32,7 @@ public class PatrolArea : AreaCheck
         float angle = 0;
         for (int i = 0; i < AmountOfRaycasts + 1; i++)
         {
-            Vector3 dir = transform.TransformDirection(Vector3.forward) * maximumSize;
+            Vector3 dir = Vector3.forward * maximumSize;
             dir = Quaternion.Euler(0, angle, 0) * dir;
             angle += 360 / AmountOfRaycasts;
             Ray ray = new Ray(patrolAreaPosition, dir);
@@ -62,4 +62,10 @@ public class PatrolArea : AreaCheck
         AmountOfRaycasts = s.AmountOfRaycasts;
         detectionSensitivity = s.detectionSensitivity;
     }
+    void OnDrawGizmos()
+    {
+        var bound = CreateArea();
+        Gizmos.DrawWireCube(new Vector3(transform.position.x, FindGroundHeight(), transform.position.z), bound.size);
+    }
+
 }

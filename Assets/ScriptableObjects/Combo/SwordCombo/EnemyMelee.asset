@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetingType: 2
   DamageType: 1
-  BaseDamage: 10
-  InflictedDamage: 20
-  Radius: 5
+  BaseDamage: 0
+  InflictedDamage: 10
+  Radius: 3
   KnockBackStrength: 10
   KnockBack: 1
-  Range: 5
+  Range: 3

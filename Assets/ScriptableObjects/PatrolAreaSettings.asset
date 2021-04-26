@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstacleLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 256
   maximumSize: 55
-  sizeCorrection: -1
-  heightRange: 50
-  heightCorrection: 0.5
-  AmountOfRaycasts: 30
-  detectionSensitivity: 1.5
+  sizeCorrection: 1
+  heightRange: 30
+  heightCorrection: 1
+  AmountOfRaycasts: 60
+  detectionSensitivity: 0.5
