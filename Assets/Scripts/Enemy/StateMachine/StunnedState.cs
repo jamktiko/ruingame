@@ -37,14 +37,11 @@ namespace DefaultNamespace
 
         public override void OnStateEnter()
         {
-            initialMoveSpeed = Enemy.movementController._movementSpeed;
-            //Stun animation
             Enemy.entityAnimator.SetBool("Stunned", true);
             Enemy.entityAnimator.SetTrigger("Stun");
-            Enemy.attackHandler.EndAttack();
             Enemy.stunned = true;
+            Enemy.attackHandler.EndAttack();
             Name = "stunned";
-            Enemy.gameObject.transform.parent = null;
         }
 
         public override void OnStateExit()

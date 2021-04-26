@@ -29,15 +29,15 @@ namespace DefaultNamespace
                         Enemy.SetState(new AttackPlayerState(Enemy));
                     }
                     Enemy.currentTargetPos = PlayerManager.Instance.gameObject.transform.position;
-                    UseMovement();
+                    UseMovement(Enemy.DecidePathToPlayer());
                     newDestination = 0.1f;
                 }
             }
         }
 
-        public override void UseMovement()
+        public override void UseMovement(Vector3 direction)
         {
-            Enemy.movementController.Move(Enemy.DecidePathToPlayer());
+            Enemy.movementController.Move(direction);
         }
 
         public override void OnStateEnter()

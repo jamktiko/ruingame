@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenuManager : MenuManager
 {
-    public bool _gamePaused;
+    public bool _gamePaused = false;
     public override void Awake()
     {
         DontDestroyOnLoad(this);
@@ -20,38 +20,34 @@ public class PauseMenuManager : MenuManager
 
     public void OnEnable()
     {
-        Cursor.visible = false;
-        gameManager.playerManager.playerInputReader.PauseEvent += OnPause;
+       PlayerManager.Instance.playerInputReader.PauseEvent += OnPause;
+       PlayerManager.Instance.playerInputReader.menuUnpauseEvent += OnUnPause;
     }
 
     public void OnDisable()
     {
-        gameManager.playerManager.playerInputReader.PauseEvent -= OnPause;
+        PlayerManager.Instance.playerInputReader.PauseEvent -= OnPause;
+        PlayerManager.Instance.playerInputReader.menuUnpauseEvent -= OnUnPause;
     }
 
     public override void Start()
     {
         MSH = GetComponent<MenuSelectionHandler>();
+        
+        ResetPauseMenu();
     }
-
+    
     public void OnPause()
     {
-        if (_gamePaused)
-        {
-            StopPause();
-        }
-        else
-        {
-            PlayerManager.Instance.playerInputReader.EnableMenuInput();
-            _gamePaused = true;
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            gameManager.SetTimeScale(0f);
-            currentCanvas.gameObject.SetActive(true);
-        }
+        _gamePaused = true;
+        PlayerManager.Instance.playerInputReader.EnableMenuInput();
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        gameManager.SetTimeScale(0f);
+        currentCanvas.gameObject.SetActive(true);
     }
 
-    public void StopPause()
+    public void OnUnPause()
     {
         _gamePaused = false;
         PlayerManager.Instance.cameraManager.UpdateCameraSettings();
@@ -62,9 +58,14 @@ public class PauseMenuManager : MenuManager
         currentCanvas.gameObject.SetActive(false);
     }
 
+    public void ResetPauseMenu()
+    {
+        GameManager.Instance.ResetPauseMenu();
+    }
+
     public void ExitToMain()
     {
-        StopPause();
+        OnUnPause();
         gameManager.playerManager.Die();
     }
 }

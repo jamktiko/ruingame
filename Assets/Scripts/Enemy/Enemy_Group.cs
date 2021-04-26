@@ -32,7 +32,6 @@ public class Enemy_Group : MonoBehaviour
         EGM.Alert();
     }
 
-
     public void AlertEnemies()
     {
         foreach (Enemy_StateMachine esm in enemyStateMachines)

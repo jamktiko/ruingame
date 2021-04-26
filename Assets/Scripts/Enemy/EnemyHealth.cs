@@ -8,6 +8,7 @@ namespace DefaultNamespace
         public override void Start()
         {
             enemyController = GetComponent<Enemy_StateMachine>();
+            damageable = true;
         }
 
         public override void ReactToDamage(float amount)

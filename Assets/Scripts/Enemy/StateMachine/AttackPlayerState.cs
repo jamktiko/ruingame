@@ -10,7 +10,6 @@ namespace DefaultNamespace
 
         public override void OnStateEnter()
         {
-            Debug.Log("Started attacking!");
             Name = "Attacking Player";
             Enemy.movementController.attacking = true;
             Enemy.movementController.Move(Vector3.zero);
@@ -21,7 +20,6 @@ namespace DefaultNamespace
         }
         public override void OnStateExit()
         {
-            Debug.Log("Stopped attacking!");
             Enemy.movementController.attacking = false;
             Enemy.attackHandler.attacking = false;
         }

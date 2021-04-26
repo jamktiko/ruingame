@@ -70,12 +70,15 @@ using UnityEngine;
             base.StartAttack(); 
             movementController.attacking = attacking;
         }
+
         public override void EndAttack()
         {
             base.EndAttack();
             movementController.attacking = attacking;
-            Debug.Log("Stopped attacking!");
-            _enemyController.SetState(new MoveTowardsPlayerState(_enemyController));
+            if (!_enemyController.stunned)
+            {
+                _enemyController.SetState(new MoveTowardsPlayerState(_enemyController));
+            }
         }
         public override void HandleAttack(IAttack AttackToExecute)
         {

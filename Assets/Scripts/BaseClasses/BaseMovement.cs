@@ -224,7 +224,15 @@
     }
     public virtual void HandleKnockBack(Vector3 target, float force)
     {
-
+        currentTarget = target;
+        if (canKnockback)
+        {
+            canKnockback = false;
+            Vector3 direction = (transform.position - target).normalized;
+            direction.y = 0;
+            _characterRigidBody.AddForce(direction * force, ForceMode.Impulse);
+            StartCoroutine("KnockbackReset");
+        }
     }
     public virtual IEnumerator KnockbackReset()
     {

@@ -33,7 +33,6 @@ public class MenuSelectionHandler : MonoBehaviour
 	private void HandleMoveSelection()
 	{
 		Cursor.visible = false;
-
 		// Handle case where no UI element is selected because mouse left selectable bounds
 		if (EventSystem.current.currentSelectedGameObject == null)
 			EventSystem.current.SetSelectedGameObject(currentSelection);

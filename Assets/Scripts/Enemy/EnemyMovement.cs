@@ -1,7 +1,8 @@
 ﻿
     using UnityEngine;
     using System.Collections;
-    
+    using DefaultNamespace;
+
     [RequireComponent(typeof(Rigidbody))]
     public class EnemyMovement : BaseMovement
     {
@@ -17,7 +18,14 @@
         }
     }
 
-    public override void OnStun()
+        public override void Start()
+        {
+            base.Start();
+            _characterController = GetComponent<Enemy_StateMachine>();
+            canKnockback = true;
+        }
+
+        public override void OnStun()
     {
         stunned = true;
     }
@@ -25,6 +33,7 @@
     public void OnStunEnd()
     {
         stunned = false;
+        attacking = false;
     }
     
     public override void Move(Vector3 movementInput)
@@ -33,6 +42,10 @@
         Vector3 movementVelocity = _movementSpeed * MovementInput;
         _characterRigidBody.velocity =
             new Vector3(movementVelocity.x, _characterRigidBody.velocity.y, movementVelocity.z);
+    }
+    public override void FixedUpdate()
+    {
+        RotateTowardsMovement(turnSmoothing);
     }
 
     public override void RotateTowardsMovement(float amount)
@@ -64,8 +77,7 @@
     {
         if (canKnockback)
         {
-            stunned = true;
-            var dir = target - transform.position;
+            var dir = transform.position - target;
             dir.y = 0;
             _characterRigidBody.AddForce(dir * force);
             canKnockback = false;

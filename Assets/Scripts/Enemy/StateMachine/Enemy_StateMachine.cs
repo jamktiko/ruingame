@@ -1,4 +1,5 @@
 ﻿
+    using System.Collections;
     using DefaultNamespace;
     using UnityEngine;
     [RequireComponent(typeof(EnemyAttackHandler))]
@@ -54,6 +55,7 @@
         {
             areaInformation = gameObject.AddComponent<AreaCheck>();
             areaInformation.AmountOfRaycasts = areaRaycasts;
+            areaInformation.obstacleLayers = obstacleLayer;
             attackHandler = GetComponent<BaseAttackHandler>();
 
             attackRange = attackHandler.baseAttack.range;
@@ -64,29 +66,16 @@
         }
         public virtual void Start()
         {
+            enemyGroup = transform.root.GetComponentInChildren<Enemy_Group>();
+            currentTargetPos = enemyGroup.transform.position;
             SetState(new PatrolState(this));
         }
 
         public string state;
         public virtual void Update()
         {
-           Debug.DrawRay(transform.position, currentTargetDirection, Color.black);
-           _currentState.Tick();
-           state = _currentState.Name;
-           if (pD != null)
-           {
-               foreach (WeightedDirection wd in pD)
-               {
-                   if (wd.weight > 0f)
-                   {
-                       Debug.DrawRay(transform.position, wd.direction * wd.weight * 5f, Color.green);
-                   }
-                   else if (wd.weight < 0f)
-                   {
-                       Debug.DrawRay(transform.position, wd.direction * Mathf.Abs(wd.weight) * 5f, Color.red);
-                   }
-               }
-           }
+            _currentState.Tick();
+            state = _currentState.Name;
         }
         public State _currentState { get; set; }
         public  virtual void SetState(State state)
@@ -154,7 +143,27 @@
         {
             enemyGroup.AlertManager();
         }
-        
+
+        public bool waitingForDirection;
+        public void GetNewDirection()
+        {
+            if (!waitingForDirection)
+            {
+                waitingForDirection = true;
+                StartCoroutine(Direction());
+            }
+            else
+            {
+                currentTargetDirection = Vector3.zero;
+            }
+                
+        }
+        IEnumerator Direction()
+        {
+            yield  return new WaitForSeconds(2f);
+            currentTargetPos = DecidePatrolDirection();
+            waitingForDirection = false;
+        }
         public bool CheckForPlayer()
         {
             RaycastHit[] hitTargets = areaInformation.RayCastAroundArea(hitTestLayer).hitInfo;
@@ -174,18 +183,15 @@
         public virtual Vector3 DecidePatrolDirection()
         {
             var finalDecision = new Vector3();
-            var p = enemyGroup.patrolArea;
             var rp = RandomPointInPatrolArea();
             rp.y = 0;
+            Ray ray = new Ray(rp, rp-transform.position);
             RaycastHit hit;
-            Vector3 dir = (rp - transform.position);
-            Ray ray = new Ray(transform.position, dir);
-            if (Physics.SphereCast(ray, 0.5f, out hit, obstacleLayer))
+            if (Physics.Raycast(ray, Vector3.Distance(transform.position, rp), obstacleLayer))
             {
-
+                rp = transform.position;
             }
             finalDecision = rp;
-            currentTargetDirection = dir;
             finalDecision.y = 0;
             return finalDecision;
         }
@@ -196,6 +202,16 @@
             public float weight;
         }
 
+        public bool HasReachedTargetDestination()
+        {
+            float dist = Vector3.Distance(transform.position, currentTargetPos);
+            if (dist <= 6f)
+            {
+                return true;
+            }
+            return false;
+        }
+
         private Vector3 RandomPointInPatrolArea()
         {
             var p = enemyGroup.patrolArea;
@@ -204,10 +220,8 @@
                 0,
                 Random.Range(p.min.z, p.max.z)
             );
-            rp = transform.TransformDirection(rp);
             return rp;
         }
-        private float sense = 0.08f;
         public virtual Vector3 DecidePathToPlayer()
         {
             var targetDir = currentTargetPos - transform.position;
@@ -253,8 +267,7 @@
             }
 
             var weightedMax = WeightedMax(pD);
-            currentTargetDirection = weightedMax * 10f;
-            weightedMax.y = 0f;
+            weightedMax.y = 0;
             return weightedMax;
         }
 

@@ -16,7 +16,7 @@
         {
         }
 
-        public virtual void UseMovement()
+        public virtual void UseMovement(Vector3 direction)
         {
             
         }
