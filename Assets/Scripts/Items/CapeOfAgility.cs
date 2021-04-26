@@ -29,14 +29,12 @@ public class CapeOfAgility : ArtifactEffect
         ChangeModifier(ArtifactModifier.Type.Plus);
         base.AddEffect();
         Invoke("ReduceSpeed", 2f);
-
     }
 
     private void ReduceSpeed()
     {
         ChangeModifier(ArtifactModifier.Type.Minus);
         base.AddEffect();
-
     }
 
     private void ChangeModifier(ArtifactModifier.Type type)
@@ -49,7 +47,15 @@ public class CapeOfAgility : ArtifactEffect
     {
         _playerReference = PlayerManager.Instance;
         if (_playerReference._playerData.entityMovementSpeed > normalSpeed)
+        {
             _playerReference._playerData.entityMovementSpeed = normalSpeed;
+        }
+
+        try
+        {
+            _playerReference.GetComponent<SprintSkill>().EndSprintEvent -= ModifyMovmentSpeed;
+        }
+        catch{}
     }
 
 }
