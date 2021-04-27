@@ -60,7 +60,7 @@ namespace DefaultNamespace.Skills
             var _whirlwind = ScriptableObject.CreateInstance<MeleeAttack>();
             _whirlwind.TargetingType = basetargetingType.AOE;
             _whirlwind.Radius = _attackRadius;
-            _whirlwind.DamageType = baseDamageType.DIRECT;
+            _whirlwind.DamageType = baseDamageType.PURE;
             _whirlwind.baseDamage = damage;
             _whirlwind.KnockBack = true;
             _whirlwind.KnockBackStrength = _knockbackForce;
