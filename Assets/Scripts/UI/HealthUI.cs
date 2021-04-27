@@ -9,7 +9,8 @@ public class HealthUI : MonoBehaviour
     public EntityHealth _entityHealth;
     public Canvas _entityUI;
     public Slider _healthSlider;
-    
+
+
     void Start()
     {
         _entityUI = GetComponent<Canvas>();
