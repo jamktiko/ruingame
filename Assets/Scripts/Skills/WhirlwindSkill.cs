@@ -26,7 +26,7 @@ namespace DefaultNamespace.Skills
     public class WhirlwindSkill : SkillExecute
     {
 
-        [SerializeField] private float _attackRadius = 5f;
+        [SerializeField] private float _attackRadius = 50f;
         [SerializeField] private float _knockbackForce = 10f;
         private float _attackDistance;
 
@@ -58,6 +58,10 @@ namespace DefaultNamespace.Skills
                 if (collider.gameObject.TryGetComponent(out BaseMovement kbh))
                 {
                     kbh.HandleKnockBack(transform.position, _knockbackForce);
+                }
+                if (collider.gameObject.TryGetComponent(out Enemy_StateMachine enemy))
+                {
+                    enemy.SetState(new StunnedState(enemy));
                 }
                 targeting.DamageEnemy(collider.gameObject, damage);
             }

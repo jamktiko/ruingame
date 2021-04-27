@@ -111,7 +111,8 @@
 
     public virtual void GroundCheck()
     {
-        GroundedEntity = Physics.CheckSphere(new Vector3(transform.position.x, transform.position.y, transform.position.z),groundCheckRadius, layerMask);
+        Ray ray = new Ray(transform.position, Vector3.down);
+        GroundedEntity = Physics.SphereCast(ray, 0.5f,groundCheckRadius, layerMask);
     }
 
     public virtual void HandleMovementAnimation()
@@ -223,7 +224,15 @@
     }
     public virtual void HandleKnockBack(Vector3 target, float force)
     {
-
+        currentTarget = target;
+        if (canKnockback)
+        {
+            canKnockback = false;
+            Vector3 direction = (transform.position - target).normalized;
+            direction.y = 0;
+            _characterRigidBody.AddForce(direction * force, ForceMode.Impulse);
+            StartCoroutine("KnockbackReset");
+        }
     }
     public virtual IEnumerator KnockbackReset()
     {
@@ -245,53 +254,52 @@
     public virtual IEnumerator Dashing2(float duration)
     {
         Vector3 startPos = transform.position;
-        float capsuleMaxHeight = 1.99f;
-        float capsuleMaxRadius = 0.49f;
+        float capsuleMaxHeight = 2f;
+        float capsuleMaxRadius = 0.5f;
         float maxDistance = 10f;
         CapsuleCollider[] colliders = GetComponents<CapsuleCollider>();
+        Vector3 direction = DashDirection();
+        LayerMask cameraCollision = LayerMask.GetMask("CameraCollision");
 
-        Vector3 p1 = transform.position;
-        Vector3 p2 = transform.position + Vector3.up * capsuleMaxHeight;
-        Vector3 dir = transform.forward;
-        LayerMask layer = LayerMask.GetMask("CameraCollision");
-        RaycastHit[] hits = Physics.CapsuleCastAll(p1, p2, capsuleMaxRadius, dir, maxDistance, layer, QueryTriggerInteraction.Collide);
-
-        foreach (var item in hits)
+        if (!CheckIfPlayerTouchesWall(ref maxDistance, capsuleMaxHeight, capsuleMaxRadius, cameraCollision))
         {
-            if (item.transform.tag != "Ground")
-            {
-                maxDistance = item.distance;
-                break;
-            }
+            CheckDashHitOnWalls(ref maxDistance, capsuleMaxHeight, capsuleMaxRadius, direction, cameraCollision);
+            CheckOverlaps(ref maxDistance, startPos, 2f, 0.8f);
         }
-        CheckOverlaps(ref maxDistance, 2f, 0.8f);
         FreezePosition(true);
-        //ChangeRigidbodyToKinematic(true, RigidbodyInterpolation.None, CollisionDetectionMode.Discrete);
         EneableColliders(false, colliders);
 
         _characterAnimator.SetBool("dashing", true);
         dashing = true;
         for (float ft = duration; ft >= 0; ft -= Time.deltaTime)
         {
-            Move2(maxDistance, startPos);
+            Move2(maxDistance, startPos, direction);
             yield return new WaitForFixedUpdate();
         }
         dashing = false;
         _characterAnimator.SetBool("dashing", false);
-
         EneableColliders(true, colliders);
         FreezePosition(false);
-        //ChangeRigidbodyToKinematic(false, RigidbodyInterpolation.None, CollisionDetectionMode.ContinuousDynamic);
     }
 
-    private void Move2(float hitDistance, Vector3 startPos)
+    Vector3 DashDirection()
+    {
+        if (MovementInput == Vector3.zero)
+        {
+            _animatorVelocity = 0;
+            return transform.forward;
+        }
+        return MovementInput;
+    }
+
+    private void Move2(float hitDistance, Vector3 startPos, Vector3 direction)
     {
         float dashDistance = Vector3.Distance(transform.position, startPos);
         float step = _movementSpeed * Time.deltaTime;
 
         if (dashDistance + step <= hitDistance)
         {
-            transform.Translate(Vector3.forward * step);
+            transform.position += direction * step;
         }
     }
 
@@ -303,14 +311,6 @@
             _characterRigidBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
     }
 
-    void ChangeRigidbodyToKinematic(bool isKinematic, RigidbodyInterpolation interpolation, CollisionDetectionMode collisionDetection)
-    {
-        //Camera may jitter without interpolation or if its changed back to None 
-        //_characterRigidBody.interpolation = interpolation;
-        _characterRigidBody.collisionDetectionMode = collisionDetection;
-        _characterRigidBody.isKinematic = isKinematic;
-    }
-
     private void EneableColliders(bool enable, CapsuleCollider[] colliders)
     {
         foreach (var item in colliders)
@@ -319,15 +319,48 @@
         }
     }
 
-    private void CheckOverlaps(ref float maxDistance, float capsuleMaxHeight, float capsuleMaxRadius)
+    private bool CheckIfPlayerTouchesWall(ref float maxDistance, float capsuleMaxHeight, float capsuleMaxRadius, LayerMask layer)
+    {
+        Vector3 p1 = transform.position;
+        Vector3 p2 = transform.position + Vector3.up * capsuleMaxHeight;
+        Collider[] colliders = Physics.OverlapCapsule(p1, p2, capsuleMaxRadius, layer, QueryTriggerInteraction.Collide);
+
+        foreach (var item in colliders)
+        {
+            if (item.transform.tag != "Ground")
+            {
+                maxDistance = 0f;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void CheckDashHitOnWalls(ref float maxDistance,  float capsuleMaxHeight, float capsuleMaxRadius, Vector3 direction, LayerMask layer)
+    {
+        Vector3 p1 = transform.position;
+        Vector3 p2 = transform.position + Vector3.up * capsuleMaxHeight;
+        RaycastHit[] hits = Physics.CapsuleCastAll(p1, p2, capsuleMaxRadius, direction, maxDistance, layer, QueryTriggerInteraction.Collide);
+
+        foreach (var item in hits)
+        {
+            if (item.transform.tag != "Ground")
+            {
+                maxDistance = item.distance;
+                break;
+            }
+        }
+    }
+
+    private void CheckOverlaps(ref float maxDistance, Vector3 startPos, float capsuleMaxHeight, float capsuleMaxRadius)
     {
         LayerMask enemyLayer = LayerMask.GetMask("EnemyLayer");
         LayerMask collisionObject = LayerMask.GetMask("CollisionObject");
-        Vector3 maxPos = transform.position + transform.forward * maxDistance;
+        Vector3 maxPos = startPos + transform.forward * maxDistance;
         while (CheckOverlapOnLayer(enemyLayer, maxPos, capsuleMaxHeight, capsuleMaxRadius) || CheckOverlapOnLayer(collisionObject, maxPos, capsuleMaxHeight, capsuleMaxRadius))
         {
             maxDistance -= 0.5f;
-            maxPos = transform.position + transform.forward * maxDistance;
+            maxPos = startPos + transform.forward * maxDistance;
         }
     }
 

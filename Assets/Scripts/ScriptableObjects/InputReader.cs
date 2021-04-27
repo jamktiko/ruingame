@@ -90,7 +90,7 @@ public class InputReader : ScriptableObject, PlayerInput.IGameplayActions, Playe
     public void OnPause(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
-            PauseEvent.Invoke();
+            PauseEvent();
     }
 
     public void OnOpenInventory(InputAction.CallbackContext context)

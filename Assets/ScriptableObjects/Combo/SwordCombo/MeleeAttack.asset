@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: MeleeAttack
   m_EditorClassIdentifier: 
   TargetingType: 1
-  DamageType: 0
-  BaseDamage: 20
-  InflictedDamage: 30
+  DamageType: 1
+  BaseDamage: 50
+  InflictedDamage: 80
   Radius: 10
-  KnockBackStrength: 10
+  KnockBackStrength: 100
   KnockBack: 1
   Range: 10

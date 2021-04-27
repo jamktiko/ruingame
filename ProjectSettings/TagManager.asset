@@ -18,6 +18,7 @@ TagManager:
   - Room
   - Artifact
   - SpawnerManager
+  - LoadingScreen
   layers:
   - Default
   - TransparentFX
