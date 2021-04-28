@@ -37,12 +37,12 @@ namespace DefaultNamespace.Skills
         {
             base.Start();
             skillname = "WhirlWind";
-            whirlwind = Whirlwind();
             damage = 50f;
             skillCooldown = 1f;
             _attackDistance = _attackRadius / 2f;
             enemyLayer = LayerMask.GetMask("EnemyLayer");
             attackHandler = GetComponent<BaseAttackHandler>();
+            whirlwind = Whirlwind();
         }
 
         public override void Execute(float duration)
@@ -60,7 +60,7 @@ namespace DefaultNamespace.Skills
             var _whirlwind = ScriptableObject.CreateInstance<MeleeAttack>();
             _whirlwind.TargetingType = basetargetingType.AOE;
             _whirlwind.Radius = _attackRadius;
-            _whirlwind.DamageType = baseDamageType.PURE;
+            _whirlwind.DamageType = baseDamageType.DIRECT;
             _whirlwind.baseDamage = damage;
             _whirlwind.KnockBack = true;
             _whirlwind.KnockBackStrength = _knockbackForce;
