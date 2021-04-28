@@ -103,9 +103,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5918574885705776622}
   - component: {fileID: 1250241272940618212}
-  - component: {fileID: 5859431126087498124}
   - component: {fileID: 2550641457589842860}
   - component: {fileID: 8211011167226655821}
+  - component: {fileID: -4299590857887955473}
   m_Layer: 0
   m_Name: Artifact
   m_TagString: Untagged
@@ -141,29 +141,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerReference: {fileID: 0}
-  ArtifactEffect: {fileID: 5859431126087498124}
---- !u!114 &5859431126087498124
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4835026549342000777}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41c1e1a8f7d7b6d458077122308cecf4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  artifactModifiers:
-  - modifier: 0.5
-    type: 0
-    modifiedValues: 3
-  - modifier: 10
-    type: 0
-    modifiedValues: 0
-  - modifier: 10
-    type: 1
-    modifiedValues: 1
+  ArtifactInfo: {fileID: 0}
+  ArtifactEffect: {fileID: 0}
 --- !u!65 &2550641457589842860
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -193,3 +172,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-4299590857887955473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4835026549342000777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e9b93653c3b9549a7241f3749ba3d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Commons:
+  - {fileID: 11400000, guid: acef72ffc3f119441bcc772e0ef017f0, type: 2}
+  - {fileID: 11400000, guid: 9cc7e71c319c1c84ea35f1dee13d25ae, type: 2}
+  - {fileID: 11400000, guid: 559a542fa7321e448a481737c1b3ed84, type: 2}
+  Rares: []
+  Mythics:
+  - {fileID: 11400000, guid: 575e678c95ab941499aa0ed261b0dd1e, type: 2}
+  ArtifactName: 
