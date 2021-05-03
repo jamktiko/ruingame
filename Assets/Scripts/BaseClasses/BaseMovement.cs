@@ -264,7 +264,7 @@
         if (!CheckIfPlayerTouchesWall(ref maxDistance, capsuleMaxHeight, capsuleMaxRadius, cameraCollision))
         {
             CheckDashHitOnWalls(ref maxDistance, capsuleMaxHeight, capsuleMaxRadius, direction, cameraCollision);
-            CheckOverlaps(ref maxDistance, startPos, 2f, 0.8f);
+            CheckOverlaps(ref maxDistance, startPos, 2f, 0.8f, direction);
         }
         FreezePosition(true);
         EneableColliders(false, colliders);
@@ -292,14 +292,18 @@
         return MovementInput;
     }
 
-    private void Move2(float hitDistance, Vector3 startPos, Vector3 direction)
+    private void Move2(float maxDistance, Vector3 startPos, Vector3 direction)
     {
         float dashDistance = Vector3.Distance(transform.position, startPos);
         float step = _movementSpeed * Time.deltaTime;
 
-        if (dashDistance + step <= hitDistance)
+        if (dashDistance + step <= maxDistance)
         {
             transform.position += direction * step;
+        }
+        else
+        {
+            transform.position = startPos + direction * maxDistance;
         }
     }
 
@@ -344,19 +348,18 @@
 
         foreach (var item in hits)
         {
-            if (item.transform.tag != "Ground")
+            if (item.transform.tag != "Ground" && item.distance < maxDistance)
             {
                 maxDistance = item.distance;
-                break;
             }
         }
     }
 
-    private void CheckOverlaps(ref float maxDistance, Vector3 startPos, float capsuleMaxHeight, float capsuleMaxRadius)
+    private void CheckOverlaps(ref float maxDistance, Vector3 startPos, float capsuleMaxHeight, float capsuleMaxRadius, Vector3 direction)
     {
         LayerMask enemyLayer = LayerMask.GetMask("EnemyLayer");
         LayerMask collisionObject = LayerMask.GetMask("CollisionObject");
-        Vector3 maxPos = startPos + transform.forward * maxDistance;
+        Vector3 maxPos = startPos + direction * maxDistance;
         while (CheckOverlapOnLayer(enemyLayer, maxPos, capsuleMaxHeight, capsuleMaxRadius) || CheckOverlapOnLayer(collisionObject, maxPos, capsuleMaxHeight, capsuleMaxRadius))
         {
             maxDistance -= 0.5f;
