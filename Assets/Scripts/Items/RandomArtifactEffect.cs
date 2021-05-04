@@ -4,225 +4,113 @@ using UnityEngine;
 using DefaultNamespace;
 public class RandomArtifactEffect : MonoBehaviour
 {
-    private Artifact artifact;
+    public string ArtifactName;
+    public Artifact artifact;
     public List<ArtifactInfo> Commons;
     public List<ArtifactInfo> Rares;
     public List<ArtifactInfo> Mythics;
-    public string ArtifactName;
-    // Start is called before the first frame update
-    private void Awake()
+
+    void Awake()
     {
         artifact = GetComponent<Artifact>();
+        RemoveEquippedArtifactsFromList(Commons);
+        RemoveEquippedArtifactsFromList(Rares);
+        RemoveEquippedArtifactsFromList(Mythics);
         AddRandomEffect();
         ArtifactName = artifact.ArtifactInfo.Name;
     }
 
+    void RemoveEquippedArtifactsFromList(List<ArtifactInfo> artifacts)
+    {
+        List<Artifact> equippedArtifacts = PlayerManager.Instance._playerData.artifactList;
+        for (int i = artifacts.Count - 1; i >= 0; i--)
+        {
+            bool artifactIsEquipped = equippedArtifacts.Exists(x => x.ArtifactInfo.Name == artifacts[i].Name);
+            if (artifactIsEquipped)
+                artifacts.RemoveAt(i);
+        }
+    }
+
     private void AddRandomEffect()
     {
-        float common = 0.45f;
-        float rare = 0.35f + common;
-        float mythic = 1f;
+        float commonMax = 0.45f;
+        float rareMax = 0.35f + commonMax;
+        float mythicMax = 1f;
         bool artifactAdded = false;
-
+        bool errorInAddingEffect = false;
         if (Commons.Count + Rares.Count + Mythics.Count > 0)
         {
             do
             {
                 float rnd = Random.Range(0f, 1f);
 
-                if (rnd <= common && Commons.Count > 0)
+                if (rnd <= commonMax && Commons.Count > 0)
                 {
-                    artifactAdded = AddEffectAndRemoveFromList(Commons);
+                    AddEffect(Commons, ref artifactAdded, ref errorInAddingEffect);
                 }
-                else if (rnd <= rare && rnd > common && Rares.Count > 0)
+                else if (rnd <= rareMax && rnd > commonMax && Rares.Count > 0)
                 {
-                    artifactAdded = AddEffectAndRemoveFromList(Rares);
+                    AddEffect(Rares, ref artifactAdded, ref errorInAddingEffect);
                 }
-                else if (rnd <= mythic && rnd > rare && Mythics.Count > 0)
+                else if (rnd <= mythicMax && rnd > rareMax && Mythics.Count > 0)
                 {
-                    artifactAdded = AddEffectAndRemoveFromList(Mythics);
+                    AddEffect(Mythics, ref artifactAdded, ref errorInAddingEffect);
                 }
-            } while (!artifactAdded);
+            } while (!artifactAdded && !errorInAddingEffect);
         }
     }
 
-    private bool AddEffectAndRemoveFromList(List<ArtifactInfo> goList)
+    private void AddEffect(List<ArtifactInfo> goList, ref bool artifactAdded, ref bool error)
     {
 
         int index = Mathf.FloorToInt(Random.Range(0f, goList.Count));
         ArtifactInfo info = goList[index];
-        switch (info.Name)
+        artifact.ArtifactInfo = info;
+        artifactAdded = false;
+        error = false;
+        try
+        {
+            ArtifactEffect effect = GetEffect(info.Name);
+            if (effect != null)
+            {
+                artifact.ArtifactEffect = effect;
+                artifactAdded = true;
+            }
+        }
+        catch (System.Exception e)
+        {
+            artifactAdded = false;
+            error = true;
+            Debug.Log("error in random artifact effect: " + e.Message);
+        }
+    }
+
+    private ArtifactEffect GetEffect(string effectName)
+    {
+        switch (effectName)
         {
             case "Atlantean Trident":
-                try
-                {
-                    ArtifactEffect effect = gameObject.AddComponent<AtlanteanTrident>();
-                    artifact.ArtifactEffect = effect;
-                    artifact.ArtifactInfo = goList[index];
-                    goList.RemoveAt(index);
-                }
-                catch (System.Exception e)
-                {
-                    Debug.Log(e.Message);
-                    return false;
-                }
-                return true;
+                return gameObject.AddComponent<AtlanteanTrident>();
             case "Book of the wise ones":
-                try
-                {
-                    ArtifactEffect effect = gameObject.AddComponent<BookOfTheWiseOnes>();
-                    artifact.ArtifactEffect = effect;
-                    artifact.ArtifactInfo = goList[index];
-                    goList.RemoveAt(index);
-
-                }
-                catch (System.Exception e)
-                {
-                    Debug.Log(e.Message);
-                    return false;
-
-                }
-                return true;
+                return gameObject.AddComponent<BookOfTheWiseOnes>();
             case "Cape of Agility":
-                try
-                {
-                    ArtifactEffect effect = gameObject.AddComponent<CapeOfAgility>();
-                    artifact.ArtifactEffect = effect;
-                    artifact.ArtifactInfo = goList[index];
-                    goList.RemoveAt(index);
-
-                }
-                catch (System.Exception e)
-                {
-                    Debug.Log(e.Message);
-                    return false;
-
-                }
-                return true;
-
+                return gameObject.GetComponent<CapeOfAgility>();
             case "Essence of Kraken":
-                try
-                {
-                    ArtifactEffect effect = gameObject.AddComponent<EssenceOfKraken>();
-                    artifact.ArtifactEffect = effect;
-                    artifact.ArtifactInfo = goList[index];
-                    goList.RemoveAt(index);
-
-                }
-                catch (System.Exception e)
-                {
-                    Debug.Log(e.Message);
-                    return false;
-
-                }
-                return true;
-
+                return gameObject.GetComponent<EssenceOfKraken>();
             case "Feather of the Phoenix":
-                try
-                {
-                    ArtifactEffect effect = gameObject.AddComponent<FeatherOfThePhoenix>();
-                    artifact.ArtifactEffect = effect;
-                    artifact.ArtifactInfo = goList[index];
-                    goList.RemoveAt(index);
-
-                }
-                catch (System.Exception e)
-                {
-                    Debug.Log(e.Message);
-                    return false;
-
-                }
-                return true;
+                return gameObject.AddComponent<FeatherOfThePhoenix>();
             case "Kappa’s plate":
-                try
-                {
-                    ArtifactEffect effect = gameObject.AddComponent<KappasPlate>();
-                    artifact.ArtifactEffect = effect;
-                    artifact.ArtifactInfo = goList[index];
-                    goList.RemoveAt(index);
-
-                }
-                catch (System.Exception e)
-                {
-                    Debug.Log(e.Message);
-                    return false;
-
-                }
-                return true;
-
+                return gameObject.AddComponent<KappasPlate>();
             case "Leviathan’s hide":
-                try
-                {
-                    ArtifactEffect effect = gameObject.AddComponent<LeviathansHide>();
-                    artifact.ArtifactEffect = effect;
-                    artifact.ArtifactInfo = goList[index];
-                    goList.RemoveAt(index);
-
-                }
-                catch (System.Exception e)
-                {
-                    Debug.Log(e.Message);
-                    return false;
-
-                }
-                return true;
-
+                return gameObject.AddComponent<LeviathansHide>();
             case "Rabbits foot":
-                try
-                {
-                    ArtifactEffect effect = gameObject.AddComponent<RabbitsFoot>();
-                    artifact.ArtifactEffect = effect;
-                    artifact.ArtifactInfo = goList[index];
-                    goList.RemoveAt(index);
-
-                }
-                catch (System.Exception e)
-                {
-                    Debug.Log(e.Message);
-                    return false;
-
-                }
-                return true;
-
+                return gameObject.AddComponent<RabbitsFoot>();
             case "Scythe of the Grim Reaper":
-                try
-                {
-                    ArtifactEffect effect = gameObject.AddComponent<ScytheOfTheGrimReaper>();
-                    artifact.ArtifactEffect = effect;
-                    artifact.ArtifactInfo = goList[index];
-                    goList.RemoveAt(index);
-
-                }
-                catch (System.Exception e)
-                {
-                    Debug.Log(e.Message);
-                    return false;
-
-                }
-                return true;
-
+                return gameObject.AddComponent<ScytheOfTheGrimReaper>();
             case "The Ruined ring":
-                try
-                {
-                    ArtifactEffect effect = gameObject.AddComponent<TheRuinedRing>();
-                    artifact.ArtifactEffect = effect;
-                    artifact.ArtifactInfo = goList[index];
-                    goList.RemoveAt(index);
-
-                }
-                catch (System.Exception e)
-                {
-                    Debug.Log(e.Message);
-                    return false;
-
-                }
-                return true;
-
-
+                return gameObject.AddComponent<TheRuinedRing>();
             default:
-                return false;
-
+                return null;
         }
-
     }
 }
