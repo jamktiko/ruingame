@@ -106,6 +106,8 @@ GameObject:
   - component: {fileID: 2550641457589842860}
   - component: {fileID: 8211011167226655821}
   - component: {fileID: -4299590857887955473}
+  - component: {fileID: -7296303077861261585}
+  - component: {fileID: 8070496924677956944}
   m_Layer: 0
   m_Name: Artifact
   m_TagString: Untagged
@@ -197,3 +199,35 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 575e678c95ab941499aa0ed261b0dd1e, type: 2}
   - {fileID: 11400000, guid: b80952d185450b14a908221bb9df182d, type: 2}
   ArtifactName: 
+--- !u!114 &-7296303077861261585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4835026549342000777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0ab4935de0483e4ea680217919a5f4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  artifactModifiers:
+  - modifier: 0
+    type: 0
+    modifiedValues: 0
+--- !u!114 &8070496924677956944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4835026549342000777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1140727b24c233d4e8a909b176101ebc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  artifactModifiers:
+  - modifier: 10
+    type: 0
+    modifiedValues: 0
