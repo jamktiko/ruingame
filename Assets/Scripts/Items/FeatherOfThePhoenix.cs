@@ -8,9 +8,6 @@ public class FeatherOfThePhoenix : ArtifactEffect
     private PlayerHealth _playerHealth;
     private BaseAttackHandler _attackHandler;
     private MeleeAttack _featherOfPhoenixDamage;
-    //public float burningDamage = 50f;
-    //public float burningRadius = 20f;
-    //public float burningTime = 3f;
 
     public override void AddEffect()
     {
