@@ -43,19 +43,4 @@ public class CapeOfAgility : ArtifactEffect
         artifactModifiers[0].modifier = speedModifier;
     }
 
-    private void OnDestroy()
-    {
-        _playerReference = PlayerManager.Instance;
-        if (_playerReference._playerData.entityMovementSpeed > normalSpeed)
-        {
-            _playerReference._playerData.entityMovementSpeed = normalSpeed;
-        }
-
-        try
-        {
-            _playerReference.GetComponent<SprintSkill>().EndSprintEvent -= ModifyMovmentSpeed;
-        }
-        catch{}
-    }
-
 }
