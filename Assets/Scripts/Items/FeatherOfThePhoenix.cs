@@ -46,25 +46,4 @@ public class FeatherOfThePhoenix : ArtifactEffect
         _fopDamage.KnockBackStrength = 10f;
         return _fopDamage;
     }
-
-    private void OnDestroy()
-    {
-        try
-        {
-            PlayerManager.Instance.GetComponent<PlayerHealth>().DiePlayerEvent -= RevivePlayer;
-        }
-        catch { }
-    }
-
-    //void BurningDamage()
-    //{
-    //    Targeting targeting = PlayerManager.Instance.GetComponent<Targeting>();
-    //    foreach (var item in targeting.GetListOfEnemiesInRange(burningRadius, 0f))
-    //    {
-    //        if (item.TryGetComponent(out EnemyHealth enemyHealth))
-    //        {
-    //            enemyHealth.DealDamageOverTime(burningDamage, burningTime);
-    //        }
-    //    }
-    //}
 }
