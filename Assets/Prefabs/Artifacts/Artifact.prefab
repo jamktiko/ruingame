@@ -185,10 +185,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Commons:
-  - {fileID: 11400000, guid: acef72ffc3f119441bcc772e0ef017f0, type: 2}
+  - {fileID: 11400000, guid: 9185892114700b94fa8f67a43634daf3, type: 2}
   - {fileID: 11400000, guid: 9cc7e71c319c1c84ea35f1dee13d25ae, type: 2}
   - {fileID: 11400000, guid: 559a542fa7321e448a481737c1b3ed84, type: 2}
-  Rares: []
+  - {fileID: 11400000, guid: f6898c8f0ef6b42448e400e9e6abc968, type: 2}
+  - {fileID: 11400000, guid: acef72ffc3f119441bcc772e0ef017f0, type: 2}
+  Rares:
+  - {fileID: 11400000, guid: 10f8a8d498de89443bf28f2e02fba40c, type: 2}
+  - {fileID: 11400000, guid: 6470942f47815dd4bae387e2ebc7e235, type: 2}
   Mythics:
   - {fileID: 11400000, guid: 575e678c95ab941499aa0ed261b0dd1e, type: 2}
+  - {fileID: 11400000, guid: b80952d185450b14a908221bb9df182d, type: 2}
   ArtifactName: 
