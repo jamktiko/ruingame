@@ -3,34 +3,34 @@ using UnityEngine;
 
 public class ScytheOfTheGrimReaper : ArtifactEffect
 {
-    private PlayerAttackHandler _playerAttackHandler;
+    private BaseAttackHandler _attackHandler;
+    private float _newCriticalHitChance = 10f;
+    private float _initialCriticalHitChance;
+    private PlayerHealth _playerHealth;
+    private float _healthModifer = 10f;
+    protected void Start()
+    {
+        _playerHealth = PlayerManager.Instance.GetComponent<PlayerHealth>();
+        _attackHandler = PlayerManager.Instance.GetComponent<BaseAttackHandler>();
+        _initialCriticalHitChance = _attackHandler.criticalHitChance;
+    }
 
     public override void AddEffect()
     {
-        _playerReference = PlayerManager.Instance;
-        if (_playerReference.TryGetComponent(out _playerAttackHandler))
-        {
-            _playerAttackHandler.PlayerAttackEvent += TryCriticalHit;
-        }
+        ModifyCriticalHitChance();
+        _attackHandler.CriticalHit += AddHealth;
     }
 
-    private void TryCriticalHit(float damage, Health enemyHealth)
+    private void ModifyCriticalHitChance()
     {
+        _attackHandler.criticalHitChance = _newCriticalHitChance;
+    }
 
-        float rnd = Random.Range(0, 11);
-        if (rnd <= 1)
-        {
-            _playerAttackHandler.artifactDamageModifier = damage;
-
-            if (_playerReference.TryGetComponent(out PlayerHealth playerHealth))
-            {
-                float addHealth = playerHealth.currentHealth + playerHealth.maximumHealth * 0.1f;
-                if (addHealth > playerHealth.maximumHealth)
-                    playerHealth.currentHealth = playerHealth.maximumHealth;
-                else
-                    playerHealth.currentHealth = addHealth;
-
-            }
-        }
+    private void AddHealth()
+    {
+        if (_playerHealth.currentHealth + _healthModifer > _playerHealth.maximumHealth)
+            _playerHealth.currentHealth = _playerHealth.maximumHealth;
+        else
+            _playerHealth.currentHealth += _healthModifer;
     }
 }
