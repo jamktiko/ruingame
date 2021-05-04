@@ -138,6 +138,7 @@ public class PlayerManager : BaseManager
     {
         //Give artifact stats and add as a string to the artifact list
         //Destroy(artifact.gameObject, 0.1f);
+        _playerData.artifactList.Add(artifact);
 
         //For artifact events
         artifact.gameObject.SetActive(false);
