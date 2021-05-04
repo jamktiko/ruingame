@@ -16,13 +16,4 @@ public class TheRuinedRing : ArtifactEffect
         }
 
     }
-
-    private void OnDestroy()
-    {
-        _playerReference = PlayerManager.Instance;
-        foreach (var skill in _playerReference._playerSkills.skillList)
-        {
-            skill.skillCooldown /= cooldownModifier;
-        }
-    }
 }
