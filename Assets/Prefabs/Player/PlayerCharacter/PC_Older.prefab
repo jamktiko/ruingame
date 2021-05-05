@@ -2142,7 +2142,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -300, y: 75}
+  m_AnchoredPosition: {x: -150, y: 240}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &6940729545538531919
@@ -2163,7 +2163,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 0
+  m_Spacing: -126
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
@@ -2184,8 +2184,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillIconPrefabs: []
   skillImages: []
-  skillIconPrefab: {fileID: 5243744037893086847, guid: 3ffd26e9b4023cb449f4c525668fb549,
-    type: 3}
+  skillIconPrefab:
+  - {fileID: 5243744037893086847, guid: 3fac41ca620ab774180ee98a580144fc, type: 3}
+  - {fileID: 5243744037893086847, guid: 19fecb412e0b78f4684230e54fe6b89e, type: 3}
+  - {fileID: 5243744037893086847, guid: 5949244f27cdfff4c8d14ce9d45a36a2, type: 3}
   UIUpdateRate: 0.05
 --- !u!1 &3450407711814719094
 GameObject:
@@ -2539,7 +2541,7 @@ MonoBehaviour:
 
     Mouse Wheel -/ Zoom
 
-    Q , E , R -/ Various skills
+    Q , E  -/ Use Skills
 
     Shift
     -/ Dodge/Dash
