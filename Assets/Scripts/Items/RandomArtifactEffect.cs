@@ -17,18 +17,24 @@ public class RandomArtifactEffect : MonoBehaviour
         RemoveEquippedArtifactsFromList(Rares);
         RemoveEquippedArtifactsFromList(Mythics);
         AddRandomEffect();
-        ArtifactName = artifact.ArtifactInfo.Name;
+        try { ArtifactName = artifact.ArtifactInfo.Name; }
+        catch { ArtifactName = "no artifact info"; }
     }
 
     void RemoveEquippedArtifactsFromList(List<ArtifactInfo> artifacts)
     {
-        List<Artifact> equippedArtifacts = PlayerManager.Instance._playerData.artifactList;
-        for (int i = artifacts.Count - 1; i >= 0; i--)
+        try
         {
-            bool artifactIsEquipped = equippedArtifacts.Exists(x => x.ArtifactInfo.Name == artifacts[i].Name);
-            if (artifactIsEquipped)
-                artifacts.RemoveAt(i);
+            List<Artifact> equippedArtifacts = PlayerManager.Instance._playerData.artifactList;
+            for (int i = artifacts.Count - 1; i >= 0; i--)
+            {
+                bool artifactIsEquipped = equippedArtifacts.Exists(x => x.ArtifactInfo.Name == artifacts[i].Name);
+                if (artifactIsEquipped)
+                    artifacts.RemoveAt(i);
+            }
         }
+        catch (System.Exception e)
+        { Debug.Log("error in removing artifact info from list: " + e.Message); }
     }
 
     private void AddRandomEffect()
