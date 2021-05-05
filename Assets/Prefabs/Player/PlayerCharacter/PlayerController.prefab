@@ -339,16 +339,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCharacter
       objectReference: {fileID: 0}
-    - target: {fileID: 8665358863011624142, guid: 010a60488de22bd4891b4d85aac207c2,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8665358863011624142, guid: 010a60488de22bd4891b4d85aac207c2,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 010a60488de22bd4891b4d85aac207c2, type: 3}
 --- !u!4 &3063667417926476631 stripped
