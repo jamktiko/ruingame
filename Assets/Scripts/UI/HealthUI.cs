@@ -9,6 +9,7 @@ public class HealthUI : MonoBehaviour
     public EntityHealth _entityHealth;
     public Canvas _entityUI;
     public Slider _healthSlider;
+    public Animator _damageIndicator;
 
 
     void Start()
@@ -16,6 +17,7 @@ public class HealthUI : MonoBehaviour
         _entityUI = GetComponent<Canvas>();
         _entityHealth = GetComponentInParent<EntityHealth>();
         _healthSlider = _entityUI.GetComponentInChildren<Slider>();
+        _damageIndicator = _entityUI.GetComponentInChildren<Animator>();
         
         StartCoroutine("UpdateUI");
     }
