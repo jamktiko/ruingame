@@ -45,7 +45,7 @@ public class PlayerAttackHandler : ComboAttackHandler
     public override void EndAttack()
     {
         base.EndAttack();
-        _movementControl.attacking = attacking;
+        _movementControl.attacking = false;
     }
     public override void AttemptAttack()
     {
