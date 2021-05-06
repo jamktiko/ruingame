@@ -26,11 +26,14 @@ public class RandomArtifactEffect : MonoBehaviour
         try
         {
             List<Artifact> equippedArtifacts = PlayerManager.Instance._playerData.artifactList;
-            for (int i = artifacts.Count - 1; i >= 0; i--)
+            int i = 0;
+            while (i < artifacts.Count)
             {
                 bool artifactIsEquipped = equippedArtifacts.Exists(x => x.ArtifactInfo.Name == artifacts[i].Name);
                 if (artifactIsEquipped)
                     artifacts.RemoveAt(i);
+                else
+                    i++;
             }
         }
         catch (System.Exception e)
