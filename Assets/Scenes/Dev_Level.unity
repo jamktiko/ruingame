@@ -1166,6 +1166,7 @@ MonoBehaviour:
   pauseMenu: {fileID: 4679750203203434461, guid: 6c7fea62e0718c04ebb81a40698d8be9,
     type: 3}
   currentPauseMenu: {fileID: 0}
+  playerSkillList: []
   playerMasterPrefab: {fileID: 181873949443222881, guid: 5aaa3e2969f309a4a9600ed8becff734,
     type: 3}
   playerInputReader: {fileID: 11400000, guid: 88aea93a9d9c85d4ea251d1cce5aa3e6, type: 2}

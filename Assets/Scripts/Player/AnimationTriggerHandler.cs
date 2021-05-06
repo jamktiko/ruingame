@@ -16,6 +16,9 @@ public class AnimationTriggerHandler : MonoBehaviour
 
     public GameObject _dashEffect;
     public Transform _dashPosition;
+    
+    public GameObject _blizzard;
+    public Transform _blizzardPosition;
 
     private GameObject currentEffectSpawned;
 
@@ -49,6 +52,13 @@ public class AnimationTriggerHandler : MonoBehaviour
 
         Destroy(currentEffectSpawned, 1.5f);
     }
+    public void Blizzard()
+
+    {
+        currentEffectSpawned = Instantiate(_blizzard, _blizzardPosition);
+        
+    }
+
 
     public void StanceChange()
     {
