@@ -81,7 +81,7 @@
 	</object>
 	<object class="EventMixerMaster" id="{3968ef3e-7f13-4e46-ad0c-0fa0e36f0ffc}">
 		<property name="volume">
-			<value>-10</value>
+			<value>-13.5</value>
 		</property>
 		<relationship name="effectChain">
 			<destination>{cd5dd504-d410-478d-8f0e-f52d682e9c44}</destination>
@@ -127,10 +127,10 @@
 	<object class="MixerBusPanner" id="{d530690e-8375-4ee4-bcc6-b271abbca48c}" />
 	<object class="MultiSound" id="{4be7aa16-ce80-4ca0-966b-2c6000a408c7}">
 		<property name="volume">
-			<value>1</value>
+			<value>-2</value>
 		</property>
 		<property name="pitch">
-			<value>3.79999995</value>
+			<value>0.800000012</value>
 		</property>
 		<property name="playlistMode">
 			<value>1</value>
@@ -157,6 +157,9 @@
 	<object class="MixerBusPanner" id="{71a1af88-8b1c-46d1-8f27-50822412eb7c}" />
 	<object class="MixerBusFader" id="{15f4ef04-15ee-4dac-b417-3220d5cfa24a}" />
 	<object class="SFXReverbEffect" id="{cf5bba3c-7840-4673-8391-453796a2c79e}">
+		<property name="decayTime">
+			<value>1900</value>
+		</property>
 		<property name="earlyDelay">
 			<value>15</value>
 		</property>
