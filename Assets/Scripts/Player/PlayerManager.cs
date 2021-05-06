@@ -27,7 +27,7 @@ public class PlayerManager : BaseManager
     public RuntimeAnimatorController playerAnimator { get; private set; }
     
     private PlayerAttackHandler _playerAttack;
-    private PlayerHealth _playerHealth;
+    public PlayerHealth _playerHealth;
     public PlayerMovementController _playerMovement { get; private set; }
     public SkillUser _playerSkills { get; private set; }
 
@@ -48,6 +48,10 @@ public class PlayerManager : BaseManager
         playerInputReader.InteractEvent -= OnPickUp;
     }
 
+    public void InitializeSkills()
+    {
+        _playerSkills.InitializeSkills();
+    }
     private void Awake()
     {
         if (_instance != null && _instance != this)

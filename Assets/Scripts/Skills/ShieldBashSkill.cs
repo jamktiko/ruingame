@@ -28,7 +28,6 @@ namespace DefaultNamespace.Skills
         protected override void Start()
         {
             base.Start();
-            skillname = "Shield Bash";
             _sprintSpeed *= 1.2f;
             damage = 10f;
             duration = 0.5f;
@@ -42,7 +41,11 @@ namespace DefaultNamespace.Skills
             PlayerManager.Instance._playerMovement.OnDash(duration);
             WhileSkillActive();
         }
-
+        protected override void Awake()
+        {
+            skillname = "Shield bash";
+            animationClip = Resources.Load<AnimationClip>("P_Dash");
+        }
         public override void WhileSkillActive()
         {
             if (!onCooldown)

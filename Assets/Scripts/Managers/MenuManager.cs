@@ -10,14 +10,14 @@ public class MenuManager : MonoBehaviour
     public Canvas[] childCanvases;
     public Canvas currentCanvas;
     public MenuSelectionHandler MSH;
-
+    public Canvas SkillSelectionCanvas;
 
     private bool loadingMenu;
     public virtual void StartGame()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        gameManager.StartGameplayLoop();
+        
+        SwitchCanvasB(SkillSelectionCanvas);
+        SkillSelectionCanvas.GetComponent<SkillSelection>().StartSkillSelection();
     }
     
     public virtual void Awake()
@@ -70,6 +70,13 @@ public class MenuManager : MonoBehaviour
         var newTarget = currentCanvas.GetComponentInChildren<MultiButton>().gameObject;
         EventSystem.current.SetSelectedGameObject(newTarget);
         MSH.UpdateSelection(newTarget);
+    }
+    public void SwitchCanvasB(Canvas newCanvas)
+    {
+        currentCanvas.gameObject.SetActive(false);
+        newCanvas.gameObject.SetActive(true);
+        currentCanvas = newCanvas;
+
     }
 }
 

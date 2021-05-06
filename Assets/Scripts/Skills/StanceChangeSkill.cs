@@ -28,26 +28,42 @@ namespace DefaultNamespace.Skills
         public MeleeAttack _selfAttack;
         protected override void Start()
         {
-            base.Start();
-            skillname = "StanceChange";
-            damage = 50f;
-            _damageResistance = 5f;
-            _passiveAttackSpeed = 0.5f;
-            _passiveResistance = 10f;
-            _selfDamage = 20f;
-            PlayerManager.Instance.ModifyAttackSpeed(_passiveAttackSpeed, 1);
-            PlayerManager.Instance.ModifyResistance(_passiveResistance, 1);
-            _selfAttack = SelfDamage();
+            
+            try
+            {
+                base.Start();
+                
+                damage = 50f;
+                _damageResistance = 5f;
+                _passiveAttackSpeed = 0.5f;
+                _passiveResistance = 10f;
+                _selfDamage = 20f;
+                PlayerManager.Instance.ModifyAttackSpeed(_passiveAttackSpeed, 1);
+                PlayerManager.Instance.ModifyResistance(_passiveResistance, 1);
+                _selfAttack = SelfDamage();
+            }
+            catch{}
+        }
+        protected override void Awake()
+        {
+            skillname = "Stance Change";
+            animationClip = Resources.Load<AnimationClip>("Aggressive_Stance");
+        }
+        public override void Execute(float duration)
+        {
+            base.Execute();
+                try {WhileSkillActive();}
+                catch{Debug.Log("whileskillactive");}
         }
 
-        public override void Execute(float duration)
+        public override bool CheckExecuteCondition()
         {
             if (playerHealth.currentHealth > 40f)
             {
-                base.Execute();
-                try {WhileSkillActive();}
-                catch{Debug.Log("whileskillactive");}
+                return true;
             }
+
+            return false;
         }
 
         public override void WhileSkillActive()

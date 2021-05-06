@@ -19,11 +19,15 @@ namespace DefaultNamespace
         protected override void Start()
         {
             base.Start();
-            skillname = "Sprint";
             skillCooldown = 1.5f;
             duration = 0.2f;
         }
-
+        
+        protected override void Awake()
+        {
+            skillname = "Sprint";
+            animationClip = Resources.Load<AnimationClip>("P_Dash");
+        }
         public override void Execute(float duration)
         {
             // THIS LOCKS PLAYER MOVEMENT TO LAST INPUT OR FORCES MOVEMENT IF PLAYER IS NOT INPUTTING ANYTHING
