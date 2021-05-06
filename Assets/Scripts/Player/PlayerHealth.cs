@@ -17,4 +17,9 @@ public class PlayerHealth : EntityHealth
         if (!revivePlayer)
             pm.Die();
     }
+    public override void ReactToDamage(float amount)
+    {
+        _healthUI.PlayAnimation();
+        base.ReactToDamage(amount);
+    }
 }
