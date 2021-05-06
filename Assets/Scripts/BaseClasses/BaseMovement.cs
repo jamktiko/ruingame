@@ -16,7 +16,7 @@
     protected float _animatorVelocity = 0.0f;
     public Animator _characterAnimator;
     
-    protected Rigidbody _characterRigidBody;
+    public Rigidbody _characterRigidBody;
     //Used to calculate movement vectors
     protected Vector2 _previousMovementInput;
     [HideInInspector] public Vector3 MovementInput { get; protected set; }

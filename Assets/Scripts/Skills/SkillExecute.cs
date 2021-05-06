@@ -7,6 +7,7 @@ public class SkillExecute : MonoBehaviour
 
     //STORE THIS DATA IN A PREFAB OR SCRIPTABLE
     public string skillname;
+    
     public string skillDescription;
     public float skillCooldown = 5f;
     public float iFrameDuration = 0.3f;
@@ -17,16 +18,29 @@ public class SkillExecute : MonoBehaviour
     protected float damage = 10f;
 
     protected Targeting targeting;
-    protected PlayerHealth playerHealth;
-    protected Rigidbody playerRb;
+    public PlayerHealth playerHealth;
+    public Rigidbody playerRb;
 
     protected virtual void Start()
     {
-        playerHealth = GetComponent<PlayerHealth>();
-        targeting = skillUser.skillTargeting;
-        playerRb = gameObject.GetComponent<Rigidbody>();
+        try
+        {
+            targeting = skillUser.skillTargeting;
+        }
+        catch{}
 
     }
+
+    protected virtual void Awake()
+    {
+        
+    }
+
+    public virtual bool CheckExecuteCondition()
+    {
+        return true;
+    }
+    
     public virtual void Execute()
     {
         try

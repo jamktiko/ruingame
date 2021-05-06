@@ -36,7 +36,6 @@ namespace DefaultNamespace.Skills
         protected override void Start()
         {
             base.Start();
-            skillname = "WhirlWind";
             damage = 50f;
             skillCooldown = 1f;
             _attackDistance = _attackRadius / 2f;
@@ -54,7 +53,11 @@ namespace DefaultNamespace.Skills
             catch { Debug.Log("whirlwind"); }
             skillUser.usingSkill = false;
         }
-
+        protected override void Awake()
+        {
+            skillname = "Whirlwind";
+            animationClip = Resources.Load<AnimationClip>("WhirlWind");
+        }
         public MeleeAttack Whirlwind()
         {
             var _whirlwind = ScriptableObject.CreateInstance<MeleeAttack>();

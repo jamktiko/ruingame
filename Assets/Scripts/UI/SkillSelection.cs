@@ -1,87 +1,120 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 public class SkillSelection : MonoBehaviour
 {
-    //Creates singleton gamemanager
-    private static SkillSelection _instance;
-    public static SkillSelection Instance
-    {
-        get { return _instance; }
-    }
-    /*
-    private void Awake()
-    {
-        if (_instance != null && _instance != this)
-        {
-            Destroy(this.gameObject);
-        } else {
-            _instance = this;
-        }
-    }
-
-    private SkillSelection _skillSelection;
-    List<NonMonoSkill> _options = new List<NonMonoSkill>();
-    private GameManager _gameManager;
-    private SkillData _generatedSkillData;
-    public MenuManager menuManager = default;
+    public List<SkillExecute> _options;
+    public SkillExecute[] _playerSkillList;
+    public List<SkillExecute> _skillList;
+    public GameObject buttons;
+    public GameObject skillSelectionButton;
+    public List<SkillExecute> _skilllistTemplate;
+    private int currentSelection = 0;
     
-    void Start()
+    void OnEnable()
     {
-        _gameManager = GameManager.Instance;
+        _skillList = GetComponents<SkillExecute>().ToList();
+        _playerSkillList = new SkillExecute[3];
     }
 
-    public void StartSkillSelection()
+    public void  StartSkillSelection()
     {
-        _generatedSkillData = gameObject.AddComponent<SkillData>();
-        //GENERATE SELECTION OF SKILLS
-        //ENABLE BUTTONS
-        //ON BUTTON CLICK SELECT SKILL
+       try { ClearExistingButtons();}
+       catch{}
+        GenerateSkillSelection();
+        EnableButtons();
     }
-
     public void GenerateSkillSelection()
     {
-        _options.Add(_gameManager.baseSkillData.GetRandomSkillExecute());
-        _options.Add(_gameManager.baseSkillData.GetRandomSkillExecute());
-        _options.Add(_gameManager.baseSkillData.GetRandomSkillExecute());
+        _options = new List<SkillExecute>();
+        _skilllistTemplate = new List<SkillExecute>(_skillList);
+        
+        var diceRoll = Random.Range(0, _skilllistTemplate.Count);
+
+        _options.Add(_skilllistTemplate[diceRoll]);
+        _skilllistTemplate.RemoveAt(diceRoll);
+        
+        diceRoll = Random.Range(0, _skilllistTemplate.Count);
+        _options.Add(_skilllistTemplate[diceRoll]);
+        _skilllistTemplate.RemoveAt(diceRoll);
+
+        diceRoll = Random.Range(0, _skilllistTemplate.Count);
+        _options.Add(_skilllistTemplate[diceRoll]);
+        _skilllistTemplate.RemoveAt(diceRoll);
+
+            for (int i = 0; i < _options.Count; i++)
+        {
+            GenerateOption(i);
+        }
+        
+        EnableButtons();
+        var menu = GetComponentInParent<MenuManager>();
+        var newTarget = GetComponentInChildren<MultiButton>().gameObject;
+        EventSystem.current.SetSelectedGameObject(newTarget);
+        menu.MSH.UpdateSelection(newTarget);
     }
 
-    public void SelectOption1()
+    public void GenerateOption(int option)
     {
-        _generatedSkillData.skillList.skill.Add(_options.ElementAt(0));
-        _options.RemoveAt(0);
-        OnSkillSelect(0);
+        var selectionbutton = Instantiate(skillSelectionButton, buttons.transform); 
+        var op = selectionbutton.GetComponent<SelectionButton>();
+        op.option = option;
+        op.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = _options[option].skillname;
+        op.onClick.AddListener(delegate { SelectOption(op.option); });
     }
-    public void SelectOption2()
+    public void SelectOption(int option)
     {
-        _generatedSkillData.skillList.skill.Add(_options.ElementAt(1));
-        _options.RemoveAt(1);
-        OnSkillSelect(1);
+        OnSkillSelect(option);
     }
-    public void SelectOption3()
-    {
-        _generatedSkillData.skillList.skill.Add(_options.ElementAt(2));
-        _options.RemoveAt(2);
-        OnSkillSelect(2);
-    }
-
     private void OnSkillSelect(int option)
     {
-        //Disable buttons
-        //Add options that werent selected back to base
-        if (_generatedSkillData.skillList.skill.Count == 4)
+        DisableButtons();
+        _playerSkillList[currentSelection] = _options[option];
+        if (_skillList.Contains(_options[option]))
+            _skillList.Remove(_options[option]);
+        currentSelection++;
+        if (currentSelection > 2)
         {
-            _gameManager.givenSkillData = _generatedSkillData;
-            menuManager.StartGame();
+            ClearExistingButtons();
+            GameManager.Instance.playerSkillList = _playerSkillList;
+            GameManager.Instance.StartGameplayLoop();
         }
         else
         {
-            _options = new List<NonMonoSkill>();
-            GenerateSkillSelection();
+            StartSkillSelection();
         }
     }
-    */
+
+    private void DisableButtons()
+    {
+       var _buttons = GetComponentsInChildren<MultiButton>();
+        foreach (MultiButton btn in _buttons)
+        {
+            btn.enabled = true;
+        }
+    }
+    private void EnableButtons()
+    {
+        var _buttons = GetComponentsInChildren<MultiButton>();
+        foreach (MultiButton btn in _buttons)
+        {
+            btn.enabled = true;
+        }
+    }
+
+    private void ClearExistingButtons()
+    {
+        var _buttons = GetComponentsInChildren<MultiButton>();
+        foreach (MultiButton btn in _buttons)
+        {
+            btn.onClick.RemoveAllListeners();
+            Destroy(btn.gameObject);
+        }
+    }
 }
