@@ -78,6 +78,8 @@ public class GameManager : MonoBehaviour
     }
     public virtual IEnumerator CreateGame()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         yield return new WaitForSeconds(0.2f);
         ConstructPlayer();
         InitializePlayer();
