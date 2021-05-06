@@ -48,7 +48,9 @@ public class SkillSelection : MonoBehaviour
         _options.Add(_skilllistTemplate[diceRoll]);
         _skilllistTemplate.RemoveAt(diceRoll);
 
-            for (int i = 0; i < _options.Count; i++)
+        _options.Shuffle();
+        
+        for (int i = 0; i < _options.Count; i++)
         {
             GenerateOption(i);
         }
@@ -59,7 +61,6 @@ public class SkillSelection : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(newTarget);
         menu.MSH.UpdateSelection(newTarget);
     }
-
     public void GenerateOption(int option)
     {
         var selectionbutton = Instantiate(skillSelectionButton, buttons.transform); 
@@ -118,3 +119,20 @@ public class SkillSelection : MonoBehaviour
         }
     }
 }
+static class ExtensionsSkill
+{
+    private static Random rng = new Random();  
+
+    public static void Shuffle<T>(this IList<T> list)  
+    {  
+        int n = list.Count;  
+        while (n > 1) {  
+            n--;  
+            int k = Random.Range(0, n+1);  
+            T value = list[k];  
+            list[k] = list[n];  
+            list[n] = value;  
+        }  
+    }
+}
+
