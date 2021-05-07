@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DefaultNamespace;
+using TMPro;
+
 public class RandomArtifactEffect : MonoBehaviour
 {
     public string ArtifactName;
@@ -19,6 +21,8 @@ public class RandomArtifactEffect : MonoBehaviour
         AddRandomEffect();
         try { ArtifactName = artifact.ArtifactInfo.Name; }
         catch { ArtifactName = "no artifact info"; }
+        
+        GetComponentInChildren<TextMeshProUGUI>().text = artifact.ArtifactInfo.Name;
     }
 
     void RemoveEquippedArtifactsFromList(List<ArtifactInfo> artifacts)

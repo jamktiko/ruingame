@@ -13,6 +13,7 @@ public class Artifact : MonoBehaviour
     private void Start()
     {
         gameObject.transform.SetParent(GameObject.FindGameObjectWithTag("Artifact").transform);
+        
     }
 
     private void Awake()
