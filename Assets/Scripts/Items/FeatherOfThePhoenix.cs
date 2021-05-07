@@ -1,18 +1,20 @@
 ﻿
 using DefaultNamespace;
+using UnityEngine;
 
 public class FeatherOfThePhoenix : ArtifactEffect
 {
-    public float burningDamage = 50f;
-    public float burningRadius = 20f;
-    public float burningTime = 3f;
     private float counter = 1;
     private PlayerHealth _playerHealth;
+    private BaseAttackHandler _attackHandler;
+    private MeleeAttack _featherOfPhoenixDamage;
 
     public override void AddEffect()
     {
         _playerReference = PlayerManager.Instance;
         _playerHealth = _playerReference.GetComponent<PlayerHealth>();
+        _attackHandler = _playerReference.GetComponent<BaseAttackHandler>();
+        _featherOfPhoenixDamage = FeatherOfPhoenixDamage();
         _playerHealth.DiePlayerEvent += RevivePlayer;
         _playerHealth.revivePlayer = true;
     }
@@ -20,24 +22,25 @@ public class FeatherOfThePhoenix : ArtifactEffect
     private void RevivePlayer()
     {
         if (counter == 0)
-           _playerHealth.revivePlayer = false;
+            _playerHealth.revivePlayer = false;
         else
         {
             _playerHealth.currentHealth = _playerHealth.maximumHealth;
-            BurningDamage();
             counter--;
+            try { _attackHandler.HandleAttack(_featherOfPhoenixDamage); }
+            catch { Debug.Log("FeatherOfPhoenix"); }
         }
     }
 
-    void BurningDamage()
+    public MeleeAttack FeatherOfPhoenixDamage()
     {
-        Targeting targeting = PlayerManager.Instance.GetComponent<Targeting>();
-        foreach (var item in targeting.GetListOfEnemiesInRange(burningRadius, 0f))
-        {
-            if (item.TryGetComponent(out EnemyHealth enemyHealth))
-            {
-                enemyHealth.DealDamageOverTime(burningDamage, burningTime);
-            }
-        }
+        var _fopDamage = ScriptableObject.CreateInstance<MeleeAttack>();
+        _fopDamage.TargetingType = basetargetingType.AOE;
+        _fopDamage.Radius = 10f;
+        _fopDamage.DamageType = baseDamageType.DIRECT;
+        _fopDamage.baseDamage = 50f;
+        _fopDamage.KnockBack = true;
+        _fopDamage.KnockBackStrength = 10f;
+        return _fopDamage;
     }
 }

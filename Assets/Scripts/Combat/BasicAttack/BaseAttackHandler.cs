@@ -2,9 +2,13 @@
 using System.Collections;
 using Data.Util;
 using UnityEngine;
+using UnityEngine.Events;
 [RequireComponent(typeof(AttackTargeting))]
     public class BaseAttackHandler : MonoBehaviour
-    {
+    {        
+        //For Scythe artifact 
+        public event UnityAction CriticalHit = delegate { };
+
         public BaseAttack baseAttack;
         public bool attacking = false;
         public float criticalHitChance;
@@ -148,6 +152,7 @@ using UnityEngine;
             if (CheckForCritical())
             {
                 retVal *= 2;
+                CriticalHit.Invoke();
             }
 
             return retVal;

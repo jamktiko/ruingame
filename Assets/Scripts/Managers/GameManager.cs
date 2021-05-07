@@ -113,6 +113,7 @@ public class GameManager : MonoBehaviour
         Destroy(currentPauseMenu);
         currentPlayer.GetComponent<PlayerManager>().enabled = false;
         Destroy(currentPlayer);
+        SpawnedArtifacts.Instance.DestroyGO();
         SceneManager.LoadScene("MainMenu");
     }
     public void InitializePlayer()
