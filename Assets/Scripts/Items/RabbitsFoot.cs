@@ -18,8 +18,9 @@ public class RabbitsFoot : ArtifactEffect
 
     private void DodgeAttack()
     {
-        float rnd = Random.Range(0f, 21f);
-        if (rnd <= 1f)
+        float rnd = Random.Range(0f, 1f);
+        float dodgeChance = 0.05f;
+        if (rnd <= dodgeChance)
             _playerHealth.dodgeAttack = true;
     }
 }

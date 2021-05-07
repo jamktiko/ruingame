@@ -12,8 +12,7 @@ public class Artifact : MonoBehaviour
     private int _pickupeventcount = 0;
     private void Start()
     {
-        ArtifactEffect = GetComponent<ArtifactEffect>();
-
+        gameObject.transform.SetParent(GameObject.FindGameObjectWithTag("Artifact").transform);
     }
 
     private void Awake()

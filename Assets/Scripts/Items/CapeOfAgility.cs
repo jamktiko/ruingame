@@ -11,11 +11,12 @@ public class CapeOfAgility : ArtifactEffect
     {
         _playerReference = PlayerManager.Instance;
         normalSpeed = _playerReference._playerData.entityMovementSpeed;
+        speedModifier = normalSpeed * speedModifier;
     }
 
     public override void AddEffect()
     {
-        artifactModifiers[0].modifier = normalSpeed * speedModifier;
+        ChangeModifier(ArtifactModifier.Type.Plus);
         base.AddEffect();
         if (_playerReference.TryGetComponent(out sprintSkill))
         {
@@ -25,23 +26,21 @@ public class CapeOfAgility : ArtifactEffect
 
     private void ModifyMovmentSpeed()
     {
-        artifactModifiers[0].type = ArtifactModifier.Type.Plus;
-        artifactModifiers[0].modifier = normalSpeed * speedModifier;
+        ChangeModifier(ArtifactModifier.Type.Plus);
         base.AddEffect();
         Invoke("ReduceSpeed", 2f);
     }
 
     private void ReduceSpeed()
     {
-        artifactModifiers[0].type = ArtifactModifier.Type.Minus;
-        artifactModifiers[0].modifier = normalSpeed * speedModifier;
+        ChangeModifier(ArtifactModifier.Type.Minus);
         base.AddEffect();
     }
 
-    private void OnDestroy()
+    private void ChangeModifier(ArtifactModifier.Type type)
     {
-        if (_playerReference._playerData.entityMovementSpeed > normalSpeed)
-            _playerReference._playerData.entityMovementSpeed = normalSpeed;
+        artifactModifiers[0].type = type;
+        artifactModifiers[0].modifier = speedModifier;
     }
 
 }
