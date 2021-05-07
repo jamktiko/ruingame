@@ -47,7 +47,8 @@ public class GameManager : MonoBehaviour
     public void ConstructPlayer()
     {
         //Destroy previous player
-        Destroy(currentPlayer);
+        try{Destroy(currentPlayer);}
+        catch{}
         //Create PlayerMaster
         currentPlayer = Instantiate(playerMasterPrefab);
         currentPlayer.name = "PlayerMaster";
@@ -124,11 +125,6 @@ public class GameManager : MonoBehaviour
     {
         roomManager = gameObject.AddComponent<RoomManager>();
         roomManager.possibleRooms = roomvariants.possibleRooms;
-    }
-
-    private void AddSkills(GameObject sk)
-    {
-        sk.AddComponent<SprintSkill>();
     }
 
     public void SetTimeScale(float amount)

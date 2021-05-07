@@ -19,20 +19,32 @@ public class SkillSelection : MonoBehaviour
     public GameObject skillSelectionButton;
     public List<SkillExecute> _skilllistTemplate;
     private int currentSelection = 0;
+    private MenuManager menu;
+    private SelectionButton[] _buttons;
     
     void OnEnable()
     {
         _skillList = GetComponents<SkillExecute>().ToList();
         _playerSkillList = new SkillExecute[3];
+       menu = GetComponentInParent<MenuManager>();
+       for (int i = 0; i < 3; i++)
+       {
+           GenerateButton(i);
+       }
+
+       _buttons = buttons.GetComponentsInChildren<SelectionButton>();
     }
 
     public void  StartSkillSelection()
     {
-        _skillList.Remove(_skillList.Find(x => x.skillname == "Sprint"));
-       try { ClearExistingButtons();}
-       catch{}
+        DisableButtons();
+        try {_skillList.Remove(_skillList.Find(x => x.skillname == "Sprint"));}
+        catch{}
         GenerateSkillSelection();
         EnableButtons();
+        var newTarget = GetComponentInChildren<MultiButton>().gameObject;
+        EventSystem.current.SetSelectedGameObject(newTarget);
+        menu.MSH.UpdateSelection(newTarget);
     }
     public void GenerateSkillSelection()
     {
@@ -54,24 +66,23 @@ public class SkillSelection : MonoBehaviour
 
         _options.Shuffle();
         
+        
         for (int i = 0; i < _options.Count; i++)
         {
-            GenerateOption(i);
+            GenerateOption(i, _buttons[i]);
         }
-        
-        EnableButtons();
-        var menu = GetComponentInParent<MenuManager>();
-        var newTarget = GetComponentInChildren<MultiButton>().gameObject;
-        EventSystem.current.SetSelectedGameObject(newTarget);
-        menu.MSH.UpdateSelection(newTarget);
     }
-    public void GenerateOption(int option)
+    public void GenerateOption(int option, SelectionButton button)
     {
-        var selectionbutton = Instantiate(skillSelectionButton, buttons.transform); 
-        var op = selectionbutton.GetComponent<SelectionButton>();
-        op.option = option;
-        op.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = _options[option].skillname;
-        op.onClick.AddListener(delegate { SelectOption(op.option); });
+        button.option = option;
+        button.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = _options[option].skillname;
+        button.onClick.AddListener(delegate { SelectOption(button.option); });
+    }
+
+    public void GenerateButton(int option)
+    {
+        var selectionbutton = Instantiate(skillSelectionButton, buttons.transform);
+        selectionbutton.gameObject.name = "option " + option;
     }
     public void SelectOption(int option)
     {
@@ -98,15 +109,14 @@ public class SkillSelection : MonoBehaviour
     }
     private void DisableButtons()
     {
-       var _buttons = GetComponentsInChildren<MultiButton>();
         foreach (MultiButton btn in _buttons)
         {
+            btn.onClick.RemoveAllListeners();
             btn.enabled = true;
         }
     }
     private void EnableButtons()
     {
-        var _buttons = GetComponentsInChildren<MultiButton>();
         foreach (MultiButton btn in _buttons)
         {
             btn.enabled = true;
@@ -115,12 +125,12 @@ public class SkillSelection : MonoBehaviour
 
     private void ClearExistingButtons()
     {
-        var _buttons = GetComponentsInChildren<MultiButton>();
         foreach (MultiButton btn in _buttons)
         {
             btn.onClick.RemoveAllListeners();
-            Destroy(btn.gameObject);
+            
         }
+        DisableButtons();
     }
 }
 static class ExtensionsSkill
