@@ -97,7 +97,7 @@ public class SkillSelection : MonoBehaviour
         currentSelection++;
         if (currentSelection > 1)
         {
-            ClearExistingButtons();
+            DisableButtons();
             _playerSkillList[2] = GetComponent<SprintSkill>();
             GameManager.Instance.playerSkillList = _playerSkillList;
             GameManager.Instance.StartGameplayLoop();
@@ -112,25 +112,17 @@ public class SkillSelection : MonoBehaviour
         foreach (MultiButton btn in _buttons)
         {
             btn.onClick.RemoveAllListeners();
-            btn.enabled = true;
+            btn.enabled = false;
+            btn.gameObject.SetActive(false);
         }
     }
     private void EnableButtons()
     {
         foreach (MultiButton btn in _buttons)
         {
+            btn.gameObject.SetActive(true);
             btn.enabled = true;
         }
-    }
-
-    private void ClearExistingButtons()
-    {
-        foreach (MultiButton btn in _buttons)
-        {
-            btn.onClick.RemoveAllListeners();
-            
-        }
-        DisableButtons();
     }
 }
 static class ExtensionsSkill
