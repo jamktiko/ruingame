@@ -11,7 +11,7 @@ public class RoomExit : DoorSwitch
         public bool CanExit = true;
         private void OnTriggerEnter(Collider other)
         {
-            if (roomManager.AllEnemiesCleared())
+            if (roomManager.AllEnemiesCleared() && other.tag =="Player")
             {
                 CanExit = true;
                 try

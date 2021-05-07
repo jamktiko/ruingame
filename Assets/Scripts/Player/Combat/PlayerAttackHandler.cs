@@ -44,6 +44,7 @@ public class PlayerAttackHandler : ComboAttackHandler
     }
     public override void EndAttack()
     {
+        Debug.Log("Ended Attack");
         base.EndAttack();
         _movementControl.attacking = false;
     }
