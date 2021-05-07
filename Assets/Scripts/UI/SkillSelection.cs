@@ -1,11 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DefaultNamespace;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using Random = UnityEngine.Random;
 
 public class SkillSelection : MonoBehaviour
 {
@@ -25,6 +28,7 @@ public class SkillSelection : MonoBehaviour
 
     public void  StartSkillSelection()
     {
+        _skillList.Remove(_skillList.Find(x => x.skillname == "Sprint"));
        try { ClearExistingButtons();}
        catch{}
         GenerateSkillSelection();
@@ -80,9 +84,10 @@ public class SkillSelection : MonoBehaviour
         if (_skillList.Contains(_options[option]))
             _skillList.Remove(_options[option]);
         currentSelection++;
-        if (currentSelection > 2)
+        if (currentSelection > 1)
         {
             ClearExistingButtons();
+            _playerSkillList[2] = GetComponent<SprintSkill>();
             GameManager.Instance.playerSkillList = _playerSkillList;
             GameManager.Instance.StartGameplayLoop();
         }
@@ -91,7 +96,6 @@ public class SkillSelection : MonoBehaviour
             StartSkillSelection();
         }
     }
-
     private void DisableButtons()
     {
        var _buttons = GetComponentsInChildren<MultiButton>();
