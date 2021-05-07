@@ -1,6 +1,4 @@
 ﻿
-using System.Collections;
-using Data.Util;
 using DefaultNamespace;
 using UnityEngine;
 [RequireComponent(typeof(AttackTargeting))]

@@ -10,13 +10,10 @@ EditorBuildSettings:
     guid: 916658ba46de8e7488fca980c265f2aa
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
-    guid: 7742bb792eeb2f64cbfb60683845b602
-  - enabled: 0
-    path: Assets/Scenes/Proto_Room.unity
-    guid: 2c30d08bf54aa0640a81aba29b5ace32
+    guid: c2012d455a8526f4ebfdd1720a7bf0e0
   - enabled: 1
     path: Assets/Scenes/Rooms/Room1.unity
-    guid: e3b3aa212cc37bd43848ac96956b3fcc
+    guid: 5840a7fb4916c2b46911e3db4aba8dd9
   - enabled: 1
     path: Assets/Scenes/Rooms/Room2.unity
     guid: 9e30ef5549aaaba40aae1d117bf7e020

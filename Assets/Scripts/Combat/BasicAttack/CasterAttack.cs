@@ -1,4 +1,4 @@
-﻿using DefaultNamespace;
+﻿
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "CasterAttack", menuName = "Game/Combat/CasterAttack")]
