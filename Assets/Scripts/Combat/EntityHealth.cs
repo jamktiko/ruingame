@@ -30,8 +30,9 @@ public abstract class EntityHealth : Health
         AddIFrame(_reDamageTimer);
         ReactToDamage(incomingDamage);
     }
-    public override void ReactToDamage(float amount)
+    public virtual void ReactToDamage(float amount)
     {
+
         _healthUI.UpdateUIValue(currentHealth);
         CheckHealth();
     }

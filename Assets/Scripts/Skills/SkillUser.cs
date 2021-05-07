@@ -41,6 +41,20 @@ public class SkillUser : MonoBehaviour
     
     private void Awake()
     {
+
+    }
+
+    private void Start()
+    {
+        foreach (SkillExecute sk in skillList)
+        {
+            sk.skillUser = this;
+            sk.playerHealth = PlayerManager.Instance._playerHealth;
+            sk.playerRb = PlayerManager.Instance._playerMovement._characterRigidBody;
+        }
+    }
+    public void InitializeSkills()
+    {
         entityAnimator = GetComponentInChildren<Animator>();
         _playerManager = PlayerManager.Instance;
         inputReader = _playerManager.playerInputReader;
@@ -49,7 +63,7 @@ public class SkillUser : MonoBehaviour
         skillTargeting = gameObject.AddComponent<Targeting>();
 
         skillList = new SkillExecute[3];
-        skillList[0] = gameObject.AddComponent<TeleportSkill>();
+        /*skillList[0] = gameObject.AddComponent<TeleportSkill>();
         skillList[0].animationClip = whirlWindAnimation;
         skillList[0].skillUser = this;
         skillList[1] = gameObject.AddComponent<WhirlwindSkill>();
@@ -57,10 +71,16 @@ public class SkillUser : MonoBehaviour
         skillList[1].skillUser = this;
         skillList[2] = gameObject.AddComponent<SprintSkill>();
         skillList[2].animationClip = sprintAnimation;
-        skillList[2].skillUser = this;
-
         
-}
+        
+        skillList[2].skillUser = this;
+        skillList2 = new ScriptableSkill[1];
+        skillList2[0] = ScriptableObject.CreateInstance<ScriptableSprint>();
+        skillList2[0].animationClip = whirlWindAnimation;
+        skillList2[0].skillUser = this;
+        */
+        skillList = GameManager.Instance.playerSkillList;
+    }
     private void OnEnable()
   
     {
@@ -117,7 +137,7 @@ public class SkillUser : MonoBehaviour
             Debug.Log("Cant Execute Skill!");
         }
     }
-    
+
     public virtual void ActivateSkill(int index)
     {
         var sk = skillList[index];
@@ -127,56 +147,34 @@ public class SkillUser : MonoBehaviour
             {
                 if (!usingSkill)
                 {
-                    //PlayerManager.Instance.ZoomCameraInAndOut();
-                    //SHOULD ONLY BE CALLED AFTER SKILL GOES ON COOLDOWN, EG. Stance change only goes on cooldown after the duration is over
-                    SkillActivatedEventArgs e = new SkillActivatedEventArgs();
-                    e.SkillIndex = index;
-                    SkillActivated?.Invoke(e);
-                     // _playerManager.StopAttacking();
-                        //SKILL SHOULD DETERMINE WHICH ANIMATION TO USE
-                    //Currently uses animation length to determine skill duration, probably should work other way around?
-                    try
+                    if (sk.CheckExecuteCondition())
                     {
-                        sk.Execute(sk.animationClip.length);
-                    }
-                    catch
-                    {
-                        try {sk.Execute();}
-                        catch{Debug.Log("Skill Execute");}
-                        Debug.Log("No skill animation!");
-                    }
-                    try
-                    {
+                        try
+                        {
+                            sk.Execute(sk.animationClip.length);
+                            SkillActivatedEventArgs e = new SkillActivatedEventArgs();
+                            e.SkillIndex = index;
+                            SkillActivated?.Invoke(e);
+                        }
+                        catch
+                        {
+                            sk.Execute();
+                            Debug.Log("No skill animation!");
+                        }
                         AddInvulnerability(sk.iFrameDuration);
-                    }
-                    catch
-                    {
-                        Debug.Log("Iframe");
-                    }
-                    try
-                    {
                         StartCoroutine(GoOnCooldown(sk));
                     }
-                    catch
-                    {
-                        Debug.Log("Cooldown");
-                    }
-                }
-                else
-                {
-                    Debug.Log("Using a skill!");
+
+                    //PlayerManager.Instance.ZoomCameraInAndOut();
+                    //SHOULD ONLY BE CALLED AFTER SKILL GOES ON COOLDOWN, EG. Stance change only goes on cooldown after the duration is over
+                    // _playerManager.StopAttacking();
+                    //SKILL SHOULD DETERMINE WHICH ANIMATION TO USE
+                    //Currently uses animation length to determine skill duration, probably should work other way around?
                 }
             }
-            else
-            {
-                Debug.Log("Skill on Cooldown!");
-            }
-        }
-        else
-        {
-            Debug.Log("Animation in progress!");
         }
     }
+
     public void ResetAllSkills()
     {
         //USE WITH CARE
@@ -197,16 +195,20 @@ public class SkillUser : MonoBehaviour
         sk.onCooldown = false;
     }
 
+
+
     public virtual IEnumerator UsePersistentEffect(SkillExecute sk)
     {
         yield return new WaitForSeconds(sk.duration);
         sk.DeActivateSkillActive();
     }
 
+
     public void PlayAnimation(SkillExecute sk)
     {
-        entityAnimator.Play(sk.skillname);
+        entityAnimator.Play(sk.animationClip.name);
     }
+
 }
 public class SkillActivatedEventArgs : EventArgs
 {

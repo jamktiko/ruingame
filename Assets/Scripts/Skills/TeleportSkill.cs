@@ -12,7 +12,7 @@ public class TeleportSkill : SkillExecute
         CheckOverlaps(ref maxDistance);
         tr.position = maxDistance;
     }
-
+    
     private float TeleportDistance()
     {
         LayerMask layer = LayerMask.GetMask("CameraCollision");
@@ -23,6 +23,11 @@ public class TeleportSkill : SkillExecute
         return teleportDistance;
     }
 
+    protected override void Awake()
+    {
+        skillname = "Teleport";
+        animationClip = Resources.Load<AnimationClip>("P_Dash");
+    }
     private void CheckOverlaps(ref Vector3 maxDistance)
     {
         LayerMask enemyLayer = LayerMask.GetMask("EnemyLayer");

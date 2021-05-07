@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject pauseMenu;
     public GameObject currentPauseMenu;
+    public SkillExecute[] playerSkillList;
     public PlayerManager playerManager { get; private set; }
     public GameObject currentPlayer { get; private set; }
 
@@ -52,24 +53,23 @@ public class GameManager : MonoBehaviour
         currentPlayer.name = "PlayerMaster";
         playerManager = PlayerManager.Instance;
 
-        //Setup playerAnimator / Make playeranimator and playercharacter come from a source for character selection.
-        //ADD Skills holder object
         var sk = new GameObject("Skills");
-        //Get list of selected skills 
-        //ADD Selected skills to this gameobject
-        //sk.AddComponent<SprintSkill>();
-        //Set skill holder parent to playermaster
+        foreach (SkillExecute sks in playerSkillList)
+        {
+            var skill = sk.AddComponent(sks.GetType());
+        }
         sk.transform.SetParent(currentPlayer.transform);
-        //UPDATE Skills on playermanager
-        //_playerManager.UpdateSkills();
+        
+        playerSkillList = sk.GetComponentsInChildren<SkillExecute>();
+        
         currentPlayer.tag = "Player";
+        PlayerManager.Instance.InitializeSkills();
     }
 
     public void StartGameplayLoop()
     {
         StartCoroutine("CreateGame");
     }
-
     public void StopGameplayLoop()
     {
         GameOver();
@@ -78,6 +78,8 @@ public class GameManager : MonoBehaviour
     }
     public virtual IEnumerator CreateGame()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         yield return new WaitForSeconds(0.2f);
         ConstructPlayer();
         InitializePlayer();
@@ -134,3 +136,4 @@ public class GameManager : MonoBehaviour
         Time.timeScale = amount;
     }
 }
+

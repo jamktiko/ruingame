@@ -15,7 +15,6 @@ public class PlayerHealth : EntityHealth
         if (!revivePlayer)
             pm.Die();
     }
-
     public override void DealDamage(IAttack attack, BaseAttackHandler attacker)
     {
         DamagePlayerEvent.Invoke();
@@ -26,5 +25,10 @@ public class PlayerHealth : EntityHealth
         }
         
         base.DealDamage(attack, attacker);
+    }
+    public override void ReactToDamage(float amount)
+    {
+        _healthUI.PlayAnimation();
+        base.ReactToDamage(amount);
     }
 }
