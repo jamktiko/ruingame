@@ -4731,6 +4731,8 @@ MonoBehaviour:
   _dashEffect: {fileID: 1304514083103518325, guid: a0695b1e8f089d9469ee5cd71826a21f,
     type: 3}
   _dashPosition: {fileID: 0}
+  _blizzard: {fileID: 0}
+  _blizzardPosition: {fileID: 0}
 --- !u!1 &8341623147409387651
 GameObject:
   m_ObjectHideFlags: 0
