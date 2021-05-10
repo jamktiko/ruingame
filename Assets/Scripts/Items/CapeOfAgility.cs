@@ -1,6 +1,6 @@
 ﻿
 using DefaultNamespace;
-
+using UnityEngine;
 public class CapeOfAgility : ArtifactEffect
 {
     private SprintSkill sprintSkill;
@@ -18,10 +18,12 @@ public class CapeOfAgility : ArtifactEffect
     {
         ChangeModifier(ArtifactModifier.Type.Plus);
         base.AddEffect();
-        if (_playerReference.TryGetComponent(out sprintSkill))
+        try
         {
+            sprintSkill = _playerReference.GetComponentInChildren<SprintSkill>();
             sprintSkill.EndSprintEvent += ModifyMovmentSpeed;
         }
+        catch { Debug.Log("no sprint skill"); }
     }
 
     private void ModifyMovmentSpeed()
