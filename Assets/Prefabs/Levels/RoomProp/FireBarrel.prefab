@@ -9637,6 +9637,7 @@ GameObject:
   - component: {fileID: 6536514144657714137}
   - component: {fileID: 5422494723491074136}
   - component: {fileID: 5054253623446984346}
+  - component: {fileID: 1168652899774902956}
   m_Layer: 10
   m_Name: FireBarrel
   m_TagString: Ground
@@ -9722,6 +9723,29 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 2534964839176971238, guid: ddc5019a918586f468a32f9ad276096e, type: 3}
+--- !u!114 &1168652899774902956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5929202171549875930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/Ambience/Fire
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 1
+  OverrideMinDistance: 0.8
+  OverrideMaxDistance: 5
 --- !u!1 &8009787999707367393
 GameObject:
   m_ObjectHideFlags: 0
