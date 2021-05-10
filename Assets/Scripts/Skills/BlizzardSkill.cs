@@ -1,31 +1,23 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-#region Skill description
-/*
-Stance Change
-
-Lore: By drinking the blood of an animal of unknown origin, your reflexes improve significantly allowing you to focus on avoiding critical hits and dealing increased damage.Enter Aggro mode to clear away your enemies while dealing minimal damage to yourself.
-
-Concept: Passively increases resistances and ATK, activating aggressive mode disables resistances while increasing damage significantly.Useful in defeating enemies faster before they are able to deal damage to you.Aggro mode cannot be used when under 40% HP.
-
-Type: Run-permanent passive
-Status: +Physical resistance, +Increased ATK, -Self-damage
-
-Justification: The effects of the blood wear off once magical power of three skills are present.
-*/
-#endregion
 namespace DefaultNamespace.Skills
 {
-    public class BlizzardSkill: SkillExecute
+    public class BlizzardSkill : SkillExecute
     {
-        
+
         [SerializeField] private float _attackRadius = 5f;
         [SerializeField] private float _knockbackForce = 10f;
         private float _attackDistance;
-        private MeleeAttack whirlwind;
+        private MeleeAttack blizzard;
         LayerMask enemyLayer;
         BaseAttackHandler attackHandler;
+
+        protected override void Awake()
+        {
+            skillname = "Blizzard";
+            animationClip = Resources.Load<AnimationClip>("Blizzard");
+        }
 
         protected override void Start()
         {
@@ -35,7 +27,7 @@ namespace DefaultNamespace.Skills
             _attackDistance = _attackRadius / 2f;
             enemyLayer = LayerMask.GetMask("EnemyLayer");
             attackHandler = GetComponent<BaseAttackHandler>();
-            whirlwind = Whirlwind();
+            blizzard = Blizzard();
         }
 
         public override void Execute(float duration)
@@ -43,46 +35,61 @@ namespace DefaultNamespace.Skills
             skillUser.usingSkill = true;
             iFrameDuration = duration;
             base.Execute(duration);
-            try { skillUser.attackHandler.HandleAttack(whirlwind); }
-            catch { Debug.Log("whirlwind"); }
+            try { ExecuteBlizzard(); }
+            catch { Debug.Log("blizzard"); }
             skillUser.usingSkill = false;
         }
-        public MeleeAttack Whirlwind()
+
+        public MeleeAttack Blizzard()
         {
-            var _whirlwind = ScriptableObject.CreateInstance<MeleeAttack>();
-            _whirlwind.TargetingType = basetargetingType.AOE;
-            _whirlwind.Radius = _attackRadius;
-            _whirlwind.DamageType = baseDamageType.DIRECT;
-            _whirlwind.baseDamage = damage;
-            _whirlwind.KnockBack = true;
-            _whirlwind.KnockBackStrength = _knockbackForce;
-            return _whirlwind;
+            var _blizzard = ScriptableObject.CreateInstance<MeleeAttack>();
+            _blizzard.Radius = _attackRadius;
+            _blizzard.DamageType = baseDamageType.DIRECT;
+            _blizzard.baseDamage = damage;
+            _blizzard.KnockBack = true;
+            _blizzard.KnockBackStrength = _knockbackForce;
+            return _blizzard;
         }
 
-
-
-        private void ExecuteWhirlWind()
+        private void ExecuteBlizzard()
         {
             GameObject[] gos = FindEnemies();
+
+            //foreach (var item in gos)
+            //{
+            //    Debug.Log(item.GetComponent<EnemyHealth>().currentHealth);
+            //    Debug.Log(item.GetComponent<Enemy_StateMachine>().movementController._movementSpeed);
+            //}
+
             if (gos.Length > 0)
             {
-                try
+                blizzard.AttackAllTargets(gos, attackHandler);
+                foreach (var enemyGo in gos)
                 {
-                    whirlwind.AttackAllTargets(gos, attackHandler);
-                    foreach (var enemyGo in gos)
-                    {
-                        Enemy_StateMachine enemy = enemyGo.GetComponent<Enemy_StateMachine>();
-                        enemy.SetState(new StunnedState(enemy));
-                    }
+                    Enemy_StateMachine enemy = enemyGo.GetComponent<Enemy_StateMachine>();
+                    StunnedState stunned = new StunnedState(enemy);
+                    enemy.SetState(stunned);
+                    float stunTime = stunned.StunTimer;
+                    float movementSpeed = enemy.movementController._movementSpeed;
+                    enemy.movementController._movementSpeed /= 2f;
+                    //Debug.Log(enemyGo.GetComponent<EnemyHealth>().currentHealth);
+                    //Debug.Log(enemy.movementController._movementSpeed);
+                    StartCoroutine(NormalizeSpeed(enemy, movementSpeed, stunTime));
                 }
-                catch { Debug.Log("couldn't execute whirlwind"); }
             }
+        }
+
+        IEnumerator NormalizeSpeed(Enemy_StateMachine enemy, float initialSpeed, float stunTime)
+        {
+            yield return new WaitForSeconds(2f + stunTime);
+            enemy.movementController._movementSpeed = initialSpeed;
+            //Debug.Log(enemy.movementController._movementSpeed);
         }
 
         GameObject[] FindEnemies()
         {
-            Vector3 p1 = transform.position + transform.forward * _attackDistance;
-            Vector3 p2 = transform.position + transform.forward * _attackDistance + Vector3.up * 2f;
+            Vector3 p1 = transform.position;
+            Vector3 p2 = transform.position + Vector3.up * 2f;
             Collider[] colliders = Physics.OverlapCapsule(p1, p2, _attackRadius, enemyLayer, QueryTriggerInteraction.Collide);
             GameObject[] enmyGos = new GameObject[colliders.Length];
 
@@ -92,12 +99,6 @@ namespace DefaultNamespace.Skills
             }
             return enmyGos;
         }
-
-        protected override void Awake()
-        {
-            skillname = "Blizzard";
-            animationClip = Resources.Load<AnimationClip>("Blizzard");
-        }
-
     }
+
 }
