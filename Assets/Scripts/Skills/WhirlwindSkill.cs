@@ -2,25 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-#region Skill description
-/*
-Whirlwind
-
-Lore: By activating an enhanced wind tattoo in their forearm, the adventurer calls forth a strong wind to push enemies back.
-
-Concept: 270 degree knockback with middle point at the direction the player is facing at the moment. Clear space for the player to perform actions or/and deal AOE damage by punching air.
-
-Type: Utility spell
-
-Dmg: Medium damage (TBD)
-
-Effects: Knockback (range TBD)
-
-Justification: Humans were not able to use magic on their own, so adventurers have to rely on magic items or imbued enchantments to perform spell and abilities.
-
-Problems: 270 degree knockback arc
- */
-#endregion
 namespace DefaultNamespace.Skills
 {
     public class WhirlwindSkill : SkillExecute
@@ -37,7 +18,7 @@ namespace DefaultNamespace.Skills
         {
             base.Start();
             damage = 50f;
-            skillCooldown = 1f;
+            skillCooldown = 3f;
             _attackDistance = _attackRadius / 2f;
             enemyLayer = LayerMask.GetMask("EnemyLayer");
             attackHandler = GetComponent<BaseAttackHandler>();
@@ -49,7 +30,7 @@ namespace DefaultNamespace.Skills
             skillUser.usingSkill = true;
             iFrameDuration = duration;
             base.Execute(duration);
-            try { skillUser.attackHandler.HandleAttack(whirlwind); }
+            try { ExecuteWhirlWind(); }
             catch { Debug.Log("whirlwind"); }
             skillUser.usingSkill = false;
         }
