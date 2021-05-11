@@ -46,6 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputReader: {fileID: 0}
+  zoom: 0
+  minimumZoom: -0.5
+  maximumZoom: 1
   playerTransform: {fileID: 0}
   _cameraData: {fileID: 0}
   speedMultiplier: 15
@@ -578,7 +581,6 @@ GameObject:
   - component: {fileID: 7831688450991784973}
   - component: {fileID: 7831688450991784961}
   - component: {fileID: 1456558338779520036}
-  - component: {fileID: 2190850265702556749}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -725,20 +727,6 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: edda351fba169bc4fa9466c970b96cd9, type: 2}
---- !u!114 &2190850265702556749
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7831688450991784972}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attenuationObject: {fileID: 0}
-  ListenerNumber: -1
 --- !u!1 &7831688451063143512
 GameObject:
   m_ObjectHideFlags: 0
