@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public float defaultMusic = 0f;
     public float defaultEffect = 0f;
 
+    public int startingRoom = 0;
     public GameObject pauseMenu;
     public GameObject currentPauseMenu;
     public SkillExecute[] playerSkillList;
@@ -100,6 +101,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(currentPlayer);
         yield return new WaitForSeconds(0.2f);
         CreateRoomManager();
+        roomManager._currentRoom = startingRoom;
         roomManager.StartRoomManager();
         yield return new WaitForSeconds(0.2f);
         CreateMenuManager();

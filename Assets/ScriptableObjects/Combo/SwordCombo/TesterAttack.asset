@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 70fe997e6d5144b9bac1bbdfa5b0e4f3, type: 3}
-  m_Name: MeleeAttack
+  m_Name: TesterAttack
   m_EditorClassIdentifier: 
-  TargetingType: 2
+  TargetingType: 1
   DamageType: 1
-  BaseDamage: 25
-  InflictedDamage: 80
-  Radius: 1.5
-  KnockBackStrength: 50
+  BaseDamage: 1000
+  InflictedDamage: 1030
+  Radius: 10
+  KnockBackStrength: 100
   KnockBack: 1
-  Range: 3.5
-
+  Range: 10
