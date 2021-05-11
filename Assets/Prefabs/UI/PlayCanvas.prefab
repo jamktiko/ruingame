@@ -409,8 +409,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: An ancient evil has been awakened from it's slumber... Do you have what
-    it takes to stop it?
+  m_text: "An ancient evil has been awakened from it's slumber... \n\nDo you have
+    what it takes to stop it?"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6d23ea45dbdba2f48b8bc99f36de4e1b, type: 2}
   m_sharedMaterial: {fileID: 3387194831485669750, guid: 6d23ea45dbdba2f48b8bc99f36de4e1b,
@@ -452,7 +452,7 @@ MonoBehaviour:
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
+  m_paragraphSpacing: -35
   m_charWidthMaxAdj: 0
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
