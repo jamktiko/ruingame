@@ -9,7 +9,7 @@
     {
         public EnemyMovement movementController;
         public BaseAttackHandler attackHandler;
-        private EnemyHealth healthSystem;
+        protected EnemyHealth healthSystem;
         public Animator entityAnimator;
         
         public int areaRaycasts = 30;
@@ -74,8 +74,8 @@
         public string state;
         public virtual void Update()
         {
-            _currentState.Tick();
-            state = _currentState.Name;
+            if (_currentState != null)
+                _currentState.Tick();
         }
         public State _currentState { get; set; }
         public  virtual void SetState(State state)

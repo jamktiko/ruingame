@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using TMPro;
 using UnityEngine.PlayerLoop;
 
 public class HealthUI : MonoBehaviour
@@ -10,8 +11,8 @@ public class HealthUI : MonoBehaviour
     public Canvas _entityUI;
     public Slider _healthSlider;
     private Animator _damageIndicator;
-
-
+    public TextMeshProUGUI nameText;
+    public string NameText;
     void Start()
     {
         _entityUI = GetComponent<Canvas>();
@@ -22,6 +23,7 @@ public class HealthUI : MonoBehaviour
         catch { }
         
         StartCoroutine("UpdateUI");
+        SetName();
     }
 
     public void UpdateUIValue(float amount)
@@ -29,6 +31,13 @@ public class HealthUI : MonoBehaviour
         _healthSlider.value = _entityHealth.currentHealth;
     }
 
+    public void SetName()
+    {
+        if (NameText != null && nameText != null)
+        {
+            nameText.text = NameText;
+        }
+    }
     public void PlayAnimation()
     {
         _damageIndicator.Play("TakeDamage");

@@ -9,8 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57e207e7ef8e5a949a2fe0a2e51260e7, type: 3}
-  m_Name: SwordComboAttack2
+  m_Script: {fileID: 11500000, guid: 70fe997e6d5144b9bac1bbdfa5b0e4f3, type: 3}
+  m_Name: TesterAttack
   m_EditorClassIdentifier: 
-  animationClip: {fileID: 7400000, guid: e63a0459130884346ba9762de6e708ef, type: 2}
-  AttackData: {fileID: 11400000, guid: 9fe63bee90cf43643bcb5bf647e9ead4, type: 2}
+  TargetingType: 1
+  DamageType: 1
+  BaseDamage: 1000
+  InflictedDamage: 1030
+  Radius: 10
+  KnockBackStrength: 100
+  KnockBack: 1
+  Range: 10

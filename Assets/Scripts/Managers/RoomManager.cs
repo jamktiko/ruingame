@@ -10,7 +10,7 @@ using UnityEngine.SceneManagement;
 public class RoomManager : MonoBehaviour
 {
     public CanvasGroup canvasGroup;
-    private int _currentRoom = 0;
+    public int _currentRoom = 0;
     public List<GameObject> possibleRooms;
     //Get total enemies 
     private int _totalEnemiesInRoom = 0;
@@ -47,15 +47,24 @@ public class RoomManager : MonoBehaviour
         //Start Encounter.
     }
 
+    private bool bossRoom = false;
     public void CreateLevel()
     {
         if (_creatingRoom)
             return;
         _creatingRoom = true;
         _currentRoom += 1;
-        if (_currentRoom > 4)
+        if (_currentRoom > 5)
         {
             _currentRoom = 1;
+        }
+        if (_currentRoom == 5)
+        {
+            bossRoom = true;
+        }
+        else
+        {
+            bossRoom = false;
         }
         StartCoroutine(WaitCreation());
     }
@@ -100,7 +109,6 @@ public class RoomManager : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         PlacePlayerInLoading();
         yield return new WaitForSeconds(0.5f);
-        currentRoomGO = GameObject.FindGameObjectWithTag("Room");
         spawnerManager = GameObject.FindGameObjectWithTag("SpawnerManager").GetComponent<SpawnerManager>();
         _entryPoint = GameObject.FindGameObjectWithTag("Entry").transform;
 
@@ -112,7 +120,15 @@ public class RoomManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         //Deactivate loading screen
         PlayerManager.Instance.EnablePlayerInput();
-        spawnerManager.StartSpawners();
+
+        if (bossRoom)
+        {
+            spawnerManager.SpawnBoss();
+        }
+        else
+        {
+            spawnerManager.StartSpawners();
+        }
         _creatingRoom = false;
     }
     IEnumerator FadeLoadingScreen(float duration)

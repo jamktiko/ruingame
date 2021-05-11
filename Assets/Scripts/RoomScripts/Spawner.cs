@@ -15,7 +15,7 @@ public class Spawner : MonoBehaviour
         remainingEnemies--;
     }
 
-    public void StartSpawning(int amount)
+    public virtual void StartSpawning(int amount)
     {
         remainingEnemies = amount;
         enemiesToSpawn = amount;
@@ -38,7 +38,7 @@ public class Spawner : MonoBehaviour
     {
         EG = GetComponent<Enemy_Group>();
     }
-    private IEnumerator SpawnEnemy()
+    protected IEnumerator SpawnEnemy()
     {
         //Spawns one enemy
         yield return new WaitForSeconds(1f);
