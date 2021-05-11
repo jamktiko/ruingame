@@ -11,7 +11,8 @@ public class MenuManager : MonoBehaviour
     public Canvas currentCanvas;
     public MenuSelectionHandler MSH;
     public Canvas SkillSelectionCanvas;
-
+    
+    
     private bool loadingMenu;
     public virtual void StartGame()
     {
@@ -33,7 +34,6 @@ public class MenuManager : MonoBehaviour
         }
         currentCanvas.gameObject.SetActive(false);
     }
-
 
     public virtual void Start()
     {

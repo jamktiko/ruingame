@@ -9,15 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70fe997e6d5144b9bac1bbdfa5b0e4f3, type: 3}
-  m_Name: MeleeAttack
+  m_Script: {fileID: 11500000, guid: b04a98f78aab4fb78bca3a0b1113aebb, type: 3}
+  m_Name: AudioSettings
   m_EditorClassIdentifier: 
-  TargetingType: 2
-  DamageType: 1
-  BaseDamage: 25
-  InflictedDamage: 80
-  Radius: 1.5
-  KnockBackStrength: 50
-  KnockBack: 1
-  Range: 3.5
-
+  musicVolume: 5
+  effectVolume: 5
