@@ -48,6 +48,10 @@ public class CombatMusicPlayer : MonoBehaviour
         {
             roomNumber = 4.0f;
         }
+        else if (roomName == "Room5")
+        {
+            roomNumber = 4.0f;
+        }
 
     }
 }

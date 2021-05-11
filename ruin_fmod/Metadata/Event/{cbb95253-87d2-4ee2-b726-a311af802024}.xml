@@ -609,7 +609,7 @@
 			<value>4</value>
 		</property>
 		<property name="maximum">
-			<value>4</value>
+			<value>5</value>
 		</property>
 		<relationship name="parameter">
 			<destination>{b026157e-c637-4016-880a-1b98f467c4a3}</destination>
@@ -642,7 +642,7 @@
 			<value>4</value>
 		</property>
 		<property name="maximum">
-			<value>4</value>
+			<value>5</value>
 		</property>
 		<relationship name="parameter">
 			<destination>{b026157e-c637-4016-880a-1b98f467c4a3}</destination>
@@ -708,7 +708,7 @@
 			<value>4</value>
 		</property>
 		<property name="maximum">
-			<value>4</value>
+			<value>5</value>
 		</property>
 		<relationship name="parameter">
 			<destination>{b026157e-c637-4016-880a-1b98f467c4a3}</destination>
@@ -719,7 +719,7 @@
 			<value>4</value>
 		</property>
 		<property name="maximum">
-			<value>4</value>
+			<value>5</value>
 		</property>
 		<relationship name="parameter">
 			<destination>{b026157e-c637-4016-880a-1b98f467c4a3}</destination>
