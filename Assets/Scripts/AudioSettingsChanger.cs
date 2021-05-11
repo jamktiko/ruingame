@@ -75,13 +75,13 @@ public class AudioSettingsChanger : MonoBehaviour
     {
         musicVolume = slider.value;
         musicBus.setVolume(DecibelToLinear(musicVolume));
-        musicBus.setMute(slider.value < -29f);
+        musicBus.setMute(slider.value < -80f);
     }
     public void UpdateEffectVolume(Slider slider)
     {
         effectVolume = slider.value;
         effectsBus.setVolume(DecibelToLinear(effectVolume));
-        effectsBus.setMute(slider.value < -29f);
+        effectsBus.setMute(slider.value < -80f);
     }
     public void SaveToFile()
     {

@@ -1072,8 +1072,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5faab818dd241bc83d4a7c75c8dc847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicBusVolume: 0
-  effectsBusVolume: 0
+  musicVolume: 0
+  effectVolume: 0
 --- !u!1 &1961353534439265304
 GameObject:
   m_ObjectHideFlags: 0
@@ -1647,8 +1647,8 @@ MonoBehaviour:
   m_FillRect: {fileID: 8525605224518316991}
   m_HandleRect: {fileID: 8891664674789342588}
   m_Direction: 0
-  m_MinValue: -30
-  m_MaxValue: 80
+  m_MinValue: -80
+  m_MaxValue: 10
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
@@ -5633,10 +5633,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 6989868240454631550}
   m_HandleRect: {fileID: 8850583052434923129}
   m_Direction: 0
-  m_MinValue: -30
-  m_MaxValue: 80
+  m_MinValue: -80
+  m_MaxValue: 10
   m_WholeNumbers: 1
-  m_Value: 8
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:

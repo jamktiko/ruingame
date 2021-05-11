@@ -22,7 +22,13 @@ namespace DefaultNamespace
             base.Die();
             enemyController.Die();
         }
-
+        public override void Awake()
+        {
+            base.Awake();
+            maximumHealth = 200f;
+            currentHealth = 200f;
+        }
+        
         public void LimitPassed()
         {
             GameManager.Instance.roomManager.spawnerManager.SpawnAdds(currentLimit * 2);
