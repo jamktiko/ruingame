@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.IO;
 using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,17 +12,14 @@ public class GameManager : MonoBehaviour
     {
         get { return _instance; }
     }
-    
-    private void Awake()
-    {
-        if (_instance != null && _instance != this)
-        {
-            Destroy(this.gameObject);
-        } else {
-            _instance = this;
-        }
-        DontDestroyOnLoad(gameObject);
-    }
+    private const string AUDIOFILENAME = "AudioSettings.dat";
+    FMOD.Studio.Bus musicBus;
+    FMOD.Studio.Bus effectsBus;
+
+    public float musicVolume;
+    public float effectVolume;
+    public float defaultMusic = 0f;
+    public float defaultEffect = 0f;
 
     public GameObject pauseMenu;
     public GameObject currentPauseMenu;
@@ -44,6 +42,21 @@ public class GameManager : MonoBehaviour
     public Roomvariants roomvariants;
     
     private GameObject _createdPlayer;
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        } else {
+            _instance = this;
+        }
+        DontDestroyOnLoad(gameObject);
+    }
+
+    private void Start()
+    {
+        LoadSettings();
+    }
     public void ConstructPlayer()
     {
         //Destroy previous player
@@ -131,5 +144,42 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = amount;
     }
+    public void LoadSettings()
+    {
+        musicBus = FMODUnity.RuntimeManager.GetBus("bus:/MusicBus");
+        effectsBus = FMODUnity.RuntimeManager.GetBus("bus:/VFXBus");
+        try
+        {
+            LoadDataFromFile();
+        }
+        catch
+        {
+            musicVolume = defaultMusic;
+            effectVolume = defaultEffect;
+            
+        }
+        musicBus.setVolume(DecibelToLinear(musicVolume));
+        effectsBus.setVolume(DecibelToLinear(effectVolume));
+    }
+    public void LoadDataFromFile()
+    {
+        var filePath = Path.Combine(Application.persistentDataPath, AUDIOFILENAME);
+
+        if(!File.Exists(filePath))
+        {
+            Debug.LogWarning($"File \"{filePath}\" not found!", this);
+            return;
+        }
+
+        var json = File.ReadAllText(filePath);
+        JsonUtility.FromJsonOverwrite(json, this);
+    }
+    private float DecibelToLinear(float dB)
+    {
+        float linear = Mathf.Pow(10.0f, dB / 20f);
+        return linear;
+    }
+
+
 }
 
